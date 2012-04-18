@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8F21C345-5FDB-40A8-BC48-599356AE02D1}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CHAOS.Portal.Client</RootNamespace>
+    <AssemblyName>CHAOS.Portal.Client</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CHAOS %28Silverlight%29">
+      <HintPath>..\..\..\lib\CHAOS (Silverlight).dll</HintPath>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Portal\ClientSettings.cs">
+      <Link>Data\Portal\ClientSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\Portal\IClientSettingsExtension.cs">
+      <Link>Extensions\Portal\IClientSettingsExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\IPortalClient.cs">
+      <Link>IPortalClient.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\ASettingsManager.cs">
+      <Link>Managers\ASettingsManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFileManager.cs">
+      <Link>Managers\IFileManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFolderManager.cs">
+      <Link>Managers\IFolderManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\ILanguageManager.cs">
+      <Link>Managers\ILanguageManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IManagerResult.cs">
+      <Link>Managers\IManagerResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IMCMTypesManager.cs">
+      <Link>Managers\IMCMTypesManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IMetadataSchemaManager.cs">
+      <Link>Managers\IMetadataSchemaManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IObjectManager.cs">
+      <Link>Managers\IObjectManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IUserManager.cs">
+      <Link>Managers\IUserManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\ServiceCall\IServiceCallState.cs">
+      <Link>ServiceCall\IServiceCallState.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\AData.cs">
+      <Link>Data\AData.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\GeoLocator\LocationInfo.cs">
+      <Link>Data\GeoLocator\LocationInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\IModuleResult.cs">
+      <Link>Data\IModuleResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\IServiceResult.cs">
+      <Link>Data\IServiceResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\File.cs">
+      <Link>Data\MCM\File.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Folder.cs">
+      <Link>Data\MCM\Folder.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\FolderType.cs">
+      <Link>Data\MCM\FolderType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\FormatType.cs">
+      <Link>Data\MCM\FormatType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Language.cs">
+      <Link>Data\MCM\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Metadata.cs">
+      <Link>Data\MCM\Metadata.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\MetadataSchema.cs">
+      <Link>Data\MCM\MetadataSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Object.cs">
+      <Link>Data\MCM\Object.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\ObjectRelation.cs">
+      <Link>Data\MCM\ObjectRelation.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\ObjectRelationType.cs">
+      <Link>Data\MCM\ObjectRelationType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\ObjectType.cs">
+      <Link>Data\MCM\ObjectType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\NoData.cs">
+      <Link>Data\NoData.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\Group.cs">
+      <Link>Data\Portal\Group.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\SecureCookie.cs">
+      <Link>Data\Portal\SecureCookie.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\Session.cs">
+      <Link>Data\Portal\Session.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\Subscription.cs">
+      <Link>Data\Portal\Subscription.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\User.cs">
+      <Link>Data\Portal\User.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\UserSetting.cs">
+      <Link>Data\Portal\UserSetting.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\ScalarResult.cs">
+      <Link>Data\ScalarResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\GeoLocator\ILocationExtension.cs">
+      <Link>Extensions\GeoLocator\ILocationExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IFolderExtension.cs">
+      <Link>Extensions\MCM\IFolderExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IFolderTypeExtension.cs">
+      <Link>Extensions\MCM\IFolderTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IFormatTypeExtension.cs">
+      <Link>Extensions\MCM\IFormatTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\ILanguageExtension.cs">
+      <Link>Extensions\MCM\ILanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IMetadataExtension.cs">
+      <Link>Extensions\MCM\IMetadataExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IMetadataSchemaExtension.cs">
+      <Link>Extensions\MCM\IMetadataSchemaExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IObjectExtension.cs">
+      <Link>Extensions\MCM\IObjectExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IObjectRelationTypeExtension.cs">
+      <Link>Extensions\MCM\IObjectRelationTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\MCM\IObjectTypeExtension.cs">
+      <Link>Extensions\MCM\IObjectTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\IEmailPasswordExtension.cs">
+      <Link>Extensions\Portal\IEmailPasswordExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\IGroupExtension.cs">
+      <Link>Extensions\Portal\IGroupExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\ISecureCookieExtension.cs">
+      <Link>Extensions\Portal\ISecureCookieExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\ISessionExtension.cs">
+      <Link>Extensions\Portal\ISessionExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\ISubscriptionExtension.cs">
+      <Link>Extensions\Portal\ISubscriptionExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\IUserExtension.cs">
+      <Link>Extensions\Portal\IUserExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client (.NET)\Extensions\Portal\IUserSettingsExtension.cs">
+      <Link>Extensions\Portal\IUserSettingsExtension.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Octopus\" />
+    <Folder Include="Extensions\Octopus\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(SolutionDir)bin\Silverlight\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

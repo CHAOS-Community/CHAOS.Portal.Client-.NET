@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A1CC7EB5-49E3-4F21-BF5D-90CAAA881BD3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CHAOS.Portal.Client</RootNamespace>
+    <AssemblyName>CHAOS.Portal.Client</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CHAOS %28.NET%29">
+      <HintPath>..\..\..\lib\CHAOS (.NET).dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\AData.cs" />
+    <Compile Include="Data\GeoLocator\LocationInfo.cs" />
+    <Compile Include="Data\IModuleResult.cs" />
+    <Compile Include="Data\IServiceResult.cs" />
+    <Compile Include="Data\MCM\File.cs" />
+    <Compile Include="Data\MCM\Folder.cs" />
+    <Compile Include="Data\MCM\FolderType.cs" />
+    <Compile Include="Data\MCM\FormatType.cs" />
+    <Compile Include="Data\MCM\Language.cs" />
+    <Compile Include="Data\MCM\Metadata.cs" />
+    <Compile Include="Data\MCM\MetadataSchema.cs" />
+    <Compile Include="Data\MCM\Object.cs" />
+    <Compile Include="Data\MCM\ObjectRelation.cs" />
+    <Compile Include="Data\MCM\ObjectRelationType.cs" />
+    <Compile Include="Data\MCM\ObjectType.cs" />
+    <Compile Include="Data\NoData.cs" />
+    <Compile Include="Data\Portal\ClientSettings.cs" />
+    <Compile Include="Data\Portal\Group.cs" />
+    <Compile Include="Data\Portal\SecureCookie.cs" />
+    <Compile Include="Data\Portal\Session.cs" />
+    <Compile Include="Data\Portal\Subscription.cs" />
+    <Compile Include="Data\Portal\User.cs" />
+    <Compile Include="Data\Portal\UserSetting.cs" />
+    <Compile Include="Data\ScalarResult.cs" />
+    <Compile Include="Extensions\GeoLocator\ILocationExtension.cs" />
+    <Compile Include="Extensions\MCM\IFolderExtension.cs" />
+    <Compile Include="Extensions\MCM\IFolderTypeExtension.cs" />
+    <Compile Include="Extensions\MCM\IFormatTypeExtension.cs" />
+    <Compile Include="Extensions\MCM\ILanguageExtension.cs" />
+    <Compile Include="Extensions\MCM\IMetadataExtension.cs" />
+    <Compile Include="Extensions\MCM\IMetadataSchemaExtension.cs" />
+    <Compile Include="Extensions\MCM\IObjectExtension.cs" />
+    <Compile Include="Extensions\MCM\IObjectRelationTypeExtension.cs" />
+    <Compile Include="Extensions\MCM\IObjectTypeExtension.cs" />
+    <Compile Include="Extensions\Portal\IClientSettingsExtension.cs" />
+    <Compile Include="Extensions\Portal\IEmailPasswordExtension.cs" />
+    <Compile Include="Extensions\Portal\IGroupExtension.cs" />
+    <Compile Include="Extensions\Portal\ISecureCookieExtension.cs" />
+    <Compile Include="Extensions\Portal\ISessionExtension.cs" />
+    <Compile Include="Extensions\Portal\ISubscriptionExtension.cs" />
+    <Compile Include="Extensions\Portal\IUserExtension.cs" />
+    <Compile Include="Extensions\Portal\IUserSettingsExtension.cs" />
+    <Compile Include="IPortalClient.cs" />
+    <Compile Include="Managers\ASettingsManager.cs" />
+    <Compile Include="Managers\IFileManager.cs" />
+    <Compile Include="Managers\IFolderManager.cs" />
+    <Compile Include="Managers\ILanguageManager.cs" />
+    <Compile Include="Managers\IManagerResult.cs" />
+    <Compile Include="Managers\IMCMTypesManager.cs" />
+    <Compile Include="Managers\IMetadataSchemaManager.cs" />
+    <Compile Include="Managers\IObjectManager.cs" />
+    <Compile Include="Managers\IUserManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceCall\IServiceCallState.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Octopus\" />
+    <Folder Include="Extensions\Octopus\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "$(SolutionDir)bin\$(PlatformName)\$(TargetFileName)"</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
