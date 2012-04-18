@@ -4,7 +4,7 @@ This is a .NET and Silverlight Portal API Client. It enables easy communication 
 
 ##Requirements
 .NET 4.0 / Silverlight 5  
-A dependency injector is used (Ninject), but this is not a requirement.
+A dependency injector is used ([Ninject](http://www.ninject.org)), but this is not a requirement.
 
 ##Code
 The source code is located in the *src/app* folder.  
