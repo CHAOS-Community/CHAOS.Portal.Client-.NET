@@ -1,14 +1,19 @@
 #CHAOS.Portal.Client (.NET)
-This is a .NET Portal API Client. It enables easy communication with a CHAOS Portal API (protocol version 4).
+This is a .NET and Silverlight Portal API Client. It enables easy communication with a CHAOS Portal API (protocol version 4).  
+It is under active development (being updated from protocol version 3).
 
 ##Requirements
-.NET 4.0 / Silverlight 5
+.NET 4.0 / Silverlight 5  
+A dependency injector is used (Ninject), but this is not an requirement.
 
 ##Code
-The source code is located in the *src* folder.  
+The source code is located in the *src/app* folder.  
 
 ##Examples
 The examples are located in the *src/examples* folder.
+
+##Unit Tests
+The examples are located in the *src/test* folder.
 
 ##Reporting problems
 If you encounter any problems using this project, please report them using the "Issues" section of the projects Github page.
