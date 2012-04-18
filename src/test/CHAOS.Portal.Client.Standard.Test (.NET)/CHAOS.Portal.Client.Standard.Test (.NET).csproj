@@ -8,8 +8,8 @@
     <ProjectGuid>{C7FCA4E7-6452-4408-AF2A-62473D66F985}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Geckon.Portal.Client.Standard.Test</RootNamespace>
-    <AssemblyName>Geckon.Portal.Client.Standard.Test</AssemblyName>
+    <RootNamespace>CHAOS.Portal.Client.Standard.Test</RootNamespace>
+    <AssemblyName>CHAOS.Portal.Client.Standard.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,23 +31,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\..\..\lib\Ninject.dll</HintPath>
+    <Reference Include="Ninject %28.NET%29">
+      <HintPath>..\..\..\lib\Ninject (.NET).dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\tools\NUnit\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PortalClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
+      <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>
+      <Name>CHAOS.Portal.Client %28.NET%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Module %28.NET%29\CHAOS.Portal.Client.Module %28.NET%29.csproj">
+      <Project>{10f9252a-b320-4990-bd4b-eb708673d352}</Project>
+      <Name>CHAOS.Portal.Client.Module %28.NET%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

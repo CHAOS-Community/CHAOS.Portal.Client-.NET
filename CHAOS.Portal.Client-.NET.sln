@@ -15,9 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client (Silver
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Standard (Silverlight)", "src\app\CHAOS.Portal.Client.Standard (Silverlight)\CHAOS.Portal.Client.Standard (Silverlight).csproj", "{836E4B8A-31AA-4C2A-AC2C-7F6ABA996043}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geckon.Portal.Client.Standard.Test (.NET)", "src\test\Geckon.Portal.Client.Standard.Test (.NET)\Geckon.Portal.Client.Standard.Test (.NET).csproj", "{C7FCA4E7-6452-4408-AF2A-62473D66F985}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Module (.NET)", "src\app\CHAOS.Portal.Client.Module (.NET)\CHAOS.Portal.Client.Module (.NET).csproj", "{10F9252A-B320-4990-BD4B-EB708673D352}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geckon.Test (Silverlight)", "src\test\Geckon.Test (Silverlight)\Geckon.Test (Silverlight).csproj", "{0FFA1D9E-B1C4-4431-A633-44A97E611148}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Module (Silverlight)", "src\app\CHAOS.Portal.Client.Module (Silverlight)\CHAOS.Portal.Client.Module (Silverlight).csproj", "{E3C925F4-A680-40B4-83A4-609743A2FFD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Standard.Test (.NET)", "src\test\CHAOS.Portal.Client.Standard.Test (.NET)\CHAOS.Portal.Client.Standard.Test (.NET).csproj", "{C7FCA4E7-6452-4408-AF2A-62473D66F985}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Test (Silverlight)", "src\test\CHAOS.Test (Silverlight)\CHAOS.Test (Silverlight).csproj", "{0FFA1D9E-B1C4-4431-A633-44A97E611148}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,10 @@ Global
 		{0FFA1D9E-B1C4-4431-A633-44A97E611148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FFA1D9E-B1C4-4431-A633-44A97E611148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FFA1D9E-B1C4-4431-A633-44A97E611148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10F9252A-B320-4990-BD4B-EB708673D352}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10F9252A-B320-4990-BD4B-EB708673D352}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10F9252A-B320-4990-BD4B-EB708673D352}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10F9252A-B320-4990-BD4B-EB708673D352}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C959A48-DA6E-4C73-8B3A-50D611413398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C959A48-DA6E-4C73-8B3A-50D611413398}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C959A48-DA6E-4C73-8B3A-50D611413398}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,15 +57,21 @@ Global
 		{C7FCA4E7-6452-4408-AF2A-62473D66F985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7FCA4E7-6452-4408-AF2A-62473D66F985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7FCA4E7-6452-4408-AF2A-62473D66F985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3C925F4-A680-40B4-83A4-609743A2FFD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3C925F4-A680-40B4-83A4-609743A2FFD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3C925F4-A680-40B4-83A4-609743A2FFD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3C925F4-A680-40B4-83A4-609743A2FFD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{10F9252A-B320-4990-BD4B-EB708673D352} = {DB90650F-66AA-4FB3-A577-BCC067D1D081}
 		{6C959A48-DA6E-4C73-8B3A-50D611413398} = {DB90650F-66AA-4FB3-A577-BCC067D1D081}
 		{836E4B8A-31AA-4C2A-AC2C-7F6ABA996043} = {D38C8901-72EC-4751-AFA1-A9A54F0FFE6A}
 		{8F21C345-5FDB-40A8-BC48-599356AE02D1} = {D38C8901-72EC-4751-AFA1-A9A54F0FFE6A}
 		{A1CC7EB5-49E3-4F21-BF5D-90CAAA881BD3} = {DB90650F-66AA-4FB3-A577-BCC067D1D081}
 		{C7FCA4E7-6452-4408-AF2A-62473D66F985} = {AC11ACF9-D74A-4817-9AA2-219DD380A33B}
+		{E3C925F4-A680-40B4-83A4-609743A2FFD6} = {D38C8901-72EC-4751-AFA1-A9A54F0FFE6A}
 	EndGlobalSection
 EndGlobal

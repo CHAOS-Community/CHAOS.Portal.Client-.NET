@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Geckon.Common.Utilities;
-using Geckon.Portal.Client.Data;
-using Geckon.Portal.Client.Data.Portal;
-using Geckon.Serialization.Standard.String;
-using Geckon.Serialization.Standard.XML;
-using Geckon.Serialization.String;
-using Geckon.Serialization.XML;
+using CHAOS.Utilities;
+using CHAOS.Portal.Client.Data;
+using CHAOS.Portal.Client.Data.Portal;
+using CHAOS.Serialization.Standard.String;
+using CHAOS.Serialization.Standard.XML;
+using CHAOS.Serialization.String;
+using CHAOS.Serialization.XML;
 using Ninject;
 
 #if SILVERLIGHT
@@ -16,7 +16,7 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
-namespace Geckon.Portal.Client.Standard.Test
+namespace CHAOS.Portal.Client.Standard.Test
 {
 #if SILVERLIGHT
 	[TestClass]
@@ -28,6 +28,8 @@ namespace Geckon.Portal.Client.Standard.Test
 		: SilverlightTest
 #endif
 	{
+		public const string SERVICE_PATH = "<YOU SERVICE>";
+
 #if SILVERLIGHT
 		[TestMethod, Asynchronous, Timeout(5000)]
 #else
@@ -45,7 +47,7 @@ namespace Geckon.Portal.Client.Standard.Test
 
 			var client = kernel.Get<IPortalClient>();
 
-			client.ServicePath = "http://services.web01.geckon.com/Portal_v3";
+			client.ServicePath = SERVICE_PATH;
 
 			IServiceResult_Portal<Session> result = null;
 

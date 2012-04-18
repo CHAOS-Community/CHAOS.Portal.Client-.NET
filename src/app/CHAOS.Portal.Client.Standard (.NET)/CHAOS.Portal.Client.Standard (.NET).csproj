@@ -75,7 +75,6 @@
     <Compile Include="Managers\MetadataSchemaManager.cs" />
     <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
-    <Compile Include="Module.cs" />
     <Compile Include="PortalClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCall\IServiceCall.cs" />
@@ -83,11 +82,16 @@
     <Compile Include="ServiceCall\IServiceCallFactory.cs" />
     <Compile Include="ServiceCall\ResultParser.cs" />
     <Compile Include="ServiceCall\ServiceCall.cs" />
-    <Compile Include="ServiceCall\ServiceCallFactory.cs" />
     <Compile Include="ServiceCall\ServiceCallState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extension\Octopus\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
+      <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>
+      <Name>CHAOS.Portal.Client %28.NET%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
