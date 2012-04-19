@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
-using CHAOS.Common.Events;
-using CHAOS.Common.Utilities;
+using CHAOS.Events;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Managers;
 using Object = CHAOS.Portal.Client.Data.MCM.Object;
-using CHAOS.Common.Extensions;
+using CHAOS.Extensions;
 using System.Linq;
 
 namespace CHAOS.Portal.Client.Standard.Managers

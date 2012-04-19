@@ -81,7 +81,9 @@
       <HintPath>..\..\..\lib\Ninject (Silverlight).dll</HintPath>
     </Reference>
     <Reference Include="system" />
-	<Reference Include="mscorlib" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

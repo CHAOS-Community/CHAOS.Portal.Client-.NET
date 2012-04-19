@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Xml.Linq;
-using CHAOS.Common.Utilities;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Standard.Data;
 using CHAOS.Serialization.XML;
 using System.Linq;
-using CHAOS.Common.Extensions;
+using CHAOS.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {

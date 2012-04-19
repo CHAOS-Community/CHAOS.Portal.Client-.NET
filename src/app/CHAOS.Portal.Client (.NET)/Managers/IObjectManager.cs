@@ -1,6 +1,6 @@
 using System;
 using System.Xml.Linq;
-using CHAOS.Common.Events;
+using CHAOS.Events;
 using CHAOS.Portal.Client.Data.MCM;
 using Object = CHAOS.Portal.Client.Data.MCM.Object;
 

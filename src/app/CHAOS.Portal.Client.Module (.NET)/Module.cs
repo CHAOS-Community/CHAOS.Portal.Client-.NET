@@ -1,11 +1,18 @@
+using System.Collections.Generic;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Managers;
+using CHAOS.Portal.Client.Standard;
 using CHAOS.Portal.Client.Standard.Data;
 using CHAOS.Portal.Client.Standard.Managers;
 using CHAOS.Portal.Client.Standard.ServiceCall;
+using CHAOS.Serialization.String;
+using CHAOS.Serialization.XML;
+using CHAOS.Serialization.Standard.String;
+using CHAOS.Serialization.Standard.XML;
+using Ninject;
 using Ninject.Modules;
 
-namespace CHAOS.Portal.Client.Standard
+namespace CHAOS.Portal.Client.Module
 {
 	public class Module : NinjectModule
 	{
@@ -27,6 +34,12 @@ namespace CHAOS.Portal.Client.Standard
 			Bind<IMCMTypesManager>().To<MCMTypesManager>().InSingletonScope();
 			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();
 			Bind<IUserManager>().To<UserManager>().InSingletonScope();
+
+			/************** Serializer ************/
+			Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
+			Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
+
+			Kernel.Get<IXMLSerializer>().Map(typeof(IList<>), typeof(List<>));
 		}
 	}
 }

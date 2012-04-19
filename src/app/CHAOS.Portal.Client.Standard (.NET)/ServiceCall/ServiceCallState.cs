@@ -1,8 +1,8 @@
 using System;
-using CHAOS.Common.Events;
+using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
-using Math = CHAOS.Common.Utilities.Math;
+using Math = CHAOS.Utilities.Math;
 
 #if SILVERLIGHT
 

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.ObjectModel;
-using CHAOS.Common.Events;
+using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Managers;
-using CHAOS.Common.Extensions;
+using CHAOS.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {

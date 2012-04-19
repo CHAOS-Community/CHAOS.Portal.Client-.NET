@@ -1,12 +1,7 @@
 using System;
-using System.Collections.Generic;
-using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
-using CHAOS.Serialization.Standard.String;
-using CHAOS.Serialization.Standard.XML;
-using CHAOS.Serialization.String;
-using CHAOS.Serialization.XML;
+using CHAOS.Utilities;
 using Ninject;
 
 #if SILVERLIGHT
@@ -38,12 +33,8 @@ namespace CHAOS.Portal.Client.Standard.Test
 		public void ShouldCallSessionCreate()
 		{
 			var kernel = new StandardKernel();
-			kernel.Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
-			kernel.Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
 
-			kernel.Get<IXMLSerializer>().Map(typeof (IList<>), typeof (List<>));
-
-			kernel.Load(new Module());
+			kernel.Load(new Module.Module());
 
 			var client = kernel.Get<IPortalClient>();
 

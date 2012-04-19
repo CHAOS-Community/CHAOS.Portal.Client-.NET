@@ -1,4 +1,4 @@
-using CHAOS.Common.Events;
+using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
 using CHAOS.Portal.Client.Extensions.Portal;

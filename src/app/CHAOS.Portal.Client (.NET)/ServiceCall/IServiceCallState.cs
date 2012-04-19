@@ -1,5 +1,5 @@
 using System;
-using CHAOS.Common.Events;
+using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 
 namespace CHAOS.Portal.Client.ServiceCall

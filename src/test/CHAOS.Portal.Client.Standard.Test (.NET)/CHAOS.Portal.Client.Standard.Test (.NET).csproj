@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CHAOS %28.NET%29">
+      <HintPath>..\..\..\lib\CHAOS (.NET).dll</HintPath>
+    </Reference>
+    <Reference Include="CHAOS.Serialization %28.NET%29">
+      <HintPath>..\..\..\lib\CHAOS.Serialization (.NET).dll</HintPath>
+    </Reference>
     <Reference Include="Ninject %28.NET%29">
       <HintPath>..\..\..\lib\Ninject (.NET).dll</HintPath>
     </Reference>

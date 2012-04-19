@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using CHAOS.Common.Utilities;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
 using CHAOS.Portal.Client.Extensions.GeoLocator;

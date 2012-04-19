@@ -60,6 +60,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CHAOS %28Silverlight%29">
+      <HintPath>..\..\..\lib\CHAOS (Silverlight).dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Silverlight.Testing">
       <HintPath>..\..\..\tools\Silverlight Testing\Microsoft.Silverlight.Testing.dll</HintPath>
     </Reference>

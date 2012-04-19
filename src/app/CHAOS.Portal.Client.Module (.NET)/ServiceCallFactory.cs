@@ -1,4 +1,4 @@
-using CHAOS.Common.Utilities;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using Ninject;
 

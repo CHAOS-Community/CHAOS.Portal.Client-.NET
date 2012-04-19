@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using CHAOS.Common.Utilities;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Portal.Client.Standard.ServiceCall;

@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using CHAOS.Common.Events;
-using CHAOS.Common.Utilities;
+using CHAOS.Events;
+using CHAOS.Utilities;
 
 namespace CHAOS.Portal.Client.Managers
 {
@@ -11,27 +11,27 @@ namespace CHAOS.Portal.Client.Managers
 	{
 		public event EventHandler<DataEventArgs<Exception>> ManagerFailure = delegate { };
 		
-		private readonly IPortalClient _PortalClient;
+		private readonly IPortalClient _portalClient;
 		
-		private readonly RepeatActionConcater _UpdateGuard;
+		private readonly RepeatActionConcater _updateGuard;
 
-		private readonly IDictionary<string, object> _SettingValues;
-		private readonly IDictionary<string, object> _SettingDefaultValues;
+		private readonly IDictionary<string, object> _settingValues;
+		private readonly IDictionary<string, object> _settingDefaultValues;
 		
-		private readonly HashSet<string> _ChangedProperties;
-		private bool? _ServiceHadSettings;
-		private bool _ShouldSaveAfterGet;
-		private bool _LockSettings;
+		private readonly HashSet<string> _changedProperties;
+		private bool? _serviceHadSettings;
+		private bool _shouldSaveAfterGet;
+		private bool _lockSettings;
 
-		public IPortalClient PortalClient { get { return _PortalClient; } }
+		public IPortalClient PortalClient { get { return _portalClient; } }
 		
 		protected ASettingsManager(IPortalClient portalClient)
 		{
-			_PortalClient = portalClient;
-			_UpdateGuard = new RepeatActionConcater(SetSettings) {WaitTime = 5000};
-			_SettingValues = new Dictionary<string, object>();
-			_SettingDefaultValues = new Dictionary<string, object>();
-			_ChangedProperties = new HashSet<string>();
+			_portalClient = portalClient;
+			_updateGuard = new RepeatActionConcater(SetSettings) {WaitTime = 5000};
+			_settingValues = new Dictionary<string, object>();
+			_settingDefaultValues = new Dictionary<string, object>();
+			_changedProperties = new HashSet<string>();
 
 			GetSettingsWhenReady();
 		}
@@ -40,21 +40,21 @@ namespace CHAOS.Portal.Client.Managers
 
 		protected void SetSetting<T>(string name, T value)
 		{
-			if (_LockSettings && _ChangedProperties.Contains(name)) return;
-			if (!_ChangedProperties.Contains(name)) _ChangedProperties.Add(name);
-			_SettingValues[name] = value;
-			_UpdateGuard.Execute();
+			if (_lockSettings && _changedProperties.Contains(name)) return;
+			if (!_changedProperties.Contains(name)) _changedProperties.Add(name);
+			_settingValues[name] = value;
+			_updateGuard.Execute();
 			RaisePropertyChanged(name);
 		}
 
 		protected T GetSetting<T>(string name)
 		{
-			return _SettingValues.ContainsKey(name) ? (T)_SettingValues[name] : _SettingDefaultValues.ContainsKey(name) ? (T) _SettingDefaultValues[name] : default(T);
+			return _settingValues.ContainsKey(name) ? (T)_settingValues[name] : _settingDefaultValues.ContainsKey(name) ? (T) _settingDefaultValues[name] : default(T);
 		}
 
 		protected void SetDefaultSetting<T>(string name, T value)
 		{
-			_SettingDefaultValues[name] = value;
+			_settingDefaultValues[name] = value;
 		}
 
 		#endregion
@@ -102,23 +102,23 @@ namespace CHAOS.Portal.Client.Managers
 		{
 			if (settings.Count == 0)
 			{
-				_ServiceHadSettings = false;
+				_serviceHadSettings = false;
 			}
 			else
 			{
-				_ServiceHadSettings = true;
+				_serviceHadSettings = true;
 
-				_LockSettings = true;
+				_lockSettings = true;
 
 				ApplySettings(settings[0]);
 
-				_LockSettings = false;
+				_lockSettings = false;
 			}
 
-			_ChangedProperties.Clear();
+			_changedProperties.Clear();
 
-			if (_ShouldSaveAfterGet)
-				_UpdateGuard.Execute();
+			if (_shouldSaveAfterGet)
+				_updateGuard.Execute();
 		}
 
 		#endregion
@@ -128,10 +128,10 @@ namespace CHAOS.Portal.Client.Managers
 
 		private void SetSettings()
 		{
-			if (_ServiceHadSettings.HasValue)
-				SendSettingsToService(_ServiceHadSettings.Value);
+			if (_serviceHadSettings.HasValue)
+				SendSettingsToService(_serviceHadSettings.Value);
 			else
-				_ShouldSaveAfterGet = true;
+				_shouldSaveAfterGet = true;
 		}
 
 		#endregion

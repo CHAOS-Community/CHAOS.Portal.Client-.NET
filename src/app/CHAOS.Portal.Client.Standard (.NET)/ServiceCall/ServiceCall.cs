@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using CHAOS.Common.Events;
-using CHAOS.Common.Utilities;
+using CHAOS.Events;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Web;
