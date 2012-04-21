@@ -48,25 +48,27 @@
     <Compile Include="Data\ModuleAttribute.cs" />
     <Compile Include="Data\ModuleResult.cs" />
     <Compile Include="Data\ServiceResult.cs" />
+    <Compile Include="Extension\ClientSettingsExtension.cs" />
+    <Compile Include="Extension\EmailPasswordExtension.cs" />
     <Compile Include="Extension\Extension.cs" />
-    <Compile Include="Extension\GeoLocator\LocationExtension.cs" />
-    <Compile Include="Extension\MCM\FolderExtension.cs" />
-    <Compile Include="Extension\MCM\FolderTypeExtension.cs" />
-    <Compile Include="Extension\MCM\FormatTypeExtension.cs" />
-    <Compile Include="Extension\MCM\LanguageExtension.cs" />
-    <Compile Include="Extension\MCM\MetadataExtension.cs" />
-    <Compile Include="Extension\MCM\MetadataSchemaExtension.cs" />
-    <Compile Include="Extension\MCM\ObjectExtension.cs" />
-    <Compile Include="Extension\MCM\ObjectRelationTypeExtension.cs" />
-    <Compile Include="Extension\MCM\ObjectTypeExtension.cs" />
-    <Compile Include="Extension\Portal\ClientSettingsExtension.cs" />
-    <Compile Include="Extension\Portal\EmailPasswordExtension.cs" />
-    <Compile Include="Extension\Portal\GroupExtension.cs" />
-    <Compile Include="Extension\Portal\SecureCookieExtension.cs" />
-    <Compile Include="Extension\Portal\SessionExtension.cs" />
-    <Compile Include="Extension\Portal\SubscriptionExtension.cs" />
-    <Compile Include="Extension\Portal\UserExtension.cs" />
-    <Compile Include="Extension\Portal\UserSettingsExtension.cs" />
+    <Compile Include="Extension\FolderExtension.cs" />
+    <Compile Include="Extension\FolderTypeExtension.cs" />
+    <Compile Include="Extension\FormatTypeExtension.cs" />
+    <Compile Include="Extension\GroupExtension.cs" />
+    <Compile Include="Extension\LanguageExtension.cs" />
+    <Compile Include="Extension\LinkExtension.cs" />
+    <Compile Include="Extension\LocationExtension.cs" />
+    <Compile Include="Extension\MetadataExtension.cs" />
+    <Compile Include="Extension\MetadataSchemaExtension.cs" />
+    <Compile Include="Extension\ObjectExtension.cs" />
+    <Compile Include="Extension\ObjectRelationTypeExtension.cs" />
+    <Compile Include="Extension\ObjectTypeExtension.cs" />
+    <Compile Include="Extension\SecureCookieExtension.cs" />
+    <Compile Include="Extension\SessionExtension.cs" />
+    <Compile Include="Extension\StatsObjectExtension.cs" />
+    <Compile Include="Extension\SubscriptionExtension.cs" />
+    <Compile Include="Extension\UserExtension.cs" />
+    <Compile Include="Extension\UserSettingsExtension.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\FolderManager.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
@@ -84,9 +86,7 @@
     <Compile Include="ServiceCall\ServiceCall.cs" />
     <Compile Include="ServiceCall\ServiceCallState.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Extension\Octopus\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
       <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>

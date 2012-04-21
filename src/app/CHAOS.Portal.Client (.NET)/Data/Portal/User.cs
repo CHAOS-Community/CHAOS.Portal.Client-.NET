@@ -12,7 +12,7 @@ namespace CHAOS.Portal.Client.Data.Portal
 			set
 			{
 				_ID = value;
-				RaisePropertyChanged("ID");
+				RaisePropertyChanged("GUID");
 			}
 		}
 
@@ -24,7 +24,7 @@ namespace CHAOS.Portal.Client.Data.Portal
 			set
 			{
 				_SessionID = value;
-				RaisePropertyChanged("SessionID");
+				RaisePropertyChanged("SessionGUID");
 			}
 		}
 

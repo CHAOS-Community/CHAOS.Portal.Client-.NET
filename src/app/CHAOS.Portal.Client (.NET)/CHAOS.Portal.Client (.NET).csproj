@@ -48,6 +48,7 @@
     <Compile Include="Data\MCM\FolderType.cs" />
     <Compile Include="Data\MCM\FormatType.cs" />
     <Compile Include="Data\MCM\Language.cs" />
+    <Compile Include="Data\MCM\Link.cs" />
     <Compile Include="Data\MCM\Metadata.cs" />
     <Compile Include="Data\MCM\MetadataSchema.cs" />
     <Compile Include="Data\MCM\Object.cs" />
@@ -63,24 +64,26 @@
     <Compile Include="Data\Portal\User.cs" />
     <Compile Include="Data\Portal\UserSetting.cs" />
     <Compile Include="Data\ScalarResult.cs" />
-    <Compile Include="Extensions\GeoLocator\ILocationExtension.cs" />
-    <Compile Include="Extensions\MCM\IFolderExtension.cs" />
-    <Compile Include="Extensions\MCM\IFolderTypeExtension.cs" />
-    <Compile Include="Extensions\MCM\IFormatTypeExtension.cs" />
-    <Compile Include="Extensions\MCM\ILanguageExtension.cs" />
-    <Compile Include="Extensions\MCM\IMetadataExtension.cs" />
-    <Compile Include="Extensions\MCM\IMetadataSchemaExtension.cs" />
-    <Compile Include="Extensions\MCM\IObjectExtension.cs" />
-    <Compile Include="Extensions\MCM\IObjectRelationTypeExtension.cs" />
-    <Compile Include="Extensions\MCM\IObjectTypeExtension.cs" />
-    <Compile Include="Extensions\Portal\IClientSettingsExtension.cs" />
-    <Compile Include="Extensions\Portal\IEmailPasswordExtension.cs" />
-    <Compile Include="Extensions\Portal\IGroupExtension.cs" />
-    <Compile Include="Extensions\Portal\ISecureCookieExtension.cs" />
-    <Compile Include="Extensions\Portal\ISessionExtension.cs" />
-    <Compile Include="Extensions\Portal\ISubscriptionExtension.cs" />
-    <Compile Include="Extensions\Portal\IUserExtension.cs" />
-    <Compile Include="Extensions\Portal\IUserSettingsExtension.cs" />
+    <Compile Include="Extensions\IClientSettingsExtension.cs" />
+    <Compile Include="Extensions\IEmailPasswordExtension.cs" />
+    <Compile Include="Extensions\IFolderExtension.cs" />
+    <Compile Include="Extensions\IFolderTypeExtension.cs" />
+    <Compile Include="Extensions\IFormatTypeExtension.cs" />
+    <Compile Include="Extensions\IGroupExtension.cs" />
+    <Compile Include="Extensions\ILanguageExtension.cs" />
+    <Compile Include="Extensions\ILinkExtension.cs" />
+    <Compile Include="Extensions\ILocationExtension.cs" />
+    <Compile Include="Extensions\IMetadataExtension.cs" />
+    <Compile Include="Extensions\IMetadataSchemaExtension.cs" />
+    <Compile Include="Extensions\IObjectExtension.cs" />
+    <Compile Include="Extensions\IObjectRelationTypeExtension.cs" />
+    <Compile Include="Extensions\IObjectTypeExtension.cs" />
+    <Compile Include="Extensions\ISecureCookieExtension.cs" />
+    <Compile Include="Extensions\ISessionExtension.cs" />
+    <Compile Include="Extensions\IStatsObjectExtension.cs" />
+    <Compile Include="Extensions\ISubscriptionExtension.cs" />
+    <Compile Include="Extensions\IUserExtension.cs" />
+    <Compile Include="Extensions\IUserSettingsExtension.cs" />
     <Compile Include="IPortalClient.cs" />
     <Compile Include="Managers\ASettingsManager.cs" />
     <Compile Include="Managers\IFileManager.cs" />
@@ -96,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Octopus\" />
-    <Folder Include="Extensions\Octopus\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

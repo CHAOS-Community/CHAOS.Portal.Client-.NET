@@ -11,7 +11,7 @@ namespace CHAOS.Portal.Client.Data.MCM
 			set
 			{
 				_ID = value;
-				RaisePropertyChanged("ID");
+				RaisePropertyChanged("GUID");
 			}
 		}
 

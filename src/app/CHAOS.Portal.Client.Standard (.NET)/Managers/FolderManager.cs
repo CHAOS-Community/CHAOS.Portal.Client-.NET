@@ -73,7 +73,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateFolder(Folder oldFolder, Folder newFolder)
 		{
-			//oldFolder.ID					= newFolder.ID;
+			//oldFolder.GUID					= newFolder.GUID;
 			oldFolder.ParentID				= newFolder.ParentID;
 			oldFolder.FolderTypeID			= newFolder.FolderTypeID;
 			//oldFolder.SubscriptionGUID	= newFolder.SubscriptionGUID;

@@ -23,6 +23,11 @@ namespace CHAOS.Portal.Client.Data
 		IModuleResult<TMCM> MCM { get; }
 	}
 
+	public interface IServiceResult_Statistics<TStatistics> : IServiceResult
+	{
+		IModuleResult<TStatistics> Statistics { get; }
+	}
+
 	public interface IServiceResult_Octopus<TOctopus> : IServiceResult
 	{
 		IModuleResult<TOctopus> Octopus { get; }

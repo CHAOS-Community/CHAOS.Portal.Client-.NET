@@ -46,8 +46,8 @@ namespace CHAOS.Portal.Client.Standard.Test
 			Action asserts = () =>
 			                 	{
 			                 		Assert.IsNotNull(result.Portal.Data[0]);
-			                 		Assert.IsNotNull(result.Portal.Data[0].SessionID);
-			                 		Assert.AreNotEqual(string.Empty, result.Portal.Data[0].SessionID);
+			                 		Assert.IsNotNull(result.Portal.Data[0].SessionGUID);
+			                 		Assert.AreNotEqual(string.Empty, result.Portal.Data[0].SessionGUID);
 			                 	};
 
 			client.Session.Create().Callback = (r, e, t) => result = r;

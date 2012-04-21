@@ -1,15 +1,11 @@
 using System;
 using System.Collections.Generic;
+using CHAOS.Portal.Client.Extensions;
+using CHAOS.Portal.Client.Standard.Extension;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
-using CHAOS.Portal.Client.Extensions.GeoLocator;
-using CHAOS.Portal.Client.Extensions.MCM;
-using CHAOS.Portal.Client.Extensions.Portal;
 using CHAOS.Portal.Client.ServiceCall;
-using CHAOS.Portal.Client.Standard.Extension.GeoLocator;
-using CHAOS.Portal.Client.Standard.Extension.MCM;
-using CHAOS.Portal.Client.Standard.Extension.Portal;
 using CHAOS.Portal.Client.Standard.ServiceCall;
 using CHAOS.Web;
 
@@ -17,19 +13,19 @@ namespace CHAOS.Portal.Client.Standard
 {
 	public class PortalClient : IPortalClient, IServiceCaller
 	{
-		private const string PARAMETER_NAME_SESSION_ID = "sessionID";
+		private const string PARAMETER_NAME_SESSION_ID = "sessionGUID";
 		private const string PARAMETER_NAME_FORMAT = "format";
 		private const string PARAMETER_NAME_USE_HTTP_CODES = "useHTTPCodes";
 
-		private const string PARAMETER_VALUE_FORMAT = "GXML";
+		private const string PARAMETER_VALUE_FORMAT = "XML";
 		private const bool PARAMETER_VALUE_USE_HTTP_CODES = true;
 
-		private const uint PROTOCOL_VERSION = 1;
+		private const uint PROTOCOL_VERSION = 4;
 
 		public event EventHandler SessionAcquired = delegate { };
 		public event EventHandler ClientGUIDSet = delegate { };
 
-		private readonly IServiceCallFactory _ServiceCallFactory;
+		private readonly IServiceCallFactory _serviceCallFactory;
 		
 		public string ServicePath { get; set; }
 
@@ -52,13 +48,13 @@ namespace CHAOS.Portal.Client.Standard
 			get { return ClientGUID.HasValue; }
 		}
 
-		private Guid? _ClientGUID;
+		private Guid? _clientGUID;
 		public Guid? ClientGUID
 		{
-			get { return _ClientGUID; }
+			get { return _clientGUID; }
 			set
 			{
-				_ClientGUID = value;
+				_clientGUID = value;
 
 				if (HasClientGUID)
 					ClientGUIDSet(this, EventArgs.Empty);
@@ -68,8 +64,8 @@ namespace CHAOS.Portal.Client.Standard
 		#region Extensions
 		#region GeoLocator
 
-		private readonly LocationExtension _Location;
-		public ILocationExtension Location { get { return _Location; } }
+		private readonly LocationExtension _location;
+		public ILocationExtension Location { get { return _location; } }
 
 		#endregion
 		#region MCM
@@ -85,6 +81,9 @@ namespace CHAOS.Portal.Client.Standard
 
 		private readonly LanguageExtension _Language;
 		public ILanguageExtension Language { get { return _Language; } }
+
+		private readonly ILinkExtension _link;
+		public ILinkExtension Link { get { return _link; } }
 
 		private readonly MetadataExtension _Metadata;
 		public IMetadataExtension Metadata { get { return _Metadata; } }
@@ -125,22 +124,29 @@ namespace CHAOS.Portal.Client.Standard
 		private readonly UserExtension _User;
 		public IUserExtension User { get { return _User; } }
 
-		private readonly UserSettingsExtension _UserSettingsExtension;
-		public IUserSettingsExtension UserSettings { get { return _UserSettingsExtension; } }
+		private readonly UserSettingsExtension _userSettings;
+		public IUserSettingsExtension UserSettings { get { return _userSettings; } }
+
+		#endregion
+		#region Statistics
+
+		private readonly StatsObjectExtension _statsObject;
+		public IStatsObjectExtension StatsObject { get { return _statsObject; } }
 
 		#endregion
 		#endregion
 
 		public PortalClient(IServiceCallFactory serviceCallFactory)
 		{
-			_ServiceCallFactory = ArgumentUtilities.ValidateIsNotNull("serviceCallFactory", serviceCallFactory);
+			_serviceCallFactory = ArgumentUtilities.ValidateIsNotNull("serviceCallFactory", serviceCallFactory);
 
-			_Location = new LocationExtension(this);
+			_location = new LocationExtension(this);
 
 			_Folder = new FolderExtension(this);
 			_FolderType = new FolderTypeExtension(this);
 			_FormatType = new FormatTypeExtension(this);
 			_Language = new LanguageExtension(this);
+			_link = new LinkExtension(this);
 			_Metadata = new MetadataExtension(this);
 			_MetadataSchema = new MetadataSchemaExtension(this);
 			_Object = new ObjectExtension(this);
@@ -154,7 +160,9 @@ namespace CHAOS.Portal.Client.Standard
 			_SecureCookie = new SecureCookieExtension(this);
 			_Subscription = new SubscriptionExtension(this);
 			_User = new UserExtension(this);
-			_UserSettingsExtension = new UserSettingsExtension(this, this);
+			_userSettings = new UserSettingsExtension(this, this);
+
+			_statsObject = new StatsObjectExtension(this);
 		}
 
 		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceResult
@@ -167,13 +175,13 @@ namespace CHAOS.Portal.Client.Standard
 				if (!HasSession)
 					throw new Exception(string.Format("Session required before calling {0}/{1}", extensionName, commandName));
 
-				parameters[PARAMETER_NAME_SESSION_ID] = CurrentSession.SessionID;
+				parameters[PARAMETER_NAME_SESSION_ID] = CurrentSession.SessionGUID;
 			}
 
 			parameters[PARAMETER_NAME_FORMAT] = PARAMETER_VALUE_FORMAT;
 			parameters[PARAMETER_NAME_USE_HTTP_CODES] = PARAMETER_VALUE_USE_HTTP_CODES;
 			
-			var call = _ServiceCallFactory.GetServiceCall<T>();
+			var call = _serviceCallFactory.GetServiceCall<T>();
 
 			call.Call(string.Format("{0}/{1}/{2}", ServicePath, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
 

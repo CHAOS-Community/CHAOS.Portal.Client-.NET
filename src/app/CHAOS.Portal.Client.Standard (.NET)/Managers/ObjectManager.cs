@@ -68,7 +68,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		}
 
 		#endregion
-		#region By File ID
+		#region By File GUID
 
 		public Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations)
 		{
@@ -139,17 +139,17 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			schema.ValidateIsNotNull("schema");
 			language.ValidateIsNotNull("language");
 
-			if(@object.Metadatas.Any(m => m.MetadataSchemaID == schema.ID && m.LanguageCode == language.LanguageCode))
+			if(@object.Metadatas.Any(m => m.MetadataSchemaGUID == schema.GUID && m.LanguageCode == language.LanguageCode))
 				throw new Exception(string.Format("Object already have metadata with {0} language", language.LanguageCode));
 
-			return AddLanguage(@object, schema.ID, language.LanguageCode);
+			return AddLanguage(@object, schema.GUID, language.LanguageCode);
 		}
 
-		public Metadata AddLanguage(Object @object, int schemaID, string languageCode)
+		public Metadata AddLanguage(Object @object, Guid schemaGUID, string languageCode)
 		{
 			var metadata = new Metadata
 			{
-				MetadataSchemaID = schemaID,
+				MetadataSchemaGUID = schemaGUID,
 				LanguageCode = languageCode
 			};
 
@@ -171,7 +171,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(@object == null)
 				throw new Exception("Could not find object matching metadata");
 
-			_Client.Metadata.Set(@object.GUID, metadata.MetadataSchemaID, metadata.LanguageCode, newData);
+			_Client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, newData);
 		}
 
 		#endregion
@@ -210,7 +210,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if (oldObject.Metadatas.IsNull())
 				oldObject.Metadatas = newObject.Metadatas;
 			else
-				UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaID == m2.MetadataSchemaID && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
+				UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaGUID == m2.MetadataSchemaGUID && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
 
 			if (oldObject.Files.IsNull())
 				oldObject.Files = newObject.Files;

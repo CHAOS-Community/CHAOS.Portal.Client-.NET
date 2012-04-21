@@ -1,8 +1,6 @@
 using System;
 using CHAOS.Portal.Client.Data.Portal;
-using CHAOS.Portal.Client.Extensions.GeoLocator;
-using CHAOS.Portal.Client.Extensions.MCM;
-using CHAOS.Portal.Client.Extensions.Portal;
+using CHAOS.Portal.Client.Extensions;
 
 namespace CHAOS.Portal.Client
 {
@@ -79,6 +77,11 @@ namespace CHAOS.Portal.Client
 		/// <summary>
 		/// A MCM extension.
 		/// </summary>
+		ILinkExtension Link { get; }
+
+		/// <summary>
+		/// A MCM extension.
+		/// </summary>
 		IMetadataExtension Metadata { get; }
 
 		/// <summary>
@@ -141,6 +144,14 @@ namespace CHAOS.Portal.Client
 		/// A Portal extension that enables the user of serverside user settings per client.
 		/// </summary>
 		IUserSettingsExtension UserSettings { get; }
+
+		#endregion
+		#region Statistics Extensions
+
+		/// <summary>
+		/// A Statistics extension.
+		/// </summary>
+		IStatsObjectExtension StatsObject { get; }
 
 		#endregion
 	}

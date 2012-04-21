@@ -20,7 +20,7 @@ namespace CHAOS.Portal.Client.Managers
 		IManagerResult<Object> GetObjectsByFolder(int folderID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize);
 
 		Metadata AddLanguage(Object @object, MetadataSchema schema, Language language);
-		Metadata AddLanguage(Object @object, int schemaID, string languageCode);
+		Metadata AddLanguage(Object @object, Guid schemaID, string languageCode);
 
 		void SaveMetadata(Metadata metadata, XElement newData);
 	}

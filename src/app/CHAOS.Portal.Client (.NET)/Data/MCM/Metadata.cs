@@ -16,14 +16,25 @@ namespace CHAOS.Portal.Client.Data.MCM
 			}
 		}
 
-		private int _MetadataSchemaID;
-		public int MetadataSchemaID
+		private Guid _MetadataSchemaGUID;
+		public Guid MetadataSchemaGUID
 		{
-			get { return _MetadataSchemaID; }
+			get { return _MetadataSchemaGUID; }
 			set
 			{
-				_MetadataSchemaID = value;
-				RaisePropertyChanged("MetadataSchemaID");
+				_MetadataSchemaGUID = value;
+				RaisePropertyChanged("MetadataSchemaGUID");
+			}
+		}
+			
+		private uint? _revisionID;
+		public uint? RevisionID
+		{
+			get { return _revisionID; }
+			set
+			{
+				_revisionID = value;
+				RaisePropertyChanged("RevisionID");
 			}
 		}
 

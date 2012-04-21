@@ -21,7 +21,7 @@ namespace CHAOS.Portal.Client.Managers
 		/// <summary>
 		/// Gets the child folders of the specified folder.
 		/// </summary>
-		/// <param name="parentFolderID">The ID of the parent folder.</param>
+		/// <param name="parentFolderID">The GUID of the parent folder.</param>
 		/// <returns>A collection with a cached result, it's updated as soon as newer data is available.</returns>
 		ObservableCollection<Folder> GetFolders(int parentFolderID);
 	}
