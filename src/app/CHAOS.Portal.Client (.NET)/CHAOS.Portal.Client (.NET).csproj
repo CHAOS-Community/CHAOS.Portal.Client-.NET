@@ -31,8 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28.NET%29">
-      <HintPath>..\..\..\lib\CHAOS (.NET).dll</HintPath>
+    <Reference Include="CHAOS, Version=1.0.4491.40027, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />

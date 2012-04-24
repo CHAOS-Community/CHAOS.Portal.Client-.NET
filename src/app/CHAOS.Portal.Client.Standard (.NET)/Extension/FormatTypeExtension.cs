@@ -7,7 +7,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class FormatTypeExtension : Extension, IFormatTypeExtension
+	public class FormatTypeExtension : AExtension, IFormatTypeExtension
 	{
 		public FormatTypeExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

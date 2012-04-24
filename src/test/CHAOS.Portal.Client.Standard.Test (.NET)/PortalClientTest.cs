@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 		: SilverlightTest
 #endif
 	{
-		public const string SERVICE_PATH = "<YOU SERVICE>";
+		public const string SERVICE_PATH = "http://api.chaos-systems.com";
 
 #if SILVERLIGHT
 		[TestMethod, Asynchronous, Timeout(5000)]
@@ -57,7 +57,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 			EnqueueCallback(asserts);
 			EnqueueTestComplete();
 #else
-			Timing.WaitUntil(condition, 5000, "client.Session.Create call timed out");
+			Timing.WaitUntil(condition, 5000, 100,  "client.Session.Create call timed out");
 			asserts();
 #endif
 		}

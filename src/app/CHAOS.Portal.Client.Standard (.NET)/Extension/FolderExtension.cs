@@ -7,7 +7,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class FolderExtension : Extension, IFolderExtension
+	public class FolderExtension : AExtension, IFolderExtension
 	{
 		public FolderExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

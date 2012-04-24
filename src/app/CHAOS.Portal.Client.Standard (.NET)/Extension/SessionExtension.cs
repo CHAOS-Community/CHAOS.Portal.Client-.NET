@@ -8,7 +8,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class SessionExtension : Extension, ISessionExtension
+	public class SessionExtension : AExtension, ISessionExtension
 	{
 		private readonly uint _ProtocolVersion;
 
@@ -26,7 +26,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 
 		private IServiceCallState<IServiceResult_Portal<Session>> Create(uint protocolVersion)
 		{
-			var state = CallServiceWithoutSession<IServiceResult_Portal<Session>>(HTTPMethod.POST, protocolVersion);
+			var state = CallServiceWithoutSession<IServiceResult_Portal<Session>>(HTTPMethod.GET, protocolVersion);
 
 			state.OperationCompleted += GetCompleted;
 

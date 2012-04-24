@@ -46,8 +46,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="system" />

@@ -46,14 +46,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Serialization %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS.Serialization (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS.Serialization, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Web %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS.Web (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS.Web, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Web.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System.Windows" />
@@ -65,6 +67,9 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\AExtension.cs">
+      <Link>Extension\AExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ClientSettingsExtension.cs">
       <Link>Extension\ClientSettingsExtension.cs</Link>
     </Compile>
@@ -133,9 +138,6 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Data\ServiceResult.cs">
       <Link>Data\ServiceResult.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Extension\Extension.cs">
-      <Link>Extension\Extension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Managers\FileManager.cs">
       <Link>Managers\FileManager.cs</Link>

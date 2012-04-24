@@ -65,20 +65,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Serialization %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS.Serialization (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS.Serialization">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Serialization.Standard %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS.Serialization.Standard (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS.Serialization.Standard">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.Standard.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Web %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS.Web (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS.Web">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject %28Silverlight%29">
-      <HintPath>..\..\..\lib\Ninject (Silverlight).dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\..\..\lib\Silverlight\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="system" />
     <Reference Include="mscorlib" />

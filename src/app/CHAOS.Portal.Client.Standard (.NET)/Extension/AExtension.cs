@@ -11,22 +11,22 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class Extension
+	public abstract class AExtension
 	{
-		private readonly IServiceCaller _ServiceCaller;
+		private readonly IServiceCaller _serviceCaller;
 
-		private readonly string _ExtensionName;
+		private readonly string _extensionName;
 
-		public Extension(IServiceCaller serviceCaller)
+		protected AExtension(IServiceCaller serviceCaller)
 		{
-			_ServiceCaller = ArgumentUtilities.ValidateIsNotNull("serviceCaller", serviceCaller);
+			_serviceCaller = ArgumentUtilities.ValidateIsNotNull("serviceCaller", serviceCaller);
 
 			var typeName = GetType().Name;
 
 			if(typeName.Substring(typeName.Length - 9) != "Extension")
 				throw new Exception("Class name must end on \"Extension\"");
 
-			_ExtensionName = typeName.Remove(typeName.Length - 9);
+			_extensionName = typeName.Remove(typeName.Length - 9);
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
@@ -55,7 +55,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			for (var i = 0; i < parameters.Count; i++)
 				serviceParameters[methodParameters[i].Name] = parameters[i];
 
-			return _ServiceCaller.CallService<T>(_ExtensionName, method.Name, serviceParameters, httpMethod, requiresSession);
+			return _serviceCaller.CallService<T>(_extensionName, method.Name, serviceParameters, httpMethod, requiresSession);
 		}
 	}
 }

@@ -31,14 +31,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28.NET%29">
-      <HintPath>..\..\..\lib\CHAOS (.NET).dll</HintPath>
+    <Reference Include="CHAOS">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Serialization %28.NET%29">
-      <HintPath>..\..\..\lib\CHAOS.Serialization (.NET).dll</HintPath>
+    <Reference Include="CHAOS.Serialization">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject %28.NET%29">
-      <HintPath>..\..\..\lib\Ninject (.NET).dll</HintPath>
+    <Reference Include="CHAOS.Serialization.Standard">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="CHAOS.Web">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\AnyCPU\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\..\tools\NUnit\nunit.framework.dll</HintPath>
@@ -59,6 +66,10 @@
     <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Module %28.NET%29\CHAOS.Portal.Client.Module %28.NET%29.csproj">
       <Project>{10f9252a-b320-4990-bd4b-eb708673d352}</Project>
       <Name>CHAOS.Portal.Client.Module %28.NET%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Standard %28.NET%29\CHAOS.Portal.Client.Standard %28.NET%29.csproj">
+      <Project>{6c959a48-da6e-4c73-8b3a-50d611413398}</Project>
+      <Name>CHAOS.Portal.Client.Standard %28.NET%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class EmailPasswordExtension : Extension, IEmailPasswordExtension
+	public class EmailPasswordExtension : AExtension, IEmailPasswordExtension
 	{
 		public EmailPasswordExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

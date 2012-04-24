@@ -7,7 +7,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class LanguageExtension : Extension, ILanguageExtension
+	public class LanguageExtension : AExtension, ILanguageExtension
 	{
 		public LanguageExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

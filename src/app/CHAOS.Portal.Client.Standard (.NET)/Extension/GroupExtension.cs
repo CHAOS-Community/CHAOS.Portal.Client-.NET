@@ -8,7 +8,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class GroupExtension : Extension, IGroupExtension
+	public class GroupExtension : AExtension, IGroupExtension
 	{
 		public GroupExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

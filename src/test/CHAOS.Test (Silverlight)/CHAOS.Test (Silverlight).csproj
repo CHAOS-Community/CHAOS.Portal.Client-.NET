@@ -60,8 +60,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28Silverlight%29">
-      <HintPath>..\..\..\lib\CHAOS (Silverlight).dll</HintPath>
+    <Reference Include="CHAOS">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.dll</HintPath>
+    </Reference>
+    <Reference Include="CHAOS.Serialization">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="CHAOS.Serialization.Standard">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.Standard.dll</HintPath>
+    </Reference>
+    <Reference Include="CHAOS.Web">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Web.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Silverlight.Testing">
       <HintPath>..\..\..\tools\Silverlight Testing\Microsoft.Silverlight.Testing.dll</HintPath>
@@ -70,8 +79,8 @@
       <HintPath>..\..\..\tools\Silverlight Testing\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="Ninject %28Silverlight%29">
-      <HintPath>..\..\..\lib\Ninject (Silverlight).dll</HintPath>
+    <Reference Include="Ninject">
+      <HintPath>..\..\..\lib\Silverlight\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
@@ -107,6 +116,10 @@
     <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Module %28Silverlight%29\CHAOS.Portal.Client.Module %28Silverlight%29.csproj">
       <Project>{e3c925f4-a680-40b4-83a4-609743a2ffd6}</Project>
       <Name>CHAOS.Portal.Client.Module %28Silverlight%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Standard %28Silverlight%29\CHAOS.Portal.Client.Standard %28Silverlight%29.csproj">
+      <Project>{836e4b8a-31aa-4c2a-ac2c-7f6aba996043}</Project>
+      <Name>CHAOS.Portal.Client.Standard %28Silverlight%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

@@ -31,14 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CHAOS %28.NET%29">
-      <HintPath>..\..\..\lib\CHAOS (.NET).dll</HintPath>
+    <Reference Include="CHAOS, Version=1.0.4491.40027, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Serialization %28.NET%29">
-      <HintPath>..\..\..\lib\CHAOS.Serialization (.NET).dll</HintPath>
+    <Reference Include="CHAOS.Serialization, Version=1.0.4491.40027, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="CHAOS.Web %28.NET%29">
-      <HintPath>..\..\..\lib\CHAOS.Web (.NET).dll</HintPath>
+    <Reference Include="CHAOS.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml.Linq" />
@@ -50,7 +53,7 @@
     <Compile Include="Data\ServiceResult.cs" />
     <Compile Include="Extension\ClientSettingsExtension.cs" />
     <Compile Include="Extension\EmailPasswordExtension.cs" />
-    <Compile Include="Extension\Extension.cs" />
+    <Compile Include="Extension\AExtension.cs" />
     <Compile Include="Extension\FolderExtension.cs" />
     <Compile Include="Extension\FolderTypeExtension.cs" />
     <Compile Include="Extension\FormatTypeExtension.cs" />
@@ -86,7 +89,6 @@
     <Compile Include="ServiceCall\ServiceCall.cs" />
     <Compile Include="ServiceCall\ServiceCallState.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
       <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>

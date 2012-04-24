@@ -8,7 +8,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class UserExtension : Extension, IUserExtension
+	public class UserExtension : AExtension, IUserExtension
 	{
 		public UserExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

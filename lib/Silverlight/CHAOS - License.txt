@@ -1,0 +1,4 @@
+CHAOS, CHAOS.Serialization, CHAOS.Serialization.Standard and CHAOS.Web may be used ONLY in conjuction with the CHAOS Portal Client.
+There are no limitation when used with CHAOS Portal Client.
+
+Copyright 2012 CHAOS ApS

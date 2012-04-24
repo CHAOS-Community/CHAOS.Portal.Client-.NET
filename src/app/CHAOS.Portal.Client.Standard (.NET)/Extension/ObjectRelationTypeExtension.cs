@@ -7,7 +7,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class ObjectRelationTypeExtension : Extension, IObjectRelationTypeExtension
+	public class ObjectRelationTypeExtension : AExtension, IObjectRelationTypeExtension
 	{
 		public ObjectRelationTypeExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

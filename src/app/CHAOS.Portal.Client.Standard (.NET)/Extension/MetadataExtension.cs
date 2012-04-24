@@ -9,7 +9,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class MetadataExtension : Extension, IMetadataExtension
+	public class MetadataExtension : AExtension, IMetadataExtension
 	{
 		public MetadataExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

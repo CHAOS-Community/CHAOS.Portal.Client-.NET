@@ -9,7 +9,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class UserSettingsExtension : Extension, IUserSettingsExtension
+	public class UserSettingsExtension : AExtension, IUserSettingsExtension
 	{
 		private readonly IPortalClient _PortalClient;
 

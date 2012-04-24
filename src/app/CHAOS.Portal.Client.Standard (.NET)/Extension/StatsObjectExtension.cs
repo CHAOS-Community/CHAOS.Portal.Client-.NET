@@ -6,7 +6,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class StatsObjectExtension : Extension, IStatsObjectExtension
+	public class StatsObjectExtension : AExtension, IStatsObjectExtension
 	{
 		public StatsObjectExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 

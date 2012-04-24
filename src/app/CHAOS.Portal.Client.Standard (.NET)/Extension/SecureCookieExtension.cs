@@ -9,7 +9,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
-	public class SecureCookieExtension : Extension, ISecureCookieExtension
+	public class SecureCookieExtension : AExtension, ISecureCookieExtension
 	{
 		public SecureCookieExtension(IServiceCaller serviceCaller) : base(serviceCaller)
 		{
