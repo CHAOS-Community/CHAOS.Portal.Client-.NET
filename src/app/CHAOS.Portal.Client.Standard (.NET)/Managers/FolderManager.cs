@@ -7,40 +7,39 @@ using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Managers;
 using System.Linq;
+using CHAOS.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
 	public class FolderManager : IFolderManager
 	{
-		private const int ROOT_FOLDER_ID = -1;
-
-		public event EventHandler<DataEventArgs<int>> FailedToGetFolders = delegate { };
+		public event EventHandler<DataEventArgs<uint?>> FailedToGetFolders = delegate { };
 		
-		private readonly IPortalClient _Client;
-		private readonly IDictionary<int, ObservableCollection<Folder>> _FoldersByParent;
+		private readonly IPortalClient _client;
+		private readonly IDictionary<uint?, ObservableCollection<Folder>> _foldersByParent;
 
 		public FolderManager(IPortalClient client)
 		{
-			_Client = ArgumentUtilities.ValidateIsNotNull("client", client);
-			_FoldersByParent = new Dictionary<int, ObservableCollection<Folder>>();
+			_client = ArgumentUtilities.ValidateIsNotNull("client", client);
+			_foldersByParent = new Dictionary<uint?, ObservableCollection<Folder>>();
 		}
 
 		public ObservableCollection<Folder> GetFolders(Folder parentFolder)
 		{
-			return GetFolders(parentFolder == null ? ROOT_FOLDER_ID : parentFolder.ID);
+			return GetFolders(parentFolder.DoIfIsNotNull(f => f.ID));
 		}
 
-		public ObservableCollection<Folder> GetFolders(int parentFolderID)
+		public ObservableCollection<Folder> GetFolders(uint? parentFolderID)
 		{
-			lock (_FoldersByParent)
+			lock (_foldersByParent)
 			{
-				if (!_FoldersByParent.ContainsKey(parentFolderID))
-					_FoldersByParent[parentFolderID] = new ObservableCollection<Folder>();
+				if (!_foldersByParent.ContainsKey(parentFolderID))
+					_foldersByParent[parentFolderID] = new ObservableCollection<Folder>();
 			}
 
-			var childFolders = _FoldersByParent[parentFolderID];
+			var childFolders = _foldersByParent[parentFolderID];
 
-			var state = _Client.Folder.Get(null, null, parentFolderID == ROOT_FOLDER_ID ? null : (int?)parentFolderID);
+			var state = _client.Folder.Get(null, null, parentFolderID);
 			state.Token = parentFolderID;
 			state.Callback = GetChildFoldersCompleted;
 			state.FeedbackOnDispatcher = true;
@@ -50,15 +49,15 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void GetChildFoldersCompleted(IServiceResult_MCM<Folder> result, Exception error, object token)
 		{
-			var parentID = (int) token;
+			var parentID = (uint?) token;
 
 			if(error != null)
 			{
-				FailedToGetFolders(this, new DataEventArgs<int>(parentID));
+				FailedToGetFolders(this, new DataEventArgs<uint?>(parentID));
 				return;
 			}
 
-			var collection = _FoldersByParent[parentID];
+			var collection = _foldersByParent[parentID];
 
 			foreach (var newFolder in result.MCM.Data)
 			{
@@ -73,7 +72,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateFolder(Folder oldFolder, Folder newFolder)
 		{
-			//oldFolder.GUID					= newFolder.GUID;
+			//oldFolder.GUID				= newFolder.GUID;
 			oldFolder.ParentID				= newFolder.ParentID;
 			oldFolder.FolderTypeID			= newFolder.FolderTypeID;
 			//oldFolder.SubscriptionGUID	= newFolder.SubscriptionGUID;

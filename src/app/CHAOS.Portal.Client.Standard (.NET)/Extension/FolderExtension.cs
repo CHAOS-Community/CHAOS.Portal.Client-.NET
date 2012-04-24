@@ -11,22 +11,22 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public FolderExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_MCM<Folder>> Get(int? id, int? folderTypeID, int? parentID)
+		public IServiceCallState<IServiceResult_MCM<Folder>> Get(uint? id, int? folderTypeID, uint? parentID)
 		{
 			return CallService<IServiceResult_MCM<Folder>>(HTTPMethod.GET, id, folderTypeID, parentID);
 		}
 
-		public IServiceCallState<IServiceResult_MCM<Folder>> Create(string subscriptionGUID, string title, int? parentID, int folderTypeID)
+		public IServiceCallState<IServiceResult_MCM<Folder>> Create(string subscriptionGUID, string title, uint? parentID, int folderTypeID)
 		{
 			return CallService<IServiceResult_MCM<Folder>>(HTTPMethod.GET, subscriptionGUID, title, parentID, folderTypeID);
 		}
 
-		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Update(int id, string newTitle, int? newParentID, int? newFolderTypeID)
+		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Update(uint id, string newTitle, int? newParentID, int? newFolderTypeID)
 		{
 			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.GET, id, newTitle, newParentID, newFolderTypeID);
 		}
 
-		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Delete(int id)
+		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Delete(uint id)
 		{
 			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.GET, id);
 		}

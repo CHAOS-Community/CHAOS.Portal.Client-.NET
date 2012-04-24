@@ -4,90 +4,90 @@ namespace CHAOS.Portal.Client.Data.MCM
 {
 	public class Folder : AData
 	{
-		private int _ID;
-		public int ID
+		private uint _id;
+		public uint ID
 		{
-			get { return _ID; }
+			get { return _id; }
 			set
 			{
-				_ID = value;
+				_id = value;
 				RaisePropertyChanged("GUID");
 			}
 		}
 
-		private int? _ParentID;
-		public int? ParentID
+		private uint? _parentID;
+		public uint? ParentID
 		{
-			get { return _ParentID; }
+			get { return _parentID; }
 			set
 			{
-				_ParentID = value;
+				_parentID = value;
 				RaisePropertyChanged("ParentID");
 			}
 		}
 
-		private int _FolderTypeID;
+		private int _folderTypeID;
 		public int FolderTypeID
 		{
-			get { return _FolderTypeID; }
+			get { return _folderTypeID; }
 			set
 			{
-				_FolderTypeID = value;
+				_folderTypeID = value;
 				RaisePropertyChanged("FolderTypeID");
 			}
 		}
 
-		private Guid _SubscriptionGUID;
+		private Guid _subscriptionGUID;
 		public Guid SubscriptionGUID
 		{
-			get { return _SubscriptionGUID; }
+			get { return _subscriptionGUID; }
 			set
 			{
-				_SubscriptionGUID = value;
+				_subscriptionGUID = value;
 				RaisePropertyChanged("SubscriptionGUID");
 			}
 		}
 
-		private string _Title;
+		private string _title;
 		public string Title
 		{
-			get { return _Title; }
+			get { return _title; }
 			set
 			{
-				_Title = value;
+				_title = value;
 				RaisePropertyChanged("Title");
 			}
 		}
 
-		private int _NumberOfSubFolders;
+		private int _numberOfSubFolders;
 		public int NumberOfSubFolders
 		{
-			get { return _NumberOfSubFolders; }
+			get { return _numberOfSubFolders; }
 			set
 			{
-				_NumberOfSubFolders = value;
+				_numberOfSubFolders = value;
 				RaisePropertyChanged("NumberOfSubFolders");
 			}
 		}
 
-		private int _NumberOfObjects;
+		private int _numberOfObjects;
 		public int NumberOfObjects
 		{
-			get { return _NumberOfObjects; }
+			get { return _numberOfObjects; }
 			set
 			{
-				_NumberOfObjects = value;
+				_numberOfObjects = value;
 				RaisePropertyChanged("NumberOfObjects");
 			}
 		}
 
-		private DateTime _DateCreated;
+		private DateTime _dateCreated;
 		public DateTime DateCreated
 		{
-			get { return _DateCreated; }
+			get { return _dateCreated; }
 			set
 			{
-				_DateCreated = value;
+				_dateCreated = value;
 				RaisePropertyChanged("DateCreated");
 			}
 		}

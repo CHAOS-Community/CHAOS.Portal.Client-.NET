@@ -18,26 +18,26 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjectByGUID = delegate { };
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjects = delegate { };
 
-		private readonly IDictionary<Guid, Object> _Objects;
+		private readonly IDictionary<Guid, Object> _objects;
 
-		private readonly IPortalClient _Client;
+		private readonly IPortalClient _client;
 
 		public ObjectManager(IPortalClient client)
 		{
-			_Client = ArgumentUtilities.ValidateIsNotNull("client", client);
-			_Objects = new Dictionary<Guid, Object>();
+			_client = ArgumentUtilities.ValidateIsNotNull("client", client);
+			_objects = new Dictionary<Guid, Object>();
 		}
 
 		#region By GUID
 
 		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations)
 		{
-			if (!_Objects.ContainsKey(guid))
-				_Objects[guid] = new Object {GUID = guid};
+			if (!_objects.ContainsKey(guid))
+				_objects[guid] = new Object {GUID = guid};
 				
-			var result = _Objects[guid];
+			var result = _objects[guid];
 
-			var state = _Client.Object.Get(string.Format("GUID:{0}", guid), null, includeMetadata, includeFiles, includeObjectRelations, 0, 1);
+			var state = _client.Object.Get(string.Format("GUID:{0}", guid), null, includeMetadata, includeFiles, includeObjectRelations, 0, 1);
 			state.Callback = GetObjectByGUIDCompleted;
 			state.FeedbackOnDispatcher = true;
 
@@ -64,7 +64,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			UpdateObject(_Objects[result.MCM.Data[0].GUID], result.MCM.Data[0]);
+			UpdateObject(_objects[result.MCM.Data[0].GUID], result.MCM.Data[0]);
 		}
 
 		#endregion
@@ -72,7 +72,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations)
 		{
-			return _Objects.Values.FirstOrDefault(o => !o.Files.IsNull() && o.Files.Any(f => f.ID == fileID)); //TODO: This is a temporary solution.
+			return _objects.Values.FirstOrDefault(o => !o.Files.IsNull() && o.Files.Any(f => f.ID == fileID)); //TODO: This is a temporary solution.
 		}
 
 		#endregion
@@ -91,9 +91,22 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			return GetObjectsByFolder(folder.ValidateIsNotNull("folder").ID, includeFiles, includeMetadata, includeObjectRelations, pageSize);
 		}
 
-		public IManagerResult<Object> GetObjectsByFolder(int folderID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize)
+		public IManagerResult<Object> GetObjectsByFolder(uint folderID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize)
 		{
 			return GetResult(string.Format("FolderID:{0}", folderID), null, includeFiles, includeMetadata, includeObjectRelations, pageSize);
+		}
+
+		#endregion
+		#region Move To Folder
+
+		public void MoveToFolder(Object @object, Folder fromFolder, Folder toFolder)
+		{
+			MoveToFolder(@object.GUID, fromFolder.ID, toFolder.ID);
+		}
+
+		public void MoveToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID)
+		{
+			_client.Link.Update(objectGUID, fromFolderID, toFolderID);
 		}
 
 		#endregion
@@ -103,7 +116,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			return new ManagerResult<Object>(pageSize, (i, r) =>
 			{
-				var state = _Client.Object.Get(query, sort, includeMetadata, includeFiles, includeObjectRelations, (int)i, (int)pageSize);
+				var state = _client.Object.Get(query, sort, includeMetadata, includeFiles, includeObjectRelations, (int)i, (int)pageSize);
 				state.Token = (Action<IList<Object>, uint>)((os, c) =>
 				{
 					r.TotalCount = c;
@@ -166,12 +179,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			metadata.ValidateIsNotNull("metadata");
 			newData.ValidateIsNotNull("newData");
 
-			var @object = _Objects.Values.FirstOrDefault(o => o.Metadatas.Contains(metadata));
+			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas.Contains(metadata));
 
 			if(@object == null)
 				throw new Exception("Could not find object matching metadata");
 
-			_Client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, newData);
+			_client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, newData);
 		}
 
 		#endregion
@@ -182,9 +195,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			
 			foreach (var newObject in objects)
 			{
-				if (_Objects.ContainsKey(newObject.GUID))
+				if (_objects.ContainsKey(newObject.GUID))
 				{
-					var existingObject = _Objects[newObject.GUID];
+					var existingObject = _objects[newObject.GUID];
 
 					UpdateObject(existingObject, newObject);
 
@@ -192,7 +205,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				}
 				else
 				{
-					_Objects.Add(newObject.GUID, newObject);
+					_objects.Add(newObject.GUID, newObject);
 
 					result.Add(newObject);
 				}
