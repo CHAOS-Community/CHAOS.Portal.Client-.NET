@@ -64,6 +64,7 @@
     <Compile Include="Extension\MetadataExtension.cs" />
     <Compile Include="Extension\MetadataSchemaExtension.cs" />
     <Compile Include="Extension\ObjectExtension.cs" />
+    <Compile Include="Extension\ObjectRelationExtension.cs" />
     <Compile Include="Extension\ObjectRelationTypeExtension.cs" />
     <Compile Include="Extension\ObjectTypeExtension.cs" />
     <Compile Include="Extension\SecureCookieExtension.cs" />

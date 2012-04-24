@@ -77,6 +77,7 @@
     <Compile Include="Extensions\IMetadataExtension.cs" />
     <Compile Include="Extensions\IMetadataSchemaExtension.cs" />
     <Compile Include="Extensions\IObjectExtension.cs" />
+    <Compile Include="Extensions\IObjectRelationExtension.cs" />
     <Compile Include="Extensions\IObjectRelationTypeExtension.cs" />
     <Compile Include="Extensions\IObjectTypeExtension.cs" />
     <Compile Include="Extensions\ISecureCookieExtension.cs" />

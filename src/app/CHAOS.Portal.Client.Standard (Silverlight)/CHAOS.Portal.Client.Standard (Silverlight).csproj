@@ -106,6 +106,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectExtension.cs">
       <Link>Extension\ObjectExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectRelationExtension.cs">
+      <Link>Extension\ObjectRelationExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectRelationTypeExtension.cs">
       <Link>Extension\ObjectRelationTypeExtension.cs</Link>
     </Compile>

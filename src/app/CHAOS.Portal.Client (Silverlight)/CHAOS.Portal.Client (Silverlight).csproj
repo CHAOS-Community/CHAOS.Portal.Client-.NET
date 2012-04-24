@@ -98,6 +98,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectExtension.cs">
       <Link>Extensions\IObjectExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectRelationExtension.cs">
+      <Link>Extensions\IObjectRelationExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectRelationTypeExtension.cs">
       <Link>Extensions\IObjectRelationTypeExtension.cs</Link>
     </Compile>
