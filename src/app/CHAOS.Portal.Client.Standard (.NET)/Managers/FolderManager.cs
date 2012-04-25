@@ -76,7 +76,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			oldFolder.ParentID				= newFolder.ParentID;
 			oldFolder.FolderTypeID			= newFolder.FolderTypeID;
 			//oldFolder.SubscriptionGUID	= newFolder.SubscriptionGUID;
-			oldFolder.Title					= newFolder.Title;
+			oldFolder.Name					= newFolder.Name;
 			oldFolder.NumberOfSubFolders	= newFolder.NumberOfSubFolders;
 			oldFolder.NumberOfObjects		= newFolder.NumberOfObjects;
 			//oldFolder.DateCreated			= newFolder.DateCreated;

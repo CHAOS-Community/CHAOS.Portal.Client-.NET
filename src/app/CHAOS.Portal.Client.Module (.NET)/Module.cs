@@ -36,10 +36,13 @@ namespace CHAOS.Portal.Client.Module
 			Bind<IUserManager>().To<UserManager>().InSingletonScope();
 
 			/************** Serializer ************/
-			Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
-			Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
+			/*if(Kernel.TryGet<IStringSerializer>() == null);
+			{
+				Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
+				Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
 
-			Kernel.Get<IXMLSerializer>().Map(typeof(IList<>), typeof(List<>));
+				Kernel.Get<IXMLSerializer>().Map(typeof(IList<>), typeof(List<>));
+			}*/
 		}
 	}
 }

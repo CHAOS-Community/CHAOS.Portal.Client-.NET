@@ -26,8 +26,19 @@ namespace CHAOS.Portal.Client.Standard
 		public event EventHandler ClientGUIDSet = delegate { };
 
 		private readonly IServiceCallFactory _serviceCallFactory;
-		
-		public string ServicePath { get; set; }
+
+		private string _servicePath = null;
+		public string ServicePath
+		{
+			get { return _servicePath; }
+			set
+			{
+				if(value != null && value.EndsWith("/"))
+					_servicePath = value.Substring(0, value.Length - 1);
+				else
+					_servicePath = value;
+			}
+		}
 
 		public bool HasSession { get { return CurrentSession != null; } }
 

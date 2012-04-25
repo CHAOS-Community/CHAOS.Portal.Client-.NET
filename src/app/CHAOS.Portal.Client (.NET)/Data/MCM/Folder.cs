@@ -48,14 +48,14 @@ namespace CHAOS.Portal.Client.Data.MCM
 			}
 		}
 
-		private string _title;
-		public string Title
+		private string _name;
+		public string Name
 		{
-			get { return _title; }
+			get { return _name; }
 			set
 			{
-				_title = value;
-				RaisePropertyChanged("Title");
+				_name = value;
+				RaisePropertyChanged("Name");
 			}
 		}
 
