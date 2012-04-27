@@ -13,6 +13,16 @@ namespace CHAOS.Portal.Client.Data
 		TimeSpan Duration { get; set; }
 	}
 
+	public interface IServiceResult_EmailPassword<TEmailPassowrd> : IServiceResult
+	{
+		IModuleResult<TEmailPassowrd> EmailPassword { get; }
+	}
+
+	public interface IServiceResult_SecureCookie<TSecureCookie> : IServiceResult
+	{
+		IModuleResult<TSecureCookie> SecureCookie { get; }
+	}
+
 	public interface IServiceResult_Portal<TPortal> : IServiceResult
 	{
 		IModuleResult<TPortal> Portal { get; }

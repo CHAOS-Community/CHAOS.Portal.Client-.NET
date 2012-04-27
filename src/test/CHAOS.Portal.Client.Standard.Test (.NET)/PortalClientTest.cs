@@ -1,6 +1,11 @@
 using System;
+using System.Collections.Generic;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
+using CHAOS.Serialization.Standard.String;
+using CHAOS.Serialization.Standard.XML;
+using CHAOS.Serialization.String;
+using CHAOS.Serialization.XML;
 using CHAOS.Utilities;
 using Ninject;
 
@@ -23,7 +28,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 		: SilverlightTest
 #endif
 	{
-		public const string SERVICE_PATH = "http://api.chaos-systems.com";
+		public const string SERVICE_PATH = "";
 
 #if SILVERLIGHT
 		[TestMethod, Asynchronous, Timeout(5000)]
@@ -34,6 +39,10 @@ namespace CHAOS.Portal.Client.Standard.Test
 		{
 			var kernel = new StandardKernel();
 
+			kernel.Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
+			kernel.Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
+			kernel.Get<IXMLSerializer>().Map(typeof(IList<>), typeof(List<>));
+
 			kernel.Load(new Module.Module());
 
 			var client = kernel.Get<IPortalClient>();
@@ -43,6 +52,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 			IServiceResult_Portal<Session> result = null;
 
 			Func<bool> condition = () => result != null;
+
 			Action asserts = () =>
 			                 	{
 			                 		Assert.IsNotNull(result.Portal.Data[0]);

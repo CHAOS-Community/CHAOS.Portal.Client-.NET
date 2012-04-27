@@ -1,8 +1,9 @@
+using CHAOS.Portal.Client.Standard.ServiceCall;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using Ninject;
 
-namespace CHAOS.Portal.Client.Standard.ServiceCall
+namespace CHAOS.Portal.Client.Module
 {
 	public class ServiceCallFactory : IServiceCallFactory
 	{

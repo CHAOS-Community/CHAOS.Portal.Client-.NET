@@ -97,16 +97,26 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		}
 
 		#endregion
-		#region Move To Folder
+		#region Link
 
-		public void MoveToFolder(Object @object, Folder fromFolder, Folder toFolder)
+		public void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder)
 		{
-			MoveToFolder(@object.GUID, fromFolder.ID, toFolder.ID);
+			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID);
 		}
 
-		public void MoveToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID)
+		public void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID)
 		{
 			_client.Link.Update(objectGUID, fromFolderID, toFolderID);
+		}
+
+		public void CreateLinkInFolder(Object @object, Folder folder)
+		{
+			CreateLinkInFolder(@object.GUID, folder.ID);
+		}
+
+		public void CreateLinkInFolder(Guid objectGUID, uint folderID)
+		{
+			_client.Link.Create(objectGUID, folderID);
 		}
 
 		#endregion
