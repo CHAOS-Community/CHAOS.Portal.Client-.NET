@@ -87,11 +87,11 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 			Feedback(() =>
 			         	{
-			         		var callback = Callback;
+							OperationCompleted(this, new DataOperationEventArgs<T>(result, error));
+
+							var callback = Callback;
 							if (callback != null)
 								callback(result, error, Token);
-
-							OperationCompleted(this, new DataOperationEventArgs<T>(result, error));
 			         	});
 		}
 	}

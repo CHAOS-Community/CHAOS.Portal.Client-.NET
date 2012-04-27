@@ -10,18 +10,18 @@ namespace CHAOS.Portal.Client.Standard.Extension
 {
 	public class SessionExtension : AExtension, ISessionExtension
 	{
-		private readonly uint _ProtocolVersion;
+		private readonly uint _protocolVersion;
 
 		public Session Session { get; set; }
 
 		public SessionExtension(IServiceCaller serviceCaller, uint protocolVersion) : base(serviceCaller)
 		{
-			_ProtocolVersion = protocolVersion;
+			_protocolVersion = protocolVersion;
 		}
 
 		public IServiceCallState<IServiceResult_Portal<Session>> Create()
 		{
-			return Create(_ProtocolVersion);
+			return Create(_protocolVersion);
 		}
 
 		private IServiceCallState<IServiceResult_Portal<Session>> Create(uint protocolVersion)
@@ -42,7 +42,8 @@ namespace CHAOS.Portal.Client.Standard.Extension
 		{
 			((IServiceCallState<IServiceResult_Portal<Session>>)sender).OperationCompleted -= GetCompleted;
 
-			Session = e.Data.Portal.Data[0]; //TODO: Check and handle if there is less or more than one Session returned.
+			if(e.Error == null)
+				Session = e.Data.Portal.Data[0]; //TODO: Check and handle if there is less or more than one Session returned.
 		}
 
 		public IServiceCallState<IServiceResult_Portal<Session>> Update()
@@ -63,7 +64,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 		{
 			((IServiceCallState<IServiceResult_Portal<ScalarResult>>)sender).OperationCompleted -= DeleteCompleted;
 
-			if (e.Data.Portal.Data[0].Value == 1) //TODO: Check and handle other values.
+			if (e.Error == null && e.Data.Portal.Data[0].Value == 1) //TODO: Check and handle other values.
 				Session = null;
 		}
 	}
