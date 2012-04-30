@@ -19,11 +19,11 @@ namespace CHAOS.Portal.Client.Managers
 		IManagerResult<Object> GetObjectsByFolder(Folder folder, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize);
 		IManagerResult<Object> GetObjectsByFolder(uint folderID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize);
 
-		void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder);
-		void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID);
+		void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder, Action<bool> callback = null);
+		void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null);
 
-		void CreateLinkInFolder(Object @object, Folder folder);
-		void CreateLinkInFolder(Guid objectGUID, uint folderID);
+		void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback = null);
+		void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback = null);
 
 		Metadata AddLanguage(Object @object, MetadataSchema schema, Language language);
 		Metadata AddLanguage(Object @object, Guid schemaID, string languageCode);

@@ -99,24 +99,32 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region Link
 
-		public void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder)
+		public void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder, Action<bool> callback = null)
 		{
 			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID);
 		}
 
-		public void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID)
+		public void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null)
 		{
-			_client.Link.Update(objectGUID, fromFolderID, toFolderID);
+			_client.Link.Update(objectGUID, fromFolderID, toFolderID).Callback = (result, error, token) =>
+			                                                                    {
+			                                                                        if (callback != null)
+			                                                                            callback(error == null);
+			                                                                    };
 		}
 
-		public void CreateLinkInFolder(Object @object, Folder folder)
+		public void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback = null)
 		{
 			CreateLinkInFolder(@object.GUID, folder.ID);
 		}
 
-		public void CreateLinkInFolder(Guid objectGUID, uint folderID)
+		public void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback = null)
 		{
-			_client.Link.Create(objectGUID, folderID);
+			_client.Link.Create(objectGUID, folderID).Callback = (result, error, token) =>
+																{
+																	if (callback != null)
+																		callback(error == null);
+																};
 		}
 
 		#endregion
