@@ -99,31 +99,31 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region Link
 
-		public void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder, Action<bool> callback = null)
+		public void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback = null, T token = default(T))
 		{
-			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID);
+			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID, callback, token);
 		}
 
-		public void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null)
+		public void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback = null, T token = default(T))
 		{
-			_client.Link.Update(objectGUID, fromFolderID, toFolderID).Callback = (result, error, token) =>
+			_client.Link.Update(objectGUID, fromFolderID, toFolderID).Callback = (result, error, t) =>
 			                                                                    {
 			                                                                        if (callback != null)
-			                                                                            callback(error == null);
+			                                                                            callback(error == null, token);
 			                                                                    };
 		}
 
-		public void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback = null)
+		public void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback = null, T token = default(T))
 		{
-			CreateLinkInFolder(@object.GUID, folder.ID);
+			CreateLinkInFolder(@object.GUID, folder.ID, callback, token);
 		}
 
-		public void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback = null)
+		public void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback = null, T token = default(T))
 		{
-			_client.Link.Create(objectGUID, folderID).Callback = (result, error, token) =>
+			_client.Link.Create(objectGUID, folderID).Callback = (result, error, t) =>
 																{
 																	if (callback != null)
-																		callback(error == null);
+																		callback(error == null, token);
 																};
 		}
 
