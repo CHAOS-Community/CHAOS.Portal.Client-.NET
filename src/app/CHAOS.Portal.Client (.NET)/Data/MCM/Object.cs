@@ -16,8 +16,8 @@ namespace CHAOS.Portal.Client.Data.MCM
 			}
 		}
 
-		private int _ObjectTypeID;
-		public int ObjectTypeID
+		private uint _ObjectTypeID;
+		public uint ObjectTypeID
 		{
 			get { return _ObjectTypeID; }
 			set

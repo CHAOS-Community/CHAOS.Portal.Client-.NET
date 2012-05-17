@@ -248,6 +248,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				LanguageCode = languageCode
 			};
 
+			if(@object.Metadatas == null)
+				@object.Metadatas = new ObservableCollection<Metadata>();
+
 			@object.Metadatas.Add(metadata);
 
 			return metadata;
@@ -302,25 +305,34 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			oldObject.ObjectTypeID = newObject.ObjectTypeID;
 			oldObject.DateCreated = newObject.DateCreated;
 
-			if (oldObject.Metadatas.IsNull())
-				oldObject.Metadatas = newObject.Metadatas;
-			else
-				UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaGUID == m2.MetadataSchemaGUID && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
-
-			if (oldObject.Files.IsNull())
-				oldObject.Files = newObject.Files;
-			else
-				UpdateCollection(oldObject.Files, newObject.Files, (f1, f2) => f1.URL == f2.URL, UpdateFile);
-
-			if (oldObject.ObjectRelations.IsNull())
-				oldObject.ObjectRelations = newObject.ObjectRelations;
-			else
-				UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => true, UpdateObjectRelation);
+			if(newObject.Metadatas != null)
+			{
+				if (oldObject.Metadatas == null)
+					oldObject.Metadatas = newObject.Metadatas;
+				else
+					UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaGUID == m2.MetadataSchemaGUID && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
+			}
+			
+			if(newObject.Files != null)
+			{
+				if (oldObject.Files == null)
+					oldObject.Files = newObject.Files;
+				else
+					UpdateCollection(oldObject.Files, newObject.Files, (f1, f2) => f1.URL == f2.URL, UpdateFile);
+			}
+			
+			if(newObject.ObjectRelations != null)
+			{
+				if (oldObject.ObjectRelations == null)
+					oldObject.ObjectRelations = newObject.ObjectRelations;
+				else
+					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => true, UpdateObjectRelation);
+			}
 		}
 
 		private static void UpdateCollection<T>(ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection, Func<T, T, bool> comparer, Action<T, T> updater) where T : class
 		{
-			if(newCollection.IsNull())
+			if(newCollection == null)
 				return;
 			
 			for (var i = 0; i < oldCollection.Count; i++)
