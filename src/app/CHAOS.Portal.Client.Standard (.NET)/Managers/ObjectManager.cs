@@ -54,10 +54,19 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			{
 				UpdateObject(callbackToken.InternalToken, result.MCM.Data[0]);
 
+				if (!_objects.ContainsKey(callbackToken.InternalToken.GUID))
+					_objects[callbackToken.InternalToken.GUID] = callbackToken.InternalToken;
+
 				callbackToken.CallCallback(true);
 			}
 			else
+			{
+				if (!_objects.ContainsKey(callbackToken.InternalToken.GUID))
+					_objects.Remove(callbackToken.InternalToken.GUID);
+
 				callbackToken.CallCallback(false);
+			}
+				
 		}
 
 		#endregion
@@ -326,7 +335,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (oldObject.ObjectRelations == null)
 					oldObject.ObjectRelations = newObject.ObjectRelations;
 				else
-					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => true, UpdateObjectRelation);
+					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1GUID == r2.Object1GUID && r1.Object2GUID == r2.Object2GUID && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation);
 			}
 		}
 
@@ -376,6 +385,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateObjectRelation(ObjectRelation oldRelation, ObjectRelation newRelation)
 		{
+			oldRelation.Sequence = newRelation.Sequence;
 		}
 	}
 }
