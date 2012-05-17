@@ -133,6 +133,12 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\UserSettingsExtension.cs">
       <Link>Extension\UserSettingsExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\CallbackToken.cs">
+      <Link>Managers\CallbackToken.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\ICallbackToken.cs">
+      <Link>Managers\ICallbackToken.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Data\ModuleAttribute.cs">
       <Link>Data\ModuleAttribute.cs</Link>
     </Compile>

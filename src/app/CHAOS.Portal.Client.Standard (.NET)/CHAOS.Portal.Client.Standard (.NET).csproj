@@ -73,8 +73,10 @@
     <Compile Include="Extension\SubscriptionExtension.cs" />
     <Compile Include="Extension\UserExtension.cs" />
     <Compile Include="Extension\UserSettingsExtension.cs" />
+    <Compile Include="Managers\CallbackToken.cs" />
     <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\FolderManager.cs" />
+    <Compile Include="Managers\ICallbackToken.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
     <Compile Include="Managers\ManagerResult.cs" />
     <Compile Include="Managers\MCMTypesManager.cs" />

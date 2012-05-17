@@ -11,6 +11,11 @@ namespace CHAOS.Portal.Client.Managers
 		event EventHandler<DataEventArgs<Exception>> FailedToGetObjectByGUID;
 		event EventHandler<DataEventArgs<Exception>> FailedToGetObjects;
 
+		Object Create<T>(uint objectTypeID, uint folderID, Guid? guid = null, Action<bool, T> callback = null, T token = default(T));
+
+		void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
+		void CreateRelation<T>(Guid object1, Guid object2, uint relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
+
 		Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations);
 		Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations);
 

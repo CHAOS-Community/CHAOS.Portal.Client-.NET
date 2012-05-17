@@ -27,7 +27,71 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client = ArgumentUtilities.ValidateIsNotNull("client", client);
 			_objects = new Dictionary<Guid, Object>();
 		}
+		#region Create
 
+		public Object Create<T>(uint objectTypeID, uint folderID, Guid? guid, Action<bool, T> callback = null, T token = default(T))
+		{
+			var @object = new Object();
+
+			if (guid.HasValue)
+			{
+				@object.GUID = guid.Value;
+				_objects[guid.Value] = @object;
+			}
+
+			var state = _client.Object.Create(guid, objectTypeID, folderID);
+			state.Callback = CreateCompleted;
+			state.Token = new CallbackToken<Object, T>(@object, token, callback);
+
+			return @object;
+		}
+
+		private void CreateCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
+		{
+			var callbackToken = (ICallbackToken<Object>) token;
+
+			if(error == null && result.MCM.Data.Count == 1)
+			{
+				UpdateObject(callbackToken.InternalToken, result.MCM.Data[0]);
+
+				callbackToken.CallCallback(true);
+			}
+			else
+				callbackToken.CallCallback(false);
+		}
+
+		#endregion
+		#region ObjectRelation
+
+		public void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T))
+		{
+			CreateRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback, token);
+		}
+
+		public void CreateRelation<T>(Guid object1, Guid object2, uint relationType, int? sequence, Action<bool, T> callback = null, T token = default(T))
+		{
+			var state = _client.ObjectRelation.Create(object1, object2, relationType, sequence);
+
+			state.Callback += CreateRelationCompleted;
+			state.Token = new CallbackToken<IList<Guid>, T>(new List<Guid> {object1, object2}, token, callback);
+		}
+
+		private void CreateRelationCompleted(IServiceResult_MCM<ScalarResult> result, Exception error, object token)
+		{
+			var callbackToken = (ICallbackToken<IList<Guid>>)token;
+
+			if (error == null && result.MCM.Data.Count == 1)
+			{
+				GetObjectByGUID(callbackToken.InternalToken[0], false, false, true); //TODO: Make the new relation manually
+				GetObjectByGUID(callbackToken.InternalToken[1], false, false, true); //TODO: Make the new relation manually
+
+				callbackToken.CallCallback(true);
+			}
+			else
+				callbackToken.CallCallback(false);
+		}
+
+		#endregion
 		#region By GUID
 
 		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations)

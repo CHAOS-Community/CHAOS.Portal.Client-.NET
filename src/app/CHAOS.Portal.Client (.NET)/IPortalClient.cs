@@ -95,6 +95,11 @@ namespace CHAOS.Portal.Client
 		IObjectExtension Object { get; }
 
 		/// <summary>
+		/// A MCM extension
+		/// </summary>
+		IObjectRelationExtension ObjectRelation { get; }
+
+		/// <summary>
 		/// A MCM extension.
 		/// </summary>
 		IObjectRelationTypeExtension ObjectRelationType{ get; }

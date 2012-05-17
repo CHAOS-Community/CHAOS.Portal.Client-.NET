@@ -105,6 +105,9 @@ namespace CHAOS.Portal.Client.Standard
 		private readonly ObjectExtension _Object;
 		public IObjectExtension Object { get { return _Object; } }
 
+		private readonly ObjectRelationExtension _ObjectRelation;
+		public IObjectRelationExtension ObjectRelation { get { return _ObjectRelation; } }
+
 		private readonly ObjectRelationTypeExtension _ObjectRelationType;
 		public IObjectRelationTypeExtension ObjectRelationType { get { return _ObjectRelationType; } }
 
@@ -161,6 +164,7 @@ namespace CHAOS.Portal.Client.Standard
 			_Metadata = new MetadataExtension(this);
 			_MetadataSchema = new MetadataSchemaExtension(this);
 			_Object = new ObjectExtension(this);
+			_ObjectRelation = new ObjectRelationExtension(this);
 			_ObjectRelationType = new ObjectRelationTypeExtension(this);
 			_ObjectType = new ObjectTypeExtension(this);
 
