@@ -65,8 +65,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 					_objects.Remove(callbackToken.InternalToken.GUID);
 
 				callbackToken.CallCallback(false);
-			}
-				
+			}	
 		}
 
 		#endregion
@@ -273,7 +272,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			metadata.ValidateIsNotNull("metadata");
 			newData.ValidateIsNotNull("newData");
 
-			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas.Contains(metadata));
+			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas != null && o.Metadatas.Contains(metadata));
 
 			if(@object == null)
 				throw new Exception("Could not find object matching metadata");
