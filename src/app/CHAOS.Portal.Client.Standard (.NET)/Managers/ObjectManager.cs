@@ -144,7 +144,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			return _objects.Values.FirstOrDefault(o => !o.Files.IsNull() && o.Files.Any(f => f.ID == fileID)); //TODO: This is a temporary solution.
+			return _objects.Values.FirstOrDefault(o => o.Files != null && o.Files.Any(f => f.ID == fileID)); //TODO: This is a temporary solution.
 		}
 
 		#endregion

@@ -13,27 +13,27 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
 	public class ResultParser<T> where T : class, IServiceResult
 	{
-		private readonly T _Result;
-		private readonly IXMLSerializer _Serializer;
+		private readonly T _result;
+		private readonly IXMLSerializer _serializer;
 
-		private readonly IDictionary<string, PropertyInfo> _Properties;
+		private readonly IDictionary<string, PropertyInfo> _properties;
 
-		private static IDictionary<Type, IDictionary<string, PropertyInfo>> _MappedModules;
+		private static IDictionary<Type, IDictionary<string, PropertyInfo>> _mappedModules;
 
 		public ResultParser(T result, IXMLSerializer serializer)
 		{
-			_Result = ArgumentUtilities.ValidateIsNotNull("result", result);
-			_Serializer = ArgumentUtilities.ValidateIsNotNull("serializer", serializer);
+			_result = ArgumentUtilities.ValidateIsNotNull("result", result);
+			_serializer = ArgumentUtilities.ValidateIsNotNull("serializer", serializer);
 
-			_Properties = GetMappedModules(result.GetType());
+			_properties = GetMappedModules(result.GetType());
 		}
 
 		private static IDictionary<string, PropertyInfo> GetMappedModules(Type type)
 		{
-			if(_MappedModules == null)
-				_MappedModules = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
+			if(_mappedModules == null)
+				_mappedModules = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
 
-			if(!_MappedModules.ContainsKey(type))
+			if(!_mappedModules.ContainsKey(type))
 			{
 				var properties = new Dictionary<string, PropertyInfo>();
 
@@ -47,32 +47,32 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 					properties.Add(attribute.Name, property);
 				}
 
-				_MappedModules.Add(type, properties);
+				_mappedModules.Add(type, properties);
 
 				return properties;
 			}
 
-			return _MappedModules[type];
+			return _mappedModules[type];
 		}
 
 		public T Parse(string data)
 		{
 			var xmlData = XDocument.Parse(ArgumentUtilities.ValidateIsNotNullOrEmpty("data", data)).Root;
 
-			_Result.Duration = new TimeSpan(0, 0, 0, 0, (int)long.Parse(xmlData.Attribute("Duration").Value));
+			_result.Duration = new TimeSpan(0, 0, 0, 0, (int)long.Parse(xmlData.Attribute("Duration").Value));
 			var error = xmlData.Element("Error");
 			
 			if(error != null)
 				throw new Exception(string.Format("Server returned an error: {0}", error.Element("Message").Value));
 
-			foreach (var property in _Properties)
+			foreach (var property in _properties)
 			{
 				var moduleXML = xmlData.Descendants("ModuleResult").FirstOrDefault(element => element.Attribute("Fullname").Value == property.Key);
 
 				if(moduleXML == null)
 					continue;
 
-				var moduleResult = (ModuleResult)property.Value.GetValue(_Result, null);
+				var moduleResult = (ModuleResult)property.Value.GetValue(_result, null);
 
 				moduleResult.Count = moduleXML.Attribute("Count").DoIfIsNotNull(att => uint.Parse(att.Value));
 				moduleResult.TotalCount = moduleXML.Attribute("TotalCount").DoIfIsNotNull(att => uint.Parse(att.Value));
@@ -81,7 +81,7 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 				var moduleError = moduleXML.Element("Results").Element("Error");
 
-				if(!moduleError.IsNull())
+				if(moduleError != null)
 				{
 					moduleResult.Error = new Exception(moduleError.Element("Message").Value);
 					
@@ -89,9 +89,9 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 				}
 
 				foreach (var element in moduleXML.Element("Results").Elements("Result"))
-					moduleResult.Add(_Serializer.Deserialize(moduleDataType, XDocument.Parse(element.ToString(SaveOptions.DisableFormatting)), false));
+					moduleResult.Add(_serializer.Deserialize(moduleDataType, XDocument.Parse(element.ToString(SaveOptions.DisableFormatting)), false));
 			}
-			return _Result;
+			return _result;
 		}
 	}
 }

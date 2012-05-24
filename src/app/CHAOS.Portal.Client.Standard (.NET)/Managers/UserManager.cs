@@ -11,34 +11,34 @@ namespace CHAOS.Portal.Client.Standard.Managers
 	{
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetCurrentUser = delegate { };
 
-		private readonly IPortalClient _Client;
-		private User _CurrentUser;
+		private readonly IPortalClient _client;
+		private User _currentUser;
 
 		public UserManager(IPortalClient client)
 		{
-			_Client = client.ValidateIsNotNull("client");
+			_client = client.ValidateIsNotNull("client");
 		}
 
 		public User GetCurrentUser()
 		{
-			if(_CurrentUser.IsNull())
-				_CurrentUser = new User();
+			if(_currentUser == null)
+				_currentUser = new User();
 
-			var state = _Client.User.Get();
+			var state = _client.User.Get();
 			state.Callback += GetCurrentUserCompleted;
 			state.FeedbackOnDispatcher = true;
 
-			return _CurrentUser;
+			return _currentUser;
 		}
 
 		private void GetCurrentUserCompleted(IServiceResult_Portal<User> result, Exception error, object token)
 		{
-			if(!error.IsNull())
+			if(error != null)
 			{
 				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(error));
 				return;
 			}
-			if(!result.Portal.Error.IsNull())
+			if(result.Portal.Error != null)
 			{
 				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(result.Portal.Error));
 				return;
@@ -49,7 +49,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			UpdateUser(_CurrentUser, result.Portal.Data[0]);
+			UpdateUser(_currentUser, result.Portal.Data[0]);
 		}
 
 		private static void UpdateUser(User oldUser, User newUser)

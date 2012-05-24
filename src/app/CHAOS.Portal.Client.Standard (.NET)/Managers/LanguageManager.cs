@@ -4,7 +4,6 @@ using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Managers;
-using CHAOS.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
@@ -12,43 +11,43 @@ namespace CHAOS.Portal.Client.Standard.Managers
 	{
 		public event EventHandler<DataEventArgs<Exception>> ServiceFailed = delegate { };
 
-		private readonly IPortalClient _Client;
+		private readonly IPortalClient _client;
 
-		private readonly ObservableCollection<Language> _Languages;
-		public ObservableCollection<Language> Languages { get { return _Languages; } }
+		private readonly ObservableCollection<Language> _languages;
+		public ObservableCollection<Language> Languages { get { return _languages; } }
 
 		public LanguageManager(IPortalClient client)
 		{
-			_Client = client;
-			_Languages = new ObservableCollection<Language>();
+			_client = client;
+			_languages = new ObservableCollection<Language>();
 
-			if (_Client.HasSession)
+			if (_client.HasSession)
 				GetLanguages();
 			else
-				_Client.SessionAcquired += ClientSessionAquired;
+				_client.SessionAcquired += ClientSessionAquired;
 		}
 
 		private void ClientSessionAquired(object sender, EventArgs e)
 		{
-			_Client.SessionAcquired -= ClientSessionAquired;
+			_client.SessionAcquired -= ClientSessionAquired;
 			GetLanguages();
 		}
 
 		private void GetLanguages()
 		{
-			_Client.Language.Get(null, null).Callback = ClientLanguageGetCompleted;
+			_client.Language.Get(null, null).Callback = ClientLanguageGetCompleted;
 		}
 
 		private void ClientLanguageGetCompleted(IServiceResult_MCM<Language> result, Exception error, object token)
 		{
-			if(!error.IsNull())
+			if(error != null)
 			{
 				ServiceFailed(this, new DataEventArgs<Exception>(error));
 				return;
 			}
 
 			foreach (var language in result.MCM.Data)
-				_Languages.Add(language);
+				_languages.Add(language);
 		}
 	}
 }
