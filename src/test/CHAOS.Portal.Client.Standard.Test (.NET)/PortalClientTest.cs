@@ -7,6 +7,7 @@ using CHAOS.Serialization.Standard.XML;
 using CHAOS.Serialization.String;
 using CHAOS.Serialization.XML;
 using CHAOS.Utilities;
+using Object = CHAOS.Portal.Client.Data.MCM.Object;
 using Ninject;
 
 #if SILVERLIGHT
@@ -30,12 +31,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 	{
 		public const string SERVICE_PATH = "";
 
-#if SILVERLIGHT
-		[TestMethod, Asynchronous, Timeout(5000)]
-#else
-		[Test]
-#endif
-		public void ShouldCallSessionCreate()
+		private IPortalClient Getclient()
 		{
 			var kernel = new StandardKernel();
 
@@ -48,6 +44,18 @@ namespace CHAOS.Portal.Client.Standard.Test
 			var client = kernel.Get<IPortalClient>();
 
 			client.ServicePath = SERVICE_PATH;
+
+			return client;
+		}
+
+#if SILVERLIGHT
+		[TestMethod, Asynchronous, Timeout(5000)]
+#else
+		[Test]
+#endif
+		public void ShouldCallSessionCreate()
+		{
+			var client = Getclient();
 
 			IServiceResult_Portal<Session> result = null;
 
@@ -68,6 +76,44 @@ namespace CHAOS.Portal.Client.Standard.Test
 			EnqueueTestComplete();
 #else
 			Timing.WaitUntil(condition, 5000, 100,  "client.Session.Create call timed out");
+			asserts();
+#endif
+		}
+
+#if SILVERLIGHT
+		[TestMethod, Asynchronous, Timeout(5000)]
+#else
+		[Test]
+#endif
+		public void ShouldCallObjectGet()
+		{
+			var client = Getclient();
+
+			IServiceResult_MCM<Object> result = null;
+
+			Func<bool> condition = () => result != null;
+
+			Action asserts = () =>
+			{
+				Assert.IsNotNull(result.MCM.Data[0]);
+			};
+
+			client.Session.Create().Callback = (r, e, t) =>
+			                                   	{
+			                                   		if(e != null)
+														Assert.Fail(e.Message);
+			                                   		else
+			                                   		{
+			                                   			client.Object.Get("", null, 0, 1, true, true, true, true).Callback = (r2, e2, t2) => result = r2; //TODO: Update search string.
+			                                   		}
+			                                   	};
+
+#if SILVERLIGHT
+			EnqueueConditional(condition);
+			EnqueueCallback(asserts);
+			EnqueueTestComplete();
+#else
+			Timing.WaitUntil(condition, 5000, 100, "client.Session.Create call timed out");
 			asserts();
 #endif
 		}

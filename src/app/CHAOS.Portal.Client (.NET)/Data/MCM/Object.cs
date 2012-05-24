@@ -5,69 +5,80 @@ namespace CHAOS.Portal.Client.Data.MCM
 {
 	public class Object : AData
 	{
-		private Guid _GUID;
+		private Guid _guid;
 		public Guid GUID
 		{
-			get { return _GUID; }
+			get { return _guid; }
 			set
 			{
-				_GUID = value;
+				_guid = value;
 				RaisePropertyChanged("GUID");
 			}
 		}
 
-		private uint _ObjectTypeID;
+		private uint _objectTypeID;
 		public uint ObjectTypeID
 		{
-			get { return _ObjectTypeID; }
+			get { return _objectTypeID; }
 			set
 			{
-				_ObjectTypeID = value;
+				_objectTypeID = value;
 				RaisePropertyChanged("ObjectTypeID");
 			}
 		}
 
-		private DateTime _DateCreated;
+		private DateTime _dateCreated;
 		public DateTime DateCreated
 		{
-			get { return _DateCreated; }
+			get { return _dateCreated; }
 			set
 			{
-				_DateCreated = value;
+				_dateCreated = value;
 				RaisePropertyChanged("DateCreated");
 			}
 		}
 
-		private ObservableCollection<Metadata> _Metadatas;
+		private ObservableCollection<Metadata> _metadatas;
 		public ObservableCollection<Metadata> Metadatas
 		{
-			get { return _Metadatas; }
+			get { return _metadatas; }
 			set
 			{
-				_Metadatas = value;
+				_metadatas = value;
 				RaisePropertyChanged("Metadatas");
 			}
 		}
 
-		private ObservableCollection<File> _Files;
+		private ObservableCollection<File> _files;
 		public ObservableCollection<File> Files
 		{
-			get { return _Files; }
+			get { return _files; }
 			set
 			{
-				_Files = value;
+				_files = value;
 				RaisePropertyChanged("Files");
 			}
 		}
 
-		private ObservableCollection<ObjectRelation> _ObjectRelations;
+		private ObservableCollection<ObjectRelation> _objectRelations;
 		public ObservableCollection<ObjectRelation> ObjectRelations
 		{
-			get { return _ObjectRelations; }
+			get { return _objectRelations; }
 			set
 			{
-				_ObjectRelations = value;
+				_objectRelations = value;
 				RaisePropertyChanged("ObjectRelations");
+			}
+		}
+
+		private ObservableCollection<AccessPoint> _accessPoints;
+		public ObservableCollection<AccessPoint> AccessPoints
+		{
+			get { return _accessPoints; }
+			set
+			{
+				_accessPoints = value;
+				RaisePropertyChanged("AccessPoints");
 			}
 		}
 	}

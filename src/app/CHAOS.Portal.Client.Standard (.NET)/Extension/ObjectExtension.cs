@@ -12,9 +12,9 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public ObjectExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_MCM<Object>> Get(string query, string sort, bool includeMetadata, bool includeFiles, bool includeObjectRelations, int pageIndex, int pageSize)
+		public IServiceCallState<IServiceResult_MCM<Object>> Get(string query, string sort, int pageIndex, int pageSize, bool includeMetadata, bool includeFiles, bool includeObjectRelations, bool includeAccessPoints, Guid? accessPointGUID)
 		{
-			return CallService<IServiceResult_MCM<Object>>(HTTPMethod.GET, query, sort, includeMetadata, includeFiles, includeObjectRelations, pageIndex, pageSize);
+			return CallService<IServiceResult_MCM<Object>>(HTTPMethod.GET, query, sort, pageIndex, pageSize, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints, accessPointGUID);
 		}
 
 		public IServiceCallState<IServiceResult_MCM<Object>> Create(Guid? GUID, uint objectTypeID, uint folderID)

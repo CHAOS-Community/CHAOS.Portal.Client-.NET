@@ -56,6 +56,9 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\AccessPoint.cs">
+      <Link>Data\MCM\AccessPoint.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Link.cs">
       <Link>Data\MCM\Link.cs</Link>
     </Compile>

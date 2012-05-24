@@ -90,8 +90,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			if (error == null && result.MCM.Data.Count == 1)
 			{
-				GetObjectByGUID(callbackToken.InternalToken[0], false, false, true); //TODO: Make the new relation manually
-				GetObjectByGUID(callbackToken.InternalToken[1], false, false, true); //TODO: Make the new relation manually
+				GetObjectByGUID(callbackToken.InternalToken[0], false, false, true, false); //TODO: Make the new relation manually
+				GetObjectByGUID(callbackToken.InternalToken[1], false, false, true, false); //TODO: Make the new relation manually
 
 				callbackToken.CallCallback(true);
 			}
@@ -102,14 +102,14 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region By GUID
 
-		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations)
+		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
 			if (!_objects.ContainsKey(guid))
 				_objects[guid] = new Object {GUID = guid};
 				
 			var result = _objects[guid];
 
-			var state = _client.Object.Get(string.Format("GUID:{0}", guid), null, includeMetadata, includeFiles, includeObjectRelations, 0, 1);
+			var state = _client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints);
 			state.Callback = GetObjectByGUIDCompleted;
 			state.FeedbackOnDispatcher = true;
 
@@ -142,7 +142,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region By File GUID
 
-		public Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations)
+		public Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
 			return _objects.Values.FirstOrDefault(o => !o.Files.IsNull() && o.Files.Any(f => f.ID == fileID)); //TODO: This is a temporary solution.
 		}
@@ -150,22 +150,22 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region By Search
 
-		public IManagerResult<Object> GetObjectBySearch(string query, string sort, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize)
+		public IManagerResult<Object> GetObjectBySearch(string query, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			return GetResult(query, sort, includeFiles, includeMetadata, includeObjectRelations, pageSize);
+			return GetResult(query, sort, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
 		}
 
 		#endregion
 		#region By Folder
 
-		public IManagerResult<Object> GetObjectsByFolder(Folder folder, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize)
+		public IManagerResult<Object> GetObjectsByFolder(Folder folder, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			return GetObjectsByFolder(folder.ValidateIsNotNull("folder").ID, includeFiles, includeMetadata, includeObjectRelations, pageSize);
+			return GetObjectsByFolder(folder.ValidateIsNotNull("folder").ID, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
 		}
 
-		public IManagerResult<Object> GetObjectsByFolder(uint folderID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize)
+		public IManagerResult<Object> GetObjectsByFolder(uint folderID, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			return GetResult(string.Format("FolderID:{0}", folderID), null, includeFiles, includeMetadata, includeObjectRelations, pageSize);
+			return GetResult(string.Format("FolderID:{0}", folderID), null, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
 		}
 
 		#endregion
@@ -202,11 +202,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region GetResult
 
-		private IManagerResult<Object> GetResult(string query, string sort, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize)
+		private IManagerResult<Object> GetResult(string query, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
 			return new ManagerResult<Object>(pageSize, (i, r) =>
 			{
-				var state = _client.Object.Get(query, sort, includeMetadata, includeFiles, includeObjectRelations, (int)i, (int)pageSize);
+				var state = _client.Object.Get(query, sort, (int)i, (int)pageSize, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints);
 				state.Token = (Action<IList<Object>, uint>)((os, c) =>
 				{
 					r.TotalCount = c;

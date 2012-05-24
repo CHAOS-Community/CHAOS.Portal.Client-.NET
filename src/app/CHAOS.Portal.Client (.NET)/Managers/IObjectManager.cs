@@ -16,13 +16,13 @@ namespace CHAOS.Portal.Client.Managers
 		void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
 		void CreateRelation<T>(Guid object1, Guid object2, uint relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
 
-		Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations);
-		Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations);
+		Object GetObjectByGUID(Guid guid, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+		Object GetObjectByFileID(int fileID, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 
-		IManagerResult<Object> GetObjectBySearch(string query, string sort, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize);
-			
-		IManagerResult<Object> GetObjectsByFolder(Folder folder, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize);
-		IManagerResult<Object> GetObjectsByFolder(uint folderID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, uint pageSize);
+		IManagerResult<Object> GetObjectBySearch(string query, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+
+		IManagerResult<Object> GetObjectsByFolder(Folder folder, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+		IManagerResult<Object> GetObjectsByFolder(uint folderID, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 
 		void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback = null, T token = default(T));
 		void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback = null, T token = default(T));

@@ -7,7 +7,7 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IObjectExtension
 	{
-		IServiceCallState<IServiceResult_MCM<Object>> Get(string query, string sort, bool includeMetadata, bool includeFiles, bool includeObjectRelations, int pageIndex, int pageSize);
+		IServiceCallState<IServiceResult_MCM<Object>> Get(string query, string sort, int pageIndex, int pageSize, bool includeMetadata = false, bool includeFiles = false, bool includeObjectRelations = false, bool includeAccessPoints = false, Guid? accessPointGUID = null);
 		IServiceCallState<IServiceResult_MCM<Object>> Create(Guid? GUID, uint objectTypeID, uint folderID);
 	}
 }

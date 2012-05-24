@@ -44,6 +44,7 @@
     <Compile Include="Data\GeoLocator\LocationInfo.cs" />
     <Compile Include="Data\IModuleResult.cs" />
     <Compile Include="Data\IServiceResult.cs" />
+    <Compile Include="Data\MCM\AccessPoint.cs" />
     <Compile Include="Data\MCM\File.cs" />
     <Compile Include="Data\MCM\Folder.cs" />
     <Compile Include="Data\MCM\FolderType.cs" />
