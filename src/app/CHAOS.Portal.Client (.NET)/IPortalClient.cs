@@ -158,6 +158,11 @@ namespace CHAOS.Portal.Client
 		/// </summary>
 		IStatsObjectExtension StatsObject { get; }
 
+		/// <summary>
+		/// A Statistics extension.
+		/// </summary>
+		IDayStatsObjectExtension DayStatsObject { get; }
+
 		#endregion
 	}
 }

@@ -52,6 +52,7 @@
     <Compile Include="Data\ModuleResult.cs" />
     <Compile Include="Data\ServiceResult.cs" />
     <Compile Include="Extension\ClientSettingsExtension.cs" />
+    <Compile Include="Extension\DayStatsObjectExtension.cs" />
     <Compile Include="Extension\EmailPasswordExtension.cs" />
     <Compile Include="Extension\AExtension.cs" />
     <Compile Include="Extension\FolderExtension.cs" />

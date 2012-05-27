@@ -27,7 +27,7 @@ namespace CHAOS.Portal.Client.Standard
 
 		private readonly IServiceCallFactory _serviceCallFactory;
 
-		private string _servicePath = null;
+		private string _servicePath;
 		public string ServicePath
 		{
 			get { return _servicePath; }
@@ -44,12 +44,12 @@ namespace CHAOS.Portal.Client.Standard
 
 		public Session CurrentSession
 		{
-			get { return _Session.Session; }
+			get { return _session.Session; }
 			set
 			{
 				if(value == null)
 					return;
-				_Session.Session = value;
+				_session.Session = value;
 				SessionAcquired(this, EventArgs.Empty);
 			}
 		}
@@ -75,77 +75,80 @@ namespace CHAOS.Portal.Client.Standard
 		#region Extensions
 		#region GeoLocator
 
-		private readonly LocationExtension _location;
+		private readonly ILocationExtension _location;
 		public ILocationExtension Location { get { return _location; } }
 
 		#endregion
 		#region MCM
 
-		private readonly FolderExtension _Folder;
-		public IFolderExtension Folder { get { return _Folder; } }
+		private readonly IFolderExtension _folder;
+		public IFolderExtension Folder { get { return _folder; } }
 
-		private readonly FolderTypeExtension _FolderType;
-		public IFolderTypeExtension FolderType { get { return _FolderType; } }
+		private readonly IFolderTypeExtension _folderType;
+		public IFolderTypeExtension FolderType { get { return _folderType; } }
 
-		private readonly FormatTypeExtension _FormatType;
-		public IFormatTypeExtension FormatType { get { return _FormatType; } }
+		private readonly IFormatTypeExtension _formatType;
+		public IFormatTypeExtension FormatType { get { return _formatType; } }
 
-		private readonly LanguageExtension _Language;
-		public ILanguageExtension Language { get { return _Language; } }
+		private readonly ILanguageExtension _language;
+		public ILanguageExtension Language { get { return _language; } }
 
 		private readonly ILinkExtension _link;
 		public ILinkExtension Link { get { return _link; } }
 
-		private readonly MetadataExtension _Metadata;
-		public IMetadataExtension Metadata { get { return _Metadata; } }
+		private readonly IMetadataExtension _metadata;
+		public IMetadataExtension Metadata { get { return _metadata; } }
 
-		private readonly MetadataSchemaExtension _MetadataSchema;
-		public IMetadataSchemaExtension MetadataSchema { get { return _MetadataSchema; } }
+		private readonly IMetadataSchemaExtension _metadataSchema;
+		public IMetadataSchemaExtension MetadataSchema { get { return _metadataSchema; } }
 
-		private readonly ObjectExtension _Object;
-		public IObjectExtension Object { get { return _Object; } }
+		private readonly IObjectExtension _object;
+		public IObjectExtension Object { get { return _object; } }
 
-		private readonly ObjectRelationExtension _ObjectRelation;
-		public IObjectRelationExtension ObjectRelation { get { return _ObjectRelation; } }
+		private readonly IObjectRelationExtension _objectRelation;
+		public IObjectRelationExtension ObjectRelation { get { return _objectRelation; } }
 
-		private readonly ObjectRelationTypeExtension _ObjectRelationType;
-		public IObjectRelationTypeExtension ObjectRelationType { get { return _ObjectRelationType; } }
+		private readonly IObjectRelationTypeExtension _objectRelationType;
+		public IObjectRelationTypeExtension ObjectRelationType { get { return _objectRelationType; } }
 
-		private readonly ObjectTypeExtension _ObjectType;
-		public IObjectTypeExtension ObjectType { get { return _ObjectType; } }
+		private readonly IObjectTypeExtension _objectType;
+		public IObjectTypeExtension ObjectType { get { return _objectType; } }
 		
 		#endregion
 		#region Portal
 
-		private readonly ClientSettingsExtension _ClientSettings;
-		public IClientSettingsExtension ClientSettings { get { return _ClientSettings; } }
+		private readonly IClientSettingsExtension _clientSettings;
+		public IClientSettingsExtension ClientSettings { get { return _clientSettings; } }
 
-		private readonly EmailPasswordExtension _EmailPassword;
-		public IEmailPasswordExtension EmailPassword { get { return _EmailPassword; } }
+		private readonly IEmailPasswordExtension _emailPassword;
+		public IEmailPasswordExtension EmailPassword { get { return _emailPassword; } }
 
-		private readonly GroupExtension _Group;
-		public IGroupExtension Group { get { return _Group; } }
+		private readonly IGroupExtension _group;
+		public IGroupExtension Group { get { return _group; } }
 
-		private readonly SessionExtension _Session;
-		public ISessionExtension Session { get { return _Session; } }
+		private readonly SessionExtension _session;
+		public ISessionExtension Session { get { return _session; } }
 
-		private readonly SecureCookieExtension _SecureCookie;
-		public ISecureCookieExtension SecureCookie { get { return _SecureCookie; } }
+		private readonly ISecureCookieExtension _secureCookie;
+		public ISecureCookieExtension SecureCookie { get { return _secureCookie; } }
 
-		private readonly SubscriptionExtension _Subscription;
-		public ISubscriptionExtension Subscription { get { return _Subscription; } }
+		private readonly ISubscriptionExtension _subscription;
+		public ISubscriptionExtension Subscription { get { return _subscription; } }
 
-		private readonly UserExtension _User;
-		public IUserExtension User { get { return _User; } }
+		private readonly IUserExtension _user;
+		public IUserExtension User { get { return _user; } }
 
-		private readonly UserSettingsExtension _userSettings;
+		private readonly IUserSettingsExtension _userSettings;
 		public IUserSettingsExtension UserSettings { get { return _userSettings; } }
 
 		#endregion
 		#region Statistics
 
-		private readonly StatsObjectExtension _statsObject;
+		private readonly IStatsObjectExtension _statsObject;
 		public IStatsObjectExtension StatsObject { get { return _statsObject; } }
+
+		private readonly IDayStatsObjectExtension _dayStatsObject;
+		public IDayStatsObjectExtension DayStatsObject { get { return _dayStatsObject; } }
 
 		#endregion
 		#endregion
@@ -156,28 +159,29 @@ namespace CHAOS.Portal.Client.Standard
 
 			_location = new LocationExtension(this);
 
-			_Folder = new FolderExtension(this);
-			_FolderType = new FolderTypeExtension(this);
-			_FormatType = new FormatTypeExtension(this);
-			_Language = new LanguageExtension(this);
+			_folder = new FolderExtension(this);
+			_folderType = new FolderTypeExtension(this);
+			_formatType = new FormatTypeExtension(this);
+			_language = new LanguageExtension(this);
 			_link = new LinkExtension(this);
-			_Metadata = new MetadataExtension(this);
-			_MetadataSchema = new MetadataSchemaExtension(this);
-			_Object = new ObjectExtension(this);
-			_ObjectRelation = new ObjectRelationExtension(this);
-			_ObjectRelationType = new ObjectRelationTypeExtension(this);
-			_ObjectType = new ObjectTypeExtension(this);
+			_metadata = new MetadataExtension(this);
+			_metadataSchema = new MetadataSchemaExtension(this);
+			_object = new ObjectExtension(this);
+			_objectRelation = new ObjectRelationExtension(this);
+			_objectRelationType = new ObjectRelationTypeExtension(this);
+			_objectType = new ObjectTypeExtension(this);
 
-			_ClientSettings = new ClientSettingsExtension(this);
-			_EmailPassword = new EmailPasswordExtension(this);
-			_Group = new GroupExtension(this);
-			_Session = new SessionExtension(this, PROTOCOL_VERSION);
-			_SecureCookie = new SecureCookieExtension(this);
-			_Subscription = new SubscriptionExtension(this);
-			_User = new UserExtension(this);
+			_clientSettings = new ClientSettingsExtension(this);
+			_emailPassword = new EmailPasswordExtension(this);
+			_group = new GroupExtension(this);
+			_session = new SessionExtension(this, PROTOCOL_VERSION);
+			_secureCookie = new SecureCookieExtension(this);
+			_subscription = new SubscriptionExtension(this);
+			_user = new UserExtension(this);
 			_userSettings = new UserSettingsExtension(this, this);
 
 			_statsObject = new StatsObjectExtension(this);
+			_dayStatsObject = new DayStatsObjectExtension(this);
 		}
 
 		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceResult

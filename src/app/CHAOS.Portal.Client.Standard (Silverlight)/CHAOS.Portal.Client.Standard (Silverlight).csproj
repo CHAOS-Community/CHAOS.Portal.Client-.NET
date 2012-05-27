@@ -73,6 +73,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ClientSettingsExtension.cs">
       <Link>Extension\ClientSettingsExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\DayStatsObjectExtension.cs">
+      <Link>Extension\DayStatsObjectExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\EmailPasswordExtension.cs">
       <Link>Extension\EmailPasswordExtension.cs</Link>
     </Compile>

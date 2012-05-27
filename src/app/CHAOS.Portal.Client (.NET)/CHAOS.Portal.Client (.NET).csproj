@@ -66,7 +66,9 @@
     <Compile Include="Data\Portal\User.cs" />
     <Compile Include="Data\Portal\UserSetting.cs" />
     <Compile Include="Data\ScalarResult.cs" />
+    <Compile Include="Data\Statistics\DayStatsObject.cs" />
     <Compile Include="Extensions\IClientSettingsExtension.cs" />
+    <Compile Include="Extensions\IDayStatsObjectExtension.cs" />
     <Compile Include="Extensions\IEmailPasswordExtension.cs" />
     <Compile Include="Extensions\IFolderExtension.cs" />
     <Compile Include="Extensions\IFolderTypeExtension.cs" />

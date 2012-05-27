@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
@@ -18,40 +19,40 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 		public event EventHandler<DataChangedEventArgs<double>> DownloadProgressChanged = delegate { };
 		public event EventHandler<DataOperationEventArgs<T>> OperationCompleted = delegate { };
 
-		private double _UploadProgress;
-		private double _DownloadProgress;
+		private double _uploadProgress;
+		private double _downloadProgress;
 
 		public double UploadProgress
 		{
-			get { return _UploadProgress; }
+			get { return _uploadProgress; }
 			set
 			{
 				value = Math.Clamp(value, 0, 1);
 
-				if (value == _UploadProgress)
+				if (value == _uploadProgress)
 					return;
 
-				var old = _UploadProgress;
-				_UploadProgress = value;
+				var old = _uploadProgress;
+				_uploadProgress = value;
 
-				Feedback(() => UploadProgressChanged(this, new DataChangedEventArgs<double>(old, _UploadProgress)));
+				Feedback(() => UploadProgressChanged(this, new DataChangedEventArgs<double>(old, _uploadProgress)));
 			}
 		}
 
 		public double DownloadProgress
 		{
-			get { return _DownloadProgress; }
+			get { return _downloadProgress; }
 			set
 			{
 				value = Math.Clamp(value, 0, 1);
 
-				if (value == _DownloadProgress)
+				if (value == _downloadProgress)
 					return;
 
-				var old = _DownloadProgress;
-				_DownloadProgress = value;
+				var old = _downloadProgress;
+				_downloadProgress = value;
 
-				Feedback(() => DownloadProgressChanged(this, new DataChangedEventArgs<double>(old, _DownloadProgress)));
+				Feedback(() => DownloadProgressChanged(this, new DataChangedEventArgs<double>(old, _downloadProgress)));
 			}
 		}
 
@@ -63,6 +64,21 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 		public ServiceCallback<T> Callback { get; set; }
 
 		public bool FeedbackOnDispatcher { get; set; }
+
+		public IServiceCallState<T> Synchronous(uint timeout)
+		{
+			var endTime = DateTime.Now.AddMilliseconds(timeout);
+
+			while (Result == null && Error == null)
+			{
+				if (timeout != 0 && endTime.CompareTo(DateTime.Now) < 0)
+					throw new TimeoutException();
+
+				Thread.Sleep(50);
+			}
+
+			return this;
+		}
 
 		private void Feedback(Action action)
 		{
