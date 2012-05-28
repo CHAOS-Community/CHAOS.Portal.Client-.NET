@@ -10,21 +10,21 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
 	public class ServiceCall<T> : IServiceCall<T> where T : class, IServiceResult
 	{
-		private readonly ServiceCallState<T> _State;
-		private readonly ResultParser<T> _ResultParser;
-		private readonly SmartHTTPRequest _Request;
+		private readonly ServiceCallState<T> _state;
+		private readonly ResultParser<T> _resultParser;
+		private readonly SmartHTTPRequest _request;
 
-		public IServiceCallState<T> State { get { return _State; } }
+		public IServiceCallState<T> State { get { return _state; } }
 
 		public ServiceCall(ServiceCallState<T> state, ResultParser<T> resultParser, SmartHTTPRequest request)
 		{
-			_State = ArgumentUtilities.ValidateIsNotNull("state", state);
-			_ResultParser = ArgumentUtilities.ValidateIsNotNull("resultParser", resultParser);
-			_Request = ArgumentUtilities.ValidateIsNotNull("request", request);
+			_state = ArgumentUtilities.ValidateIsNotNull("state", state);
+			_resultParser = ArgumentUtilities.ValidateIsNotNull("resultParser", resultParser);
+			_request = ArgumentUtilities.ValidateIsNotNull("request", request);
 
-			_Request.UploadProgressChanged += Request_UploadProgressChanged;
-			_Request.DownloadProgressChanged += Request_DownloadProgressChanged;
-			_Request.Completed += Request_Completed;
+			_request.UploadProgressChanged += Request_UploadProgressChanged;
+			_request.DownloadProgressChanged += Request_DownloadProgressChanged;
+			_request.Completed += Request_Completed;
 		}
 
 		public void Call(string servicePath, IDictionary<string, object> parameters, HTTPMethod method)
@@ -35,17 +35,17 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			if (method == HTTPMethod.GET)
 				parameters["_"] = DateTime.Now.Ticks;
 
-			_Request.Call(servicePath, parameters, method);
+			_request.Call(servicePath, parameters, method);
 		}
 
 		private void Request_UploadProgressChanged(object sender, DataChangedEventArgs<double> e)
 		{
-			_State.UploadProgress = e.NewValue;
+			_state.UploadProgress = e.NewValue;
 		}
 
 		private void Request_DownloadProgressChanged(object sender, DataChangedEventArgs<double> e)
 		{
-			_State.DownloadProgress = e.NewValue;
+			_state.DownloadProgress = e.NewValue;
 		}
 
 		private void Request_Completed(object sender, DataOperationEventArgs<string> e)
@@ -53,13 +53,13 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			try
 			{
 				if(e.HasError)
-					_State.ReportResult(null, e.Error);
+					_state.ReportResult(null, e.Error);
 				else
-					_State.ReportResult(_ResultParser.Parse(e.Data), null);
+					_state.ReportResult(_resultParser.Parse(e.Data), null);
 			}
 			catch (Exception error)
 			{
-				_State.ReportResult(null, new Exception("Failed to parse service result", error));
+				_state.ReportResult(null, new Exception("Failed to parse service result", error));
 			}
 		}
 	}
