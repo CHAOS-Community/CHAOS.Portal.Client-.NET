@@ -1,3 +1,4 @@
+using System;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
@@ -10,9 +11,20 @@ namespace CHAOS.Portal.Client.Standard.Extension
 {
 	public class SessionExtension : AExtension, ISessionExtension
 	{
+		public event EventHandler SessionChanged = delegate { };
+
 		private readonly uint _protocolVersion;
 
-		public Session Session { get; set; }
+		private Session _session;
+		public Session Session
+		{
+			get { return _session; }
+			set
+			{
+				_session = value;
+				SessionChanged(this, EventArgs.Empty);
+			}
+		}
 
 		public SessionExtension(IServiceCaller serviceCaller, uint protocolVersion) : base(serviceCaller)
 		{
@@ -28,7 +40,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 		{
 			var state = CallServiceWithoutSession<IServiceResult_Portal<Session>>(HTTPMethod.GET, protocolVersion);
 
-			state.OperationCompleted += GetCompleted;
+			state.OperationCompleted += CreateCompleted;
 
 			return state;
 		}
@@ -38,17 +50,13 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			return CallService<IServiceResult_Portal<Session>>(HTTPMethod.GET);
 		}
 
-		private void GetCompleted(object sender, DataOperationEventArgs<IServiceResult_Portal<Session>> e)
-		{
-			((IServiceCallState<IServiceResult_Portal<Session>>)sender).OperationCompleted -= GetCompleted;
-
-			if(e.Error == null)
-				Session = e.Data.Portal.Data[0]; //TODO: Check and handle if there is less or more than one Session returned.
-		}
-
 		public IServiceCallState<IServiceResult_Portal<Session>> Update()
 		{
-			return CallService<IServiceResult_Portal<Session>>(HTTPMethod.POST);
+			var state = CallService<IServiceResult_Portal<Session>>(HTTPMethod.POST);
+
+			state.OperationCompleted += UpdateCompleted;
+
+			return state;
 		}
 
 		public IServiceCallState<IServiceResult_Portal<ScalarResult>> Delete()
@@ -58,6 +66,22 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			state.OperationCompleted += DeleteCompleted;
 
 			return state;
+		}
+
+		private void CreateCompleted(object sender, DataOperationEventArgs<IServiceResult_Portal<Session>> e)
+		{
+			((IServiceCallState<IServiceResult_Portal<Session>>)sender).OperationCompleted -= CreateCompleted;
+
+			if (e.Error == null && e.Data.Portal.Error == null && e.Data.Portal.Data.Count == 1) //TODO: Handle if there is less or more than one Session returned.
+				Session = e.Data.Portal.Data[0];
+		}
+
+		private void UpdateCompleted(object sender, DataOperationEventArgs<IServiceResult_Portal<Session>> e)
+		{
+			((IServiceCallState<IServiceResult_Portal<Session>>)sender).OperationCompleted -= UpdateCompleted;
+
+			if (e.Error == null && e.Data.Portal.Error == null && e.Data.Portal.Data.Count == 1) //TODO: Handle if there is less or more than one Session returned.
+				Session = e.Data.Portal.Data[0];
 		}
 
 		private void DeleteCompleted(object sender, DataOperationEventArgs<IServiceResult_Portal<ScalarResult>> e)

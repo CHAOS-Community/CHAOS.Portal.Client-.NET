@@ -22,6 +22,8 @@ namespace CHAOS.Portal.Client.Standard
 
 		private const uint PROTOCOL_VERSION = 4;
 
+		private bool _sessionAcquired;
+
 		public event EventHandler SessionAcquired = delegate { };
 		public event EventHandler ClientGUIDSet = delegate { };
 
@@ -42,17 +44,7 @@ namespace CHAOS.Portal.Client.Standard
 
 		public bool HasSession { get { return CurrentSession != null; } }
 
-		public Session CurrentSession
-		{
-			get { return _session.Session; }
-			set
-			{
-				if(value == null)
-					return;
-				_session.Session = value;
-				SessionAcquired(this, EventArgs.Empty);
-			}
-		}
+		public Session CurrentSession { get { return _session.Session; } }
 
 		public bool HasClientGUID
 		{
@@ -182,6 +174,27 @@ namespace CHAOS.Portal.Client.Standard
 
 			_statsObject = new StatsObjectExtension(this);
 			_dayStatsObject = new DayStatsObjectExtension(this);
+
+			_session.SessionChanged += SessionOnSessionChanged;
+		}
+
+		public void UseExistingSession(Guid guid)
+		{
+			_session.Session = new Session { SessionGUID = guid };
+			Session.Update();
+		}
+
+		private void SessionOnSessionChanged(object sender, EventArgs eventArgs)
+		{
+			if(CurrentSession == null)
+			{
+				_sessionAcquired = false;
+			}
+			else if(!_sessionAcquired)
+			{
+				_sessionAcquired = true;
+				SessionAcquired(this, EventArgs.Empty);
+			}
 		}
 
 		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceResult

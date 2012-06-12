@@ -32,7 +32,7 @@ namespace CHAOS.Portal.Client
 		/// <summary>
 		/// Gets or sets the session used by the portal client.
 		/// </summary>
-		Session CurrentSession { get; set; }
+		Session CurrentSession { get; }
 
 		/// <summary>
 		/// Returns <code>true</code> if ClientGUID has been set.
@@ -43,6 +43,8 @@ namespace CHAOS.Portal.Client
 		/// Gets or sets the GUID used to identify the client.
 		/// </summary>
 		Guid? ClientGUID { get; set; }
+
+		void UseExistingSession(Guid guid);
 
 		#region GeoLocator Extensions
 
