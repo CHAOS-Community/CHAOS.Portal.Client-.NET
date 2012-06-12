@@ -6,7 +6,6 @@ using CHAOS.Utilities;
 
 namespace CHAOS.Portal.Client.Managers
 {
-	
 	public abstract class ASettingsManager<TSettings> : INotifyPropertyChanged where TSettings : class
 	{
 		public event EventHandler<DataEventArgs<Exception>> ManagerFailure = delegate { };
@@ -23,7 +22,7 @@ namespace CHAOS.Portal.Client.Managers
 		private bool _shouldSaveAfterGet;
 		private bool _lockSettings;
 
-		public IPortalClient PortalClient { get { return _portalClient; } }
+		protected IPortalClient PortalClient { get { return _portalClient; } }
 		
 		protected ASettingsManager(IPortalClient portalClient)
 		{
