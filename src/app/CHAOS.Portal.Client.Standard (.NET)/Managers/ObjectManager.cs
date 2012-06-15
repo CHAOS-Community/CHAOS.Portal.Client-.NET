@@ -267,7 +267,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region SaveMetadata
 
-		public void SaveMetadata(Metadata metadata, XElement newData)
+		public void SaveMetadata(Metadata metadata, XElement newData, Action<bool> callback = null)
+		{
+			SaveMetadata(metadata, newData, callback == null ? null : (Action<bool, object>)((s, t) => callback(s)));
+		}
+
+		public void SaveMetadata<T>(Metadata metadata, XElement newData, Action<bool, T> callback = null, T token = default(T))
 		{
 			metadata.ValidateIsNotNull("metadata");
 			newData.ValidateIsNotNull("newData");
@@ -277,7 +282,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(@object == null)
 				throw new Exception("Could not find object matching metadata");
 
-			_client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, newData);
+			metadata.MetadataXML = newData;
+
+			_client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, newData).Callback = (result, error, o) =>
+			                                                                                                                                	{
+																																					if (callback != null)
+																																						callback(error == null, token);
+			                                                                                                                                	};
 		}
 
 		#endregion

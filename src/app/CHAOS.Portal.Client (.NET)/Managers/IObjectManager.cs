@@ -33,6 +33,7 @@ namespace CHAOS.Portal.Client.Managers
 		Metadata AddLanguage(Object @object, MetadataSchema schema, Language language);
 		Metadata AddLanguage(Object @object, Guid schemaID, string languageCode);
 
-		void SaveMetadata(Metadata metadata, XElement newData);
+		void SaveMetadata(Metadata metadata, XElement newData, Action<bool> callback = null);
+		void SaveMetadata<T>(Metadata metadata, XElement newData, Action<bool, T> callback = null, T token = default(T));
 	}
 }

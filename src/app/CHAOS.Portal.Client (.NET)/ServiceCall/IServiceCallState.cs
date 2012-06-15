@@ -63,6 +63,14 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// <param name="timeout">The timeout in milliseconds or 0 for no timeout (other timeout may apply)</param>
 		/// <returns>Returns the IServiceCallState for chaining</returns>
 		IServiceCallState<T> Synchronous(uint timeout = 0);
+
+		/// <summary>
+		/// Sets the callback and optionally the token.
+		/// </summary>
+		/// <param name="callback">A callback to be called when a service call completes, successful or not</param>
+		/// <param name="token">Any object used to track the service call</param>
+		/// <returns></returns>
+		IServiceCallState<T> WithCallback(ServiceCallback<T> callback, object token = null);
 	}
 
 	/// <summary>

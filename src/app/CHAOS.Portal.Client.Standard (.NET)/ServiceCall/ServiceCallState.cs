@@ -80,6 +80,14 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			return this;
 		}
 
+		public IServiceCallState<T> WithCallback(ServiceCallback<T> callback, object token = null)
+		{
+			Callback = callback;
+			Token = token;
+
+			return this;
+		}
+
 		private void Feedback(Action action)
 		{
 #if SILVERLIGHT
