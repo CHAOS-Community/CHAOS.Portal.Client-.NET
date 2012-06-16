@@ -22,6 +22,11 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			return CallService<IServiceResult_MCM<Object>>(HTTPMethod.GET, GUID, objectTypeID, folderID);
 		}
 
+		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Delete(Guid? GUID)
+		{
+			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.GET, GUID);
+		}
+
 		public IServiceCallState<IServiceResult_MCM<ScalarResult>> SetPublishSettings(Guid objectGUID, Guid accessPointGUID, DateTime? startDate, DateTime? endDate)
 		{
 			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.GET, objectGUID, accessPointGUID, startDate, endDate);

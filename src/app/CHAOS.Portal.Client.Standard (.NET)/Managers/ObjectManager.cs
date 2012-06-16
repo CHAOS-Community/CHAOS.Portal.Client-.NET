@@ -69,6 +69,38 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		}
 
 		#endregion
+		#region Delete
+
+		public void Delete(Object @object, Action<bool> callback = null)
+		{
+			Delete(@object.ValidateIsNotNull("@object").GUID, callback);
+		}
+
+		public void Delete(Guid objectGuid, Action<bool> callback = null)
+		{
+			Delete(objectGuid, callback == null ? null : (Action<bool, object>)((s, t) => callback(s)), null);
+		}
+
+		public void Delete<T>(Object @object, Action<bool, T> callback, T token)
+		{
+			Delete(@object.ValidateIsNotNull("@object").GUID, callback, token);
+		}
+
+		public void Delete<T>(Guid objectGuid, Action<bool, T> callback, T token)
+		{
+			_client.Object.Delete(objectGuid).WithCallback((result, error, o) =>
+			                                               	{
+			                                               		if(error == null)
+			                                               		{
+			                                               			_objects.Remove(objectGuid);
+			                                               			callback(true, (T) o);
+			                                               		}
+																	callback(false, (T)o);
+																
+			                                               	}, token);
+		}
+
+		#endregion
 		#region ObjectRelation
 
 		public void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T))
@@ -145,6 +177,19 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public Object GetObjectByFileID(int fileID, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
 			return _objects.Values.FirstOrDefault(o => o.Files != null && o.Files.Any(f => f.ID == fileID)); //TODO: This is a temporary solution.
+		}
+
+		#endregion
+		#region By Metadata
+
+		public Object GetObjectByMetadata(Metadata metadata)
+		{
+			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas.Contains(metadata));
+
+			if(@object == null)
+				throw new Exception("Object not found");
+
+			return @object;
 		}
 
 		#endregion
@@ -292,11 +337,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		}
 
 		#endregion
+		#region Update methods
 
 		private IList<Object> UpdateObjects(IList<Object> objects)
 		{
 			var result = new List<Object>();
-			
+
 			foreach (var newObject in objects)
 			{
 				if (_objects.ContainsKey(newObject.GUID))
@@ -324,23 +370,23 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			oldObject.ObjectTypeID = newObject.ObjectTypeID;
 			oldObject.DateCreated = newObject.DateCreated;
 
-			if(newObject.Metadatas != null)
+			if (newObject.Metadatas != null)
 			{
 				if (oldObject.Metadatas == null)
 					oldObject.Metadatas = newObject.Metadatas;
 				else
 					UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaGUID == m2.MetadataSchemaGUID && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
 			}
-			
-			if(newObject.Files != null)
+
+			if (newObject.Files != null)
 			{
 				if (oldObject.Files == null)
 					oldObject.Files = newObject.Files;
 				else
 					UpdateCollection(oldObject.Files, newObject.Files, (f1, f2) => f1.URL == f2.URL, UpdateFile);
 			}
-			
-			if(newObject.ObjectRelations != null)
+
+			if (newObject.ObjectRelations != null)
 			{
 				if (oldObject.ObjectRelations == null)
 					oldObject.ObjectRelations = newObject.ObjectRelations;
@@ -351,9 +397,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateCollection<T>(ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection, Func<T, T, bool> comparer, Action<T, T> updater) where T : class
 		{
-			if(newCollection == null)
+			if (newCollection == null)
 				return;
-			
+
 			for (var i = 0; i < oldCollection.Count; i++)
 			{
 				var olditem = oldCollection[i];
@@ -397,5 +443,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			oldRelation.Sequence = newRelation.Sequence;
 		}
+		
+		#endregion
 	}
 }

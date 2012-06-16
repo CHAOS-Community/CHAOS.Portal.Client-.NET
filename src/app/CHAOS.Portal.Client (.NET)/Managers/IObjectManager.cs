@@ -13,11 +13,17 @@ namespace CHAOS.Portal.Client.Managers
 
 		Object Create<T>(uint objectTypeID, uint folderID, Guid? guid = null, Action<bool, T> callback = null, T token = default(T));
 
+		void Delete(Object @object, Action<bool> callback = null);
+		void Delete(Guid objectGuid, Action<bool> callback = null);
+		void Delete<T>(Object @object, Action<bool, T> callback, T token);
+		void Delete<T>(Guid objectGuid, Action<bool, T> callback, T token);
+
 		void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
 		void CreateRelation<T>(Guid object1, Guid object2, uint relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
 
 		Object GetObjectByGUID(Guid guid, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 		Object GetObjectByFileID(int fileID, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+		Object GetObjectByMetadata(Metadata metadata);
 
 		IManagerResult<Object> GetObjectBySearch(string query, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 
