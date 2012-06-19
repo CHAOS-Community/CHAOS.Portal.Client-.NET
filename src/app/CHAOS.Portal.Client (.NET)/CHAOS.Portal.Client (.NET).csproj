@@ -47,6 +47,7 @@
     <Compile Include="Data\MCM\AccessPoint.cs" />
     <Compile Include="Data\MCM\File.cs" />
     <Compile Include="Data\MCM\Folder.cs" />
+    <Compile Include="Data\MCM\FolderPermission.cs" />
     <Compile Include="Data\MCM\FolderType.cs" />
     <Compile Include="Data\MCM\FormatType.cs" />
     <Compile Include="Data\MCM\Language.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Data\MCM\ObjectRelation.cs" />
     <Compile Include="Data\MCM\ObjectRelationType.cs" />
     <Compile Include="Data\MCM\ObjectType.cs" />
+    <Compile Include="Data\MCM\Permission.cs" />
     <Compile Include="Data\NoData.cs" />
     <Compile Include="Data\Portal\ClientSettings.cs" />
     <Compile Include="Data\Portal\Group.cs" />
