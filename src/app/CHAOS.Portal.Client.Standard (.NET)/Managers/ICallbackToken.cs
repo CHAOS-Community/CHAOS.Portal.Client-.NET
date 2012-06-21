@@ -2,7 +2,7 @@
 {
 	internal interface ICallbackToken<T>
 	{
-		T InternalToken { get; set; }
+		T Token { get; set; }
 
 		void CallCallback(bool success);
 	}

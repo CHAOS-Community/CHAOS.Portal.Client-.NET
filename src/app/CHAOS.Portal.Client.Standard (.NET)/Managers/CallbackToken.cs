@@ -2,25 +2,22 @@
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
-	internal class CallbackToken<TInternal, TExternal> : ICallbackToken<TInternal>
+	internal class CallbackToken<T>
 	{
-		public TInternal InternalToken { get; set; }
+		public T Token { get; private set; }
 
-		public TExternal ExternalToken { get; set; }
+		public Action<bool> Callback { get; private set; }
 
-		public Action<bool, TExternal> Callback { get; set; }
-
-		public CallbackToken(TInternal internalToken, TExternal externalToken, Action<bool, TExternal> callback)
+		public CallbackToken(T token, Action<bool> callback)
 		{
-			InternalToken = internalToken;
-			ExternalToken = externalToken;
+			Token = token;
 			Callback = callback;
 		}
 
 		public void CallCallback(bool success)
 		{
 			if (Callback != null)
-				Callback(success, ExternalToken);
+				Callback(success);
 		}
 	}
 }

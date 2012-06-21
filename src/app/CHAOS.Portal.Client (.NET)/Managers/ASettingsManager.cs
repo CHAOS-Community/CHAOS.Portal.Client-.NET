@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using CHAOS.Events;
-using CHAOS.Utilities;
+using CHAOS.Tasks;
 
 namespace CHAOS.Portal.Client.Managers
 {
@@ -12,7 +12,7 @@ namespace CHAOS.Portal.Client.Managers
 		
 		private readonly IPortalClient _portalClient;
 		
-		private readonly RepeatActionConcater _updateGuard;
+		private readonly RepeatTaskConcater _updateGuard;
 
 		private readonly IDictionary<string, object> _settingValues;
 		private readonly IDictionary<string, object> _settingDefaultValues;
@@ -27,7 +27,7 @@ namespace CHAOS.Portal.Client.Managers
 		protected ASettingsManager(IPortalClient portalClient)
 		{
 			_portalClient = portalClient;
-			_updateGuard = new RepeatActionConcater(SetSettings) {WaitTime = 5000};
+			_updateGuard = new RepeatTaskConcater(SetSettings) { WaitTime = 5000 };
 			_settingValues = new Dictionary<string, object>();
 			_settingDefaultValues = new Dictionary<string, object>();
 			_changedProperties = new HashSet<string>();

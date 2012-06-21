@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using CHAOS.Events;
+using CHAOS.Tasks;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
@@ -18,18 +19,26 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjectByGUID = delegate { };
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjects = delegate { };
 
-		private readonly IDictionary<Guid, Object> _objects;
-
 		private readonly IPortalClient _client;
+
+		private readonly IDictionary<Guid, Object> _objects;
+		private readonly IDictionary<Object, DeferredTasksInvoker> _clientSideOnlyObjects;
 
 		public ObjectManager(IPortalClient client)
 		{
 			_client = ArgumentUtilities.ValidateIsNotNull("client", client);
 			_objects = new Dictionary<Guid, Object>();
+			_clientSideOnlyObjects = new Dictionary<Object, DeferredTasksInvoker>();
 		}
+
 		#region Create
 
-		public Object Create<T>(uint objectTypeID, uint folderID, Guid? guid, Action<bool, T> callback = null, T token = default(T))
+		public Object Create<T>(uint objectTypeID, uint folderID, Guid? guid, Action<bool, T> callback, T token)
+		{
+			return Create(objectTypeID, folderID, guid, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+		}
+
+		public Object Create(uint objectTypeID, uint folderID, Guid? guid = null, Action<bool> callback = null)
 		{
 			var @object = new Object();
 
@@ -39,30 +48,44 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				_objects[guid.Value] = @object;
 			}
 
-			var state = _client.Object.Create(guid, objectTypeID, folderID);
-			state.Callback = CreateCompleted;
-			state.Token = new CallbackToken<Object, T>(@object, token, callback);
+			_client.Object.Create(guid, objectTypeID, folderID).WithCallback(CreateCompleted, new CallbackToken<Object>(@object, callback));
+
+			return @object;
+		}
+
+		public Object CreateClientSideObject(uint objectTypeID, uint folderID, Guid? guid)
+		{
+			var @object = new Object();
+
+			if(!guid.HasValue)
+				guid = new Guid();
+
+			@object.GUID = guid.Value;
+			_objects[guid.Value] = @object;
+
+			AddClientSideOnlyObject(@object);
+			RunActionOnObject(@object, c => _client.Object.Create(guid, objectTypeID, folderID).WithCallback(CreateCompleted, new CallbackToken<Object>(@object, c)));
 
 			return @object;
 		}
 
 		private void CreateCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
 		{
-			var callbackToken = (ICallbackToken<Object>) token;
+			var callbackToken = (CallbackToken<Object>)token;
 
 			if(error == null && result.MCM.Data.Count == 1)
 			{
-				UpdateObject(callbackToken.InternalToken, result.MCM.Data[0]);
+				UpdateObject(callbackToken.Token, result.MCM.Data[0]);
 
-				if (!_objects.ContainsKey(callbackToken.InternalToken.GUID))
-					_objects[callbackToken.InternalToken.GUID] = callbackToken.InternalToken;
+				if (!_objects.ContainsKey(callbackToken.Token.GUID))
+					_objects[callbackToken.Token.GUID] = callbackToken.Token;
 
 				callbackToken.CallCallback(true);
 			}
 			else
 			{
-				if (!_objects.ContainsKey(callbackToken.InternalToken.GUID))
-					_objects.Remove(callbackToken.InternalToken.GUID);
+				if (!_objects.ContainsKey(callbackToken.Token.GUID))
+					_objects.Remove(callbackToken.Token.GUID);
 
 				callbackToken.CallCallback(false);
 			}	
@@ -76,9 +99,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			Delete(@object.ValidateIsNotNull("@object").GUID, callback);
 		}
 
-		public void Delete(Guid objectGuid, Action<bool> callback = null)
+		public void Delete(Guid objectGUID, Action<bool> callback = null)
 		{
-			Delete(objectGuid, callback == null ? null : (Action<bool, object>)((s, t) => callback(s)), null);
+			Delete(objectGUID, callback == null ? null : (Action<bool, object>)((s, t) => callback(s)), null);
 		}
 
 		public void Delete<T>(Object @object, Action<bool, T> callback, T token)
@@ -86,49 +109,69 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			Delete(@object.ValidateIsNotNull("@object").GUID, callback, token);
 		}
 
-		public void Delete<T>(Guid objectGuid, Action<bool, T> callback, T token)
+		public void Delete<T>(Guid objectGUID, Action<bool, T> callback, T token)
 		{
-			_client.Object.Delete(objectGuid).WithCallback((result, error, o) =>
+			if (IsClientSideOnlyObject(objectGUID))
+				RemoveClientOnlyObject(_objects[objectGUID], true);
+			else
+			{
+				_client.Object.Delete(objectGUID).WithCallback((result, error, o) =>
 			                                               	{
 			                                               		if(error == null)
 			                                               		{
-			                                               			_objects.Remove(objectGuid);
+			                                               			_objects.Remove(objectGUID);
 			                                               			callback(true, (T) o);
 			                                               		}
 																	callback(false, (T)o);
 																
 			                                               	}, token);
+			}
 		}
 
 		#endregion
 		#region ObjectRelation
 
-		public void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T))
+		public void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token)
 		{
-			CreateRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback, token);
+			CreateRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
 		}
 
-		public void CreateRelation<T>(Guid object1, Guid object2, uint relationType, int? sequence, Action<bool, T> callback = null, T token = default(T))
+		public void CreateRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null)
 		{
-			var state = _client.ObjectRelation.Create(object1, object2, relationType, sequence);
+			CreateRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback);
+		}
 
-			state.Callback += CreateRelationCompleted;
-			state.Token = new CallbackToken<IList<Guid>, T>(new List<Guid> {object1, object2}, token, callback);
+		public void CreateRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token)
+		{
+			CreateRelation(object1GUID, object2GUID, relationTypeID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+		}
+
+		public void CreateRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null)
+		{
+			var relation = new ObjectRelation(object1GUID, object2GUID, relationTypeID, sequence);
+			
+			if(_objects.ContainsKey(object1GUID))
+				_objects[object1GUID].ObjectRelations.Add(relation);
+
+			if (_objects.ContainsKey(object2GUID))
+				_objects[object2GUID].ObjectRelations.Add(relation);
+
+			if(IsClientSideOnlyObject(object1GUID) && IsClientSideOnlyObject(object2GUID))
+				throw new NotImplementedException("Both objects can't be client side only");
+
+			var @object = IsClientSideOnlyObject(object1GUID) ? _objects[object1GUID] : IsClientSideOnlyObject(object2GUID) ? _objects[object2GUID] : null;
+
+			Action<Action<bool>> action = a => _client.ObjectRelation.Create(object1GUID, object2GUID, relationTypeID, sequence).Callback = (result, error, token) => a(error == null && result.MCM.Data.Count == 1);
+
+			if (@object == null)
+				action(callback);
+			else
+				RunActionOnObject(@object, action, callback);
 		}
 
 		private void CreateRelationCompleted(IServiceResult_MCM<ScalarResult> result, Exception error, object token)
 		{
-			var callbackToken = (ICallbackToken<IList<Guid>>)token;
-
-			if (error == null && result.MCM.Data.Count == 1)
-			{
-				GetObjectByGUID(callbackToken.InternalToken[0], false, false, true, false); //TODO: Make the new relation manually
-				GetObjectByGUID(callbackToken.InternalToken[1], false, false, true, false); //TODO: Make the new relation manually
-
-				callbackToken.CallCallback(true);
-			}
-			else
-				callbackToken.CallCallback(false);
+			((CallbackToken<IList<Guid>>)token).CallCallback(error == null && result.MCM.Data.Count == 1);
 		}
 
 		#endregion
@@ -141,9 +184,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				
 			var result = _objects[guid];
 
-			var state = _client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints);
-			state.Callback = GetObjectByGUIDCompleted;
-			state.FeedbackOnDispatcher = true;
+			if(!IsClientSideOnlyObject(result))
+				_client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).Callback = GetObjectByGUIDCompleted;
 
 			return result;
 		}
@@ -312,28 +354,110 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region SaveMetadata
 
-		public void SaveMetadata(Metadata metadata, XElement newData, Action<bool> callback = null)
+		public void SaveMetadata<T>(Metadata metadata, XElement newData, Action<bool, T> callback, T token)
 		{
-			SaveMetadata(metadata, newData, callback == null ? null : (Action<bool, object>)((s, t) => callback(s)));
+			SaveMetadata(metadata, newData, callback == null ? null : (Action<bool>) (s => callback(s, token)));
 		}
 
-		public void SaveMetadata<T>(Metadata metadata, XElement newData, Action<bool, T> callback = null, T token = default(T))
+		public void SaveMetadata(Metadata metadata, XElement newData, Action<bool> callback = null)
 		{
 			metadata.ValidateIsNotNull("metadata");
 			newData.ValidateIsNotNull("newData");
 
 			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas != null && o.Metadatas.Contains(metadata));
 
-			if(@object == null)
+			if (@object == null)
 				throw new Exception("Could not find object matching metadata");
 
 			metadata.MetadataXML = newData;
 
-			_client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, newData).Callback = (result, error, o) =>
-			                                                                                                                                	{
-																																					if (callback != null)
-																																						callback(error == null, token);
-			                                                                                                                                	};
+			SaveMetadata(@object, metadata, callback);
+		}
+
+		public void SaveMetadata<T>(Object @object, Metadata metadata, Action<bool, T> callback, T token)
+		{
+			SaveMetadata(@object, metadata, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+		}
+
+		public void SaveMetadata(Object @object, Metadata metadata, Action<bool> callback = null)
+		{
+			@object.ValidateIsNotNull("@object");
+			metadata.ValidateIsNotNull("metadata");
+
+			var cachedObject = _objects.Values.FirstOrDefault(o => o.Metadatas != null && o.Metadatas.Contains(metadata));
+
+			if (cachedObject != null && cachedObject != @object)
+				throw new Exception("Metadata belongs to another object");
+
+			if (!@object.Metadatas.Contains(metadata))
+				@object.Metadatas.Add(metadata);
+
+			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, metadata.MetadataXML).Callback = (result, error, token) => a(error == null), callback);
+		}
+
+		#endregion
+		#region ClientSide Only
+
+		private bool IsClientSideOnlyObject(Object @object)
+		{
+			return _clientSideOnlyObjects.ContainsKey(@object);
+		}
+
+		private bool IsClientSideOnlyObject(Guid guid)
+		{
+			return _clientSideOnlyObjects.Keys.Any(o => o.GUID == guid);
+		}
+
+		private void AddClientSideOnlyObject(Object @object)
+		{
+			_clientSideOnlyObjects[@object] = new DeferredTasksInvoker();
+		}
+
+		private void RemoveClientOnlyObject(Object @object, bool deleteObject = false)
+		{
+			_clientSideOnlyObjects.Remove(@object);
+
+			if(deleteObject)
+				_objects.Remove(@object.GUID);
+		}
+
+		private void RunActionOnObject(Object @object, Action<Action<bool>> action, Action<bool> callback = null)
+		{
+			if (IsClientSideOnlyObject(@object))
+			{
+				_clientSideOnlyObjects[@object].AddAction(action);
+				if (callback != null)
+					callback(true);
+			}
+			else
+				action(callback);
+		}
+
+		public void SendClientSideOnlyObjectToServer<T>(Object @object, Action<bool, T> callback, T token)
+		{
+			SendClientSideOnlyObjectToServer(@object, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+		}
+
+		public void SendClientSideOnlyObjectToServer(Object @object, Action<bool> callback)
+		{			
+			@object.ValidateIsNotNull("@object");
+
+			DeferredTasksInvoker invoker;
+
+			lock(_clientSideOnlyObjects)
+			{
+				if (!IsClientSideOnlyObject(@object))
+				{
+					if (_objects.ContainsKey(@object.GUID))
+						return; //Assume object has been send to server
+					throw new Exception("ClientSide only object not found");
+				}
+
+				invoker = _clientSideOnlyObjects[@object];
+				RemoveClientOnlyObject(@object); //TODO: Wait and remove invoker when all tasks are run, in case tasks are added in between now and then
+			}
+
+			invoker.Invoke(callback);
 		}
 
 		#endregion
@@ -364,7 +488,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			return result;
 		}
 
-		private static void UpdateObject(Object oldObject, Object newObject)
+		private void UpdateObject(Object oldObject, Object newObject)
 		{
 			oldObject.GUID = newObject.GUID;
 			oldObject.ObjectTypeID = newObject.ObjectTypeID;
@@ -391,11 +515,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (oldObject.ObjectRelations == null)
 					oldObject.ObjectRelations = newObject.ObjectRelations;
 				else
-					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1GUID == r2.Object1GUID && r1.Object2GUID == r2.Object2GUID && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation);
+					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1GUID == r2.Object1GUID && r1.Object2GUID == r2.Object2GUID && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation, oR => IsClientSideOnlyObject(oR.Object1GUID) || IsClientSideOnlyObject(oR.Object1GUID));
 			}
 		}
 
-		private static void UpdateCollection<T>(ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection, Func<T, T, bool> comparer, Action<T, T> updater) where T : class
+		private static void UpdateCollection<T>(ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection, Func<T, T, bool> comparer, Action<T, T> updater, Func<T, bool> clientSideChecker = null) where T : class
 		{
 			if (newCollection == null)
 				return;
@@ -406,7 +530,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 				var newItem = newCollection.FirstOrDefault(item => comparer(olditem, item));
 
-				if (newItem == null)
+				if (newItem == null && clientSideChecker != null && !clientSideChecker(olditem))
 				{
 					oldCollection.RemoveAt(i--);
 					continue;
@@ -443,7 +567,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			oldRelation.Sequence = newRelation.Sequence;
 		}
-		
+
 		#endregion
 	}
 }

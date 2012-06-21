@@ -11,15 +11,20 @@ namespace CHAOS.Portal.Client.Managers
 		event EventHandler<DataEventArgs<Exception>> FailedToGetObjectByGUID;
 		event EventHandler<DataEventArgs<Exception>> FailedToGetObjects;
 
-		Object Create<T>(uint objectTypeID, uint folderID, Guid? guid = null, Action<bool, T> callback = null, T token = default(T));
+		Object Create(uint objectTypeID, uint folderID, Guid? guid = null, Action<bool> callback = null);
+		Object Create<T>(uint objectTypeID, uint folderID, Guid? guid, Action<bool, T> callback, T token);
+
+		Object CreateClientSideObject(uint objectTypeID, uint folderID, Guid? guid);
 
 		void Delete(Object @object, Action<bool> callback = null);
-		void Delete(Guid objectGuid, Action<bool> callback = null);
 		void Delete<T>(Object @object, Action<bool, T> callback, T token);
-		void Delete<T>(Guid objectGuid, Action<bool, T> callback, T token);
+		void Delete(Guid objectGUID, Action<bool> callback = null);
+		void Delete<T>(Guid objectGUID, Action<bool, T> callback, T token);
 
-		void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
-		void CreateRelation<T>(Guid object1, Guid object2, uint relationType, int? sequence, Action<bool, T> callback = null, T token = default(T));
+		void CreateRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null);
+		void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token);
+		void CreateRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null);
+		void CreateRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token);
 
 		Object GetObjectByGUID(Guid guid, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 		Object GetObjectByFileID(int fileID, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
@@ -40,6 +45,12 @@ namespace CHAOS.Portal.Client.Managers
 		Metadata AddLanguage(Object @object, Guid schemaID, string languageCode);
 
 		void SaveMetadata(Metadata metadata, XElement newData, Action<bool> callback = null);
-		void SaveMetadata<T>(Metadata metadata, XElement newData, Action<bool, T> callback = null, T token = default(T));
+		void SaveMetadata<T>(Metadata metadata, XElement newData, Action<bool, T> callback, T token);
+
+		void SaveMetadata(Object @object, Metadata metadata, Action<bool> callback = null);
+		void SaveMetadata<T>(Object @object, Metadata metadata, Action<bool, T> callback, T token);
+
+		void SendClientSideOnlyObjectToServer(Object @object, Action<bool> callback = null);
+		void SendClientSideOnlyObjectToServer<T>(Object @object, Action<bool, T> callback, T token);
 	}
 }
