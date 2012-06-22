@@ -149,12 +149,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public void CreateRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null)
 		{
 			var relation = new ObjectRelation(object1GUID, object2GUID, relationTypeID, sequence);
-			
-			if(_objects.ContainsKey(object1GUID))
-				_objects[object1GUID].ObjectRelations.Add(relation);
 
-			if (_objects.ContainsKey(object2GUID))
-				_objects[object2GUID].ObjectRelations.Add(relation);
+			AddRelationIfCached(object1GUID, relation);
+			AddRelationIfCached(object2GUID, relation);
 
 			if(IsClientSideOnlyObject(object1GUID) && IsClientSideOnlyObject(object2GUID))
 				throw new NotImplementedException("Both objects can't be client side only");
@@ -169,9 +166,16 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				RunActionOnObject(@object, action, callback);
 		}
 
-		private void CreateRelationCompleted(IServiceResult_MCM<ScalarResult> result, Exception error, object token)
+		private void AddRelationIfCached(Guid guid, ObjectRelation relation)
 		{
-			((CallbackToken<IList<Guid>>)token).CallCallback(error == null && result.MCM.Data.Count == 1);
+			if (!_objects.ContainsKey(guid)) return;
+
+			var @cachedObject = _objects[guid];
+
+			if (cachedObject.ObjectRelations == null)
+				cachedObject.ObjectRelations = new ObservableCollection<ObjectRelation>();
+
+			cachedObject.ObjectRelations.Add(relation);
 		}
 
 		#endregion
@@ -418,7 +422,19 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_clientSideOnlyObjects.Remove(@object);
 
 			if(deleteObject)
+			{
 				_objects.Remove(@object.GUID);
+
+				if(@object.ObjectRelations != null)
+				{
+					foreach(var relation in @object.ObjectRelations)
+					{
+						var relatedKey = relation.Object1GUID == @object.GUID ? relation.Object2GUID : relation.Object1GUID;
+						if (_objects.ContainsKey(relatedKey))
+							_objects[relatedKey].ObjectRelations.Remove(relation);
+					}
+				}
+			}
 		}
 
 		private void RunActionOnObject(Object @object, Action<Action<bool>> action, Action<bool> callback = null)
@@ -515,11 +531,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (oldObject.ObjectRelations == null)
 					oldObject.ObjectRelations = newObject.ObjectRelations;
 				else
-					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1GUID == r2.Object1GUID && r1.Object2GUID == r2.Object2GUID && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation, oR => IsClientSideOnlyObject(oR.Object1GUID) || IsClientSideOnlyObject(oR.Object1GUID));
+					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1GUID == r2.Object1GUID && r1.Object2GUID == r2.Object2GUID && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation, oR => IsClientSideOnlyObject(oR.Object1GUID) || IsClientSideOnlyObject(oR.Object2GUID));
 			}
 		}
 
-		private static void UpdateCollection<T>(ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection, Func<T, T, bool> comparer, Action<T, T> updater, Func<T, bool> clientSideChecker = null) where T : class
+		private static void UpdateCollection<T>(ObservableCollection<T> oldCollection, ObservableCollection<T> newCollection, Func<T, T, bool> comparer, Action<T, T> updater, Func<T, bool> keepChecker = null) where T : class
 		{
 			if (newCollection == null)
 				return;
@@ -530,7 +546,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 				var newItem = newCollection.FirstOrDefault(item => comparer(olditem, item));
 
-				if (newItem == null && clientSideChecker != null && !clientSideChecker(olditem))
+				if (newItem == null && (keepChecker == null || !keepChecker(olditem)))
 				{
 					oldCollection.RemoveAt(i--);
 					continue;
