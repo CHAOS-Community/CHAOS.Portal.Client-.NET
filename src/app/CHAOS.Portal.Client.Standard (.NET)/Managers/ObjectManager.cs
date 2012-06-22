@@ -393,10 +393,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if (cachedObject != null && cachedObject != @object)
 				throw new Exception("Metadata belongs to another object");
 
+			metadata.RevisionID = metadata.RevisionID == null ? 1 : metadata.RevisionID++;
+
 			if (!@object.Metadatas.Contains(metadata))
 				@object.Metadatas.Add(metadata);
 
-			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, metadata.MetadataXML).Callback = (result, error, token) => a(error == null), callback);
+			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, metadata.MetadataXML).Callback = (result, error, token) => a.DoIfIsNotNull(c => c(error == null)), callback);
 		}
 
 		#endregion

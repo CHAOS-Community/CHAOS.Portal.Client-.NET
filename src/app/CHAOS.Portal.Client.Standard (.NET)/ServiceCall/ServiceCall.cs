@@ -50,17 +50,22 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 		private void Request_Completed(object sender, DataOperationEventArgs<string> e)
 		{
+			T result = null;
+			Exception resultError = null;
+
 			try
 			{
 				if(e.HasError)
-					_state.ReportResult(null, e.Error);
+					resultError = e.Error;
 				else
-					_state.ReportResult(_resultParser.Parse(e.Data), null);
+					result = _resultParser.Parse(e.Data);
 			}
 			catch (Exception error)
 			{
-				_state.ReportResult(null, new Exception("Failed to parse service result", error));
+				resultError = new Exception("Failed to parse service result", error);
 			}
+
+			_state.ReportResult(result, resultError);
 		}
 	}
 }
