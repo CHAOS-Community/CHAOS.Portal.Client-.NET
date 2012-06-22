@@ -467,7 +467,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (!IsClientSideOnlyObject(@object))
 				{
 					if (_objects.ContainsKey(@object.GUID))
+					{
+						callback(true);
 						return; //Assume object has been send to server
+					}
+						
 					throw new Exception("ClientSide only object not found");
 				}
 
