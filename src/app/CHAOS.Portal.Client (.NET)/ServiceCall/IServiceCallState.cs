@@ -58,7 +58,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 		bool FeedbackOnDispatcher { get; set; }
 
 		/// <summary>
-		/// Blocks the thread
+		/// Blocks the thread.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds or 0 for no timeout (other timeout may apply)</param>
 		/// <returns>Returns the IServiceCallState for chaining</returns>
@@ -69,8 +69,15 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// </summary>
 		/// <param name="callback">A callback to be called when a service call completes, successful or not</param>
 		/// <param name="token">Any object used to track the service call</param>
-		/// <returns></returns>
+		/// <returns>Returns the IServiceCallState for chaining</returns>
 		IServiceCallState<T> WithCallback(ServiceCallback<T> callback, object token = null);
+
+		/// <summary>
+		/// If parameter is true; callback and events will be called on dispatcher thread.
+		/// </summary>
+		/// <param name="invokeFeedbackOnDispatcher">If true; callback and events will be called on dispatcher thread</param>
+		/// <returns>Returns the IServiceCallState for chaining</returns>
+		IServiceCallState<T> InvokeFeedbackOnDispatcher(bool invokeFeedbackOnDispatcher = true);
 	}
 
 	/// <summary>

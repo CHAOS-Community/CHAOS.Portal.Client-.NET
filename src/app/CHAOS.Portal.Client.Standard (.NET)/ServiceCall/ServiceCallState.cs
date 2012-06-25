@@ -80,10 +80,17 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			return this;
 		}
 
-		public IServiceCallState<T> WithCallback(ServiceCallback<T> callback, object token = null)
+		public IServiceCallState<T> WithCallback(ServiceCallback<T> callback, object token)
 		{
 			Callback = callback;
 			Token = token;
+
+			return this;
+		}
+
+		public IServiceCallState<T> InvokeFeedbackOnDispatcher(bool invokeFeedbackOnDispatcher)
+		{
+			FeedbackOnDispatcher = invokeFeedbackOnDispatcher;
 
 			return this;
 		}
