@@ -47,7 +47,8 @@
     <Compile Include="Data\MCM\AccessPoint.cs" />
     <Compile Include="Data\MCM\File.cs" />
     <Compile Include="Data\MCM\Folder.cs" />
-    <Compile Include="Data\MCM\FolderPermission.cs" />
+    <Compile Include="Data\MCM\FolderPermissions.cs" />
+    <Compile Include="Data\MCM\Permissions.cs" />
     <Compile Include="Data\MCM\FolderType.cs" />
     <Compile Include="Data\MCM\FormatType.cs" />
     <Compile Include="Data\MCM\Language.cs" />

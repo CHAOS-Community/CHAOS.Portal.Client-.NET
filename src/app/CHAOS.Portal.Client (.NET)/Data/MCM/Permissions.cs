@@ -2,9 +2,9 @@
 
 namespace CHAOS.Portal.Client.Data.MCM
 {
-	public class FolderPermission
+	public class Permissions<T>
 	{
 		public uint AccumulatedPermission { get; set; }
-		public IList<Permission> PermissionDetails { get; set; }
+		public IList<Permission<T>> PermissionDetails { get; set; }
 	}
 }
