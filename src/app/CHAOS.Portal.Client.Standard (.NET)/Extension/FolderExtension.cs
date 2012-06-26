@@ -39,7 +39,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 
 		public IServiceCallState<IServiceResult_MCM<ScalarResult>> SetPermission(Guid? userGUID, Guid? groupGUID, uint folderID, FolderPermissions permission)
 		{
-			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.GET, userGUID, groupGUID, folderID, permission);
+			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.GET, userGUID, groupGUID, folderID, (uint)permission);
 		}
 	}
 }
