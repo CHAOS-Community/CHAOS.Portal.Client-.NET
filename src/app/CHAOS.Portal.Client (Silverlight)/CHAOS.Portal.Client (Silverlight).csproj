@@ -56,6 +56,15 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Indexing\Facet.cs">
+      <Link>Data\Indexing\Facet.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Indexing\FacetsResult.cs">
+      <Link>Data\Indexing\FacetsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Indexing\IndexResponse.cs">
+      <Link>Data\Indexing\IndexResponse.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\AccessPoint.cs">
       <Link>Data\MCM\AccessPoint.cs</Link>
     </Compile>
@@ -100,6 +109,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IGroupExtension.cs">
       <Link>Extensions\IGroupExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IIndexExtension.cs">
+      <Link>Extensions\IIndexExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ILanguageExtension.cs">
       <Link>Extensions\ILanguageExtension.cs</Link>

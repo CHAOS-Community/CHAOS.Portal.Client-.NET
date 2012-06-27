@@ -146,6 +146,12 @@ namespace CHAOS.Portal.Client.Standard
 		public IDayStatsObjectExtension DayStatsObject { get { return _dayStatsObject; } }
 
 		#endregion
+		#region Indexing
+
+		private readonly IndexExtension _index;
+		public IIndexExtension Index { get { return _index; } }
+		
+		#endregion
 		#endregion
 
 		public PortalClient(IServiceCallFactory serviceCallFactory)
@@ -178,6 +184,8 @@ namespace CHAOS.Portal.Client.Standard
 
 			_statsObject = new StatsObjectExtension(this);
 			_dayStatsObject = new DayStatsObjectExtension(this);
+
+			_index = new IndexExtension(this);
 
 			_session.SessionChanged += SessionOnSessionChanged;
 		}

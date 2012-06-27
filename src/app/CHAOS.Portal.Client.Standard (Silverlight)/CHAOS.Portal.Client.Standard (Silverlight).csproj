@@ -94,6 +94,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\GroupExtension.cs">
       <Link>Extension\GroupExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\IndexExtension.cs">
+      <Link>Extension\IndexExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\LanguageExtension.cs">
       <Link>Extension\LanguageExtension.cs</Link>
     </Compile>

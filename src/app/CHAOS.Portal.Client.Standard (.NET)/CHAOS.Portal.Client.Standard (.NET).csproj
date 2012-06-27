@@ -60,6 +60,7 @@
     <Compile Include="Extension\FolderTypeExtension.cs" />
     <Compile Include="Extension\FormatTypeExtension.cs" />
     <Compile Include="Extension\GroupExtension.cs" />
+    <Compile Include="Extension\IndexExtension.cs" />
     <Compile Include="Extension\LanguageExtension.cs" />
     <Compile Include="Extension\LinkExtension.cs" />
     <Compile Include="Extension\LocationExtension.cs" />

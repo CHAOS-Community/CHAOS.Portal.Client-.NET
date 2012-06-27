@@ -43,6 +43,9 @@
     <Compile Include="Data\AData.cs" />
     <Compile Include="Data\GeoLocator\LocationInfo.cs" />
     <Compile Include="Data\IModuleResult.cs" />
+    <Compile Include="Data\Indexing\Facet.cs" />
+    <Compile Include="Data\Indexing\FacetsResult.cs" />
+    <Compile Include="Data\Indexing\IndexResponse.cs" />
     <Compile Include="Data\IServiceResult.cs" />
     <Compile Include="Data\MCM\AccessPoint.cs" />
     <Compile Include="Data\MCM\File.cs" />
@@ -78,6 +81,7 @@
     <Compile Include="Extensions\IFolderTypeExtension.cs" />
     <Compile Include="Extensions\IFormatTypeExtension.cs" />
     <Compile Include="Extensions\IGroupExtension.cs" />
+    <Compile Include="Extensions\IIndexExtension.cs" />
     <Compile Include="Extensions\ILanguageExtension.cs" />
     <Compile Include="Extensions\ILinkExtension.cs" />
     <Compile Include="Extensions\ILocationExtension.cs" />

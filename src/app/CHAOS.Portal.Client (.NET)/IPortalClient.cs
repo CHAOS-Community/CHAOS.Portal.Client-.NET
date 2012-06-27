@@ -171,5 +171,10 @@ namespace CHAOS.Portal.Client
 		IDayStatsObjectExtension DayStatsObject { get; }
 
 		#endregion
+		#region Indexing Extensions
+
+		IIndexExtension Index { get; }
+
+		#endregion
 	}
 }
