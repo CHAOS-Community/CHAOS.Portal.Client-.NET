@@ -73,6 +73,9 @@ namespace CHAOS.Portal.Client.Standard
 		#endregion
 		#region MCM
 
+        private readonly IFileExtension _file;
+        public IFileExtension File { get { return _file; } }
+
 		private readonly IFolderExtension _folder;
 		public IFolderExtension Folder { get { return _folder; } }
 
@@ -151,6 +154,7 @@ namespace CHAOS.Portal.Client.Standard
 
 			_location = new LocationExtension(this);
 
+            _file = new FileExtension(this);
 			_folder = new FolderExtension(this);
 			_folderType = new FolderTypeExtension(this);
 			_formatType = new FormatTypeExtension(this);

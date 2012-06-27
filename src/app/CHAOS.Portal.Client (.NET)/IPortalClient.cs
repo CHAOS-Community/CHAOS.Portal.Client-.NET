@@ -56,6 +56,11 @@ namespace CHAOS.Portal.Client
 		#endregion
 		#region MCM Extension
 
+        /// <summary>
+        /// A MCM extension.
+        /// </summary>
+        IFileExtension File { get; }
+
 		/// <summary>
 		/// A MCM extension.
 		/// </summary>
