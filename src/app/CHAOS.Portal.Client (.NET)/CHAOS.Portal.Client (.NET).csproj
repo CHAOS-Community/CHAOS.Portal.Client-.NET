@@ -72,6 +72,7 @@
     <Compile Include="Extensions\IClientSettingsExtension.cs" />
     <Compile Include="Extensions\IDayStatsObjectExtension.cs" />
     <Compile Include="Extensions\IEmailPasswordExtension.cs" />
+    <Compile Include="Extensions\IFileExtension.cs" />
     <Compile Include="Extensions\IFolderExtension.cs" />
     <Compile Include="Extensions\IFolderTypeExtension.cs" />
     <Compile Include="Extensions\IFormatTypeExtension.cs" />

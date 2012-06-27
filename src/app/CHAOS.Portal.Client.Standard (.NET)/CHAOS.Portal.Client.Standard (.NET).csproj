@@ -55,6 +55,7 @@
     <Compile Include="Extension\DayStatsObjectExtension.cs" />
     <Compile Include="Extension\EmailPasswordExtension.cs" />
     <Compile Include="Extension\AExtension.cs" />
+    <Compile Include="Extension\FileExtension.cs" />
     <Compile Include="Extension\FolderExtension.cs" />
     <Compile Include="Extension\FolderTypeExtension.cs" />
     <Compile Include="Extension\FormatTypeExtension.cs" />
@@ -75,7 +76,6 @@
     <Compile Include="Extension\UserExtension.cs" />
     <Compile Include="Extension\UserSettingsExtension.cs" />
     <Compile Include="Managers\CallbackToken.cs" />
-    <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Managers\FolderManager.cs" />
     <Compile Include="Managers\ICallbackToken.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
