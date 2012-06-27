@@ -86,6 +86,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IEmailPasswordExtension.cs">
       <Link>Extensions\IEmailPasswordExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IFileExtension.cs">
+      <Link>Extensions\IFileExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IFolderExtension.cs">
       <Link>Extensions\IFolderExtension.cs</Link>
     </Compile>

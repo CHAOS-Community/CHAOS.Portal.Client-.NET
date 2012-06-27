@@ -79,6 +79,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\EmailPasswordExtension.cs">
       <Link>Extension\EmailPasswordExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\FileExtension.cs">
+      <Link>Extension\FileExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\FolderExtension.cs">
       <Link>Extension\FolderExtension.cs</Link>
     </Compile>
