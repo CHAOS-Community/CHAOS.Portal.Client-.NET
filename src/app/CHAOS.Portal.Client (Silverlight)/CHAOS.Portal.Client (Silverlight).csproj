@@ -59,14 +59,17 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\AccessPoint.cs">
       <Link>Data\MCM\AccessPoint.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\FolderPermission.cs">
-      <Link>Data\MCM\FolderPermission.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\FolderPermissions.cs">
+      <Link>Data\MCM\FolderPermissions.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Link.cs">
       <Link>Data\MCM\Link.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Permission.cs">
       <Link>Data\MCM\Permission.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Permissions.cs">
+      <Link>Data\MCM\Permissions.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Portal\ClientSettings.cs">
       <Link>Data\Portal\ClientSettings.cs</Link>
