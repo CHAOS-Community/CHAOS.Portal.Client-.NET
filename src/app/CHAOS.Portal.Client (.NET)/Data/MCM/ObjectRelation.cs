@@ -4,6 +4,11 @@ namespace CHAOS.Portal.Client.Data.MCM
 {
 	public class ObjectRelation
 	{
+		public ObjectRelation()
+		{
+			
+		}
+		
 		public ObjectRelation(Guid object1GUID, Guid object2GUID, uint objectRelationTypeID, int? sequence = null, DateTime? dateCreated = null)
 		{
 			Object1GUID = object1GUID;
