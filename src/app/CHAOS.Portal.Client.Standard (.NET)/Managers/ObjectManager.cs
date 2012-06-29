@@ -58,7 +58,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			var @object = new Object();
 
 			if(!guid.HasValue)
-				guid = new Guid();
+				guid = Guid.NewGuid();
 
 			@object.GUID = guid.Value;
 			_objects[guid.Value] = @object;
@@ -393,12 +393,14 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if (cachedObject != null && cachedObject != @object)
 				throw new Exception("Metadata belongs to another object");
 
+			var oldRevision = metadata.RevisionID;
+
 			metadata.RevisionID = metadata.RevisionID == null ? 1 : metadata.RevisionID++;
 
 			if (!@object.Metadatas.Contains(metadata))
 				@object.Metadatas.Add(metadata);
 
-			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, metadata.RevisionID, metadata.MetadataXML).Callback = (result, error, token) => a.DoIfIsNotNull(c => c(error == null)), callback);
+			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, oldRevision, metadata.MetadataXML).Callback = (result, error, token) => a.DoIfIsNotNull(c => c(error == null)), callback);
 		}
 
 		#endregion
