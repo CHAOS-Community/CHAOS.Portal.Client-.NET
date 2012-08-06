@@ -554,9 +554,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 				var newItem = newCollection.FirstOrDefault(item => comparer(olditem, item));
 
-				if (newItem == null && (keepChecker == null || !keepChecker(olditem)))
+				if(newItem == null)
 				{
-					oldCollection.RemoveAt(i--);
+					if (keepChecker != null && !keepChecker(olditem))
+						oldCollection.RemoveAt(i--);
+					
 					continue;
 				}
 
