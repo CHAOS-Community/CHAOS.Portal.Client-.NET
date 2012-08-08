@@ -50,7 +50,13 @@ namespace CHAOS.Portal.Client.Managers
 		void SaveMetadata(Object @object, Metadata metadata, Action<bool> callback = null);
 		void SaveMetadata<T>(Object @object, Metadata metadata, Action<bool, T> callback, T token);
 
+		void DeleteMetadata(Metadata metadata, Action<bool> callback = null);
+		void DeleteMetadata<T>(Metadata metadata, Action<bool, T> callback, T token);
+
 		void SendClientSideOnlyObjectToServer(Object @object, Action<bool> callback = null);
 		void SendClientSideOnlyObjectToServer<T>(Object @object, Action<bool, T> callback, T token);
+
+		bool IsClientSideOnlyObject(Object @object);
+		bool IsClientSideOnlyObject(Guid guid);
 	}
 }

@@ -404,14 +404,29 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		}
 
 		#endregion
-		#region ClientSide Only
+		#region Delete Metadata
 
-		private bool IsClientSideOnlyObject(Object @object)
+		public void DeleteMetadata<T>(Metadata metadata, Action<bool, T> callback, T token)
 		{
-			return _clientSideOnlyObjects.ContainsKey(@object);
+			DeleteMetadata(metadata, callback == null ? null : (Action<bool>)(s => callback(s, token)));
 		}
 
-		private bool IsClientSideOnlyObject(Guid guid)
+		public void DeleteMetadata(Metadata metadata, Action<bool> callback = null)
+		{
+			metadata.ValidateIsNotNull("metadata");
+
+			throw new NotImplementedException();
+		}
+
+		#endregion
+		#region ClientSide Only
+
+		public bool IsClientSideOnlyObject(Object @object)
+		{
+			return _clientSideOnlyObjects.ContainsKey(@object.ValidateIsNotNull("@object"));
+		}
+
+		public bool IsClientSideOnlyObject(Guid guid)
 		{
 			return _clientSideOnlyObjects.Keys.Any(o => o.GUID == guid);
 		}
