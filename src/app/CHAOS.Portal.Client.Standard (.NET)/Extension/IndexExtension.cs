@@ -1,4 +1,5 @@
-﻿using CHAOS.Portal.Client.Data;
+﻿using System;
+using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Indexing;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.ServiceCall;
@@ -11,9 +12,9 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public IndexExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_Portal<IndexResponse>> Search(string facet)
+		public IServiceCallState<IServiceResult_Portal<IndexResponse>> Search(string query, string facet, string sort, uint pageIndex, uint pageSize, Guid? accessPointGUID = null)
 		{
-			return CallService<IServiceResult_Portal<IndexResponse>>(HTTPMethod.GET, facet);
+			return CallService<IServiceResult_Portal<IndexResponse>>(HTTPMethod.GET, query, facet, sort, pageIndex, pageSize, accessPointGUID);
 		}
 	}
 }

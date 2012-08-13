@@ -6,6 +6,5 @@ namespace CHAOS.Portal.Client.Data.Indexing
 	{
 		public string Value { get; set; }
 		public IList<Facet> Facets { get; set; }
- 
 	}
 }
