@@ -152,6 +152,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ISubscriptionExtension.cs">
       <Link>Extensions\ISubscriptionExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IUploadExtension.cs">
+      <Link>Extensions\IUploadExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IUserExtension.cs">
       <Link>Extensions\IUserExtension.cs</Link>
     </Compile>

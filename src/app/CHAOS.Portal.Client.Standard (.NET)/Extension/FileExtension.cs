@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml.Linq;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Extensions;

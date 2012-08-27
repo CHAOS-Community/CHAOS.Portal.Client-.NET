@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.Standard.Extension;
+using CHAOS.Portal.Client.Standard.Managers;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
@@ -136,6 +137,9 @@ namespace CHAOS.Portal.Client.Standard
 		private readonly IUserSettingsExtension _userSettings;
 		public IUserSettingsExtension UserSettings { get { return _userSettings; } }
 
+		private readonly IUploadExtension _upload;
+		public IUploadExtension Upload { get { return _upload; } }
+
 		#endregion
 		#region Statistics
 
@@ -181,6 +185,7 @@ namespace CHAOS.Portal.Client.Standard
 			_subscription = new SubscriptionExtension(this);
 			_user = new UserExtension(this);
 			_userSettings = new UserSettingsExtension(this, this);
+			_upload = new UploadExtension(this);
 
 			_statsObject = new StatsObjectExtension(this);
 			_dayStatsObject = new DayStatsObjectExtension(this);

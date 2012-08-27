@@ -157,6 +157,11 @@ namespace CHAOS.Portal.Client
 		/// </summary>
 		IUserSettingsExtension UserSettings { get; }
 
+		/// <summary>
+		/// A Portal extension.
+		/// </summary>
+		IUploadExtension Upload { get; }
+
 		#endregion
 		#region Statistics Extensions
 

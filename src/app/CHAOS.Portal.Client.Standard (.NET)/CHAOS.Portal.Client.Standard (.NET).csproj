@@ -74,6 +74,7 @@
     <Compile Include="Extension\SessionExtension.cs" />
     <Compile Include="Extension\StatsObjectExtension.cs" />
     <Compile Include="Extension\SubscriptionExtension.cs" />
+    <Compile Include="Extension\UploadExtension.cs" />
     <Compile Include="Extension\UserExtension.cs" />
     <Compile Include="Extension\UserSettingsExtension.cs" />
     <Compile Include="Managers\CallbackToken.cs" />
