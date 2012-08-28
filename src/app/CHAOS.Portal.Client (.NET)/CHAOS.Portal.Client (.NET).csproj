@@ -63,6 +63,7 @@
     <Compile Include="Data\MCM\ObjectRelationType.cs" />
     <Compile Include="Data\MCM\ObjectType.cs" />
     <Compile Include="Data\MCM\Permission.cs" />
+    <Compile Include="Data\MCM\UploadToken.cs" />
     <Compile Include="Data\NoData.cs" />
     <Compile Include="Data\Portal\ClientSettings.cs" />
     <Compile Include="Data\Portal\Group.cs" />
