@@ -30,7 +30,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 		: SilverlightTest
 #endif
 	{
-		public const string SERVICE_PATH = "http://api.test.chaos-systems.com/";
+		public const string SERVICE_PATH = "";
 
 		private IPortalClient Getclient()
 		{
