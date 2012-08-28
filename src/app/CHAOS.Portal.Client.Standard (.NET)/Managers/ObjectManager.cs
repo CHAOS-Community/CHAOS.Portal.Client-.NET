@@ -590,6 +590,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			oldMetadata.DateCreated = newMetadata.DateCreated;
 			oldMetadata.DateModified = newMetadata.DateModified;
 			oldMetadata.MetadataXML = newMetadata.MetadataXML;
+			oldMetadata.EditingUserGUID = newMetadata.EditingUserGUID;
+			oldMetadata.RevisionID = newMetadata.RevisionID;
 		}
 
 		private static void UpdateFile(File oldFile, File newFile)

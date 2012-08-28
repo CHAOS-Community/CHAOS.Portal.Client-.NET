@@ -38,6 +38,17 @@ namespace CHAOS.Portal.Client.Data.MCM
 			}
 		}
 
+		private Guid _editingUserGUID;
+		public Guid EditingUserGUID
+		{
+			get { return _editingUserGUID; }
+			set
+			{
+				_editingUserGUID = value;
+				RaisePropertyChanged("EditingUserGUID");
+			}
+		}
+
 		private XElement _MetadataXML;
 		public XElement MetadataXML
 		{
