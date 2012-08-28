@@ -5,24 +5,24 @@ namespace CHAOS.Portal.Client.Data.MCM
 {
 	public class Metadata : AData
 	{
-		private string _LanguageCode;
+		private string _languageCode;
 		public string LanguageCode
 		{
-			get { return _LanguageCode; }
+			get { return _languageCode; }
 			set
 			{
-				_LanguageCode = value;
+				_languageCode = value;
 				RaisePropertyChanged("LanguageCode");
 			}
 		}
 
-		private Guid _MetadataSchemaGUID;
+		private Guid _metadataSchemaGUID;
 		public Guid MetadataSchemaGUID
 		{
-			get { return _MetadataSchemaGUID; }
+			get { return _metadataSchemaGUID; }
 			set
 			{
-				_MetadataSchemaGUID = value;
+				_metadataSchemaGUID = value;
 				RaisePropertyChanged("MetadataSchemaGUID");
 			}
 		}
@@ -49,35 +49,35 @@ namespace CHAOS.Portal.Client.Data.MCM
 			}
 		}
 
-		private XElement _MetadataXML;
+		private XElement _metadataXML;
 		public XElement MetadataXML
 		{
-			get { return _MetadataXML; }
+			get { return _metadataXML; }
 			set
 			{
-				_MetadataXML = value;
+				_metadataXML = value;
 				RaisePropertyChanged("MetadataXml");
 			}
 		}
 
-		private DateTime _DateCreated;
+		private DateTime _dateCreated;
 		public DateTime DateCreated
 		{
-			get { return _DateCreated; }
+			get { return _dateCreated; }
 			set
 			{
-				_DateCreated = value;
+				_dateCreated = value;
 				RaisePropertyChanged("DateCreated");
 			}
 		}
 
-		private DateTime _DateModified;
+		private DateTime _dateModified;
 		public DateTime DateModified
 		{
-			get { return _DateModified; }
+			get { return _dateModified; }
 			set
 			{
-				_DateModified = value;
+				_dateModified = value;
 				RaisePropertyChanged("DateModified");
 			}
 		}
