@@ -94,6 +94,16 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region Delete
 
+		public void Delete<T>(Object @object, Action<bool, T> callback, T token)
+		{
+			Delete(@object.ValidateIsNotNull("@object").GUID, callback == null ? null : (Action<bool>) (s => callback(s, token)));
+		}
+
+		public void Delete<T>(Guid objectGUID, Action<bool, T> callback, T token)
+		{
+			Delete(objectGUID, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+		}
+
 		public void Delete(Object @object, Action<bool> callback = null)
 		{
 			Delete(@object.ValidateIsNotNull("@object").GUID, callback);
@@ -101,31 +111,66 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void Delete(Guid objectGUID, Action<bool> callback = null)
 		{
-			Delete(objectGUID, callback == null ? null : (Action<bool, object>)((s, t) => callback(s)), null);
-		}
+			RemoveRelations(objectGUID);
 
-		public void Delete<T>(Object @object, Action<bool, T> callback, T token)
-		{
-			Delete(@object.ValidateIsNotNull("@object").GUID, callback, token);
-		}
-
-		public void Delete<T>(Guid objectGUID, Action<bool, T> callback, T token)
-		{
 			if (IsClientSideOnlyObject(objectGUID))
 				RemoveClientOnlyObject(_objects[objectGUID], true);
 			else
 			{
 				_client.Object.Delete(objectGUID).WithCallback((result, error, o) =>
-			                                               	{
-			                                               		if(error == null)
-			                                               		{
-			                                               			_objects.Remove(objectGUID);
-			                                               			callback(true, (T) o);
-			                                               		}
-																	callback(false, (T)o);
-																
-			                                               	}, token);
+				{
+					if (error == null)
+					{
+						_objects.Remove(objectGUID);
+						RemoveRelations(objectGUID);
+
+						if (callback != null)
+							callback(true);
+					}
+					else if (callback != null) 
+						callback(false);
+				});
 			}
+		}
+
+		private void RemoveRelations(Guid objectGUID)
+		{
+			if (_objects.ContainsKey(objectGUID))
+				RemoveRelations(_objects[objectGUID]);
+			else
+				foreach (var @object in _objects.Values.Where(@object => @object.GUID != objectGUID))
+					RemoveRelations(@object, objectGUID);
+		}
+
+		private void RemoveRelations(Object @object)
+		{
+			if (@object.ObjectRelations == null) return;
+			
+			foreach (var relation in @object.ObjectRelations)
+			{
+				var relatedObjectGUID = relation.Object1GUID == @object.GUID ? relation.Object2GUID : relation.Object1GUID;
+				
+				if (!_objects.ContainsKey(relatedObjectGUID)) continue;
+				
+				var relatedObject = _objects[relatedObjectGUID];
+
+				if (relatedObject.ObjectRelations == null) continue;
+
+				if (relatedObject.ObjectRelations.Contains(relation))
+					relatedObject.ObjectRelations.Remove(relation);
+				else
+					RemoveRelations(relatedObject, @object.GUID);
+			}
+
+			@object.ObjectRelations.Clear();
+		}
+
+		private void RemoveRelations(Object @object, Guid relatedObjectGUID)
+		{
+			if (@object.ObjectRelations == null) return;
+
+			foreach (var relation in @object.ObjectRelations.Where(r => r.Object1GUID == relatedObjectGUID || r.Object2GUID == relatedObjectGUID).ToList())
+				@object.ObjectRelations.Remove(relation);
 		}
 
 		#endregion
@@ -443,16 +488,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(deleteObject)
 			{
 				_objects.Remove(@object.GUID);
-
-				if(@object.ObjectRelations != null)
-				{
-					foreach(var relation in @object.ObjectRelations)
-					{
-						var relatedKey = relation.Object1GUID == @object.GUID ? relation.Object2GUID : relation.Object1GUID;
-						if (_objects.ContainsKey(relatedKey))
-							_objects[relatedKey].ObjectRelations.Remove(relation);
-					}
-				}
+				RemoveRelations(@object);
 			}
 		}
 
