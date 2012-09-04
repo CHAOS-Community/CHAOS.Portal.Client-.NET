@@ -68,6 +68,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\AccessPoint.cs">
       <Link>Data\MCM\AccessPoint.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\ChunkState.cs">
+      <Link>Data\MCM\ChunkState.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\FolderPermissions.cs">
       <Link>Data\MCM\FolderPermissions.cs</Link>
     </Compile>

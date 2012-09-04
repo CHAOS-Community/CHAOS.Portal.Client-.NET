@@ -48,6 +48,7 @@
     <Compile Include="Data\Indexing\IndexResponse.cs" />
     <Compile Include="Data\IServiceResult.cs" />
     <Compile Include="Data\MCM\AccessPoint.cs" />
+    <Compile Include="Data\MCM\ChunkState.cs" />
     <Compile Include="Data\MCM\File.cs" />
     <Compile Include="Data\MCM\Folder.cs" />
     <Compile Include="Data\MCM\FolderPermissions.cs" />
