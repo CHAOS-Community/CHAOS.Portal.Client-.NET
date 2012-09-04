@@ -17,18 +17,18 @@ namespace CHAOS.Portal.Client.Standard.Data
 
 	public class ModuleResult<T> : ModuleResult, IModuleResult<T>
 	{
-		private readonly IList<T> _Data;
+		private readonly IList<T> _data;
 
-		public IList<T> Data { get { return _Data; } }
+		public IList<T> Data { get { return _data; } }
 
 		public ModuleResult()
 		{
-			_Data = new List<T>();
+			_data = new List<T>();
 		}
 
 		public override void Add(object data)
 		{
-			_Data.Add((T) data);
+			_data.Add((T) data);
 		}
 	}
 }
