@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Extensions;
@@ -18,7 +17,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			return CallService<IServiceResult_MCM<UploadToken>>(HTTPMethod.GET, objectGUID, formatID, fileSize);
 		}
 
-		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Transfer(string token, uint chunkIndex, Stream fileData)
+		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Transfer(string token, uint chunkIndex, byte[] fileData)
 		{
 			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.POST, token, chunkIndex, fileData);
 		}
