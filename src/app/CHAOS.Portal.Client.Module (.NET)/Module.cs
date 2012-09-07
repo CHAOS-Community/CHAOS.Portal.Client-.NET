@@ -19,6 +19,7 @@ namespace CHAOS.Portal.Client.Module
 			Bind(typeof (IServiceResult_Portal<>)).To(typeof (ServiceResult_Portal<>));
 			Bind(typeof (IServiceResult_MCM<>)).To(typeof (ServiceResult_MCM<>));
 			Bind(typeof (IServiceResult_Statistics<>)).To(typeof (ServiceResult_Statistics<>));
+			Bind(typeof (IServiceResult_Index<>)).To(typeof (ServiceResult_Index<>));
 			
 			Bind(typeof (IServiceCall<>)).To(typeof(ServiceCall<>));
 			Bind<IServiceCallFactory>().To<ServiceCallFactory>().InSingletonScope();

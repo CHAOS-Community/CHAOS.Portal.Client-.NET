@@ -12,9 +12,9 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public IndexExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_Portal<IndexResponse>> Search(string query, string facet, string sort, uint pageIndex, uint pageSize, Guid? accessPointGUID = null)
+		public IServiceCallState<IServiceResult_Index<IndexResponse>> Search(string query, string facet, string sort, uint pageIndex, uint pageSize, Guid? accessPointGUID = null)
 		{
-			return CallService<IServiceResult_Portal<IndexResponse>>(HTTPMethod.GET, query, facet, sort, pageIndex, pageSize, accessPointGUID);
+			return CallService<IServiceResult_Index<IndexResponse>>(HTTPMethod.GET, query, facet, sort, pageIndex, pageSize, accessPointGUID);
 		}
 	}
 }

@@ -62,4 +62,15 @@ namespace CHAOS.Portal.Client.Standard.Data
 			Statistics = moduleResult;
 		}
 	}
+
+	public class ServiceResult_Index<T> : ServiceResult, IServiceResult_Index<T>
+	{
+		[Module("Index")]
+		public IModuleResult<T> Index { get; private set; }
+
+		public ServiceResult_Index(IModuleResult<T> moduleResult)
+		{
+			Index = moduleResult;
+		}
+	}
 }

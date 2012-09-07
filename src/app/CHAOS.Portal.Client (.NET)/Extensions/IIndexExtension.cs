@@ -7,6 +7,6 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IIndexExtension
 	{
-		IServiceCallState<IServiceResult_Portal<IndexResponse>> Search(string query, string facet, string sort, uint pageIndex, uint pageSize, Guid? accessPointGUID = null);
+		IServiceCallState<IServiceResult_Index<IndexResponse>> Search(string query, string facet, string sort, uint pageIndex, uint pageSize, Guid? accessPointGUID = null);
 	}
 }

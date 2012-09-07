@@ -48,6 +48,11 @@ namespace CHAOS.Portal.Client.Data
 		IModuleResult<TGeoLocator> GeoLocator { get; }
 	}
 
+	public interface IServiceResult_Index<TIndex> : IServiceResult
+	{
+		IModuleResult<TIndex> Index { get; }
+	}
+
 	public interface IServiceResult_MCM_Octopus<TMCM, TOctopus> : IServiceResult
 	{
 		IModuleResult<TMCM> MCM { get; }

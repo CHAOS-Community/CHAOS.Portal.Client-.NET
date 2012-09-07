@@ -128,13 +128,13 @@ namespace CHAOS.Portal.Client.Standard.Test
 		{
 			var client = Getclient();
 
-			IServiceResult_Portal<IndexResponse> result = null;
+			IServiceResult_Index<IndexResponse> result = null;
 
 			Func<bool> condition = () => result != null;
 
 			Action asserts = () =>
 			{
-				Assert.IsNotNull(result.Portal.Data[0]);
+				Assert.IsNotNull(result.Index.Data[0]);
 			};
 
 			client.Session.Create().Callback = (r, e, t) =>
