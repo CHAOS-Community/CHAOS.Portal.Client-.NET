@@ -7,16 +7,16 @@ namespace CHAOS.Portal.Client.Module
 {
 	public class ServiceCallFactory : IServiceCallFactory
 	{
-		private readonly IKernel _Kernel;
+		private readonly IKernel _kernel;
 
 		public ServiceCallFactory(IKernel kernel)
 		{
-			_Kernel = ArgumentUtilities.ValidateIsNotNull("kernel", kernel);
+			_kernel = ArgumentUtilities.ValidateIsNotNull("kernel", kernel);
 		}
 
 		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceResult
 		{
-			return _Kernel.Get<IServiceCall<T>>();
+			return _kernel.Get<IServiceCall<T>>();
 		}
 	}
 }
