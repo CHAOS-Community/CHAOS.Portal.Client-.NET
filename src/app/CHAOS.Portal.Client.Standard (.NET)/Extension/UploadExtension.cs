@@ -17,9 +17,9 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			return CallService<IServiceResult_MCM<UploadToken>>(HTTPMethod.GET, objectGUID, formatID, fileSize);
 		}
 
-		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Transfer(string token, uint chunkIndex, byte[] fileData)
+		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Transfer(string uploadID, uint chunkIndex, byte[] fileData)
 		{
-			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.POST, token, chunkIndex, fileData);
+			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.POST, uploadID, chunkIndex, fileData);
 		}
 	}
 }
