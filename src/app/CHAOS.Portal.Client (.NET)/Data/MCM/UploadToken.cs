@@ -5,7 +5,6 @@ namespace CHAOS.Portal.Client.Data.MCM
 	public class UploadToken
 	{
 		public uint NoOfChunks { get; set; }
-		public string Fullname { get; private set; }
 
         public string UploadID { get; set; }
         public string BucketName { get; set; }

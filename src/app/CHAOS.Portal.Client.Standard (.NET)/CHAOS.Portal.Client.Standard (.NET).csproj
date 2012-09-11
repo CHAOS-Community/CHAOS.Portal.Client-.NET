@@ -78,6 +78,8 @@
     <Compile Include="Extension\UserExtension.cs" />
     <Compile Include="Extension\UserSettingsExtension.cs" />
     <Compile Include="Managers\CallbackToken.cs" />
+    <Compile Include="Managers\Data\FileUploader.cs" />
+    <Compile Include="Managers\FileUploadManager.cs" />
     <Compile Include="Managers\FolderManager.cs" />
     <Compile Include="Managers\ICallbackToken.cs" />
     <Compile Include="Managers\LanguageManager.cs" />
@@ -101,6 +103,7 @@
       <Name>CHAOS.Portal.Client %28.NET%29</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>Copy "$(TargetPath)" "$(SolutionDir)bin\$(PlatformName)\$(TargetFileName)"</PostBuildEvent>

@@ -9,6 +9,8 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 {
 	public class FileUploader : IFileUploader
 	{
+		public event EventHandler Completed = delegate { };
+
 		private readonly IPortalClient _client;
 		private Guid _objectGUID;
 		private uint _formatID;
@@ -16,6 +18,7 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 		private double _progress;
 		private TransactionState _state;
 		private UploadToken _uploadToken;
+		private byte[] _buffer;
 
 		#region Properties
 
@@ -35,7 +38,28 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 			private set
 			{
 				_state = value;
+
+				if(_state == TransactionState.Completed || _state == TransactionState.Failed)
+				{
+					Completed(this, EventArgs.Empty);
+
+					if(_data != null)
+					{
+						_data.Close();
+						_data = null;
+					}
+				}
+
 				RaisePropertyChanged("State");
+			}
+		}
+
+		private uint ChunkIndex
+		{
+			get
+			{
+				if (_data == null || _uploadToken == null) return 0;
+				return (uint)(_data.Position / _uploadToken.ChunkSize);
 			}
 		}
 		
@@ -71,6 +95,8 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 
 			_uploadToken = result.MCM.Data[0];
 
+			_buffer = new byte[_uploadToken.ChunkSize];
+
 			UploadNextChunk();
 		}
 		
@@ -79,9 +105,26 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 
 		private void UploadNextChunk()
 		{
-			
+			var chunkIndex = ChunkIndex;
+
+			_data.Read(_buffer, 0, _buffer.Length);
+
+			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, _buffer).WithCallback(TransferCompleted).UploadProgressChanged += (sender, args) => Progress = (ChunkIndex - 1 + args.NewValue) / _uploadToken.NoOfChunks;
 		}
-		
+
+		private void TransferCompleted(IServiceResult_MCM<ScalarResult> result, Exception error, object token)
+		{
+			if (error != null)
+			{
+				State = TransactionState.Failed;
+				return;
+			}
+
+			Progress = (double)ChunkIndex /_uploadToken.NoOfChunks;
+
+			UploadNextChunk();
+		}
+
 		#endregion
 		#region PropertyChanged
 
