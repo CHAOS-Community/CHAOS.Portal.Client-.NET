@@ -2,8 +2,6 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using CHAOS.Portal.Client.Managers;
-using CHAOS.Portal.Client.Managers.Data;
-using CHAOS.Portal.Client.Standard.Managers.Data;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {

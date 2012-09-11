@@ -12,14 +12,14 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public UploadExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_MCM<UploadToken>> Initiate(Guid objectGUID, uint formatID, ulong fileSize, bool supportMultipleChunks)
+		public IServiceCallState<IServiceResult_Portal<UploadToken>> Initiate(Guid objectGUID, uint formatID, ulong fileSize, bool supportMultipleChunks)
 		{
-			return CallService<IServiceResult_MCM<UploadToken>>(HTTPMethod.GET, objectGUID, formatID, fileSize);
+			return CallService<IServiceResult_Portal<UploadToken>>(HTTPMethod.GET, objectGUID, formatID, fileSize, supportMultipleChunks);
 		}
 
-		public IServiceCallState<IServiceResult_MCM<ScalarResult>> Transfer(string uploadID, uint chunkIndex, byte[] fileData)
+		public IServiceCallState<IServiceResult_Portal<ScalarResult>> Transfer(string uploadID, uint chunkIndex, byte[] fileData)
 		{
-			return CallService<IServiceResult_MCM<ScalarResult>>(HTTPMethod.POST, uploadID, chunkIndex, fileData);
+			return CallService<IServiceResult_Portal<ScalarResult>>(HTTPMethod.POST, uploadID, chunkIndex, fileData);
 		}
 	}
 }

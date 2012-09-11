@@ -31,6 +31,8 @@ namespace CHAOS.Portal.Client.Module
 			Bind<IMCMTypesManager>().To<MCMTypesManager>().InSingletonScope();
 			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();
 			Bind<IUserManager>().To<UserManager>().InSingletonScope();
+			Bind<IFileUploader>().To<FileUploader>();
+			Bind<IFileUploadManager>().To<FileUploadManager>().InSingletonScope();
 		}
 	}
 }

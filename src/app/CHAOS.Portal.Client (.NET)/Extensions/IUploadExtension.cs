@@ -7,7 +7,7 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IUploadExtension
 	{
-		IServiceCallState<IServiceResult_MCM<UploadToken>> Initiate(Guid objectGUID, uint formatID, ulong fileSize, bool supportMultipleChunks);
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Transfer(string uploadID, uint chunkIndex, byte[] fileData);
+		IServiceCallState<IServiceResult_Portal<UploadToken>> Initiate(Guid objectGUID, uint formatID, ulong fileSize, bool supportMultipleChunks);
+		IServiceCallState<IServiceResult_Portal<ScalarResult>> Transfer(string uploadID, uint chunkIndex, byte[] fileData);
 	}
 }

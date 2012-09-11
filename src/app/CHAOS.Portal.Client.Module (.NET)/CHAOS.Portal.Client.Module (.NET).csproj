@@ -62,6 +62,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\AnyCPU\Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>

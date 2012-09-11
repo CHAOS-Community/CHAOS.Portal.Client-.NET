@@ -102,9 +102,8 @@
     <Compile Include="Extensions\IUserSettingsExtension.cs" />
     <Compile Include="IPortalClient.cs" />
     <Compile Include="Managers\ASettingsManager.cs" />
-    <Compile Include="Managers\Data\IFileUploader.cs" />
-    <Compile Include="Managers\Data\TransactionState.cs" />
     <Compile Include="Managers\IFileManager.cs" />
+    <Compile Include="Managers\IFileUploader.cs" />
     <Compile Include="Managers\IFolderManager.cs" />
     <Compile Include="Managers\ILanguageManager.cs" />
     <Compile Include="Managers\IManagerResult.cs" />
@@ -113,6 +112,7 @@
     <Compile Include="Managers\IObjectManager.cs" />
     <Compile Include="Managers\IFileUploadManager.cs" />
     <Compile Include="Managers\IUserManager.cs" />
+    <Compile Include="Managers\TransactionState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCall\IServiceCallState.cs" />
   </ItemGroup>

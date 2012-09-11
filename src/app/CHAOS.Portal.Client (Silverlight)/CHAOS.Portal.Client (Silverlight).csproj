@@ -176,6 +176,12 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFileManager.cs">
       <Link>Managers\IFileManager.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFileUploader.cs">
+      <Link>Managers\IFileUploader.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFileUploadManager.cs">
+      <Link>Managers\IFileUploadManager.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFolderManager.cs">
       <Link>Managers\IFolderManager.cs</Link>
     </Compile>
@@ -196,6 +202,12 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IUserManager.cs">
       <Link>Managers\IUserManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\TransactionState.cs">
+      <Link>Managers\TransactionState.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Properties\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\ServiceCall\IServiceCallState.cs">
       <Link>ServiceCall\IServiceCallState.cs</Link>
@@ -269,7 +281,6 @@
     <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\ScalarResult.cs">
       <Link>Data\ScalarResult.cs</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\Octopus\" />

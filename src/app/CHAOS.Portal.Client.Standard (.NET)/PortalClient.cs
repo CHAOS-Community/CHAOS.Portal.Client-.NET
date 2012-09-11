@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.Standard.Extension;
-using CHAOS.Portal.Client.Standard.Managers;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;

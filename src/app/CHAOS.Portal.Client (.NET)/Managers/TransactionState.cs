@@ -1,4 +1,4 @@
-namespace CHAOS.Portal.Client.Managers.Data
+namespace CHAOS.Portal.Client.Managers
 {
 	public enum TransactionState
 	{

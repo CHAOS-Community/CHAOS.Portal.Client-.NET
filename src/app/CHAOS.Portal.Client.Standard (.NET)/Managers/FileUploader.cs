@@ -1,13 +1,12 @@
-﻿using System;
-using System.ComponentModel;
+using System;
 using System.IO;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.MCM;
-using CHAOS.Portal.Client.Managers.Data;
+using CHAOS.Portal.Client.Managers;
 
-namespace CHAOS.Portal.Client.Standard.Managers.Data
+namespace CHAOS.Portal.Client.Standard.Managers
 {
-	public class FileUploader : IFileUploader
+	public class FileUploader : AViewModel, IFileUploader
 	{
 		public event EventHandler Completed = delegate { };
 
@@ -85,15 +84,15 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 			_client.Upload.Initiate(_objectGUID, _formatID, (ulong)_data.Length, true).Callback = InitiateCompleted;
 		}
 
-		private void InitiateCompleted(IServiceResult_MCM<UploadToken> result, Exception error, object token)
+		private void InitiateCompleted(IServiceResult_Portal<UploadToken> result, Exception error, object token)
 		{
-			if (error != null)
+			if (error != null || result.Portal.Error != null)
 			{
 				State = TransactionState.Failed;
 				return;
 			}
 
-			_uploadToken = result.MCM.Data[0];
+			_uploadToken = result.Portal.Data[0];
 
 			_buffer = new byte[_uploadToken.ChunkSize];
 
@@ -112,9 +111,9 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, _buffer).WithCallback(TransferCompleted).UploadProgressChanged += (sender, args) => Progress = (ChunkIndex - 1 + args.NewValue) / _uploadToken.NoOfChunks;
 		}
 
-		private void TransferCompleted(IServiceResult_MCM<ScalarResult> result, Exception error, object token)
+		private void TransferCompleted(IServiceResult_Portal<ScalarResult> result, Exception error, object token)
 		{
-			if (error != null)
+			if (error != null || result.Portal.Error != null)
 			{
 				State = TransactionState.Failed;
 				return;
@@ -125,15 +124,6 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 			UploadNextChunk();
 		}
 
-		#endregion
-		#region PropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged = delegate { };
-		private void RaisePropertyChanged(string propertyName)
-		{
-			PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-		
 		#endregion
 	}
 }

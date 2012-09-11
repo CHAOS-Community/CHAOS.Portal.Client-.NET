@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 
-namespace CHAOS.Portal.Client.Managers.Data
+namespace CHAOS.Portal.Client.Managers
 {
 	public interface IFileUploader : INotifyPropertyChanged
 	{
