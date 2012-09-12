@@ -28,6 +28,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			{
 				_progress = value;
 				RaisePropertyChanged("Progress");
+
+				if(Progress == 1)
+					State = TransactionState.Completed;
 			}
 		}
 
@@ -58,7 +61,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			get
 			{
 				if (_data == null || _uploadToken == null) return 0;
-				return (uint)(_data.Position / _uploadToken.ChunkSize);
+				return (uint) Math.Ceiling((double)_data.Position / _uploadToken.ChunkSize);
 			}
 		}
 		
@@ -105,6 +108,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		private void UploadNextChunk()
 		{
 			var chunkIndex = ChunkIndex;
+
+			if(chunkIndex >= _uploadToken.NoOfChunks - 1)
+				return;
 
 			_data.Read(_buffer, 0, _buffer.Length);
 
