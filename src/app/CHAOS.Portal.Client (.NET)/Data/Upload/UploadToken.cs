@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
+using CHAOS.Portal.Client.Data.MCM;
 
-namespace CHAOS.Portal.Client.Data.MCM
+namespace CHAOS.Portal.Client.Data.Upload
 {
 	public class UploadToken
 	{

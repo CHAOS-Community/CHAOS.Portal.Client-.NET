@@ -64,7 +64,6 @@
     <Compile Include="Data\MCM\ObjectRelationType.cs" />
     <Compile Include="Data\MCM\ObjectType.cs" />
     <Compile Include="Data\MCM\Permission.cs" />
-    <Compile Include="Data\MCM\UploadToken.cs" />
     <Compile Include="Data\NoData.cs" />
     <Compile Include="Data\Portal\ClientSettings.cs" />
     <Compile Include="Data\Portal\Group.cs" />
@@ -75,6 +74,7 @@
     <Compile Include="Data\Portal\UserSetting.cs" />
     <Compile Include="Data\ScalarResult.cs" />
     <Compile Include="Data\Statistics\DayStatsObject.cs" />
+    <Compile Include="Data\Upload\UploadToken.cs" />
     <Compile Include="Extensions\IClientSettingsExtension.cs" />
     <Compile Include="Extensions\IDayStatsObjectExtension.cs" />
     <Compile Include="Extensions\IEmailPasswordExtension.cs" />

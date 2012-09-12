@@ -73,4 +73,15 @@ namespace CHAOS.Portal.Client.Standard.Data
 			Index = moduleResult;
 		}
 	}
+
+	public class ServiceResult_Upload<T> : ServiceResult, IServiceResult_Upload<T>
+	{
+		[Module("Upload")]
+		public IModuleResult<T> Upload { get; private set; }
+
+		public ServiceResult_Upload(IModuleResult<T> moduleResult)
+		{
+			Upload = moduleResult;
+		}
+	}
 }

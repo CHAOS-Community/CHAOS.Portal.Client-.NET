@@ -83,14 +83,14 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Permissions.cs">
       <Link>Data\MCM\Permissions.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\UploadToken.cs">
-      <Link>Data\MCM\UploadToken.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Portal\ClientSettings.cs">
       <Link>Data\Portal\ClientSettings.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Statistics\DayStatsObject.cs">
       <Link>Data\Statistics\DayStatsObject.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Upload\UploadToken.cs">
+      <Link>Data\Upload\UploadToken.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IClientSettingsExtension.cs">
       <Link>Extensions\IClientSettingsExtension.cs</Link>

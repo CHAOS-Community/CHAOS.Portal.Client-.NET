@@ -53,6 +53,11 @@ namespace CHAOS.Portal.Client.Data
 		IModuleResult<TIndex> Index { get; }
 	}
 
+	public interface IServiceResult_Upload<TUpload> : IServiceResult
+	{
+		IModuleResult<TUpload> Upload { get; }
+	}
+
 	public interface IServiceResult_MCM_Octopus<TMCM, TOctopus> : IServiceResult
 	{
 		IModuleResult<TMCM> MCM { get; }

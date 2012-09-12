@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.Data.Upload;
 using CHAOS.Portal.Client.Managers;
 
 namespace CHAOS.Portal.Client.Standard.Managers
@@ -87,15 +87,15 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client.Upload.Initiate(_objectGUID, _formatID, (ulong)_data.Length, true).Callback = InitiateCompleted;
 		}
 
-		private void InitiateCompleted(IServiceResult_Portal<UploadToken> result, Exception error, object token)
+		private void InitiateCompleted(IServiceResult_Upload<UploadToken> result, Exception error, object token)
 		{
-			if (error != null || result.Portal.Error != null)
+			if (error != null || result.Upload.Error != null || result.Upload.Data.Count == 0)
 			{
 				State = TransactionState.Failed;
 				return;
 			}
 
-			_uploadToken = result.Portal.Data[0];
+			_uploadToken = result.Upload.Data[0];
 
 			_buffer = new byte[_uploadToken.ChunkSize];
 
@@ -117,9 +117,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, _buffer).WithCallback(TransferCompleted).UploadProgressChanged += (sender, args) => Progress = (ChunkIndex - 1 + args.NewValue) / _uploadToken.NoOfChunks;
 		}
 
-		private void TransferCompleted(IServiceResult_Portal<ScalarResult> result, Exception error, object token)
+		private void TransferCompleted(IServiceResult_Upload<ScalarResult> result, Exception error, object token)
 		{
-			if (error != null || result.Portal.Error != null)
+			if (error != null || result.Upload.Error != null)
 			{
 				State = TransactionState.Failed;
 				return;
