@@ -109,7 +109,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			var chunkIndex = ChunkIndex;
 
-			if(chunkIndex >= _uploadToken.NoOfChunks - 1)
+			if(chunkIndex > _uploadToken.NoOfChunks - 1)
 				return;
 
 			_data.Read(_buffer, 0, _buffer.Length);
