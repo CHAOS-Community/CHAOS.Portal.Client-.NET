@@ -275,7 +275,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public Object GetObjectByMetadata(Metadata metadata)
 		{
-			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas.Contains(metadata));
+			var @object = _objects.Values.FirstOrDefault(o => o.Metadatas != null && o.Metadatas.Contains(metadata));
 
 			if(@object == null)
 				throw new Exception("Object not found");
@@ -378,7 +378,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			schema.ValidateIsNotNull("schema");
 			language.ValidateIsNotNull("language");
 
-			if(@object.Metadatas.Any(m => m.MetadataSchemaGUID == schema.GUID && m.LanguageCode == language.LanguageCode))
+			if(@object.Metadatas != null && @object.Metadatas.Any(m => m.MetadataSchemaGUID == schema.GUID && m.LanguageCode == language.LanguageCode))
 				throw new Exception(string.Format("Object already have metadata with {0} language", language.LanguageCode));
 
 			return AddLanguage(@object, schema.GUID, language.LanguageCode);
@@ -392,10 +392,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				LanguageCode = languageCode
 			};
 
-			if(@object.Metadatas == null)
-				@object.Metadatas = new ObservableCollection<Metadata>();
-
-			@object.Metadatas.Add(metadata);
+			AddMetadataToObject(@object, metadata);
 
 			return metadata;
 		}
@@ -442,10 +439,18 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			metadata.RevisionID = metadata.RevisionID == null ? 1 : metadata.RevisionID++;
 
-			if (!@object.Metadatas.Contains(metadata))
-				@object.Metadatas.Add(metadata);
+			AddMetadataToObject(@object, metadata);
 
 			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, oldRevision, metadata.MetadataXML).Callback = (result, error, token) => a.DoIfIsNotNull(c => c(error == null)), callback);
+		}
+
+		private void AddMetadataToObject(Object @object, Metadata metadata)
+		{
+			if (@object.Metadatas == null)
+				@object.Metadatas = new ObservableCollection<Metadata>();
+
+			if (!@object.Metadatas.Contains(metadata))
+				@object.Metadatas.Add(metadata);
 		}
 
 		#endregion
