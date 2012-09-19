@@ -89,6 +89,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Statistics\DayStatsObject.cs">
       <Link>Data\Statistics\DayStatsObject.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Upload\FileData.cs">
+      <Link>Data\Upload\FileData.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Upload\UploadToken.cs">
       <Link>Data\Upload\UploadToken.cs</Link>
     </Compile>

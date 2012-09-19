@@ -5,6 +5,7 @@ using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Portal.Client.Standard.ServiceCall;
 using CHAOS.Web;
+using CHAOS.Web.Data;
 
 namespace CHAOS.Portal.Client.Standard.Extension
 {
@@ -17,9 +18,9 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			return CallService<IServiceResult_Upload<UploadToken>>(HTTPMethod.GET, objectGUID, formatTypeID, fileSize, supportMultipleChunks);
 		}
 
-		public IServiceCallState<IServiceResult_Upload<ScalarResult>> Transfer(string uploadID, uint chunkIndex, byte[] fileData)
+		public IServiceCallState<IServiceResult_Upload<ScalarResult>> Transfer(string uploadID, uint chunkIndex, FileData fileData)
 		{
-			return CallService<IServiceResult_Upload<ScalarResult>>(HTTPMethod.POST, uploadID, chunkIndex, fileData);
+			return CallService<IServiceResult_Upload<ScalarResult>>(HTTPMethod.POST, uploadID, chunkIndex, new FileMultipartElement(fileData.Name, fileData.Data, (int) fileData.Length));
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using CHAOS.Portal.Client.Managers;
+using CHAOS.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
@@ -20,10 +21,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_fileUploaders = new ReadOnlyObservableCollection<IFileUploader>(_innerFileUploaders); 
 		}
 
-		public IFileUploader Upload(Guid objectGUID, uint formatID, Stream data)
+		public IFileUploader Upload(Guid objectGUID, uint formatTypeID, string fileName, Stream fileData)
 		{
 			var uploader = new FileUploader(_client);
-			uploader.Initialize(objectGUID, formatID, data);
+			uploader.Initialize(objectGUID, formatTypeID, fileName.ValidateIsNotNull("fileName"), fileData.ValidateIsNotNull("fileData"));
 
 			_innerFileUploaders.Add(uploader);
 

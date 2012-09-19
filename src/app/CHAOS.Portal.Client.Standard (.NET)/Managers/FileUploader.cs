@@ -3,6 +3,7 @@ using System.IO;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Upload;
 using CHAOS.Portal.Client.Managers;
+using CHAOS.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
@@ -11,15 +12,34 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public event EventHandler Completed = delegate { };
 
 		private readonly IPortalClient _client;
-		private Guid _objectGUID;
-		private uint _formatID;
-		private Stream _data;
+		private Stream _fileData;
 		private double _progress;
 		private TransactionState _state;
 		private UploadToken _uploadToken;
-		private byte[] _buffer;
 
 		#region Properties
+
+		public TransactionState State
+		{
+			get { return _state; }
+			private set
+			{
+				_state = value;
+
+				if (_state == TransactionState.Completed || _state == TransactionState.Failed)
+				{
+					Completed(this, EventArgs.Empty);
+
+					if (_fileData != null)
+					{
+						_fileData.Close();
+						_fileData = null;
+					}
+				}
+
+				RaisePropertyChanged("State");
+			}
+		}
 
 		public double Progress
 		{
@@ -34,34 +54,17 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 		}
 
-		public TransactionState State
-		{
-			get { return _state; }
-			private set
-			{
-				_state = value;
-
-				if(_state == TransactionState.Completed || _state == TransactionState.Failed)
-				{
-					Completed(this, EventArgs.Empty);
-
-					if(_data != null)
-					{
-						_data.Close();
-						_data = null;
-					}
-				}
-
-				RaisePropertyChanged("State");
-			}
-		}
+		public Guid ObjectGUID { get; private set; }
+		public uint FormatTypeID { get; private set; }
+		public string FileName { get; private set; }
+		public ulong FileSize  { get { return (ulong) _fileData.DoIfIsNotNull(d => d.Length); } }
 
 		private uint ChunkIndex
 		{
 			get
 			{
-				if (_data == null || _uploadToken == null) return 0;
-				return (uint) Math.Ceiling((double)_data.Position / _uploadToken.ChunkSize);
+				if (_fileData == null || _uploadToken == null) return 0;
+				return (uint) Math.Ceiling((double)_fileData.Position / _uploadToken.ChunkSize);
 			}
 		}
 		
@@ -72,11 +75,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client = client;
 		}
 
-		public void Initialize(Guid objectGUID, uint formatID, Stream data)
+		public void Initialize(Guid objectGUID, uint formatTypeID, string fileName, Stream fileData)
 		{
-			_objectGUID = objectGUID;
-			_formatID = formatID;
-			_data = data;
+			ObjectGUID = objectGUID;
+			FormatTypeID = formatTypeID;
+			FileName = fileName;
+			_fileData = fileData;
 		}
 
 		#region Upload Start
@@ -84,7 +88,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public void Start()
 		{
 			State = TransactionState.Started;
-			_client.Upload.Initiate(_objectGUID, _formatID, (ulong)_data.Length, true).Callback = InitiateCompleted;
+			_client.Upload.Initiate(ObjectGUID, FormatTypeID, (ulong)_fileData.Length, true).Callback = InitiateCompleted;
 		}
 
 		private void InitiateCompleted(IServiceResult_Upload<UploadToken> result, Exception error, object token)
@@ -97,8 +101,6 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			_uploadToken = result.Upload.Data[0];
 
-			_buffer = new byte[_uploadToken.ChunkSize];
-
 			UploadNextChunk();
 		}
 		
@@ -109,12 +111,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			var chunkIndex = ChunkIndex;
 
-			if(chunkIndex > _uploadToken.NoOfChunks - 1)
+			if(State != TransactionState.Started)
 				return;
 
-			_data.Read(_buffer, 0, _buffer.Length);
-
-			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, _buffer).WithCallback(TransferCompleted).UploadProgressChanged += (sender, args) => Progress = (ChunkIndex - 1 + args.NewValue) / _uploadToken.NoOfChunks;
+			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, new FileData(FileName, _fileData, _fileData.Position, _uploadToken.ChunkSize)).WithCallback(TransferCompleted).UploadProgressChanged += (sender, args) => Progress = (ChunkIndex - 1 + args.NewValue) / _uploadToken.NoOfChunks;
 		}
 
 		private void TransferCompleted(IServiceResult_Upload<ScalarResult> result, Exception error, object token)
