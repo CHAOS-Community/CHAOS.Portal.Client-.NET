@@ -49,7 +49,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				_progress = value;
 				RaisePropertyChanged("Progress");
 
-				if(Progress == 1)
+				if(Progress == 1d)
 					State = TransactionState.Completed;
 			}
 		}
@@ -114,7 +114,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(State != TransactionState.Started)
 				return;
 
-			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, new FileData(FileName, _fileData, _fileData.Position, _uploadToken.ChunkSize)).WithCallback(TransferCompleted).UploadProgressChanged += (sender, args) => Progress = (ChunkIndex - 1 + args.NewValue) / _uploadToken.NoOfChunks;
+			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, new FileData(FileName, _fileData, _fileData.Position, _uploadToken.ChunkSize)).WithCallback(TransferCompleted).UploadProgressChanged 
+				+= (sender, args) => Progress = (ChunkIndex - 1 + Math.Min(0.99, args.NewValue)) / _uploadToken.NoOfChunks; //Math.Min() is used to prevent progress from reaching completed
 		}
 
 		private void TransferCompleted(IServiceResult_Upload<ScalarResult> result, Exception error, object token)
