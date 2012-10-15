@@ -30,7 +30,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 		: SilverlightTest
 #endif
 	{
-		public const string SERVICE_PATH = "";
+		private const string SERVICE_PATH = "";
 
 		private IPortalClient Getclient()
 		{
@@ -64,6 +64,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 			Action asserts = () =>
 			                 	{
+									Assert.AreNotEqual(0, result.Portal.Data.Count, "No session info returned");
 			                 		Assert.IsNotNull(result.Portal.Data[0]);
 			                 		Assert.IsNotNull(result.Portal.Data[0].SessionGUID);
 			                 		Assert.AreNotEqual(string.Empty, result.Portal.Data[0].SessionGUID);
@@ -76,7 +77,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 			EnqueueCallback(asserts);
 			EnqueueTestComplete();
 #else
-			Timing.WaitUntil(condition, 5000, 100,  "client.Session.Create call timed out");
+			Timing.WaitUntil(condition, 500000, 100,  "client.Session.Create call timed out");
 			asserts();
 #endif
 		}

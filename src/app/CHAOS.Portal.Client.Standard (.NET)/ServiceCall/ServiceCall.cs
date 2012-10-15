@@ -32,9 +32,6 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			ArgumentUtilities.ValidateIsNotNullOrEmpty("servicePath", servicePath);
 			ArgumentUtilities.ValidateIsNotNull("parameters", parameters);
 
-			if (method == HTTPMethod.GET)
-				parameters["_"] = DateTime.Now.Ticks;
-
 			_request.Call(servicePath, parameters, method);
 		}
 

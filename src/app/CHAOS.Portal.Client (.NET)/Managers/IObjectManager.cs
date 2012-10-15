@@ -32,8 +32,8 @@ namespace CHAOS.Portal.Client.Managers
 
 		IManagerResult<Object> GetObjectBySearch(string query, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 
-		IManagerResult<Object> GetObjectsByFolder(Folder folder, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
-		IManagerResult<Object> GetObjectsByFolder(uint folderID, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+		IManagerResult<Object> GetObjectsByFolder(Folder folder, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+		IManagerResult<Object> GetObjectsByFolder(uint folderID, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 
 		void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback = null, T token = default(T));
 		void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback = null, T token = default(T));

@@ -294,14 +294,14 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region By Folder
 
-		public IManagerResult<Object> GetObjectsByFolder(Folder folder, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
+		public IManagerResult<Object> GetObjectsByFolder(Folder folder, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			return GetObjectsByFolder(folder.ValidateIsNotNull("folder").ID, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
+			return GetObjectsByFolder(folder.ValidateIsNotNull("folder").ID, sort, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
 		}
 
-		public IManagerResult<Object> GetObjectsByFolder(uint folderID, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
+		public IManagerResult<Object> GetObjectsByFolder(uint folderID, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			return GetResult(string.Format("FolderID:{0}", folderID), null, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
+			return GetResult(string.Format("FolderID:{0}", folderID), sort, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
 		}
 
 		#endregion
