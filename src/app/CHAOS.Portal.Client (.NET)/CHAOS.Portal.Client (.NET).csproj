@@ -107,6 +107,7 @@
     <Compile Include="Managers\IFileUploader.cs" />
     <Compile Include="Managers\IFolderManager.cs" />
     <Compile Include="Managers\ILanguageManager.cs" />
+    <Compile Include="Managers\ILoadingManager.cs" />
     <Compile Include="Managers\IManagerResult.cs" />
     <Compile Include="Managers\IMCMTypesManager.cs" />
     <Compile Include="Managers\IMetadataSchemaManager.cs" />

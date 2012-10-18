@@ -191,6 +191,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\ILanguageManager.cs">
       <Link>Managers\ILanguageManager.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\ILoadingManager.cs">
+      <Link>Managers\ILoadingManager.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IManagerResult.cs">
       <Link>Managers\IManagerResult.cs</Link>
     </Compile>

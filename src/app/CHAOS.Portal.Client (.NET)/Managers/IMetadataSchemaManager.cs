@@ -1,14 +1,10 @@
-using System;
 using System.Collections.ObjectModel;
-using CHAOS.Events;
 using CHAOS.Portal.Client.Data.MCM;
 
 namespace CHAOS.Portal.Client.Managers
 {
-	public interface IMetadataSchemaManager
+	public interface IMetadataSchemaManager : ILoadingManager
 	{
-		event EventHandler<DataEventArgs<Exception>> ServiceFailed;
-
 		ObservableCollection<MetadataSchema> MetadataSchemas { get; }
 	}
 }

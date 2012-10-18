@@ -5,10 +5,8 @@ using CHAOS.Portal.Client.Data.MCM;
 
 namespace CHAOS.Portal.Client.Managers
 {
-	public interface ILanguageManager
+	public interface ILanguageManager : ILoadingManager
 	{
-		event EventHandler<DataEventArgs<Exception>> ServiceFailed;
-
 		ObservableCollection<Language> Languages { get; }
 	}
 }

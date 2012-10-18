@@ -10,32 +10,33 @@ namespace CHAOS.Portal.Client.Standard.Managers
 	public class MetadataSchemaManager : IMetadataSchemaManager
 	{
 		public event EventHandler<DataEventArgs<Exception>> ServiceFailed = delegate { };
+		public event EventHandler Loaded = delegate { };
 
-		private readonly IPortalClient _Client;
+		private readonly IPortalClient _client;
 
-		private readonly ObservableCollection<MetadataSchema> _MetadataSchemas;
-		public ObservableCollection<MetadataSchema> MetadataSchemas { get { return _MetadataSchemas; } }
+		private readonly ObservableCollection<MetadataSchema> _metadataSchemas;
+		public ObservableCollection<MetadataSchema> MetadataSchemas { get { return _metadataSchemas; } }
 
 		public MetadataSchemaManager(IPortalClient client)
 		{
-			_Client = client;
-			_MetadataSchemas = new ObservableCollection<MetadataSchema>();
+			_client = client;
+			_metadataSchemas = new ObservableCollection<MetadataSchema>();
 
-			if (_Client.HasSession)
+			if (_client.HasSession)
 				GetSchemas();
 			else
-				_Client.SessionAcquired += ClientSessionAquired;
+				_client.SessionAcquired += ClientSessionAquired;
 		}
 
 		private void ClientSessionAquired(object sender, EventArgs e)
 		{
-			_Client.SessionAcquired -= ClientSessionAquired;
+			_client.SessionAcquired -= ClientSessionAquired;
 			GetSchemas();
 		}
 
 		private void GetSchemas()
 		{
-			_Client.MetadataSchema.Get(null).Callback = ClientMetadataSchemaGetcompleted;
+			_client.MetadataSchema.Get(null).Callback = ClientMetadataSchemaGetcompleted;
 		}
 
 		private void ClientMetadataSchemaGetcompleted(IServiceResult_MCM<MetadataSchema> result, Exception error, object token)
@@ -47,7 +48,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 
 			foreach (var schema in result.MCM.Data)
-				_MetadataSchemas.Add(schema);
+				_metadataSchemas.Add(schema);
+
+			Loaded(this, EventArgs.Empty);
 		}
 	}
 }

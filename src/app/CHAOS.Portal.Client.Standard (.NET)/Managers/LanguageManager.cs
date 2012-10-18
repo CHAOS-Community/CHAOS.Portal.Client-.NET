@@ -10,6 +10,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 	public class LanguageManager : ILanguageManager
 	{
 		public event EventHandler<DataEventArgs<Exception>> ServiceFailed = delegate { };
+		public event EventHandler Loaded = delegate { };
 
 		private readonly IPortalClient _client;
 
@@ -48,6 +49,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			foreach (var language in result.MCM.Data)
 				_languages.Add(language);
+
+			Loaded(this, EventArgs.Empty);
 		}
 	}
 }
