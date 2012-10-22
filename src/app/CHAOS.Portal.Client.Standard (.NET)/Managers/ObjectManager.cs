@@ -307,32 +307,117 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region Link
 
-		public void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback = null, T token = default(T))
+		public void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback, T token)
 		{
-			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID, callback, token);
+			MoveLinkToFolder(@object, fromFolder, toFolder, r => callback(r, token));
 		}
 
-		public void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback = null, T token = default(T))
+		public void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder, Action<bool> callback = null)
+		{
+			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID, callback);
+		}
+
+		public void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback, T token)
+		{
+			MoveLinkToFolder(objectGUID, fromFolderID, toFolderID, r => callback(r, token));
+		}
+
+		public void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null)
 		{
 			_client.Link.Update(objectGUID, fromFolderID, toFolderID).Callback = (result, error, t) =>
-			                                                                    {
-			                                                                        if (callback != null)
-			                                                                            callback(error == null, token);
-			                                                                    };
+			{
+				if (callback != null)
+					callback(error == null);
+			};
 		}
 
-		public void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback = null, T token = default(T))
+		
+		public void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token)
 		{
-			CreateLinkInFolder(@object.GUID, folder.ID, callback, token);
+			CreateLinkInFolder(@object, folder, r => callback(r, token));
 		}
 
-		public void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback = null, T token = default(T))
+		public void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback)
+		{
+			CreateLinkInFolder(@object.GUID, folder.ID, callback);
+		}
+
+		public void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token)
+		{
+			CreateLinkInFolder(objectGUID, folderID, r => callback(r, token));
+		}
+
+		public void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback)
 		{
 			_client.Link.Create(objectGUID, folderID).Callback = (result, error, t) =>
-																{
-																	if (callback != null)
-																		callback(error == null, token);
-																};
+			{
+				if (callback != null)
+					callback(error == null);
+			};
+		}
+
+
+		public void DeleteLinkFromFolder(Object @object, Folder folder, Action<bool> callback)
+		{
+			DeleteLinkFromFolder(@object.GUID, folder.ID, callback);
+		}
+
+		public void DeleteLinkFromFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token)
+		{
+			DeleteLinkFromFolder(@object, folder, r => callback(r, token));
+		}
+
+		public void DeleteLinkFromFolder(Guid objectGUID, uint folderID, Action<bool> callback)
+		{
+			_client.Link.Delete(objectGUID, folderID).Callback = (result, error, t) =>
+			{
+				if (callback != null)
+					callback(error == null);
+			};
+		}
+
+		public void DeleteLinkFromFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token)
+		{
+			DeleteLinkFromFolder(objectGUID, folderID, r => callback(r, token));
+		}
+
+		public void DeleteLinksFromFolder(IEnumerable<Object> objects, Folder folder, Action<bool> callback)
+		{
+			DeleteLinksFromFolder(objects.Select(o => o.GUID), folder.ID, callback);
+		}
+
+		public void DeleteLinksFromFolder<T>(IEnumerable<Object> objects, Folder folder, Action<bool, T> callback, T token)
+		{
+			DeleteLinksFromFolder(objects, folder, r => callback(r, token));
+		}
+
+		public void DeleteLinksFromFolder(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool> callback)
+		{
+			var allCallsSucceeded = true;
+			var allCallsStarted = false;
+			var activeCalls = 0;
+
+
+			foreach (var objectGuiD in objectGUIDs)
+			{
+				activeCalls++;
+				DeleteLinkFromFolder(objectGuiD, folderID, r =>
+					                                           {
+																   if (!r)
+																	   allCallsSucceeded = false;
+
+																   if (--activeCalls == 0 && allCallsStarted)
+																	   callback(allCallsSucceeded);
+					                                           });
+				
+			}
+
+			allCallsStarted = true;
+		}
+
+		public void DeleteLinksFromFolder<T>(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool, T> callback, T token)
+		{
+			DeleteLinksFromFolder(objectGUIDs, folderID, r => callback(r, token));
 		}
 
 		#endregion

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Xml.Linq;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data.MCM;
@@ -35,11 +36,25 @@ namespace CHAOS.Portal.Client.Managers
 		IManagerResult<Object> GetObjectsByFolder(Folder folder, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 		IManagerResult<Object> GetObjectsByFolder(uint folderID, string sort, uint pageSize, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 
-		void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback = null, T token = default(T));
-		void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback = null, T token = default(T));
+		void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder, Action<bool> callback = null);
+		void MoveLinkToFolder<T>(Object @object, Folder fromFolder, Folder toFolder, Action<bool, T> callback, T token);
+		void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null);
+		void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback, T token);
 
-		void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback = null, T token = default(T));
-		void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback = null, T token = default(T));
+		void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback);
+		void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token);
+		void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback);
+		void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token);
+
+		void DeleteLinkFromFolder(Object @object, Folder folder, Action<bool> callback);
+		void DeleteLinkFromFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token);
+		void DeleteLinkFromFolder(Guid objectGUID, uint folderID, Action<bool> callback);
+		void DeleteLinkFromFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token);
+
+		void DeleteLinksFromFolder(IEnumerable<Object> objects, Folder folder, Action<bool> callback);
+		void DeleteLinksFromFolder<T>(IEnumerable<Object> objects, Folder folder, Action<bool, T> callback, T token);
+		void DeleteLinksFromFolder(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool> callback);
+		void DeleteLinksFromFolder<T>(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool, T> callback, T token);
 
 		Metadata AddLanguage(Object @object, MetadataSchema schema, Language language);
 		Metadata AddLanguage(Object @object, Guid schemaID, string languageCode);
