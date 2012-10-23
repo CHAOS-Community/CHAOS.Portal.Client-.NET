@@ -41,19 +41,19 @@ namespace CHAOS.Portal.Client.Managers
 		void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null);
 		void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback, T token);
 
-		void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback);
+		void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback = null);
 		void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token);
-		void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback);
+		void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback = null);
 		void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token);
 
-		void DeleteLinkFromFolder(Object @object, Folder folder, Action<bool> callback);
+		void DeleteLinkFromFolder(Object @object, Folder folder, Action<bool> callback = null);
 		void DeleteLinkFromFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token);
-		void DeleteLinkFromFolder(Guid objectGUID, uint folderID, Action<bool> callback);
+		void DeleteLinkFromFolder(Guid objectGUID, uint folderID, Action<bool> callback = null);
 		void DeleteLinkFromFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token);
 
-		void DeleteLinksFromFolder(IEnumerable<Object> objects, Folder folder, Action<bool> callback);
+		void DeleteLinksFromFolder(IEnumerable<Object> objects, Folder folder, Action<bool> callback = null);
 		void DeleteLinksFromFolder<T>(IEnumerable<Object> objects, Folder folder, Action<bool, T> callback, T token);
-		void DeleteLinksFromFolder(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool> callback);
+		void DeleteLinksFromFolder(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool> callback = null);
 		void DeleteLinksFromFolder<T>(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool, T> callback, T token);
 
 		Metadata AddLanguage(Object @object, MetadataSchema schema, Language language);
