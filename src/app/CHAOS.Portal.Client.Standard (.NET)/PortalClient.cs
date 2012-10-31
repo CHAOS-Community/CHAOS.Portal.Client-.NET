@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.Standard.Extension;
 using CHAOS.Utilities;
@@ -35,6 +36,9 @@ namespace CHAOS.Portal.Client.Standard
 			get { return _servicePath; }
 			set
 			{
+				if(new Regex("/v\\d+(?:/|$)").IsMatch(value))
+					throw new Exception("Protocol version should not be part of service path");
+
 				if(value != null && value.EndsWith("/"))
 					_servicePath = value.Substring(0, value.Length - 1);
 				else
@@ -63,6 +67,8 @@ namespace CHAOS.Portal.Client.Standard
 					ClientGUIDSet(this, EventArgs.Empty);
 			}
 		}
+
+		public uint ProtocolVersion { get { return PROTOCOL_VERSION; } }
 
 		#region Extensions
 		#region GeoLocator
@@ -194,6 +200,8 @@ namespace CHAOS.Portal.Client.Standard
 			_session.SessionChanged += SessionOnSessionChanged;
 		}
 
+		
+
 		public void UseExistingSession(Guid guid)
 		{
 			_session.Session = new Session { SessionGUID = guid };
@@ -231,7 +239,7 @@ namespace CHAOS.Portal.Client.Standard
 			
 			var call = _serviceCallFactory.GetServiceCall<T>();
 
-			call.Call(string.Format("{0}/{1}/{2}", ServicePath, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
+			call.Call(string.Format("{0}/v{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
 
 			return call.State;
 		}

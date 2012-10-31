@@ -44,6 +44,15 @@ namespace CHAOS.Portal.Client
 		/// </summary>
 		Guid? ClientGUID { get; set; }
 
+		/// <summary>
+		/// Gets the protocol version used by the client
+		/// </summary>
+		uint ProtocolVersion { get; }
+
+		/// <summary>
+		/// Gives the client a session GUID to use
+		/// </summary>
+		/// <param name="guid">A valid session GUID</param>
 		void UseExistingSession(Guid guid);
 
 		#region GeoLocator Extensions
