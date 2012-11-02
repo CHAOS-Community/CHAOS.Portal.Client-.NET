@@ -105,7 +105,6 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 #else
 			action(); //TODO: Find alternative to dispatcher
 #endif
-
 		}
 
 		public void ReportResult(T result, Exception error)

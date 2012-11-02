@@ -145,6 +145,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\UserSettingsExtension.cs">
       <Link>Extension\UserSettingsExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\AManager.cs">
+      <Link>Managers\AManager.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\AViewModel.cs">
       <Link>Managers\AViewModel.cs</Link>
     </Compile>

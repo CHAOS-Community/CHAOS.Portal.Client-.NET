@@ -11,43 +11,43 @@ namespace CHAOS.Portal.Client.Standard.Managers
 	{
 		public event EventHandler<DataEventArgs<Exception>> ServiceFailed = delegate { };
 		
-		private readonly IPortalClient _Client;
-		private readonly ObservableCollection<FolderType> _FolderTypes;
-		private readonly ObservableCollection<FormatType> _FormatTypes;
-		private readonly ObservableCollection<ObjectRelationType> _ObjectRelationTypes;
-		private readonly ObservableCollection<ObjectType> _ObjectTypes;
+		private readonly IPortalClient _client;
+		private readonly ObservableCollection<FolderType> _folderTypes;
+		private readonly ObservableCollection<FormatType> _formatTypes;
+		private readonly ObservableCollection<ObjectRelationType> _objectRelationTypes;
+		private readonly ObservableCollection<ObjectType> _objectTypes;
 
-		public ObservableCollection<FolderType> FolderTypes						{ get { return _FolderTypes; } }
-		public ObservableCollection<FormatType> FormatTypes						{ get { return _FormatTypes; } }
-		public ObservableCollection<ObjectRelationType> ObjectRelationTypes		{ get { return _ObjectRelationTypes; } }
-		public ObservableCollection<ObjectType> ObjectTypes						{ get { return _ObjectTypes; } }
+		public ObservableCollection<FolderType> FolderTypes						{ get { return _folderTypes; } }
+		public ObservableCollection<FormatType> FormatTypes						{ get { return _formatTypes; } }
+		public ObservableCollection<ObjectRelationType> ObjectRelationTypes		{ get { return _objectRelationTypes; } }
+		public ObservableCollection<ObjectType> ObjectTypes						{ get { return _objectTypes; } }
 
 		public MCMTypesManager(IPortalClient client)
 		{
-			_Client = client;
-			_FolderTypes = new ObservableCollection<FolderType>();
-			_FormatTypes = new ObservableCollection<FormatType>();
-			_ObjectRelationTypes = new ObservableCollection<ObjectRelationType>();
-			_ObjectTypes = new ObservableCollection<ObjectType>();
+			_client = client;
+			_folderTypes = new ObservableCollection<FolderType>();
+			_formatTypes = new ObservableCollection<FormatType>();
+			_objectRelationTypes = new ObservableCollection<ObjectRelationType>();
+			_objectTypes = new ObservableCollection<ObjectType>();
 
-			if (_Client.HasSession)
+			if (_client.HasSession)
 				GetTypes();
 			else
-				_Client.SessionAcquired += ClientSessionAquired;
+				_client.SessionAcquired += ClientSessionAquired;
 		}
 
 		private void ClientSessionAquired(object sender, EventArgs e)
 		{
-			_Client.SessionAcquired -= ClientSessionAquired;
+			_client.SessionAcquired -= ClientSessionAquired;
 			GetTypes();
 		}
 
 		private void GetTypes()
 		{
-			_Client.FolderType.Get(null, null).Callback = ClientFolderTypeGet;
-			_Client.FormatType.Get(null, null).Callback = ClientFormatTypeGet;
-			_Client.ObjectRelationType.Get(null, null).Callback = ClientObjectRelationTypeGet;
-			_Client.ObjectType.Get(null, null).Callback = ClientObjectTypeGet;
+			_client.FolderType.Get(null, null).Callback = ClientFolderTypeGet;
+			_client.FormatType.Get(null, null).Callback = ClientFormatTypeGet;
+			_client.ObjectRelationType.Get(null, null).Callback = ClientObjectRelationTypeGet;
+			_client.ObjectType.Get(null, null).Callback = ClientObjectTypeGet;
 		}
 
 		private void ClientFolderTypeGet(IServiceResult_MCM<FolderType> result, Exception error, object token)
@@ -59,7 +59,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 
 			foreach (var folderType in result.MCM.Data)
-				_FolderTypes.Add(folderType);
+				_folderTypes.Add(folderType);
 		}
 
 		private void ClientFormatTypeGet(IServiceResult_MCM<FormatType> result, Exception error, object token)
@@ -71,7 +71,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 
 			foreach (var formatType in result.MCM.Data)
-				_FormatTypes.Add(formatType);
+				_formatTypes.Add(formatType);
 		}
 
 		private void ClientObjectRelationTypeGet(IServiceResult_MCM<ObjectRelationType> result, Exception error, object token)
@@ -83,7 +83,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 
 			foreach (var objectRelationType in result.MCM.Data)
-				_ObjectRelationTypes.Add(objectRelationType);
+				_objectRelationTypes.Add(objectRelationType);
 		}
 
 		private void ClientObjectTypeGet(IServiceResult_MCM<ObjectType> result, Exception error, object token)
@@ -95,7 +95,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 
 			foreach (var objectType in result.MCM.Data)
-				_ObjectTypes.Add(objectType);
+				_objectTypes.Add(objectType);
 		}
 	}
 }

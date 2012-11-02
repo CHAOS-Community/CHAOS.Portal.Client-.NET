@@ -7,7 +7,7 @@ using CHAOS.Portal.Client.Managers;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
-	public class MetadataSchemaManager : IMetadataSchemaManager
+	public class MetadataSchemaManager : AManager, IMetadataSchemaManager
 	{
 		public event EventHandler<DataEventArgs<Exception>> ServiceFailed = delegate { };
 		public event EventHandler Loaded = delegate { };
@@ -47,8 +47,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			foreach (var schema in result.MCM.Data)
-				_metadataSchemas.Add(schema);
+			UpdatePublicProperty(() =>
+				                     {
+										 foreach (var schema in result.MCM.Data)
+											 _metadataSchemas.Add(schema);
+				                     });
 
 			Loaded(this, EventArgs.Empty);
 		}

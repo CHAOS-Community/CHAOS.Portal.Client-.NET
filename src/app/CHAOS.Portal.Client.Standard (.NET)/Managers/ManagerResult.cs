@@ -8,17 +8,17 @@ namespace CHAOS.Portal.Client.Standard.Managers
 {
 	public class ManagerResult<T> : ObservableCollection<T>, IManagerResult<T>
 	{
-		private readonly Action<uint, ManagerResult<T>> _ResultsGetter;
+		private readonly Action<uint, ManagerResult<T>> _resultsGetter;
 
-		private readonly object _SyncObject;
+		private readonly object _syncObject;
 
-		private uint _TotalCount;
+		private uint _totalCount;
 		public uint TotalCount
 		{
-			get { return _TotalCount; }
+			get { return _totalCount; }
 			set
 			{
-				_TotalCount = value;
+				_totalCount = value;
 				RaisePropertyChanged("TotalCount");
 			}
 		}
@@ -29,18 +29,18 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public ManagerResult(uint pageSize, Action<uint, ManagerResult<T>> resultsGetter)
 		{
 			_PageSize = pageSize;
-			_ResultsGetter = resultsGetter;
-			_SyncObject = new object();
+			_resultsGetter = resultsGetter;
+			_syncObject = new object();
 		}
 
 		public bool GetNextPage()
 		{
-			lock (_SyncObject)
+			lock (_syncObject)
 			{
 				if (TotalCount != 0 && _NextPageIndex * _PageSize >= TotalCount)
 					return false;
 
-				_ResultsGetter(_NextPageIndex++, this);
+				_resultsGetter(_NextPageIndex++, this);
 
 				return true;
 			}
@@ -48,7 +48,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void AddResult(uint pageIndex, IList<T> result)
 		{
-			lock (_SyncObject)
+			lock (_syncObject)
 			{
 				var startIndex = Math.Min(pageIndex * _PageSize, Count);
 
