@@ -51,9 +51,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				                     {
 										 foreach (var schema in result.MCM.Data)
 											 _metadataSchemas.Add(schema);
-				                     });
 
-			Loaded(this, EventArgs.Empty);
+										 Loaded(this, EventArgs.Empty);
+				                     });
 		}
 	}
 }
