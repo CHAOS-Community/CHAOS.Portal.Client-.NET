@@ -42,7 +42,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 					throw new InvalidOperationException("Guid must be set on IPortalClient or method call");
 			}
 
-			return CallService<IServiceResult_Portal<UserSetting>>(HTTPMethod.POST, clientGUID, settings);
+			return CallService<IServiceResult_Portal<UserSetting>>(HTTPMethod.POST, settings, clientGUID);
 		}
 
 		public IServiceCallState<IServiceResult_Portal<UserSetting>> Delete(Guid? clientGUID)

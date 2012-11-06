@@ -17,10 +17,9 @@ namespace CHAOS.Portal.Client.Managers
 		private readonly IDictionary<string, object> _settingValues;
 		private readonly IDictionary<string, object> _settingDefaultValues;
 		
-		private readonly HashSet<string> _changedProperties;
 		private bool? _serviceHadSettings;
 		private bool _shouldSaveAfterGet;
-		private bool _lockSettings;
+		private bool _isApplyingSettings;
 
 		protected IPortalClient PortalClient { get { return _portalClient; } }
 		
@@ -30,7 +29,6 @@ namespace CHAOS.Portal.Client.Managers
 			_updateGuard = new RepeatTaskConcater(SetSettings) { WaitTime = 5000 };
 			_settingValues = new Dictionary<string, object>();
 			_settingDefaultValues = new Dictionary<string, object>();
-			_changedProperties = new HashSet<string>();
 
 			GetSettingsWhenReady();
 		}
@@ -39,10 +37,11 @@ namespace CHAOS.Portal.Client.Managers
 
 		protected void SetSetting<T>(string name, T value)
 		{
-			if (_lockSettings && _changedProperties.Contains(name)) return;
-			if (!_changedProperties.Contains(name)) _changedProperties.Add(name);
 			_settingValues[name] = value;
-			_updateGuard.Execute();
+
+			if (!_isApplyingSettings)
+				_updateGuard.Execute();
+			
 			RaisePropertyChanged(name);
 		}
 
@@ -107,14 +106,12 @@ namespace CHAOS.Portal.Client.Managers
 			{
 				_serviceHadSettings = true;
 
-				_lockSettings = true;
+				_isApplyingSettings = true;
 
 				ApplySettings(settings[0]);
 
-				_lockSettings = false;
+				_isApplyingSettings = false;
 			}
-
-			_changedProperties.Clear();
 
 			if (_shouldSaveAfterGet)
 				_updateGuard.Execute();
