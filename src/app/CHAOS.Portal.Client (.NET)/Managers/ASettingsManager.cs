@@ -67,6 +67,11 @@ namespace CHAOS.Portal.Client.Managers
 
 		protected abstract void GetSettingsFromService();
 		protected abstract void ApplySettings(TSettings settings);
+		
+		protected virtual void NoSettingsExist()
+		{
+			
+		}
 
 		private void GetSettingsWhenReady()
 		{
@@ -101,6 +106,7 @@ namespace CHAOS.Portal.Client.Managers
 			if (settings.Count == 0)
 			{
 				_serviceHadSettings = false;
+				NoSettingsExist();
 			}
 			else
 			{
@@ -108,7 +114,14 @@ namespace CHAOS.Portal.Client.Managers
 
 				_isApplyingSettings = true;
 
-				ApplySettings(settings[0]);
+				try
+				{
+					ApplySettings(settings[0]);
+				}
+				catch(Exception error)
+				{
+					ReportError(error);
+				}
 
 				_isApplyingSettings = false;
 			}
