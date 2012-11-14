@@ -91,6 +91,9 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\FolderExtensionTest.cs">
+      <Link>Portal\Client\Standard\FolderExtensionTest.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\PortalClientTest.cs">
       <Link>Portal\Client\Standard\PortalClientTest.cs</Link>
     </Compile>

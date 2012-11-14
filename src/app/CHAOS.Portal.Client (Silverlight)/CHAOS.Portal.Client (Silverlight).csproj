@@ -71,14 +71,14 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\ChunkState.cs">
       <Link>Data\MCM\ChunkState.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\EntityPermission.cs">
+      <Link>Data\MCM\EntityPermission.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\FolderPermissions.cs">
       <Link>Data\MCM\FolderPermissions.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Link.cs">
       <Link>Data\MCM\Link.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Permission.cs">
-      <Link>Data\MCM\Permission.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Permissions.cs">
       <Link>Data\MCM\Permissions.cs</Link>

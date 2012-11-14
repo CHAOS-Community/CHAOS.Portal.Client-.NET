@@ -4,7 +4,7 @@ namespace CHAOS.Portal.Client.Data.MCM
 {
 	public class Permissions<T>
 	{
-		public uint AccumulatedPermission { get; set; }
-		public IList<Permission<T>> PermissionDetails { get; set; }
+		public IList<EntityPermission<T>> UserPermissions { get; set; }
+		public IList<EntityPermission<T>> GroupPermissions { get; set; }
 	}
 }

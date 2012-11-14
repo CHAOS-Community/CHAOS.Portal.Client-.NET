@@ -31,8 +31,11 @@ namespace CHAOS.Portal.Client.Standard.Test
 #endif
 	{
 		private const string SERVICE_PATH = "";
+		private const string LOGIN_EMAIL = "";
+		private const string LOGIN_PASSWORD = "";
+		public const uint CALL_TIMEOUT = uint.MaxValue;
 
-		private IPortalClient Getclient()
+		public static IPortalClient Getclient(bool createSession = false, bool login = false)
 		{
 			var kernel = new StandardKernel();
 
@@ -45,6 +48,36 @@ namespace CHAOS.Portal.Client.Standard.Test
 			var client = kernel.Get<IPortalClient>();
 
 			client.ServicePath = SERVICE_PATH;
+
+			if (createSession)
+				CreateSession(client);
+
+			if (login)
+				Login(client);
+
+			return client;
+		}
+
+		public static IPortalClient CreateSession(IPortalClient client)
+		{
+			var state = client.Session.Create().Synchronous(CALL_TIMEOUT);
+
+			if (state.Error != null)
+				throw state.Error;
+			if (state.Result.Portal.Error != null)
+				throw state.Result.Portal.Error;
+
+			return client;
+		}
+
+		public static IPortalClient Login(IPortalClient client)
+		{
+			var state = client.EmailPassword.Login(LOGIN_EMAIL, LOGIN_PASSWORD).Synchronous(CALL_TIMEOUT);
+
+			if (state.Error != null)
+				throw state.Error;
+			if (state.Result.EmailPassword.Error != null)
+				throw state.Result.EmailPassword.Error;
 
 			return client;
 		}

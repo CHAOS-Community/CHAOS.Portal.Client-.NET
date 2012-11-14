@@ -200,8 +200,6 @@ namespace CHAOS.Portal.Client.Standard
 			_session.SessionChanged += SessionOnSessionChanged;
 		}
 
-		
-
 		public void UseExistingSession(Guid guid)
 		{
 			_session.Session = new Session { SessionGUID = guid };
@@ -239,7 +237,7 @@ namespace CHAOS.Portal.Client.Standard
 			
 			var call = _serviceCallFactory.GetServiceCall<T>();
 
-			call.Call(string.Format("{0}/v{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
+			call.Call(string.Format("{0}/{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
 
 			return call.State;
 		}
