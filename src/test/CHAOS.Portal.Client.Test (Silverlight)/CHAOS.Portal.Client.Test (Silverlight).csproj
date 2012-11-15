@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0FFA1D9E-B1C4-4431-A633-44A97E611148}</ProjectGuid>
+    <ProjectGuid>{1D46E6DF-FD18-476F-80D0-D38D9FB0AD6A}</ProjectGuid>
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CHAOS.Test</RootNamespace>
-    <AssemblyName>CHAOS.Test</AssemblyName>
+    <RootNamespace>CHAOS.Portal.Client.Test</RootNamespace>
+    <AssemblyName>CHAOS.Portal.Client.Test</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -19,10 +19,10 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>CHAOS.Test.xap</XapFilename>
+    <XapFilename>CHAOS.Portal.Client.Test.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>CHAOS.Test.App</SilverlightAppEntry>
-    <TestPageFileName>CHAOS.TestTestPage.html</TestPageFileName>
+    <SilverlightAppEntry>CHAOS.Portal.Client.Test.App</SilverlightAppEntry>
+    <TestPageFileName>CHAOS.Portal.Client.Test__Silverlight_TestPage.html</TestPageFileName>
     <CreateTestPage>true</CreateTestPage>
     <ValidateXaml>true</ValidateXaml>
     <EnableOutOfBrowser>false</EnableOutOfBrowser>
@@ -84,7 +84,9 @@
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Core">
+      <HintPath>$(TargetFrameworkDirectory)System.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
@@ -92,49 +94,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\EmailPasswordExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\EmailPasswordExtensionTest.cs</Link>
+      <Link>Standard\Extensions\EmailPasswordExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\FolderExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\FolderExtensionTest.cs</Link>
+      <Link>Standard\Extensions\FolderExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\FolderTypeExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\FolderTypeExtensionTest.cs</Link>
+      <Link>Standard\Extensions\FolderTypeExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\FormatTypeExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\FormatTypeExtensionTest.cs</Link>
+      <Link>Standard\Extensions\FormatTypeExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\GroupExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\GroupExtensionTest.cs</Link>
+      <Link>Standard\Extensions\GroupExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\IndexExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\IndexExtensionTest.cs</Link>
+      <Link>Standard\Extensions\IndexExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\LanguageExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\LanguageExtensionTest.cs</Link>
+      <Link>Standard\Extensions\LanguageExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\MetadataSchemaExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\MetadataSchemaExtensionTest.cs</Link>
+      <Link>Standard\Extensions\MetadataSchemaExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\ObjectExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\ObjectExtensionTest.cs</Link>
+      <Link>Standard\Extensions\ObjectExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\ObjectRelationTypeExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\ObjectRelationTypeExtensionTest.cs</Link>
+      <Link>Standard\Extensions\ObjectRelationTypeExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\ObjectTypeExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\ObjectTypeExtensionTest.cs</Link>
+      <Link>Standard\Extensions\ObjectTypeExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\SessionExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\SessionExtensionTest.cs</Link>
+      <Link>Standard\Extensions\SessionExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\UserExtensionTest.cs">
-      <Link>Portal\Client\Standard\Extensions\UserExtensionTest.cs</Link>
+      <Link>Standard\Extensions\UserExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\PortalClientTest.cs">
-      <Link>Portal\Client\Standard\PortalClientTest.cs</Link>
+      <Link>Standard\PortalClientTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\PortalClientTestHelper.cs">
-      <Link>Portal\Client\Standard\PortalClientTestHelper.cs</Link>
+      <Link>Standard\PortalClientTestHelper.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -164,7 +166,6 @@
       <Name>CHAOS.Portal.Client.Standard %28Silverlight%29</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

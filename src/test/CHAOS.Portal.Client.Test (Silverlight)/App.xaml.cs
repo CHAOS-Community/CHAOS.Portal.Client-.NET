@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Browser;
 using Microsoft.Silverlight.Testing;
 
-namespace CHAOS.Test
+namespace CHAOS.Portal.Client.Test
 {
 	public partial class App : Application
 	{
