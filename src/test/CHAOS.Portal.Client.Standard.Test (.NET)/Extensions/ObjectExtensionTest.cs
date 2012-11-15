@@ -1,9 +1,8 @@
-using NUnit.Framework;
 #if SILVERLIGHT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
-
+using NUnit.Framework;
 #endif
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions

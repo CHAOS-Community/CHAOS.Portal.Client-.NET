@@ -2,14 +2,15 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
-using System.Linq;
 using NUnit.Framework;
 #endif
+
+using System.Linq;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
+	[TestClass, Tag("Object")]
 #else
 	[TestFixture]
 #endif

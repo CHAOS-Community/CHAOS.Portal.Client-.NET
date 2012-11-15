@@ -4,7 +4,7 @@ using System.Windows;
 using System.Windows.Browser;
 using Microsoft.Silverlight.Testing;
 
-namespace Geckon.Test
+namespace CHAOS.Test
 {
 	public partial class App : Application
 	{
