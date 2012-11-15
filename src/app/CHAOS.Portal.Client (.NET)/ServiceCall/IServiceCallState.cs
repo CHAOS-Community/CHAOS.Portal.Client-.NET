@@ -71,12 +71,14 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// </summary>
 		bool FeedbackOnDispatcher { get; set; }
 
+#if !SILVERLIGHT
 		/// <summary>
 		/// Blocks the thread.
 		/// </summary>
 		/// <param name="timeout">The timeout in milliseconds or 0 for no timeout (other timeout may apply)</param>
 		/// <returns>Returns the IServiceCallState for chaining</returns>
 		IServiceCallState<T> Synchronous(uint timeout = 0);
+#endif
 
 		/// <summary>
 		/// Sets the callback and optionally the token.

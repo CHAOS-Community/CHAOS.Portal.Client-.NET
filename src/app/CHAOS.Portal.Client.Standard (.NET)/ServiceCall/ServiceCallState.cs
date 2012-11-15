@@ -86,6 +86,9 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 		public IServiceCallState<T> Synchronous(uint timeout)
 		{
+#if SILVERLIGHT
+			throw new InvalidOperationException("Synchronous call not support in Silverlight");
+#endif
 			var endTime = DateTime.Now.AddMilliseconds(timeout);
 
 			while (Result == null && Error == null)

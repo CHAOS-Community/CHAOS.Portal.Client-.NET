@@ -20,7 +20,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous]
 #else
 		[Test]
 #endif
