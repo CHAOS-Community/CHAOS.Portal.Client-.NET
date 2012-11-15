@@ -4,6 +4,8 @@ using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 using Math = CHAOS.Utilities.Math;
+using CHAOS.Extensions;
+using System.Linq;
 
 #if SILVERLIGHT
 
@@ -60,6 +62,23 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 		public T Result { get; private set; }
 		public Exception Error { get; private set; }
+
+		public Exception GetFirstError()
+		{
+			if (Error != null)
+				return Error;
+
+			return Result.GetType().GetProperties()
+					.Where(p => p.PropertyType.Implements<IModuleResult>())
+					.Select(p => ((IModuleResult) p.GetValue(Result, null)).Error)
+					.FirstOrDefault(e => e != null);
+		}
+
+		public IServiceCallState<T> ThrowFirstError()
+		{
+			GetFirstError().DoIfIsNotNull(e => { throw e; });
+			return this;
+		}
 
 		public ServiceCallback<T> Callback { get; set; }
 

@@ -12,7 +12,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public GroupExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_Portal<Group>> Get(Guid guid)
+		public IServiceCallState<IServiceResult_Portal<Group>> Get(Guid? guid)
 		{
 			return CallService<IServiceResult_Portal<Group>>(HTTPMethod.GET, guid);
 		}

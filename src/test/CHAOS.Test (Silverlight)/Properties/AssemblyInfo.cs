@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Geckon.Test")]
+[assembly: AssemblyTitle("CHAOS.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Geckon ApS")]
-[assembly: AssemblyProduct("Geckon.Test")]
-[assembly: AssemblyCopyright("Copyright © Geckon ApS 2011")]
+[assembly: AssemblyCompany("CHAOS ApS")]
+[assembly: AssemblyProduct("CHAOS.Test")]
+[assembly: AssemblyCopyright("Copyright © CHAOS ApS 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

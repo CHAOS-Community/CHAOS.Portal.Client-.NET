@@ -42,9 +42,23 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// </summary>
 		T Result { get; }
 		/// <summary>
-		/// An error if the service call fails.
+		/// An error if the service call itself fails.
 		/// </summary>
 		Exception Error { get; }
+
+		/// <summary>
+		/// Gets the first error from the service call itself or from any module that returned mapped data.
+		/// Null is returned if no error was found
+		/// </summary>
+		/// <returns>The first error found or null</returns>
+		Exception GetFirstError();
+
+		/// <summary>
+		/// Find the first error from the service call itself or from any module that returned mapped data and throws it.
+		/// If no error is found nothing happens
+		/// </summary>
+		/// <returns>The state itself</returns>
+		IServiceCallState<T> ThrowFirstError();
 
 		/// <summary>
 		/// A callback to be called when a service call completes, successful or not.

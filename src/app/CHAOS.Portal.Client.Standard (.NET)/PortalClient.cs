@@ -70,6 +70,8 @@ namespace CHAOS.Portal.Client.Standard
 
 		public uint ProtocolVersion { get { return PROTOCOL_VERSION; } }
 
+		public bool UseLatest { get; set; }
+
 		#region Extensions
 		#region GeoLocator
 
@@ -237,7 +239,7 @@ namespace CHAOS.Portal.Client.Standard
 			
 			var call = _serviceCallFactory.GetServiceCall<T>();
 
-			call.Call(string.Format("{0}/{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
+			call.Call(string.Format( UseLatest ? "{0}/latest/{2}/{3}" : "{0}/{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName), parameters, method); //Note: In theory call could complete before state is returned, consider refactoring.
 
 			return call.State;
 		}

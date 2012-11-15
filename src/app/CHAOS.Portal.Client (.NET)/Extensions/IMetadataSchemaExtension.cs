@@ -7,6 +7,6 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IMetadataSchemaExtension
 	{
-		IServiceCallState<IServiceResult_MCM<MetadataSchema>> Get(Guid? guid);
+		IServiceCallState<IServiceResult_MCM<MetadataSchema>> Get(Guid? guid = null);
 	}
 }

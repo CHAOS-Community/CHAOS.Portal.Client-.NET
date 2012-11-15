@@ -55,8 +55,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FolderExtensionTest.cs" />
+    <Compile Include="Extensions\EmailPasswordExtensionTest.cs" />
+    <Compile Include="Extensions\FolderExtensionTest.cs" />
+    <Compile Include="Extensions\FolderTypeExtensionTest.cs" />
+    <Compile Include="Extensions\FormatTypeExtensionTest.cs" />
+    <Compile Include="Extensions\GroupExtensionTest.cs" />
+    <Compile Include="Extensions\IndexExtensionTest.cs" />
+    <Compile Include="Extensions\LanguageExtensionTest.cs" />
+    <Compile Include="Extensions\MetadataSchemaExtensionTest.cs" />
+    <Compile Include="Extensions\ObjectExtensionTest.cs" />
+    <Compile Include="Extensions\ObjectRelationTypeExtensionTest.cs" />
+    <Compile Include="Extensions\ObjectTypeExtensionTest.cs" />
+    <Compile Include="Extensions\SessionExtensionTest.cs" />
+    <Compile Include="Extensions\UserExtensionTest.cs" />
     <Compile Include="PortalClientTest.cs" />
+    <Compile Include="PortalClientTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

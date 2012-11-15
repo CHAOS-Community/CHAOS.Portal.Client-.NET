@@ -91,11 +91,11 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\FolderExtensionTest.cs">
-      <Link>Portal\Client\Standard\FolderExtensionTest.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\PortalClientTest.cs">
       <Link>Portal\Client\Standard\PortalClientTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\PortalClientTestHelper.cs">
+      <Link>Portal\Client\Standard\PortalClientTestHelper.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -124,6 +124,9 @@
       <Project>{836e4b8a-31aa-4c2a-ac2c-7f6aba996043}</Project>
       <Name>CHAOS.Portal.Client.Standard %28Silverlight%29</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Portal\Client\Standard\Extensions\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

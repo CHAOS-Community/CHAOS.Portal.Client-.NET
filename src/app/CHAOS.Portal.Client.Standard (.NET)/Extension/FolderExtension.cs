@@ -12,7 +12,7 @@ namespace CHAOS.Portal.Client.Standard.Extension
 	{
 		public FolderExtension(IServiceCaller serviceCaller) : base(serviceCaller) { }
 
-		public IServiceCallState<IServiceResult_MCM<Folder>> Get(uint? id, int? folderTypeID, uint? parentID)
+		public IServiceCallState<IServiceResult_MCM<Folder>> Get(uint? id, uint? folderTypeID, uint? parentID)
 		{
 			return CallService<IServiceResult_MCM<Folder>>(HTTPMethod.GET, id, folderTypeID, parentID);
 		}
