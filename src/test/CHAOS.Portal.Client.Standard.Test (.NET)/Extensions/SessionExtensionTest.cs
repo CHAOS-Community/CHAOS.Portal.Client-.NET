@@ -1,5 +1,3 @@
-using System;
-
 #if SILVERLIGHT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
@@ -7,29 +5,33 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
+using System;
+
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
+	[TestClass, Tag("Session")]
 #else
 	[TestFixture]
 #endif
-	public class SessionExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class SessionExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Create")]
 #else
 		[Test]
 #endif
 		public void ShouldCreateSession()
 		{
-			var data = PortalClientTestHelper.GetClient(false, false).Session.Create().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
+			TestData(
+				CallPortal(c => c.Session.Create(), false, false, false),
+					d =>
+					{
+						Assert.AreNotEqual(d.Portal.Data.Count, 0, "No session data returned");
+						Assert.AreNotEqual(new Guid(), d.Portal.Data[0].SessionGUID);
+					});
 
-			Assert.AreNotEqual(data.Count, 0, "No session data returned");
-			Assert.AreNotEqual(new Guid(), data[0].SessionGUID);
+			EndTest();
 		}
 	}
 }

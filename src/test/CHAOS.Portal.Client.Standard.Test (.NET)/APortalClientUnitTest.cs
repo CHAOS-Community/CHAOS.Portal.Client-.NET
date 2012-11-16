@@ -30,18 +30,17 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 		protected Func<T> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class, IServiceResult
 		{
+			T data = null;
 #if SILVERLIGHT
 			 IServiceCallState<T> state = null;
-			 T data = null;
 
 			 EnqueueCallback(() => state = caller());
 			 EnqueueConditional(() => state.Result != null);
 			 EnqueueCallback(() => data = state.ThrowFirstError().Result);
-
-			 return () => data;
 #else
-			 return () => caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result;
+			 data = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result;
 #endif
+			 return () => data;
 		 }
 
 		protected void Test(Action test)

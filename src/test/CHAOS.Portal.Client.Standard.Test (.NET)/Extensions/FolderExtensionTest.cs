@@ -3,38 +3,46 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
 using NUnit.Framework;
-
 #endif
+
+using CHAOS.Portal.Client.Data.MCM;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
+	[TestClass, Tag("Folder")]
 #else
 	[TestFixture]
 #endif
-	public class FolderExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class FolderExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetFolderPermissons()
 		{
-			var client = PortalClientTestHelper.GetClient();
+			Folder folder = null;
 
-			var folderGetState = client.Folder.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError();
-			if (folderGetState.Result.MCM.Data.Count == 0) Assert.Fail("No folders to test");
+			TestData(
+				CallPortal(c => c.Folder.Get()),
+					d =>
+					{
+						Assert.AreNotEqual(0, d.MCM.Data.Count, "No folders to test");
+						folder = d.MCM.Data[0];
+					});
 
-			var state = client.Folder.GetPermission(folderGetState.Result.MCM.Data[0].ID).Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError();
-			if (state.Result.MCM.Data.Count == 0) Assert.Fail("No permissions recieved");
+			TestData(
+				CallPortal(c => c.Folder.GetPermission(folder.ID)),
+					d =>
+					{
+						Assert.AreNotEqual(0, d.MCM.Data.Count, "No permissions recieved");
+						Assert.IsNotNull(d.MCM.Data[0].UserPermissions);
+						Assert.IsNotNull(d.MCM.Data[0].GroupPermissions);
+					});
 
-			Assert.IsNotNull(state.Result.MCM.Data[0].UserPermissions);
-			Assert.IsNotNull(state.Result.MCM.Data[0].GroupPermissions);
+			EndTest();
 		}
 	}
 }

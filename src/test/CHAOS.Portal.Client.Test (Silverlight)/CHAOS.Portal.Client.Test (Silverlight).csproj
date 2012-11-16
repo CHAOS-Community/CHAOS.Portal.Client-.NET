@@ -99,11 +99,41 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\EmailPasswordExtensionTest.cs">
       <Link>Standard\Extensions\EmailPasswordExtensionTest.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\FolderExtensionTest.cs">
+      <Link>Standard\Extensions\FolderExtensionTest.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\FolderTypeExtensionTest.cs">
       <Link>Standard\Extensions\FolderTypeExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\FormatTypeExtensionTest.cs">
       <Link>Standard\Extensions\FormatTypeExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\GroupExtensionTest.cs">
+      <Link>Standard\Extensions\GroupExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\IndexExtensionTest.cs">
+      <Link>Standard\Extensions\IndexExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\LanguageExtensionTest.cs">
+      <Link>Standard\Extensions\LanguageExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\MetadataSchemaExtensionTest.cs">
+      <Link>Standard\Extensions\MetadataSchemaExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\ObjectExtensionTest.cs">
+      <Link>Standard\Extensions\ObjectExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\ObjectRelationTypeExtensionTest.cs">
+      <Link>Standard\Extensions\ObjectRelationTypeExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\ObjectTypeExtensionTest.cs">
+      <Link>Standard\Extensions\ObjectTypeExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\SessionExtensionTest.cs">
+      <Link>Standard\Extensions\SessionExtensionTest.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\Extensions\UserExtensionTest.cs">
+      <Link>Standard\Extensions\UserExtensionTest.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard.Test %28.NET%29\PortalClientTest.cs">
       <Link>Standard\PortalClientTest.cs</Link>

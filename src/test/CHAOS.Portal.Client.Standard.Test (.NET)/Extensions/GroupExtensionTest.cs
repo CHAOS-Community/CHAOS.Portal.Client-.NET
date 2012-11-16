@@ -11,26 +11,26 @@ using System.Linq;
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("Group")]
 #endif
-	public class GroupExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class GroupExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetGroups()
 		{
-			var data = PortalClientTestHelper.GetClient().Group.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
+			TestData(
+				CallPortal(c => c.Group.Get()),
+					d =>
+					{
+						Assert.AreNotEqual(d.Portal.Data.Count, 0, "No Groups returned");
+						Assert.IsTrue(d.Portal.Data.All(g => g.Name != null && g.GUID != new Guid()), "Name or GUID not set on Group");
+					});
 
-			Assert.AreNotEqual(data.Count, 0, "No Groups returned");
-			Assert.IsTrue(data.All(g => g.Name != null && g.GUID != new Guid()), "Name or GUID not set on Group");
+			EndTest();
 		}
 	}
 }

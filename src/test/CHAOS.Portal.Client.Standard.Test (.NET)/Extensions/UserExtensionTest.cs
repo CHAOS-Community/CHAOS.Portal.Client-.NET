@@ -10,26 +10,26 @@ using System;
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("User")]
 #endif
-	public class UserExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class UserExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetCurrentUser()
 		{
-			var data = PortalClientTestHelper.GetClient().User.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
+			TestData(
+				CallPortal(c => c.User.Get()),
+					d =>
+					{
+						Assert.AreNotEqual(0, d.Portal.Data.Count, "No user returned");
+						Assert.AreNotEqual(new Guid(), d.Portal.Data[0].GUID, "User Guid not set");
+					});
 
-			Assert.AreNotEqual(0, data.Count, "No user returned");
-			Assert.AreNotEqual(new Guid(), data[0].GUID, "User Guid not set");
+			EndTest();
 		}
 	}
 }

@@ -5,32 +5,31 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
-using System;
 using System.Linq;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("MetadataSchema")]
 #endif
-	public class MetadataSchemaExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class MetadataSchemaExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetMetadataSchemas()
 		{
-			var data = PortalClientTestHelper.GetClient().MetadataSchema.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			TestData(
+				CallPortal(c => c.MetadataSchema.Get()),
+					d =>
+					{
+						Assert.AreNotEqual(d.MCM.Data.Count, 0, "No MetadataSchemas returned");
+						Assert.IsTrue(d.MCM.Data.All(s => s.Name != null && s.SchemaXML != null), "Name or SchemaXML not set on MetadataSchema");
+					});
 
-			Assert.AreNotEqual(data.Count, 0, "No MetadataSchemas returned");
-			Assert.IsTrue(data.All(s => s.Name != null && s.SchemaXML != null), "Name or SchemaXML not set on MetadataSchema");
+			EndTest();
 		}
 	}
 }

@@ -10,26 +10,26 @@ using System.Linq;
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass, Tag("Object")]
-#else
-	[TestFixture]
+	[TestClass, Tag("ObjectType")]
 #endif
-	public class ObjectTypeExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class ObjectTypeExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetObjectTypes()
 		{
-			var data = PortalClientTestHelper.GetClient().ObjectType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			TestData(
+				CallPortal(c => c.ObjectType.Get()),
+					d =>
+					{
+						Assert.AreNotEqual(d.MCM.Data.Count, 0, "No ObjectTypes returned");
+						Assert.IsTrue(d.MCM.Data.All(o => o.Name != null), "Name not set on ObjectType");
+					});
 
-			Assert.AreNotEqual(data.Count, 0, "No ObjectTypes returned");
-			Assert.IsTrue(data.All(o => o.Name != null), "Name not set on ObjectType");
+			EndTest();
 		}
 	}
 }

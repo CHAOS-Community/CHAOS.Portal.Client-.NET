@@ -5,32 +5,31 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
-using System;
 using System.Linq;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("Language")]
 #endif
-	public class LanguageExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class LanguageExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetLanguages()
 		{
-			var data = PortalClientTestHelper.GetClient().Language.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			TestData(
+				CallPortal(c => c.Language.Get()),
+					d =>
+					{
+						Assert.AreNotEqual(d.MCM.Data.Count, 0, "No Languages returned");
+						Assert.IsTrue(d.MCM.Data.All(g => g.Name != null && g.LanguageCode != null), "Name or LanguageCode not set on Language");
+					});
 
-			Assert.AreNotEqual(data.Count, 0, "No Languages returned");
-			Assert.IsTrue(data.All(t => t.Name != null && t.LanguageCode != null), "Name or LanguageCode not set on Language");
+			EndTest();
 		}
 	}
 }
