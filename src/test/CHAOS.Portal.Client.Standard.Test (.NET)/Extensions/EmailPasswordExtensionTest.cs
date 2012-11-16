@@ -22,7 +22,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldLogin()
 		{
 			TestData(
-				CallPortal(c => c.EmailPassword.Login(PortalClientTestHelper.LOGIN_EMAIL, PortalClientTestHelper.LOGIN_PASSWORD), true, false),
+				CallPortal(c => c.EmailPassword.Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword), true, false),
 				d =>
 					{
 						Assert.AreNotEqual(0, d.EmailPassword.Data.Count, "No user returned");

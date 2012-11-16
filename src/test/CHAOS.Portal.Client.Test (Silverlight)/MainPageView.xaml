@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="CHAOS.Portal.Client.Test.MainPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid x:Name="LayoutRoot" Background="White">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="ServicePath:" Margin="10, 13 5 10" />
+			<TextBox Text="{Binding ServicePath, Mode=TwoWay}" Width="250" Height="25"/>
+			<TextBlock Text="Email:" Margin="10, 13 5 10" />
+			<TextBox Text="{Binding Email, Mode=TwoWay}" Width="175" Height="25"/>
+			<TextBlock Text="Password:" Margin="10, 13 5 10" />
+			<PasswordBox Password="{Binding Password, Mode=TwoWay}" Width="100" Height="25"/>
+			<CheckBox Content="Use Latest" Margin="10, 13 5 10" IsChecked="{Binding UseLatest, Mode=TwoWay}"/>
+			<Button Content="Run Tests" Margin="10, 10 5 10" Width="70" Height="25" Command="{Binding RunTestsCommand}"/>
+		</StackPanel>
+		<ContentControl Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding Tests}" />
+    </Grid>
+</UserControl>

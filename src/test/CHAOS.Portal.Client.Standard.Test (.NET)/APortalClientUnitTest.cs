@@ -82,7 +82,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 				CallPortal(() => client.Session.Create());
 
 			if (createSession && login)
-				CallPortal(() => client.EmailPassword.Login(PortalClientTestHelper.LOGIN_EMAIL, PortalClientTestHelper.LOGIN_PASSWORD));
+				CallPortal(() => client.EmailPassword.Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword));
 
 			return client;
 		}

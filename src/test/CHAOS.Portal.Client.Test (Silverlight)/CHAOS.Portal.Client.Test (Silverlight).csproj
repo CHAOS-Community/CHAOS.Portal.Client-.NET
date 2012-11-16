@@ -69,6 +69,9 @@
     <Reference Include="CHAOS.Serialization.Standard">
       <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.Standard.dll</HintPath>
     </Reference>
+    <Reference Include="CHAOS.UI.MVVM">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.UI.MVVM.dll</HintPath>
+    </Reference>
     <Reference Include="CHAOS.Web">
       <HintPath>..\..\..\lib\Silverlight\CHAOS.Web.dll</HintPath>
     </Reference>
@@ -144,6 +147,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainPageView.xaml.cs">
+      <DependentUpon>MainPageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +176,12 @@
       <Name>CHAOS.Portal.Client.Standard %28Silverlight%29</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="MainPageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

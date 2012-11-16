@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Browser;
-using Microsoft.Silverlight.Testing;
 
 namespace CHAOS.Portal.Client.Test
 {
@@ -19,7 +18,7 @@ namespace CHAOS.Portal.Client.Test
 
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
-			RootVisual = UnitTestSystem.CreateTestPage();
+			RootVisual = new MainPageView {DataContext = new MainPageViewModel()};
 		}
 
 		private void Application_Exit(object sender, EventArgs e)

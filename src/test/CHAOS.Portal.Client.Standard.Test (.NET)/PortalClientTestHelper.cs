@@ -9,11 +9,11 @@ namespace CHAOS.Portal.Client.Standard.Test
 {
 	public static class PortalClientTestHelper
 	{
-		private const string SERVICE_PATH = "";
-		public const string LOGIN_EMAIL = "";
-		public const string LOGIN_PASSWORD = "";
-		private const bool USE_LATEST = true;
-		public const uint CALL_TIMEOUT = uint.MaxValue;
+		public static string ServicePath = "";
+		public static string LoginEmail = "";
+		public static string LoginPassword = "";
+		public static bool UseLatest = true;
+		public const uint CALL_TIMEOUT = 5000;
 
 		public static IPortalClient GetClient()
 		{	
@@ -27,10 +27,10 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 			var client = kernel.Get<IPortalClient>();
 
-			if (USE_LATEST)
+			if (UseLatest)
 				((PortalClient) client).UseLatest = true;
 
-			client.ServicePath = SERVICE_PATH;
+			client.ServicePath = ServicePath;
 
 			return client;
 		}
