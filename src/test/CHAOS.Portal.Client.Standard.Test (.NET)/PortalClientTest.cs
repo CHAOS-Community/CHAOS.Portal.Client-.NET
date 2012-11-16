@@ -11,13 +11,8 @@ namespace CHAOS.Portal.Client.Standard.Test
 {
 #if SILVERLIGHT
 	[TestClass]
-#else
-	[TestFixture]
 #endif
-	public class PortalClientTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class PortalClientTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
 		[TestMethod]
@@ -26,7 +21,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 #endif
 		public void ClientGUIDSetIsRaised()
 		{
-			var client = PortalClientTestHelper.Getclient(false, false);
+			var client = GetClient(false);
 
 			var wasRaised = false;
 

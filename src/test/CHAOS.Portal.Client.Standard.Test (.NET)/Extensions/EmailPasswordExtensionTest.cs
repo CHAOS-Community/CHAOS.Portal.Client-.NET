@@ -10,14 +10,9 @@ using System;
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("EmailPassword")]
 #endif
-	public class EmailPasswordExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class EmailPasswordExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
 		[TestMethod, Asynchronous]
@@ -26,10 +21,15 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldLogin()
 		{
-			var data = PortalClientTestHelper.Getclient(true, false).EmailPassword.Login(PortalClientTestHelper.LOGIN_EMAIL, PortalClientTestHelper.LOGIN_PASSWORD).Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.EmailPassword.Data;
-
-			Assert.AreNotEqual(0, data.Count, "No user returned");
-			Assert.AreNotEqual(new Guid(), data[0].GUID, "Returned Users GUID not set");
+			TestData(
+				CallPortal(c => c.EmailPassword.Login(PortalClientTestHelper.LOGIN_EMAIL, PortalClientTestHelper.LOGIN_PASSWORD), true, false),
+				d =>
+					{
+						Assert.AreNotEqual(0, d.EmailPassword.Data.Count, "No user returned");
+						Assert.AreNotEqual(new Guid(), d.EmailPassword.Data[0].GUID, "Returned Users GUID not set");
+					});
+			
+			EndTest();
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldGetObjectTypes()
 		{
-			var data = PortalClientTestHelper.Getclient().ObjectType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			var data = PortalClientTestHelper.GetClient().ObjectType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
 
 			Assert.AreNotEqual(data.Count, 0, "No ObjectTypes returned");
 			Assert.IsTrue(data.All(o => o.Name != null), "Name not set on ObjectType");

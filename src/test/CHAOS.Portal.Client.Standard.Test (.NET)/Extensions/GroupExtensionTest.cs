@@ -27,7 +27,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldGetGroups()
 		{
-			var data = PortalClientTestHelper.Getclient().Group.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
+			var data = PortalClientTestHelper.GetClient().Group.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
 
 			Assert.AreNotEqual(data.Count, 0, "No Groups returned");
 			Assert.IsTrue(data.All(g => g.Name != null && g.GUID != new Guid()), "Name or GUID not set on Group");

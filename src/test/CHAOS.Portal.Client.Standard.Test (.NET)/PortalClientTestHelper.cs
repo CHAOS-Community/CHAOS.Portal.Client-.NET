@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CHAOS.Serialization.Standard.String;
 using CHAOS.Serialization.Standard.XML;
 using CHAOS.Serialization.String;
@@ -16,16 +15,8 @@ namespace CHAOS.Portal.Client.Standard.Test
 		private const bool USE_LATEST = true;
 		public const uint CALL_TIMEOUT = uint.MaxValue;
 
-		private static IPortalClient _loggedInClient;
-
-		public static IPortalClient Getclient(bool createSession = true, bool login = true)
-		{
-			if(!createSession && login)
-				throw new InvalidOperationException("Cannot login without creating session");
-			
-			if (createSession && login && _loggedInClient != null)
-				return _loggedInClient;
-			
+		public static IPortalClient GetClient()
+		{	
 			var kernel = new StandardKernel();
 
 			kernel.Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
@@ -40,29 +31,6 @@ namespace CHAOS.Portal.Client.Standard.Test
 				((PortalClient) client).UseLatest = true;
 
 			client.ServicePath = SERVICE_PATH;
-
-			if (createSession)
-				CreateSession(client);
-
-			if (login)
-			{
-				Login(client);
-				_loggedInClient = client;
-			}
-
-			return client;
-		}
-
-		public static IPortalClient CreateSession(IPortalClient client)
-		{
-			client.Session.Create().Synchronous(CALL_TIMEOUT).ThrowFirstError();
-
-			return client;
-		}
-
-		public static IPortalClient Login(IPortalClient client)
-		{
-			client.EmailPassword.Login(LOGIN_EMAIL, LOGIN_PASSWORD).Synchronous(CALL_TIMEOUT).ThrowFirstError();
 
 			return client;
 		}

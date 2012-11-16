@@ -27,7 +27,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldGetObjectRelationTypes()
 		{
-			var data = PortalClientTestHelper.Getclient().ObjectRelationType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			var data = PortalClientTestHelper.GetClient().ObjectRelationType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
 
 			Assert.AreNotEqual(data.Count, 0, "No ObjectRelationTypes returned");
 			Assert.IsTrue(data.All(t => t.Name != null), "Name not set on ObjectRelationType");

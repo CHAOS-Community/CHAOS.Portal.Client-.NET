@@ -24,7 +24,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldDoFacetSearch()
 		{
-			var indexData = PortalClientTestHelper.Getclient().Index.Search(null, "field:ObjectTypeID", null, 0, 1).Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Index;
+			var indexData = PortalClientTestHelper.GetClient().Index.Search(null, "field:ObjectTypeID", null, 0, 1).Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Index;
 
 			Assert.AreNotEqual(indexData.Data.Count, 0, "No facets returned");
 			Assert.IsNotNull(indexData.Data[0], "No facets returned");

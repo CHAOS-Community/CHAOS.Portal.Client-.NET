@@ -27,7 +27,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldGetMetadataSchemas()
 		{
-			var data = PortalClientTestHelper.Getclient().MetadataSchema.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			var data = PortalClientTestHelper.GetClient().MetadataSchema.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
 
 			Assert.AreNotEqual(data.Count, 0, "No MetadataSchemas returned");
 			Assert.IsTrue(data.All(s => s.Name != null && s.SchemaXML != null), "Name or SchemaXML not set on MetadataSchema");

@@ -26,7 +26,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldCreateSession()
 		{
-			var data = PortalClientTestHelper.Getclient(false, false).Session.Create().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
+			var data = PortalClientTestHelper.GetClient(false, false).Session.Create().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
 
 			Assert.AreNotEqual(data.Count, 0, "No session data returned");
 			Assert.AreNotEqual(new Guid(), data[0].SessionGUID);

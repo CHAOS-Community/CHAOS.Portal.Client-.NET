@@ -5,32 +5,31 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
-using System;
 using System.Linq;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("FormatType")]
 #endif
-	public class FormatTypeExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class FormatTypeExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetFormatTypes()
 		{
-			var data = PortalClientTestHelper.Getclient().FormatType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			TestData(
+				CallPortal(c => c.FormatType.Get()),
+				d =>
+				{
+					Assert.AreNotEqual(d.MCM.Data.Count, 0, "No FormatTypes returned");
+					Assert.IsTrue(d.MCM.Data.All(t => t.Name != null), "Name not set on FormatType");
+				});
 
-			Assert.AreNotEqual(data.Count, 0, "No FormatTypes returned");
-			Assert.IsTrue(data.All(t => t.Name != null), "Name not set on FormatType");
+			EndTest();
 		}
 	}
 }

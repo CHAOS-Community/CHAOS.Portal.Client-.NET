@@ -25,7 +25,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldGetFolderPermissons()
 		{
-			var client = PortalClientTestHelper.Getclient();
+			var client = PortalClientTestHelper.GetClient();
 
 			var folderGetState = client.Folder.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError();
 			if (folderGetState.Result.MCM.Data.Count == 0) Assert.Fail("No folders to test");

@@ -5,32 +5,31 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
-using System;
 using System.Linq;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
 #if SILVERLIGHT
-	[TestClass]
-#else
-	[TestFixture]
+	[TestClass, Tag("FolderType")]
 #endif
-	public class FolderTypeExtensionTest
-#if SILVERLIGHT
-		: SilverlightTest
-#endif
+	public class FolderTypeExtensionTest : APortalClientUnitTest
 	{
 #if SILVERLIGHT
-		[TestMethod]
+		[TestMethod, Asynchronous, Tag("Get")]
 #else
 		[Test]
 #endif
 		public void ShouldGetFolderTypes()
 		{
-			var data = PortalClientTestHelper.Getclient().FolderType.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.MCM.Data;
+			TestData(
+				CallPortal(c => c.FolderType.Get()),
+				d =>
+				{
+					Assert.AreNotEqual(d.MCM.Data.Count, 0, "No FolderTypes returned");
+					Assert.IsTrue(d.MCM.Data.All(t => t.Name != null), "Name not set on FolderType");
+				});
 
-			Assert.AreNotEqual(data.Count, 0, "No FolderTypes returned");
-			Assert.IsTrue(data.All(t => t.Name != null), "Name not set on FolderType");
+			EndTest();
 		}
 	}
 }

@@ -26,7 +26,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 #endif
 		public void ShouldGetCurrentUser()
 		{
-			var data = PortalClientTestHelper.Getclient().User.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
+			var data = PortalClientTestHelper.GetClient().User.Get().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result.Portal.Data;
 
 			Assert.AreNotEqual(0, data.Count, "No user returned");
 			Assert.AreNotEqual(new Guid(), data[0].GUID, "User Guid not set");

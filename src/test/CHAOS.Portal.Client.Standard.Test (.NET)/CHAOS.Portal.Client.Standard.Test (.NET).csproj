@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="APortalClientUnitTest.cs" />
     <Compile Include="Extensions\EmailPasswordExtensionTest.cs" />
     <Compile Include="Extensions\FolderExtensionTest.cs" />
     <Compile Include="Extensions\FolderTypeExtensionTest.cs" />
