@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace CHAOS.Portal.Client.Managers
+namespace CHAOS.Portal.Client.Managers.Data
 {
 	public interface IManagerResult<T> : IList<T>, INotifyCollectionChanged, INotifyPropertyChanged
 	{

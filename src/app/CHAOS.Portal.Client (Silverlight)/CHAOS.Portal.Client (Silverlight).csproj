@@ -176,6 +176,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\ASettingsManager.cs">
       <Link>Managers\ASettingsManager.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\Data\IManagerResult.cs">
+      <Link>Managers\Data\IManagerResult.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IFileManager.cs">
       <Link>Managers\IFileManager.cs</Link>
     </Compile>
@@ -193,9 +196,6 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\ILoadingManager.cs">
       <Link>Managers\ILoadingManager.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IManagerResult.cs">
-      <Link>Managers\IManagerResult.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IMCMTypesManager.cs">
       <Link>Managers\IMCMTypesManager.cs</Link>

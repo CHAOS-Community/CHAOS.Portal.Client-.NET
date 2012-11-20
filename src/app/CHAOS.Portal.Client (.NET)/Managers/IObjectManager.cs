@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.Managers.Data;
 using Object = CHAOS.Portal.Client.Data.MCM.Object;
 
 namespace CHAOS.Portal.Client.Managers

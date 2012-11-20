@@ -2,97 +2,81 @@ using System;
 
 namespace CHAOS.Portal.Client.Data.Portal
 {
-	//CHAOS.Portal.Data.UserInfo
 	public class User : AData
 	{
-		private int _ID;
-		public int ID
+		private Guid? _sessionID;
+		public Guid? SessionID
 		{
-			get { return _ID; }
+			get { return _sessionID; }
 			set
 			{
-				_ID = value;
-				RaisePropertyChanged("GUID");
-			}
-		}
-
-		//TODO: Remove this
-		private Guid _SessionID;
-		public Guid SessionID
-		{
-			get { return _SessionID; }
-			set
-			{
-				_SessionID = value;
+				_sessionID = value;
 				RaisePropertyChanged("SessionGUID");
 			}
 		}
 
-		private Guid _GUID;
-		public Guid GUID
+		private Guid? _guid;
+		public Guid? GUID
 		{
-			get { return _GUID; }
+			get { return _guid; }
 			set
 			{
-				_GUID = value;
+				_guid = value;
 				RaisePropertyChanged("GUID");
 			}
 		}
 
-		private string _Firstname;
+		private string _firstname;
 		public string Firstname
 		{
-			get { return _Firstname; }
+			get { return _firstname; }
 			set
 			{
-				_Firstname = value;
+				_firstname = value;
 				RaisePropertyChanged("Firstname");
 			}
 		}
 
-		//TODO: Rename to FirstName
-		private string _Middlename;
+		private string _middlename;
 		public string Middlename
 		{
-			get { return _Middlename; }
+			get { return _middlename; }
 			set
 			{
-				_Middlename = value;
+				_middlename = value;
 				RaisePropertyChanged("Middlename");
 			}
 		}
 
-		//TODO: Rename to MiddleName
-		private string _Lastname;
+		private string _lastname;
 		public string Lastname
 		{
-			get { return _Lastname; }
+			get { return _lastname; }
 			set
 			{
-				_Lastname = value;
+				_lastname = value;
 				RaisePropertyChanged("Lastname");
 			}
 		}
 
-		//TODO: Rename to LastName
-		private string _Email;
+		private string _email;
 		public string Email
 		{
-			get { return _Email; }
+			get { return _email; }
 			set
 			{
-				_Email = value;
+				_email = value;
 				RaisePropertyChanged("Email");
 			}
 		}
 
-		private int _SystemPermission;
+		private int _systemPermission;
 		public int SystemPermission
 		{
-			get { return _SystemPermission; }
+			get { return _systemPermission; }
 			set
 			{
-				_SystemPermission = value;
+				_systemPermission = value;
 				RaisePropertyChanged("SystemPermission");
 			}
 		}
