@@ -229,8 +229,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
 		{
-			if (!_objects.ContainsKey(guid))
-				_objects[guid] = new Object {GUID = guid};
+			lock (_objects)
+			{
+				if (!_objects.ContainsKey(guid))
+					_objects[guid] = new Object { GUID = guid };
+			}
 				
 			var result = _objects[guid];
 
