@@ -113,7 +113,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 							                      if (args.PropertyName != "Metadatas") return;
 
 							                      userObject.PropertyChanged -= objectChangedAction;
-							                      userObject.Metadatas.CollectionChanged += metadatasChangedAction;
+
+							                      var profileMetadata = userObject.Metadatas.FirstOrDefault(m => m.MetadataSchemaGUID == schemaGUID);
+
+												  if (profileMetadata != null)
+													  callback(profileMetadata.MetadataXML);
+												  else
+													userObject.Metadatas.CollectionChanged += metadatasChangedAction;
 						                      };
 
 					userObject.PropertyChanged += objectChangedAction;
