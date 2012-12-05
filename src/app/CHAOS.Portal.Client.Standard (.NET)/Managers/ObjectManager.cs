@@ -17,7 +17,6 @@ namespace CHAOS.Portal.Client.Standard.Managers
 {
 	public class ObjectManager : IObjectManager
 	{
-		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjectByGUID = delegate { };
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjects = delegate { };
 
 		private readonly IPortalClient _client;
@@ -227,7 +226,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region By GUID
 
-		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
+		public Object GetObjectByGUID(Guid guid, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints, Action<Object, Exception> callback = null)
 		{
 			lock (_objects)
 			{
@@ -237,33 +236,45 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				
 			var result = _objects[guid];
 
-			if(!IsClientSideOnlyObject(result))
-				_client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).Callback = GetObjectByGUIDCompleted;
+			if (!IsClientSideOnlyObject(result))
+				_client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).WithCallback(GetObjectByGUIDCompleted, callback);
+			else if(callback != null)
+				callback(result, null);
 
 			return result;
 		}
 
 		private void GetObjectByGUIDCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
 		{
+			var callback = token as Action<Object, Exception>;
+
 			if (error != null)
 			{
-				FailedToGetObjectByGUID(this, new DataEventArgs<Exception>(error));
+				if (callback != null)
+					callback(null, error);
 				return;
 			}
 
 			if(result.MCM.Error != null)
 			{
-				FailedToGetObjectByGUID(this, new DataEventArgs<Exception>(result.MCM.Error));
+				if (callback != null)
+					callback(null, result.MCM.Error);
 				return;
 			}
 
 			if(result.MCM.Data.Count != 1)
 			{
-				FailedToGetObjectByGUID(this, new DataEventArgs<Exception>(new Exception(string.Format("Call to get single object by guid returned {0} objects", result.MCM.Data.Count))));
+				if (callback != null)
+					callback(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", result.MCM.Data.Count)));
 				return;
 			}
 
-			UpdateObject(_objects[result.MCM.Data[0].GUID], result.MCM.Data[0]);
+			var @object = _objects[result.MCM.Data[0].GUID];
+
+			UpdateObject(@object, result.MCM.Data[0]);
+
+			if (callback != null)
+				callback(@object, null);
 		}
 
 		#endregion

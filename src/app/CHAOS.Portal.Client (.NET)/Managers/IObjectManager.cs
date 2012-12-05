@@ -10,7 +10,6 @@ namespace CHAOS.Portal.Client.Managers
 {
 	public interface IObjectManager
 	{
-		event EventHandler<DataEventArgs<Exception>> FailedToGetObjectByGUID;
 		event EventHandler<DataEventArgs<Exception>> FailedToGetObjects;
 
 		Object Create(uint objectTypeID, uint folderID, Guid? guid = null, Action<bool> callback = null);
@@ -28,7 +27,7 @@ namespace CHAOS.Portal.Client.Managers
 		void CreateRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null);
 		void CreateRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token);
 
-		Object GetObjectByGUID(Guid guid, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
+		Object GetObjectByGUID(Guid guid, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false, Action<Object, Exception> callback = null);
 		Object GetObjectByFileID(int fileID, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
 		Object GetObjectByMetadata(Metadata metadata);
 
