@@ -489,7 +489,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			var metadata = new Metadata
 			{
 				MetadataSchemaGUID = schemaGUID,
-				LanguageCode = languageCode
+				LanguageCode = languageCode,
+				DateCreated = DateTime.Now,
+				DateModified = DateTime.Now
 			};
 
 			AddMetadataToObject(@object, metadata);
@@ -516,6 +518,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				throw new Exception("Could not find object matching metadata");
 
 			metadata.MetadataXML = newData;
+			metadata.EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGUID);
 
 			SaveMetadata(@object, metadata, callback);
 		}
@@ -538,6 +541,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			var oldRevision = metadata.RevisionID;
 
 			metadata.RevisionID = metadata.RevisionID == null ? 1 : metadata.RevisionID++;
+
+			metadata.DateModified = DateTime.Now;
+			metadata.EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGUID);
 
 			AddMetadataToObject(@object, metadata);
 
