@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Managers.Data;
+using CHAOS.Portal.Client.Standard.Managers.Data;
 using CHAOS.Tasks;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
@@ -19,16 +20,20 @@ namespace CHAOS.Portal.Client.Standard.Managers
 	{
 		public event EventHandler<DataEventArgs<Exception>> FailedToGetObjects = delegate { };
 
+		public static readonly TimeSpan MinUpdateIntervalTime = new TimeSpan(0,0,0,2);
+
 		private readonly IPortalClient _client;
 
 		private readonly IDictionary<Guid, Object> _objects;
 		private readonly IDictionary<Object, DeferredTasksInvoker> _clientSideOnlyObjects;
+		private readonly IList<ObjectGetByGUIDData> _getByGUIDDatas;
 
 		public ObjectManager(IPortalClient client)
 		{
 			_client = ArgumentUtilities.ValidateIsNotNull("client", client);
 			_objects = new Dictionary<Guid, Object>();
 			_clientSideOnlyObjects = new Dictionary<Object, DeferredTasksInvoker>();
+			_getByGUIDDatas = new List<ObjectGetByGUIDData>();
 		}
 
 		#region Create
@@ -237,44 +242,63 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			var result = _objects[guid];
 
 			if (!IsClientSideOnlyObject(result))
-				_client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).WithCallback(GetObjectByGUIDCompleted, callback);
+			{
+				var call = false;
+				ObjectGetByGUIDData data;
+				lock (_getByGUIDDatas)
+				{
+					CleanGetByGUIDDatas();
+
+					data = _getByGUIDDatas.FirstOrDefault(d => d.GUID == guid && (!includeFiles || d.IncludeFiles) && (!includeMetadata || d.IncludeMetadata) && (!includeObjectRelations || d.IncludeObjectRelations) && (!includeAccessPoints || d.IncludeAccessPoints));
+
+					if (data == null)
+					{
+						data = new ObjectGetByGUIDData(guid, includeFiles, includeMetadata,includeObjectRelations, includeAccessPoints);
+						_getByGUIDDatas.Add(data);
+						call = true;
+					}
+				}
+
+				if (callback != null)
+					data.AddCallback(callback);
+
+				if (call)
+					_client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).WithCallback(GetObjectByGUIDCompleted, data);
+			}
 			else if(callback != null)
 				callback(result, null);
 
 			return result;
 		}
 
+		private void CleanGetByGUIDDatas()
+		{
+			var deadline = DateTime.Now - MinUpdateIntervalTime;
+			for (var i = 0; i < _getByGUIDDatas.Count; i++)
+			{
+				if(_getByGUIDDatas[i].Created.CompareTo(deadline) < 0)
+					_getByGUIDDatas.RemoveAt(i--);
+			}
+		}
+
 		private void GetObjectByGUIDCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
 		{
-			var callback = token as Action<Object, Exception>;
+			var data = (ObjectGetByGUIDData)token;
 
 			if (error != null)
+				data.Call(null, error);
+			else if(result.MCM.Error != null)
+				data.Call(null, result.MCM.Error);
+			else if(result.MCM.Data.Count != 1)
+				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", result.MCM.Data.Count)));
+			else
 			{
-				if (callback != null)
-					callback(null, error);
-				return;
+				var @object = _objects[result.MCM.Data[0].GUID];
+
+				UpdateObject(@object, result.MCM.Data[0]);
+
+				data.Call(@object, null);
 			}
-
-			if(result.MCM.Error != null)
-			{
-				if (callback != null)
-					callback(null, result.MCM.Error);
-				return;
-			}
-
-			if(result.MCM.Data.Count != 1)
-			{
-				if (callback != null)
-					callback(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", result.MCM.Data.Count)));
-				return;
-			}
-
-			var @object = _objects[result.MCM.Data[0].GUID];
-
-			UpdateObject(@object, result.MCM.Data[0]);
-
-			if (callback != null)
-				callback(@object, null);
 		}
 
 		#endregion

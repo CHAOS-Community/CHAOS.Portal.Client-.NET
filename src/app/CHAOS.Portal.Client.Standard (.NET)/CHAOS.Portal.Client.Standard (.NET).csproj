@@ -80,6 +80,7 @@
     <Compile Include="Managers\AManager.cs" />
     <Compile Include="Managers\AViewModel.cs" />
     <Compile Include="Managers\CallbackToken.cs" />
+    <Compile Include="Managers\Data\ObjectGetByGUIDData.cs" />
     <Compile Include="Managers\FileUploader.cs" />
     <Compile Include="Managers\FileUploadManager.cs" />
     <Compile Include="Managers\FolderManager.cs" />

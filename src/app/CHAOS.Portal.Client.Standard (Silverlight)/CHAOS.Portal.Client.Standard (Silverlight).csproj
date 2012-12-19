@@ -154,6 +154,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\CallbackToken.cs">
       <Link>Managers\CallbackToken.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\Data\ObjectGetByGUIDData.cs">
+      <Link>Managers\Data\ObjectGetByGUIDData.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\FileUploader.cs">
       <Link>Managers\FileUploader.cs</Link>
     </Compile>
