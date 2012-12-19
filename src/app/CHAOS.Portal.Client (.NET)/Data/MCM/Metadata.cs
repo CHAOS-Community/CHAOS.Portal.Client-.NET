@@ -70,16 +70,5 @@ namespace CHAOS.Portal.Client.Data.MCM
 				RaisePropertyChanged("DateCreated");
 			}
 		}
-
-		private DateTime _dateModified;
-		public DateTime DateModified
-		{
-			get { return _dateModified; }
-			set
-			{
-				_dateModified = value;
-				RaisePropertyChanged("DateModified");
-			}
-		}
 	}
 }
