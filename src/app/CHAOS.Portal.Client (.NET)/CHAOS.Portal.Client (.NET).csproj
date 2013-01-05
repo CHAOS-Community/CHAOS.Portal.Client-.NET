@@ -76,9 +76,13 @@
     <Compile Include="Data\Statistics\DayStatsObject.cs" />
     <Compile Include="Data\Upload\FileData.cs" />
     <Compile Include="Data\Upload\UploadToken.cs" />
+    <Compile Include="Extensions\AExtension.cs" />
+    <Compile Include="Extensions\ExtensionProviders.cs" />
+    <Compile Include="Extensions\ExtensionProviderService.cs" />
     <Compile Include="Extensions\IClientSettingsExtension.cs" />
     <Compile Include="Extensions\IDayStatsObjectExtension.cs" />
     <Compile Include="Extensions\IEmailPasswordExtension.cs" />
+    <Compile Include="Extensions\IExtension.cs" />
     <Compile Include="Extensions\IFileExtension.cs" />
     <Compile Include="Extensions\IFolderExtension.cs" />
     <Compile Include="Extensions\IFolderTypeExtension.cs" />
@@ -95,12 +99,14 @@
     <Compile Include="Extensions\IObjectRelationTypeExtension.cs" />
     <Compile Include="Extensions\IObjectTypeExtension.cs" />
     <Compile Include="Extensions\ISecureCookieExtension.cs" />
+    <Compile Include="Extensions\ISessionChangingExtension.cs" />
     <Compile Include="Extensions\ISessionExtension.cs" />
     <Compile Include="Extensions\IStatsObjectExtension.cs" />
     <Compile Include="Extensions\ISubscriptionExtension.cs" />
     <Compile Include="Extensions\IUploadExtension.cs" />
     <Compile Include="Extensions\IUserExtension.cs" />
     <Compile Include="Extensions\IUserSettingsExtension.cs" />
+    <Compile Include="Extensions\SessionExtension.cs" />
     <Compile Include="IPortalClient.cs" />
     <Compile Include="Managers\ASettingsManager.cs" />
     <Compile Include="Managers\Data\IManagerResult.cs" />
@@ -116,6 +122,8 @@
     <Compile Include="Managers\IUserManager.cs" />
     <Compile Include="Managers\TransactionState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceCall\HTTPMethod.cs" />
+    <Compile Include="ServiceCall\IServiceCaller.cs" />
     <Compile Include="ServiceCall\IServiceCallState.cs" />
   </ItemGroup>
   <ItemGroup>

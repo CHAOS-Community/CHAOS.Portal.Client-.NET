@@ -1,19 +1,14 @@
-using System;
+﻿using System;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Data.Portal;
-using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.ServiceCall;
-using CHAOS.Portal.Client.Standard.ServiceCall;
-using CHAOS.Web;
 
-namespace CHAOS.Portal.Client.Standard.Extension
+namespace CHAOS.Portal.Client.Extensions
 {
-	public class SessionExtension : AExtension, ISessionExtension
+	public class SessionExtension : AExtension, ISessionExtension, ISessionChangingExtension
 	{
 		public event EventHandler SessionChanged = delegate { };
-
-		private readonly uint _protocolVersion;
 
 		private Session _session;
 		public Session Session
@@ -26,19 +21,9 @@ namespace CHAOS.Portal.Client.Standard.Extension
 			}
 		}
 
-		public SessionExtension(IServiceCaller serviceCaller, uint protocolVersion) : base(serviceCaller)
-		{
-			_protocolVersion = protocolVersion;
-		}
-
 		public IServiceCallState<IServiceResult_Portal<Session>> Create()
 		{
-			return Create(_protocolVersion);
-		}
-
-		private IServiceCallState<IServiceResult_Portal<Session>> Create(uint protocolVersion)
-		{
-			var state = CallServiceWithoutSession<IServiceResult_Portal<Session>>(HTTPMethod.GET, protocolVersion);
+			var state = CallServiceWithoutSession<IServiceResult_Portal<Session>>(HTTPMethod.GET);
 
 			state.OperationCompleted += CreateCompleted;
 

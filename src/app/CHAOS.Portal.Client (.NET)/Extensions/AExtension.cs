@@ -6,27 +6,33 @@ using System.Runtime.CompilerServices;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
-using CHAOS.Portal.Client.Standard.ServiceCall;
-using CHAOS.Web;
 
-namespace CHAOS.Portal.Client.Standard.Extension
+namespace CHAOS.Portal.Client.Extensions
 {
-	public abstract class AExtension
+	public abstract class AExtension : IExtension
 	{
-		private readonly IServiceCaller _serviceCaller;
+		private IServiceCaller _serviceCaller;
 
 		private readonly string _extensionName;
 
-		protected AExtension(IServiceCaller serviceCaller)
+		protected AExtension()
 		{
-			_serviceCaller = ArgumentUtilities.ValidateIsNotNull("serviceCaller", serviceCaller);
-
 			var typeName = GetType().Name;
 
-			if(typeName.Substring(typeName.Length - 9) != "Extension")
+			if (typeName.Substring(typeName.Length - 9) != "Extension")
 				throw new Exception("Class name must end on \"Extension\"");
 
 			_extensionName = typeName.Remove(typeName.Length - 9);
+		}
+
+		public void Initialize(IServiceCaller portalClient)
+		{
+			if(_serviceCaller != null)
+				throw new InvalidOperationException("Already initialized");
+			
+			_serviceCaller = ArgumentUtilities.ValidateIsNotNull("portalClient", portalClient);
+
+			_serviceCaller.RegisterExtension(this);
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]

@@ -5,6 +5,7 @@ using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Web;
+using HTTPMethod = CHAOS.Web.HTTPMethod;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
