@@ -1,8 +1,8 @@
 using System;
 using System.Xml.Linq;
 using CHAOS.Events;
-using CHAOS.Portal.Client.Data.MCM;
-using CHAOS.Portal.Client.Data.Portal;
+using CHAOS.Portal.Client.Data;
+using CHAOS.Portal.Client.MCM.Data;
 
 namespace CHAOS.Portal.Client.Managers
 {

@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using CHAOS.Events;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.Portal;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Portal.Client.Standard.ServiceCall;
 using HTTPMethod = CHAOS.Portal.Client.ServiceCall.HTTPMethod;
@@ -46,7 +46,6 @@ namespace CHAOS.Portal.Client.Standard
 		public PortalClient(IServiceCallFactory serviceCallFactory)
 		{
 			_serviceCallFactory = ArgumentUtilities.ValidateIsNotNull("serviceCallFactory", serviceCallFactory);
-			_sessionChangingExtensions = new List<ISessionChangingExtension>();
 		}
 
 		public void RegisterExtension(IExtension extension)
@@ -54,9 +53,7 @@ namespace CHAOS.Portal.Client.Standard
 			var sessionExtension = extension as ISessionChangingExtension;
 
 			if (sessionExtension != null)
-			{
 				sessionExtension.SessionChanged += SessionChanged;
-			}
 		}
 
 		#region ClientGUID
@@ -84,8 +81,6 @@ namespace CHAOS.Portal.Client.Standard
 		#endregion
 		#region Session
 
-		private readonly IList<ISessionChangingExtension> _sessionChangingExtensions;
-
 		private bool _sessionAcquired;
 
 		public event EventHandler SessionAcquired = delegate { };
@@ -97,19 +92,12 @@ namespace CHAOS.Portal.Client.Standard
 		{
 			CurrentSession = new Session { SessionGUID = guid };
 
-			foreach (var sessionChangingExtension in _sessionChangingExtensions)
-			{
-				sessionChangingExtension.Session = CurrentSession;
-			}
-
 			this.Session().Update();
 		}
 
-		private void SessionChanged(object sender, EventArgs eventArgs)
+		private void SessionChanged(object sender, DataEventArgs<Session> eventArgs)
 		{
-			var sessionChanger = (ISessionChangingExtension) sender;
-
-			CurrentSession = sessionChanger.Session;
+			CurrentSession = eventArgs.Data;
 
 			if (CurrentSession == null)
 			{

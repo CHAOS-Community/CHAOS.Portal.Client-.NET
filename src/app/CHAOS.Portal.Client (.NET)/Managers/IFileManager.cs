@@ -1,4 +1,4 @@
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
 
 namespace CHAOS.Portal.Client.Managers
 {

@@ -2,10 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
+using CHAOS.Portal.Client.MCM.Data;
 using NUnit.Framework;
 #endif
-
-using CHAOS.Portal.Client.Data.MCM;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {

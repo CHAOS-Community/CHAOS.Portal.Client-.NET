@@ -1,7 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using CHAOS.Events;
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
 
 namespace CHAOS.Portal.Client.Managers
 {

@@ -1,11 +1,11 @@
 ﻿using System;
-using CHAOS.Portal.Client.Data.Portal;
+using CHAOS.Events;
+using CHAOS.Portal.Client.Data;
 
 namespace CHAOS.Portal.Client.Extensions
 {
 	public interface ISessionChangingExtension
 	{
-		event EventHandler SessionChanged;
-		Session Session { get; set; }
+		event EventHandler<DataEventArgs<Session>> SessionChanged;
 	}
 }

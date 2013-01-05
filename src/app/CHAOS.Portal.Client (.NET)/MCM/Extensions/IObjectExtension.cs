@@ -1,9 +1,9 @@
 using System;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
-using Object = CHAOS.Portal.Client.Data.MCM.Object;
+using Object = CHAOS.Portal.Client.MCM.Data.Object;
 
-namespace CHAOS.Portal.Client.Extensions
+namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IObjectExtension
 	{

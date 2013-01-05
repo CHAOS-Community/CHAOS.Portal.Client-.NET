@@ -2,7 +2,7 @@
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 
-namespace CHAOS.Portal.Client.Extensions
+namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IObjectRelationExtension
 	{

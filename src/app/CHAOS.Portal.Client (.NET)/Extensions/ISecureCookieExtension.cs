@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.Portal;
 using CHAOS.Portal.Client.ServiceCall;
 
 namespace CHAOS.Portal.Client.Extensions

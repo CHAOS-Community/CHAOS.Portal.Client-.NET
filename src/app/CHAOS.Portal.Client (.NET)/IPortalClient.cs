@@ -1,5 +1,5 @@
 using System;
-using CHAOS.Portal.Client.Data.Portal;
+using CHAOS.Portal.Client.Data;
 
 namespace CHAOS.Portal.Client
 {
