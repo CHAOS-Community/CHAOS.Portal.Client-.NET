@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using CHAOS.Utilities;
-using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 
 namespace CHAOS.Portal.Client.Extensions
@@ -36,19 +35,19 @@ namespace CHAOS.Portal.Client.Extensions
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		protected IServiceCallState<T> CallService<T>(HTTPMethod callMethod, params object[] parameters) where T : class, IServiceResult
+		protected IServiceCallState<T> CallService<T>(HTTPMethod callMethod, params object[] parameters) where T : class
 		{
 			return CallService<T>(callMethod, parameters, true);
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		protected IServiceCallState<T> CallServiceWithoutSession<T>(HTTPMethod callMethod, params object[] parameters) where T : class, IServiceResult
+		protected IServiceCallState<T> CallServiceWithoutSession<T>(HTTPMethod callMethod, params object[] parameters) where T : class
 		{
 			return CallService<T>(callMethod, parameters, false);
 		}
 
 		[MethodImpl(MethodImplOptions.NoInlining)]
-		private IServiceCallState<T> CallService<T>(HTTPMethod httpMethod, IList<object> parameters, bool requiresSession) where T : class, IServiceResult
+		private IServiceCallState<T> CallService<T>(HTTPMethod httpMethod, IList<object> parameters, bool requiresSession) where T : class
 		{
 			var method = new StackTrace().GetFrame(2).GetMethod(); //Jump two steps back, to get public extension method
 			var methodParameters = method.GetParameters();

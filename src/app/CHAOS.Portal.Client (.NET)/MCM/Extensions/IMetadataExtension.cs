@@ -8,6 +8,6 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IMetadataExtension
 	{
-		IServiceCallState<IServiceResult_MCM<Metadata>> Set(Guid objectGUID, Guid metadataSchemaGUID, string languageCode, uint? revisionID, XElement metadataXML);
+		IServiceCallState<Metadata> Set(Guid objectGUID, Guid metadataSchemaGUID, string languageCode, uint? revisionID, XElement metadataXML);
 	}
 }

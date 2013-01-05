@@ -6,6 +6,6 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IClientSettingsExtension
 	{
-		IServiceCallState<IServiceResult_Portal<ClientSettings>> Get(Guid guid);
+		IServiceCallState<ClientSettings> Get(Guid guid);
 	}
 }

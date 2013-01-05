@@ -7,9 +7,9 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface ISecureCookieExtension
 	{
-		IServiceCallState<IServiceResult_Portal<SecureCookie>> Get();
-		IServiceCallState<IServiceResult_Portal<SecureCookie>> Create();
-		IServiceCallState<IServiceResult_Portal<ScalarResult>> Delete(IList<Guid> guids);
-		IServiceCallState<IServiceResult_Portal<SecureCookie>> Login(Guid guid, Guid securityGUID);
+		IServiceCallState<SecureCookie> Get();
+		IServiceCallState<SecureCookie> Create();
+		IServiceCallState<ScalarResult> Delete(IList<Guid> guids);
+		IServiceCallState<SecureCookie> Login(Guid guid, Guid securityGUID);
 	}
 }

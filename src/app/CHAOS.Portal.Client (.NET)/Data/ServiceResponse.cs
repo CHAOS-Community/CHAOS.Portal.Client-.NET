@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace CHAOS.Portal.Client.Data
 {
@@ -6,12 +6,6 @@ namespace CHAOS.Portal.Client.Data
 	{
 		public ServiceHeader Header { get; set; }
 		public ServiceResult<T> Result { get; set; }
-	}
-
-	public class ServiceResult<T>
-	{
-		public uint Count { get; set; }
-		public uint TotalCount { get; set; }
-		public IList<T> Results { get; set; }
+		public Exception Error { get; set; }
 	}
 }

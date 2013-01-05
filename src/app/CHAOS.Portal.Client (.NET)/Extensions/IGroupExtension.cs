@@ -6,9 +6,9 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IGroupExtension
 	{
-		IServiceCallState<IServiceResult_Portal<Group>> Get(Guid? guid = null);
-		IServiceCallState<IServiceResult_Portal<Group>> Create(string name, int systemPermission);
-		IServiceCallState<IServiceResult_Portal<ScalarResult>> Update(Guid guid, string newName, int newSystemPermission);
-		IServiceCallState<IServiceResult_Portal<ScalarResult>> Delete(Guid guid);
+		IServiceCallState<Group> Get(Guid? guid = null);
+		IServiceCallState<Group> Create(string name, int systemPermission);
+		IServiceCallState<ScalarResult> Update(Guid guid, string newName, int newSystemPermission);
+		IServiceCallState<ScalarResult> Delete(Guid guid);
 	}
 }

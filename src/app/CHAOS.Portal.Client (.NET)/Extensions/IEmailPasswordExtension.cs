@@ -6,7 +6,7 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IEmailPasswordExtension
 	{
-		IServiceCallState<IServiceResult_EmailPassword<User>> CreatePassword(Guid userGUID, string password);
-		IServiceCallState<IServiceResult_EmailPassword<User>> Login(string email, string password);
+		IServiceCallState<User> CreatePassword(Guid userGUID, string password);
+		IServiceCallState<User> Login(string email, string password);
 	}
 }

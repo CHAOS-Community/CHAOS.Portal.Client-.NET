@@ -6,7 +6,7 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IObjectRelationExtension
 	{
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Create(Guid object1GUID, Guid object2GUID, uint objectRelationTypeID, int? sequence);
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Delete(Guid object1GUID, Guid object2GUID, uint objectRelationTypeID);
+		IServiceCallState<ScalarResult> Create(Guid object1GUID, Guid object2GUID, uint objectRelationTypeID, int? sequence);
+		IServiceCallState<ScalarResult> Delete(Guid object1GUID, Guid object2GUID, uint objectRelationTypeID);
 	}
 }

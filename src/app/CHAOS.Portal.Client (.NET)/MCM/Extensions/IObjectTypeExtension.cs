@@ -6,9 +6,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IObjectTypeExtension
 	{
-		IServiceCallState<IServiceResult_MCM<ObjectType>> Get(int? id = null, string name = null);
-		IServiceCallState<IServiceResult_MCM<ObjectType>> Create(string value);
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Update(int id, string newValue);
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Delete(int id);
+		IServiceCallState<ObjectType> Get(int? id = null, string name = null);
+		IServiceCallState<ObjectType> Create(string value);
+		IServiceCallState<ScalarResult> Update(int id, string newValue);
+		IServiceCallState<ScalarResult> Delete(int id);
 	}
 }

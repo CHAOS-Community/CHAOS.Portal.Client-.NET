@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 
@@ -8,7 +9,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 	/// Represents the state of a service call.
 	/// </summary>
 	/// <typeparam name="T">The type of the result from the service.</typeparam>
-	public interface IServiceCallState<T> where T : class, IServiceResult
+	public interface IServiceCallState<T> where T : class
 	{
 		/// <summary>
 		/// Is raised every time the upload progress change.
@@ -21,7 +22,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// <summary>
 		/// Is raised when the service call has completed, successful or not.
 		/// </summary>
-		event EventHandler<DataOperationEventArgs<T>> OperationCompleted;
+		event EventHandler<DataOperationEventArgs<ServiceResponse<T>>> OperationCompleted;
 		
 		/// <summary>
 		/// Indicates the upload progress from 0 to 1.
@@ -40,25 +41,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// <summary>
 		/// The result of the service call, is set when the call completes successfully.
 		/// </summary>
-		T Result { get; }
-		/// <summary>
-		/// An error if the service call itself fails.
-		/// </summary>
-		Exception Error { get; }
-
-		/// <summary>
-		/// Gets the first error from the service call itself or from any module that returned mapped data.
-		/// Null is returned if no error was found
-		/// </summary>
-		/// <returns>The first error found or null</returns>
-		Exception GetFirstError();
-
-		/// <summary>
-		/// Find the first error from the service call itself or from any module that returned mapped data and throws it.
-		/// If no error is found nothing happens
-		/// </summary>
-		/// <returns>The state itself</returns>
-		IServiceCallState<T> ThrowFirstError();
+		ServiceResponse<T> Response { get; }
 
 		/// <summary>
 		/// A callback to be called when a service call completes, successful or not.
@@ -103,5 +86,5 @@ namespace CHAOS.Portal.Client.ServiceCall
 	/// <param name="result">The result of the service call, if successful, otherwise null.</param>
 	/// <param name="error">An error if the service call failed, otherwise null.</param>
 	/// <param name="token">An object if set on <code>IServiceCallState&gr;T&lt;.Object</code></param>
-	public delegate void ServiceCallback<in TResult>(TResult result, Exception error, object token);
+	public delegate void ServiceCallback<TResult>(IList<TResult> result, Exception error, object token);
 }

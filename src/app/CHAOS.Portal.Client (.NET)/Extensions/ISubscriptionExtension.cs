@@ -6,9 +6,9 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface ISubscriptionExtension
 	{
-		IServiceCallState<IServiceResult_Portal<Subscription>> Get(Guid guid);
-		IServiceCallState<IServiceResult_Portal<Subscription>> Create(string name);
-		IServiceCallState<IServiceResult_Portal<ScalarResult>> Update(Guid guid, string newName);
-		IServiceCallState<IServiceResult_Portal<ScalarResult>> Delete(Guid guid);
+		IServiceCallState<Subscription> Get(Guid guid);
+		IServiceCallState<Subscription> Create(string name);
+		IServiceCallState<ScalarResult> Update(Guid guid, string newName);
+		IServiceCallState<ScalarResult> Delete(Guid guid);
 	}
 }

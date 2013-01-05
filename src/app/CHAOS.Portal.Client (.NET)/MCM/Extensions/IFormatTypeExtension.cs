@@ -6,9 +6,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IFormatTypeExtension
 	{
-		IServiceCallState<IServiceResult_MCM<FormatType>> Get(int? id = null, string name = null);
-		IServiceCallState<IServiceResult_MCM<FormatType>> Create(string name);
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Update(int id, string newName);
-		IServiceCallState<IServiceResult_MCM<ScalarResult>> Delete(int id);
+		IServiceCallState<FormatType> Get(int? id = null, string name = null);
+		IServiceCallState<FormatType> Create(string name);
+		IServiceCallState<ScalarResult> Update(int id, string newName);
+		IServiceCallState<ScalarResult> Delete(int id);
 	}
 }
