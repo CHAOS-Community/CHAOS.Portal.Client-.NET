@@ -89,7 +89,7 @@ namespace CHAOS.Portal.Client.Standard
 
 		public void UseExistingSession(Guid guid)
 		{
-			CurrentSession = new Session { SessionGUID = guid };
+			CurrentSession = new Session { GUID = guid };
 
 			this.Session().Update();
 		}
@@ -122,7 +122,7 @@ namespace CHAOS.Portal.Client.Standard
 				if (!HasSession)
 					throw new Exception(string.Format("Session required before calling {0}/{1}", extensionName, commandName));
 
-				parameters[PARAMETER_NAME_SESSION_ID] = CurrentSession.SessionGUID;
+				parameters[PARAMETER_NAME_SESSION_ID] = CurrentSession.GUID;
 			}
 
 			parameters[PARAMETER_NAME_FORMAT] = PARAMETER_VALUE_FORMAT;
