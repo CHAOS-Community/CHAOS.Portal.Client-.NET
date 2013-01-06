@@ -6,5 +6,10 @@
 		 {
 			 return ExtensionProviderService.GetExtension<SessionExtension>(portalClient);
 		 }
+
+		 public static IEmailPasswordExtension EmailPassword(this IPortalClient portalClient)
+		 {
+			 return ExtensionProviderService.GetExtension<EmailPasswordExtension>(portalClient);
+		 }
 	}
 }
