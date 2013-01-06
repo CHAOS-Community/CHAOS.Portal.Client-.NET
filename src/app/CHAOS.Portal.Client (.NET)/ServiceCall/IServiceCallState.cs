@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 
@@ -77,6 +76,12 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// <param name="invokeFeedbackOnDispatcher">If true; callback and events will be called on dispatcher thread</param>
 		/// <returns>Returns the IServiceCallState for chaining</returns>
 		IServiceCallState<T> InvokeFeedbackOnDispatcher(bool invokeFeedbackOnDispatcher = true);
+
+		/// <summary>
+		/// Throws any error returned by the service.
+		/// </summary>
+		/// <returns>Returns the IServiceCallState for chaining</returns>
+		IServiceCallState<T> ThrowError();
 	}
 
 	/// <summary>

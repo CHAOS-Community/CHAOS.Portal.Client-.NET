@@ -94,6 +94,17 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			return this;
 		}
 
+		public IServiceCallState<T> ThrowError()
+		{
+			if(Response == null)
+				throw new Exception("Service response not ready");
+
+			if (Response.Error != null)
+				throw Response.Error;
+
+			return this;
+		}
+
 		private void Feedback(Action action)
 		{
 #if SILVERLIGHT

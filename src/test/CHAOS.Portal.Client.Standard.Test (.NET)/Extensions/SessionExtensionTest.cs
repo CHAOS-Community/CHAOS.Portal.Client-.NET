@@ -1,3 +1,5 @@
+using CHAOS.Portal.Client.Extensions;
+
 #if SILVERLIGHT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
@@ -24,11 +26,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldCreateSession()
 		{
 			TestData(
-				CallPortal(c => c.Session.Create(), false, false, false),
+				CallPortal(c => c.Session().Create(), false, false, false),
 					d =>
 					{
-						Assert.AreNotEqual(d.Portal.Data.Count, 0, "No session data returned");
-						Assert.AreNotEqual(new Guid(), d.Portal.Data[0].SessionGUID);
+						Assert.AreNotEqual(d.Count, 0, "No session data returned");
+						Assert.AreNotEqual(new Guid(), d[0].SessionGUID);
 					});
 
 			EndTest();

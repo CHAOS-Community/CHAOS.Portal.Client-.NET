@@ -45,6 +45,7 @@
     <Compile Include="Data\ServiceHeader.cs" />
     <Compile Include="Data\ServiceResponse.cs" />
     <Compile Include="Data\ServiceResult.cs" />
+    <Compile Include="Extensions\EmailPasswordExtension.cs" />
     <Compile Include="Indexing\Data\Facet.cs" />
     <Compile Include="Indexing\Data\FacetsResult.cs" />
     <Compile Include="Indexing\Data\IndexResponse.cs" />

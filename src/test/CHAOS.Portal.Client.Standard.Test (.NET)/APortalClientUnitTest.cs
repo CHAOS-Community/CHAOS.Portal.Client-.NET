@@ -2,12 +2,14 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
+using System.Collections.Generic;
 using NUnit.Framework;
 #endif
 
 using System;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
+using CHAOS.Portal.Client.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test
 {
@@ -21,16 +23,16 @@ namespace CHAOS.Portal.Client.Standard.Test
 	{
 		private static IPortalClient _reusableClient;
 
-		protected Func<T> CallPortal<T>(Func<IPortalClient, IServiceCallState<T>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class, IServiceResult
+		protected Func<IList<T>> CallPortal<T>(Func<IPortalClient, IServiceCallState<T>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class
 		{
 			var client = GetClient(createSession, login, reuseClient);
 
 			return CallPortal(() => caller(client));
 		}
 
-		protected Func<T> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class, IServiceResult
+		protected Func<IList<T>> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class
 		{
-			T data = null;
+			IList<T> data = null;
 #if SILVERLIGHT
 			 IServiceCallState<T> state = null;
 
@@ -38,7 +40,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 			 EnqueueConditional(() => state.Result != null);
 			 EnqueueCallback(() => data = state.ThrowFirstError().Result);
 #else
-			 data = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowFirstError().Result;
+			 data = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowError().Response.Result.Results;
 #endif
 			 return () => data;
 		 }
@@ -52,7 +54,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 #endif
 		}
 
-		protected void TestData<T>(Func<T> data, Action<T> test) where T : class, IServiceResult
+		protected void TestData<T>(Func<T> data, Action<T> test) where T : class
 		{
 #if SILVERLIGHT
 			EnqueueCallback(() => test(data()));
@@ -79,10 +81,10 @@ namespace CHAOS.Portal.Client.Standard.Test
 				_reusableClient = client;
 
 			if (createSession)
-				CallPortal(() => client.Session.Create());
+				CallPortal(() => client.Session().Create());
 
 			if (createSession && login)
-				CallPortal(() => client.EmailPassword.Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword));
+				CallPortal(() => client.EmailPassword().Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword));
 
 			return client;
 		}

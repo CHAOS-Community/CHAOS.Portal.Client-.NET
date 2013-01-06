@@ -17,7 +17,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 		public static IPortalClient GetClient()
 		{	
-			var kernel = new StandardKernel();
+			/*var kernel = new StandardKernel();
 
 			kernel.Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
 			kernel.Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
@@ -25,7 +25,9 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 			kernel.Load(new Module.Module());
 
-			var client = kernel.Get<IPortalClient>();
+			var client = kernel.Get<IPortalClient>();*/
+
+			var client = new PortalClient();
 
 			if (UseLatest)
 				((PortalClient) client).UseLatest = true;
