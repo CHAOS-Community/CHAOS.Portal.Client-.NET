@@ -41,27 +41,27 @@ namespace CHAOS.Portal.Client.Extensions
 			return state;
 		}
 
-		private void CreateCompleted(object sender, DataOperationEventArgs<ServiceResponse<Session>> e)
+		private void CreateCompleted(object sender, DataEventArgs<ServiceResponse<Session>> e)
 		{
 			((IServiceCallState<Session>)sender).OperationCompleted -= CreateCompleted;
 
-			if (e.Error == null && e.Data.Error == null && e.Data.Result.Count == 1) //TODO: Handle if there is less or more than one Session returned.
+			if (e.Data.Error == null && e.Data.Result.Count == 1) //TODO: Handle if there is less or more than one Session returned.
 				SessionChanged(this, new DataEventArgs<Session>(e.Data.Result.Results[0]));
 		}
 
-		private void UpdateCompleted(object sender, DataOperationEventArgs<ServiceResponse<Session>> e)
+		private void UpdateCompleted(object sender, DataEventArgs<ServiceResponse<Session>> e)
 		{
 			((IServiceCallState<Session>)sender).OperationCompleted -= UpdateCompleted;
 
-			if (e.Error == null && e.Data.Error == null && e.Data.Result.Count == 1) //TODO: Handle if there is less or more than one Session returned.
+			if (e.Data.Error == null && e.Data.Result.Count == 1) //TODO: Handle if there is less or more than one Session returned.
 				SessionChanged(this, new DataEventArgs<Session>(e.Data.Result.Results[0]));
 		}
 
-		private void DeleteCompleted(object sender, DataOperationEventArgs<ServiceResponse<ScalarResult>> e)
+		private void DeleteCompleted(object sender, DataEventArgs<ServiceResponse<ScalarResult>> e)
 		{
 			((IServiceCallState<ScalarResult>)sender).OperationCompleted -= DeleteCompleted;
 
-			if (e.Error == null && e.Data.Result.Results[0].Value == 1) //TODO: Check and handle other values.
+			if (e.Data.Error == null && e.Data.Result.Count == 1 && e.Data.Result.Results[0].Value == 1) //TODO: Check and handle other values.
 				SessionChanged(this, new DataEventArgs<Session>(null));
 		}
 	}

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Extensions;
-using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Portal.Client.Standard.ServiceCall;
@@ -22,7 +21,7 @@ namespace CHAOS.Portal.Client.Standard
 
 		private const uint PROTOCOL_VERSION = 6;
 
-		private readonly IServiceCallFactory _serviceCallFactory;
+		private readonly ServiceCallFactory _serviceCallFactory;
 
 		private string _servicePath;
 		public string ServicePath
@@ -43,9 +42,9 @@ namespace CHAOS.Portal.Client.Standard
 		public uint ProtocolVersion { get { return PROTOCOL_VERSION; } }
 		public bool UseLatest { get; set; }
 
-		public PortalClient(IServiceCallFactory serviceCallFactory)
+		public PortalClient()
 		{
-			_serviceCallFactory = ArgumentUtilities.ValidateIsNotNull("serviceCallFactory", serviceCallFactory);
+			_serviceCallFactory = new ServiceCallFactory();
 		}
 
 		public void RegisterExtension(IExtension extension)
@@ -113,7 +112,7 @@ namespace CHAOS.Portal.Client.Standard
 		#endregion
 		#region Call
 
-		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceResult
+		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class
 		{
 			if (string.IsNullOrEmpty(ServicePath))
 				throw new Exception("ServicePath must be set");

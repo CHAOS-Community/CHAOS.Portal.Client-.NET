@@ -5,21 +5,18 @@ using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.ServiceCall;
 using Math = CHAOS.Utilities.Math;
 using CHAOS.Extensions;
-using System.Linq;
 
 #if SILVERLIGHT
-
 using System.Windows;
-
 #endif
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ServiceCallState<T> : IServiceCallState<T> where T : class, IServiceResult
+	public class ServiceCallState<T> : IServiceCallState<T> where T : class
 	{
 		public event EventHandler<DataChangedEventArgs<double>> UploadProgressChanged = delegate { };
 		public event EventHandler<DataChangedEventArgs<double>> DownloadProgressChanged = delegate { };
-		public event EventHandler<DataOperationEventArgs<T>> OperationCompleted = delegate { };
+		public event EventHandler<DataEventArgs<ServiceResponse<T>>> OperationCompleted = delegate { };
 
 		private double _uploadProgress;
 		private double _downloadProgress;
@@ -60,21 +57,17 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 		public object Token { get; set; }
 
-		public T Result { get; private set; }
-		public Exception Error { get; private set; }
-
+		public ServiceResponse<T> Response { get; private set; }
 		public ServiceCallback<T> Callback { get; set; }
 
 		public bool FeedbackOnDispatcher { get; set; }
 
+		#if !SILVERLIGHT
 		public IServiceCallState<T> Synchronous(uint timeout)
 		{
-#if SILVERLIGHT
-			throw new InvalidOperationException("Synchronous call not support in Silverlight");
-#endif
 			var endTime = DateTime.Now.AddMilliseconds(timeout);
 
-			while (Result == null && Error == null)
+			while (Response == null)
 			{
 				if (timeout != 0 && endTime.CompareTo(DateTime.Now) < 0)
 					throw new TimeoutException();
@@ -84,6 +77,7 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 			return this;
 		}
+#endif
 
 		public IServiceCallState<T> WithCallback(ServiceCallback<T> callback, object token)
 		{
@@ -112,21 +106,19 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 #endif
 		}
 
-		public void ReportResult(T result, Exception error)
+		public void ReportResult(ServiceResponse<T> response)
 		{
-			if (!(result == null ^ error == null))
-				throw new ArgumentException("Exactly one of result or error must be set");
+			response.ValidateIsNotNull("response");
 
-			Result = result;
-			Error = error;
+			Response = response;
 
 			Feedback(() =>
 			         	{
-							OperationCompleted(this, new DataOperationEventArgs<T>(result, error));
+							OperationCompleted(this, new DataEventArgs<ServiceResponse<T>>(response));
 
 							var callback = Callback;
 							if (callback != null)
-								callback(result, error, Token);
+								callback(response, Token);
 			         	});
 		}
 	}

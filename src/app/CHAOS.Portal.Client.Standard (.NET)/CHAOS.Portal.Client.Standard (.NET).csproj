@@ -34,35 +34,39 @@
     <Reference Include="CHAOS, Version=1.0.4491.40027, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CHAOS.Serialization, Version=1.0.4491.40027, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CHAOS.Serialization.Standard">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.Standard.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CHAOS.Web, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\AnyCPU\CHAOS.Web.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\ModuleAttribute.cs" />
-    <Compile Include="Data\ModuleResult.cs" />
-    <Compile Include="Data\ServiceResult.cs" />
     <Compile Include="PortalClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceCall\IServiceCall.cs" />
-    <Compile Include="ServiceCall\IServiceCallFactory.cs" />
     <Compile Include="ServiceCall\ResultParser.cs" />
     <Compile Include="ServiceCall\ServiceCall.cs" />
+    <Compile Include="ServiceCall\ServiceCallFactory.cs" />
     <Compile Include="ServiceCall\ServiceCallState.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
       <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>
       <Name>CHAOS.Portal.Client %28.NET%29</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -22,7 +22,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 		/// <summary>
 		/// Is raised when the service call has completed, successful or not.
 		/// </summary>
-		event EventHandler<DataOperationEventArgs<ServiceResponse<T>>> OperationCompleted;
+		event EventHandler<DataEventArgs<ServiceResponse<T>>> OperationCompleted;
 		
 		/// <summary>
 		/// Indicates the upload progress from 0 to 1.
@@ -83,8 +83,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 	/// A delegate used as the callback when a service call completes, successful or not.
 	/// </summary>
 	/// <typeparam name="TResult">The type of result from the service call.</typeparam>
-	/// <param name="result">The result of the service call, if successful, otherwise null.</param>
-	/// <param name="error">An error if the service call failed, otherwise null.</param>
+	/// <param name="response">The response from the service.</param>
 	/// <param name="token">An object if set on <code>IServiceCallState&gr;T&lt;.Object</code></param>
-	public delegate void ServiceCallback<TResult>(IList<TResult> result, Exception error, object token);
+	public delegate void ServiceCallback<TResult>(ServiceResponse<TResult> response, object token);
 }

@@ -34,6 +34,7 @@
     <Reference Include="CHAOS, Version=1.0.4491.40027, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
@@ -41,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AData.cs" />
-    <Compile Include="Data\IModuleResult.cs" />
     <Compile Include="Data\ServiceHeader.cs" />
     <Compile Include="Data\ServiceResponse.cs" />
     <Compile Include="Data\ServiceResult.cs" />

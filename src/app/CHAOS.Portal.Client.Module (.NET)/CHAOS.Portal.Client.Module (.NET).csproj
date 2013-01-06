@@ -33,7 +33,6 @@
   <ItemGroup>
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceCallFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">

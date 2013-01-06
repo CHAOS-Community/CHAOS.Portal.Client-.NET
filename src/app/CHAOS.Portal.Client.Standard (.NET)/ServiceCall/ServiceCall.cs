@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using CHAOS.Events;
-using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Web;
 using HTTPMethod = CHAOS.Web.HTTPMethod;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ServiceCall<T> : IServiceCall<T> where T : class, IServiceResult
+	public class ServiceCall<T> where T : class
 	{
 		private readonly ServiceCallState<T> _state;
 		private readonly ResultParser<T> _resultParser;
@@ -48,22 +48,9 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 		private void Request_Completed(object sender, DataOperationEventArgs<string> e)
 		{
-			T result = null;
-			Exception resultError = null;
-
-			try
-			{
-				if(e.HasError)
-					resultError = e.Error;
-				else
-					result = _resultParser.Parse(e.Data);
-			}
-			catch (Exception error)
-			{
-				resultError = new Exception("Failed to parse service result", error);
-			}
-
-			_state.ReportResult(result, resultError);
+			_state.ReportResult(e.HasError
+									? new ServiceResponse<T> {Error = new Exception("Http error", e.Error)}
+									: _resultParser.Parse(e.Data));
 		}
 	}
 }
