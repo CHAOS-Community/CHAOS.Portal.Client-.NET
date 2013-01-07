@@ -50,9 +50,18 @@ namespace CHAOS.Portal.Client.Standard
 		public void RegisterExtension(IExtension extension)
 		{
 			var sessionExtension = extension as ISessionChangingExtension;
+			var clientGUIDDependentExtension = extension as IClientGUIDDependentExtension;
 
 			if (sessionExtension != null)
 				sessionExtension.SessionChanged += SessionChanged;
+
+			if (clientGUIDDependentExtension != null)
+			{
+				if(!HasClientGUID)
+					throw new Exception("ClientGUID not set");
+
+				clientGUIDDependentExtension.ClientGUID = ClientGUID.Value;
+			}
 		}
 
 		#region ClientGUID

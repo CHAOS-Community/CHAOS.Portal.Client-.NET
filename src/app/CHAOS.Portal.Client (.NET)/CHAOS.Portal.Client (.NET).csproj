@@ -45,10 +45,19 @@
     <Compile Include="Data\ServiceHeader.cs" />
     <Compile Include="Data\ServiceResponse.cs" />
     <Compile Include="Data\ServiceResult.cs" />
+    <Compile Include="Extensions\ClientSettingsExtension.cs" />
     <Compile Include="Extensions\EmailPasswordExtension.cs" />
+    <Compile Include="Extensions\GroupExtension.cs" />
+    <Compile Include="Extensions\IClientGUIDDependentExtension.cs" />
+    <Compile Include="MCM\Extensions\LanguageExtension.cs" />
+    <Compile Include="Extensions\SecureCookieExtension.cs" />
+    <Compile Include="Extensions\SubscriptionExtension.cs" />
+    <Compile Include="Extensions\UserExtension.cs" />
+    <Compile Include="Extensions\UserSettingsExtension.cs" />
     <Compile Include="Indexing\Data\Facet.cs" />
     <Compile Include="Indexing\Data\FacetsResult.cs" />
     <Compile Include="Indexing\Data\IndexResponse.cs" />
+    <Compile Include="Indexing\Extensions\IndexExtension.cs" />
     <Compile Include="MCM\Data\AccessPoint.cs" />
     <Compile Include="MCM\Data\ChunkState.cs" />
     <Compile Include="MCM\Data\EntityPermission.cs" />
@@ -75,6 +84,17 @@
     <Compile Include="Data\User.cs" />
     <Compile Include="Data\UserSetting.cs" />
     <Compile Include="Data\ScalarResult.cs" />
+    <Compile Include="MCM\Extensions\FileExtension.cs" />
+    <Compile Include="MCM\Extensions\FolderExtension.cs" />
+    <Compile Include="MCM\Extensions\FolderTypeExtension.cs" />
+    <Compile Include="MCM\Extensions\FormatTypeExtension.cs" />
+    <Compile Include="MCM\Extensions\LinkExtension.cs" />
+    <Compile Include="MCM\Extensions\MetadataExtension.cs" />
+    <Compile Include="MCM\Extensions\MetadataSchemaExtension.cs" />
+    <Compile Include="MCM\Extensions\ObjectExtension.cs" />
+    <Compile Include="MCM\Extensions\ObjectRelationExtension.cs" />
+    <Compile Include="MCM\Extensions\ObjectRelationTypeExtension.cs" />
+    <Compile Include="MCM\Extensions\ObjectTypeExtension.cs" />
     <Compile Include="Upload\Data\FileData.cs" />
     <Compile Include="Upload\Data\UploadToken.cs" />
     <Compile Include="Extensions\AExtension.cs" />
@@ -89,7 +109,7 @@
     <Compile Include="MCM\Extensions\IFormatTypeExtension.cs" />
     <Compile Include="Extensions\IGroupExtension.cs" />
     <Compile Include="Indexing\Extensions\IIndexExtension.cs" />
-    <Compile Include="Extensions\ILanguageExtension.cs" />
+    <Compile Include="MCM\Extensions\ILanguageExtension.cs" />
     <Compile Include="MCM\Extensions\ILinkExtension.cs" />
     <Compile Include="MCM\Extensions\IMetadataExtension.cs" />
     <Compile Include="MCM\Extensions\IMetadataSchemaExtension.cs" />
@@ -123,6 +143,7 @@
     <Compile Include="ServiceCall\HTTPMethod.cs" />
     <Compile Include="ServiceCall\IServiceCaller.cs" />
     <Compile Include="ServiceCall\IServiceCallState.cs" />
+    <Compile Include="Upload\Extensions\UploadExtension.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
