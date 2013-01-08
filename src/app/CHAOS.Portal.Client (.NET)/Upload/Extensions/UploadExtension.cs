@@ -3,6 +3,7 @@ using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Portal.Client.Upload.Data;
+using CHAOS.Web.Data;
 
 namespace CHAOS.Portal.Client.Upload.Extensions
 {

@@ -36,6 +36,10 @@
       <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="CHAOS.Web">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.XML" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +53,11 @@
     <Compile Include="Extensions\EmailPasswordExtension.cs" />
     <Compile Include="Extensions\GroupExtension.cs" />
     <Compile Include="Extensions\IClientGUIDDependentExtension.cs" />
+    <Compile Include="Indexing\Extensions\ExtensionProviders.cs" />
+    <Compile Include="MCM\Data\Format.cs" />
+    <Compile Include="MCM\Extensions\ExtensionProviders.cs" />
+    <Compile Include="MCM\Extensions\FormatExtension.cs" />
+    <Compile Include="MCM\Extensions\IFormatExtension.cs" />
     <Compile Include="MCM\Extensions\LanguageExtension.cs" />
     <Compile Include="Extensions\SecureCookieExtension.cs" />
     <Compile Include="Extensions\SubscriptionExtension.cs" />
@@ -121,6 +130,7 @@
     <Compile Include="Extensions\ISessionChangingExtension.cs" />
     <Compile Include="Extensions\ISessionExtension.cs" />
     <Compile Include="Extensions\ISubscriptionExtension.cs" />
+    <Compile Include="Upload\Extensions\ExtensionProviders.cs" />
     <Compile Include="Upload\Extensions\IUploadExtension.cs" />
     <Compile Include="Extensions\IUserExtension.cs" />
     <Compile Include="Extensions\IUserSettingsExtension.cs" />

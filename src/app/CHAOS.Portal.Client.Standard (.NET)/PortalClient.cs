@@ -21,7 +21,7 @@ namespace CHAOS.Portal.Client.Standard
 
 		private const uint PROTOCOL_VERSION = 6;
 
-		private readonly ServiceCallFactory _serviceCallFactory;
+		private readonly IServiceCallFactory _serviceCallFactory;
 
 		private string _servicePath;
 		public string ServicePath
@@ -42,9 +42,14 @@ namespace CHAOS.Portal.Client.Standard
 		public uint ProtocolVersion { get { return PROTOCOL_VERSION; } }
 		public bool UseLatest { get; set; }
 
-		public PortalClient()
+		public PortalClient() : this(new ServiceCallFactory())
 		{
-			_serviceCallFactory = new ServiceCallFactory();
+			
+		}
+
+		public PortalClient(IServiceCallFactory serviceCallFactory)
+		{
+			_serviceCallFactory = serviceCallFactory;
 		}
 
 		public void RegisterExtension(IExtension extension)

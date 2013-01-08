@@ -13,14 +13,14 @@ namespace CHAOS.Portal.Client.Module
 			Bind<IServiceCallFactory>().To<ServiceCallFactory>().InSingletonScope();
 			Bind<IPortalClient>().To<PortalClient>().InSingletonScope();
 			
-			Bind<IFolderManager>().To<FolderManager>().InSingletonScope();
+			/*Bind<IFolderManager>().To<FolderManager>().InSingletonScope();
 			Bind<IObjectManager>().To<ObjectManager>().InSingletonScope();
 			Bind<IMetadataSchemaManager>().To<MetadataSchemaManager>().InSingletonScope();
 			Bind<IMCMTypesManager>().To<MCMTypesManager>().InSingletonScope();
 			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();
 			Bind<IUserManager>().To<UserManager>().InSingletonScope();
 			Bind<IFileUploader>().To<FileUploader>();
-			Bind<IFileUploadManager>().To<FileUploadManager>().InSingletonScope();
+			Bind<IFileUploadManager>().To<FileUploadManager>().InSingletonScope();*/
 		}
 	}
 }

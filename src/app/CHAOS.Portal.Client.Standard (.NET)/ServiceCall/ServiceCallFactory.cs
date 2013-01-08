@@ -7,7 +7,7 @@ using CHAOS.Web;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ServiceCallFactory
+	public class ServiceCallFactory : IServiceCallFactory
 	{
 		private readonly IStringSerializer _stringSerializer;
 		private readonly IXMLSerializer _xmlSerializer;
@@ -19,7 +19,7 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			_xmlSerializer.Map(typeof(IList<>), typeof(List<>));
 		}
 
-		public ServiceCall<T> GetServiceCall<T>() where T : class
+		public IServiceCall<T> GetServiceCall<T>() where T : class
 		{
 			return new ServiceCall<T>(new ServiceCallState<T>(), new ResultParser<T>(_xmlSerializer), new SmartHTTPRequest(_stringSerializer));
 		}
