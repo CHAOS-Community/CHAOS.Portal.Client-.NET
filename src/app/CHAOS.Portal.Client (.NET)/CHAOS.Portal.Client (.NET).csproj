@@ -68,7 +68,6 @@
     <Compile Include="Indexing\Data\IndexResponse.cs" />
     <Compile Include="Indexing\Extensions\IndexExtension.cs" />
     <Compile Include="MCM\Data\AccessPoint.cs" />
-    <Compile Include="MCM\Data\ChunkState.cs" />
     <Compile Include="MCM\Data\EntityPermission.cs" />
     <Compile Include="MCM\Data\File.cs" />
     <Compile Include="MCM\Data\Folder.cs" />
@@ -104,6 +103,7 @@
     <Compile Include="MCM\Extensions\ObjectRelationExtension.cs" />
     <Compile Include="MCM\Extensions\ObjectRelationTypeExtension.cs" />
     <Compile Include="MCM\Extensions\ObjectTypeExtension.cs" />
+    <Compile Include="Upload\Data\ChunkState.cs" />
     <Compile Include="Upload\Data\FileData.cs" />
     <Compile Include="Upload\Data\UploadToken.cs" />
     <Compile Include="Extensions\AExtension.cs" />

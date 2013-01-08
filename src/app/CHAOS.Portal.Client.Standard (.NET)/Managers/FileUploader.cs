@@ -1,9 +1,10 @@
 using System;
 using System.IO;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.Upload;
 using CHAOS.Portal.Client.Managers;
 using CHAOS.Extensions;
+using CHAOS.Portal.Client.Upload.Data;
+using CHAOS.Portal.Client.Upload.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Managers
 {
@@ -88,18 +89,18 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public void Start()
 		{
 			State = TransactionState.Started;
-			_client.Upload.Initiate(ObjectGUID, FormatTypeID, (ulong)_fileData.Length, true).Callback = InitiateCompleted;
+			_client.Upload().Initiate(ObjectGUID, FormatTypeID, (ulong)_fileData.Length, true).Callback = InitiateCompleted;
 		}
 
-		private void InitiateCompleted(IServiceResult_Upload<UploadToken> result, Exception error, object token)
+		private void InitiateCompleted(ServiceResponse<UploadToken> response, object token)
 		{
-			if (error != null || result.Upload.Error != null || result.Upload.Data.Count == 0)
+			if (response.Error != null || response.Result.Results.Count == 0)
 			{
 				State = TransactionState.Failed;
 				return;
 			}
 
-			_uploadToken = result.Upload.Data[0];
+			_uploadToken = response.Result.Results[0];
 
 			UploadNextChunk();
 		}
@@ -114,13 +115,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(State != TransactionState.Started)
 				return;
 
-			_client.Upload.Transfer(_uploadToken.UploadID, chunkIndex, new FileData(FileName, _fileData, _fileData.Position, _uploadToken.ChunkSize)).WithCallback(TransferCompleted).UploadProgressChanged 
+			_client.Upload().Transfer(_uploadToken.UploadID, chunkIndex, new FileData(FileName, _fileData, _fileData.Position, _uploadToken.ChunkSize)).WithCallback(TransferCompleted).UploadProgressChanged 
 				+= (sender, args) => Progress = (ChunkIndex - 1 + Math.Min(0.99, args.NewValue)) / _uploadToken.NoOfChunks; //Math.Min() is used to prevent progress from reaching completed
 		}
 
-		private void TransferCompleted(IServiceResult_Upload<ScalarResult> result, Exception error, object token)
+		private void TransferCompleted(ServiceResponse<ScalarResult> response, object token)
 		{
-			if (error != null || result.Upload.Error != null)
+			if (response.Error != null || response.Result.Results[0].Value != 1)
 			{
 				State = TransactionState.Failed;
 				return;

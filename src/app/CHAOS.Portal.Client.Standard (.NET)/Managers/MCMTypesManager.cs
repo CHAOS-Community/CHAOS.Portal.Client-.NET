@@ -2,7 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.MCM.Extensions;
 using CHAOS.Portal.Client.Managers;
 
 namespace CHAOS.Portal.Client.Standard.Managers
@@ -44,57 +45,57 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void GetTypes()
 		{
-			_client.FolderType.Get(null, null).Callback = ClientFolderTypeGet;
-			_client.FormatType.Get(null, null).Callback = ClientFormatTypeGet;
-			_client.ObjectRelationType.Get(null, null).Callback = ClientObjectRelationTypeGet;
-			_client.ObjectType.Get(null, null).Callback = ClientObjectTypeGet;
+			_client.FolderType().Get().Callback = ClientFolderTypeGet;
+			_client.FormatType().Get().Callback = ClientFormatTypeGet;
+			_client.ObjectRelationType().Get().Callback = ClientObjectRelationTypeGet;
+			_client.ObjectType().Get().Callback = ClientObjectTypeGet;
 		}
 
-		private void ClientFolderTypeGet(IServiceResult_MCM<FolderType> result, Exception error, object token)
+		private void ClientFolderTypeGet(ServiceResponse<FolderType> response, object token)
 		{
-			if(error != null)
+			if (response.Error != null)
 			{
-				ServiceFailed(this, new DataEventArgs<Exception>(error));
+				ServiceFailed(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
-			foreach (var folderType in result.MCM.Data)
+			foreach (var folderType in response.Result.Results)
 				_folderTypes.Add(folderType);
 		}
 
-		private void ClientFormatTypeGet(IServiceResult_MCM<FormatType> result, Exception error, object token)
+		private void ClientFormatTypeGet(ServiceResponse<FormatType> response, object token)
 		{
-			if (error != null)
+			if (response.Error != null)
 			{
-				ServiceFailed(this, new DataEventArgs<Exception>(error));
+				ServiceFailed(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
-			foreach (var formatType in result.MCM.Data)
+			foreach (var formatType in response.Result.Results)
 				_formatTypes.Add(formatType);
 		}
 
-		private void ClientObjectRelationTypeGet(IServiceResult_MCM<ObjectRelationType> result, Exception error, object token)
+		private void ClientObjectRelationTypeGet(ServiceResponse<ObjectRelationType> response, object token)
 		{
-			if (error != null)
+			if (response.Error != null)
 			{
-				ServiceFailed(this, new DataEventArgs<Exception>(error));
+				ServiceFailed(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
-			foreach (var objectRelationType in result.MCM.Data)
+			foreach (var objectRelationType in response.Result.Results)
 				_objectRelationTypes.Add(objectRelationType);
 		}
 
-		private void ClientObjectTypeGet(IServiceResult_MCM<ObjectType> result, Exception error, object token)
+		private void ClientObjectTypeGet(ServiceResponse<ObjectType> response, object token)
 		{
-			if (error != null)
+			if (response.Error != null)
 			{
-				ServiceFailed(this, new DataEventArgs<Exception>(error));
+				ServiceFailed(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
-			foreach (var objectType in result.MCM.Data)
+			foreach (var objectType in response.Result.Results)
 				_objectTypes.Add(objectType);
 		}
 	}

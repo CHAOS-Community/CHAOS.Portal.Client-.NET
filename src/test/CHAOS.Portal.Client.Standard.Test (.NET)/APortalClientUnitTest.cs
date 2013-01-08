@@ -2,12 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
-using System.Collections.Generic;
 using NUnit.Framework;
 #endif
 
 using System;
-using CHAOS.Portal.Client.Data;
+using System.Collections.Generic;
 using CHAOS.Portal.Client.ServiceCall;
 using CHAOS.Portal.Client.Extensions;
 

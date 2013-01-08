@@ -2,7 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.MCM.Extensions;
 using CHAOS.Portal.Client.Managers;
 
 namespace CHAOS.Portal.Client.Standard.Managers
@@ -36,18 +37,18 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void GetLanguages()
 		{
-			_client.Language.Get(null, null).Callback = ClientLanguageGetCompleted;
+			_client.Language().Get().Callback = ClientLanguageGetCompleted;
 		}
 
-		private void ClientLanguageGetCompleted(IServiceResult_MCM<Language> result, Exception error, object token)
+		private void ClientLanguageGetCompleted(ServiceResponse<Language> response, object token)
 		{
-			if(error != null)
+			if(response.Error != null)
 			{
-				ServiceFailed(this, new DataEventArgs<Exception>(error));
+				ServiceFailed(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
-			foreach (var language in result.MCM.Data)
+			foreach (var language in response.Result.Results)
 				_languages.Add(language);
 
 			Loaded(this, EventArgs.Empty);

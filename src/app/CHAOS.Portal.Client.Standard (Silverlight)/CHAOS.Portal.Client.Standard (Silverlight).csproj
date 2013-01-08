@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="CHAOS.Serialization.Standard">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Serialization.Standard.dll</HintPath>
+    </Reference>
     <Reference Include="CHAOS.Web, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\lib\Silverlight\CHAOS.Web.dll</HintPath>
@@ -67,84 +70,6 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\AExtension.cs">
-      <Link>Extension\AExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ClientSettingsExtension.cs">
-      <Link>Extension\ClientSettingsExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\DayStatsObjectExtension.cs">
-      <Link>Extension\DayStatsObjectExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\EmailPasswordExtension.cs">
-      <Link>Extension\EmailPasswordExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\FileExtension.cs">
-      <Link>Extension\FileExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\FolderExtension.cs">
-      <Link>Extension\FolderExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\FolderTypeExtension.cs">
-      <Link>Extension\FolderTypeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\FormatTypeExtension.cs">
-      <Link>Extension\FormatTypeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\GroupExtension.cs">
-      <Link>Extension\GroupExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\IndexExtension.cs">
-      <Link>Extension\IndexExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\LanguageExtension.cs">
-      <Link>Extension\LanguageExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\LinkExtension.cs">
-      <Link>Extension\LinkExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\LocationExtension.cs">
-      <Link>Extension\LocationExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\MetadataExtension.cs">
-      <Link>Extension\MetadataExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\MetadataSchemaExtension.cs">
-      <Link>Extension\MetadataSchemaExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectExtension.cs">
-      <Link>Extension\ObjectExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectRelationExtension.cs">
-      <Link>Extension\ObjectRelationExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectRelationTypeExtension.cs">
-      <Link>Extension\ObjectRelationTypeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\ObjectTypeExtension.cs">
-      <Link>Extension\ObjectTypeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\SecureCookieExtension.cs">
-      <Link>Extension\SecureCookieExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\SessionExtension.cs">
-      <Link>Extension\SessionExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\StatsObjectExtension.cs">
-      <Link>Extension\StatsObjectExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\SubscriptionExtension.cs">
-      <Link>Extension\SubscriptionExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\UploadExtension.cs">
-      <Link>Extension\UploadExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\UserExtension.cs">
-      <Link>Extension\UserExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Extension\UserSettingsExtension.cs">
-      <Link>Extension\UserSettingsExtension.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\AManager.cs">
       <Link>Managers\AManager.cs</Link>
     </Compile>
@@ -163,14 +88,8 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\FileUploadManager.cs">
       <Link>Managers\FileUploadManager.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Data\ModuleAttribute.cs">
-      <Link>Data\ModuleAttribute.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Data\ModuleResult.cs">
-      <Link>Data\ModuleResult.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Data\ServiceResult.cs">
-      <Link>Data\ServiceResult.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\ServiceCall\ServiceCallFactory.cs">
+      <Link>ServiceCall\ServiceCallFactory.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Managers\FileManager.cs">
       <Link>Managers\FileManager.cs</Link>
@@ -201,9 +120,6 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\ServiceCall\IServiceCall.cs">
       <Link>ServiceCall\IServiceCall.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\ServiceCall\IServiceCaller.cs">
-      <Link>ServiceCall\IServiceCaller.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\ServiceCall\IServiceCallFactory.cs">
       <Link>ServiceCall\IServiceCallFactory.cs</Link>

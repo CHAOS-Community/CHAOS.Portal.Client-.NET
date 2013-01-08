@@ -49,6 +49,10 @@
     <Reference Include="CHAOS">
       <HintPath>..\..\..\lib\Silverlight\CHAOS.dll</HintPath>
     </Reference>
+    <Reference Include="CHAOS.Web">
+      <HintPath>..\..\..\lib\Silverlight\CHAOS.Web.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="system" />
     <Reference Include="System.Windows" />
@@ -56,119 +60,119 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Indexing\Facet.cs">
-      <Link>Data\Indexing\Facet.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ClientSettings.cs">
+      <Link>Data\ClientSettings.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Indexing\FacetsResult.cs">
-      <Link>Data\Indexing\FacetsResult.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Group.cs">
+      <Link>Data\Group.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Indexing\IndexResponse.cs">
-      <Link>Data\Indexing\IndexResponse.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\SecureCookie.cs">
+      <Link>Data\SecureCookie.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\AccessPoint.cs">
-      <Link>Data\MCM\AccessPoint.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ServiceHeader.cs">
+      <Link>Data\ServiceHeader.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\ChunkState.cs">
-      <Link>Data\MCM\ChunkState.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ServiceResponse.cs">
+      <Link>Data\ServiceResponse.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\EntityPermission.cs">
-      <Link>Data\MCM\EntityPermission.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ServiceResult.cs">
+      <Link>Data\ServiceResult.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\FolderPermissions.cs">
-      <Link>Data\MCM\FolderPermissions.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Session.cs">
+      <Link>Data\Session.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Link.cs">
-      <Link>Data\MCM\Link.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Subscription.cs">
+      <Link>Data\Subscription.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\MCM\Permissions.cs">
-      <Link>Data\MCM\Permissions.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\User.cs">
+      <Link>Data\User.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Portal\ClientSettings.cs">
-      <Link>Data\Portal\ClientSettings.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\UserSetting.cs">
+      <Link>Data\UserSetting.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Statistics\DayStatsObject.cs">
-      <Link>Data\Statistics\DayStatsObject.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\AExtension.cs">
+      <Link>Extensions\AExtension.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Upload\FileData.cs">
-      <Link>Data\Upload\FileData.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ClientSettingsExtension.cs">
+      <Link>Extensions\ClientSettingsExtension.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Upload\UploadToken.cs">
-      <Link>Data\Upload\UploadToken.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\EmailPasswordExtension.cs">
+      <Link>Extensions\EmailPasswordExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ExtensionProviders.cs">
+      <Link>Extensions\ExtensionProviders.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ExtensionProviderService.cs">
+      <Link>Extensions\ExtensionProviderService.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\GroupExtension.cs">
+      <Link>Extensions\GroupExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IClientGUIDDependentExtension.cs">
+      <Link>Extensions\IClientGUIDDependentExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IClientSettingsExtension.cs">
       <Link>Extensions\IClientSettingsExtension.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IDayStatsObjectExtension.cs">
-      <Link>Extensions\IDayStatsObjectExtension.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IEmailPasswordExtension.cs">
       <Link>Extensions\IEmailPasswordExtension.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IFileExtension.cs">
-      <Link>Extensions\IFileExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IFolderExtension.cs">
-      <Link>Extensions\IFolderExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IFolderTypeExtension.cs">
-      <Link>Extensions\IFolderTypeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IFormatTypeExtension.cs">
-      <Link>Extensions\IFormatTypeExtension.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IExtension.cs">
+      <Link>Extensions\IExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IGroupExtension.cs">
       <Link>Extensions\IGroupExtension.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IIndexExtension.cs">
-      <Link>Extensions\IIndexExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ILanguageExtension.cs">
-      <Link>Extensions\ILanguageExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ILinkExtension.cs">
-      <Link>Extensions\ILinkExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ILocationExtension.cs">
-      <Link>Extensions\ILocationExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IMetadataExtension.cs">
-      <Link>Extensions\IMetadataExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IMetadataSchemaExtension.cs">
-      <Link>Extensions\IMetadataSchemaExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectExtension.cs">
-      <Link>Extensions\IObjectExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectRelationExtension.cs">
-      <Link>Extensions\IObjectRelationExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectRelationTypeExtension.cs">
-      <Link>Extensions\IObjectRelationTypeExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IObjectTypeExtension.cs">
-      <Link>Extensions\IObjectTypeExtension.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ISecureCookieExtension.cs">
       <Link>Extensions\ISecureCookieExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ISessionChangingExtension.cs">
+      <Link>Extensions\ISessionChangingExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ISessionExtension.cs">
       <Link>Extensions\ISessionExtension.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IStatsObjectExtension.cs">
-      <Link>Extensions\IStatsObjectExtension.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ISubscriptionExtension.cs">
       <Link>Extensions\ISubscriptionExtension.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IUploadExtension.cs">
-      <Link>Extensions\IUploadExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IUserExtension.cs">
       <Link>Extensions\IUserExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IUserSettingsExtension.cs">
       <Link>Extensions\IUserSettingsExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\SecureCookieExtension.cs">
+      <Link>Extensions\SecureCookieExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\SessionExtension.cs">
+      <Link>Extensions\SessionExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\SubscriptionExtension.cs">
+      <Link>Extensions\SubscriptionExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\UserExtension.cs">
+      <Link>Extensions\UserExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\UserSettingsExtension.cs">
+      <Link>Extensions\UserSettingsExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Data\Facet.cs">
+      <Link>Indexing\Data\Facet.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Data\FacetsResult.cs">
+      <Link>Indexing\Data\FacetsResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Data\IndexResponse.cs">
+      <Link>Indexing\Data\IndexResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Extensions\ExtensionProviders.cs">
+      <Link>Indexing\Extensions\ExtensionProviders.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Extensions\IIndexExtension.cs">
+      <Link>Indexing\Extensions\IIndexExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Extensions\IndexExtension.cs">
+      <Link>Indexing\Extensions\IndexExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\IPortalClient.cs">
       <Link>IPortalClient.cs</Link>
@@ -212,85 +216,179 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\TransactionState.cs">
       <Link>Managers\TransactionState.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\AccessPoint.cs">
+      <Link>MCM\Data\AccessPoint.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\EntityPermission.cs">
+      <Link>MCM\Data\EntityPermission.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\File.cs">
+      <Link>MCM\Data\File.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Folder.cs">
+      <Link>MCM\Data\Folder.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\FolderPermissions.cs">
+      <Link>MCM\Data\FolderPermissions.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\FolderType.cs">
+      <Link>MCM\Data\FolderType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Format.cs">
+      <Link>MCM\Data\Format.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\FormatType.cs">
+      <Link>MCM\Data\FormatType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Language.cs">
+      <Link>MCM\Data\Language.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Link.cs">
+      <Link>MCM\Data\Link.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Metadata.cs">
+      <Link>MCM\Data\Metadata.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\MetadataSchema.cs">
+      <Link>MCM\Data\MetadataSchema.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Object.cs">
+      <Link>MCM\Data\Object.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\ObjectRelation.cs">
+      <Link>MCM\Data\ObjectRelation.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\ObjectRelationType.cs">
+      <Link>MCM\Data\ObjectRelationType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\ObjectType.cs">
+      <Link>MCM\Data\ObjectType.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Permissions.cs">
+      <Link>MCM\Data\Permissions.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ExtensionProviders.cs">
+      <Link>MCM\Extensions\ExtensionProviders.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\FileExtension.cs">
+      <Link>MCM\Extensions\FileExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\FolderExtension.cs">
+      <Link>MCM\Extensions\FolderExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\FolderTypeExtension.cs">
+      <Link>MCM\Extensions\FolderTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\FormatExtension.cs">
+      <Link>MCM\Extensions\FormatExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\FormatTypeExtension.cs">
+      <Link>MCM\Extensions\FormatTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IFileExtension.cs">
+      <Link>MCM\Extensions\IFileExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IFolderExtension.cs">
+      <Link>MCM\Extensions\IFolderExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IFolderTypeExtension.cs">
+      <Link>MCM\Extensions\IFolderTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IFormatExtension.cs">
+      <Link>MCM\Extensions\IFormatExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IFormatTypeExtension.cs">
+      <Link>MCM\Extensions\IFormatTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ILanguageExtension.cs">
+      <Link>MCM\Extensions\ILanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ILinkExtension.cs">
+      <Link>MCM\Extensions\ILinkExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IMetadataExtension.cs">
+      <Link>MCM\Extensions\IMetadataExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IMetadataSchemaExtension.cs">
+      <Link>MCM\Extensions\IMetadataSchemaExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IObjectExtension.cs">
+      <Link>MCM\Extensions\IObjectExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IObjectRelationExtension.cs">
+      <Link>MCM\Extensions\IObjectRelationExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IObjectRelationTypeExtension.cs">
+      <Link>MCM\Extensions\IObjectRelationTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IObjectTypeExtension.cs">
+      <Link>MCM\Extensions\IObjectTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\LanguageExtension.cs">
+      <Link>MCM\Extensions\LanguageExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\LinkExtension.cs">
+      <Link>MCM\Extensions\LinkExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\MetadataExtension.cs">
+      <Link>MCM\Extensions\MetadataExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\MetadataSchemaExtension.cs">
+      <Link>MCM\Extensions\MetadataSchemaExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ObjectExtension.cs">
+      <Link>MCM\Extensions\ObjectExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ObjectRelationExtension.cs">
+      <Link>MCM\Extensions\ObjectRelationExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ObjectRelationTypeExtension.cs">
+      <Link>MCM\Extensions\ObjectRelationTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ObjectTypeExtension.cs">
+      <Link>MCM\Extensions\ObjectTypeExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\ServiceCall\HTTPMethod.cs">
+      <Link>ServiceCall\HTTPMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\ServiceCall\IServiceCaller.cs">
+      <Link>ServiceCall\IServiceCaller.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\ServiceCall\IServiceCallState.cs">
       <Link>ServiceCall\IServiceCallState.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Upload\Data\ChunkState.cs">
+      <Link>Upload\Data\ChunkState.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Upload\Data\FileData.cs">
+      <Link>Upload\Data\FileData.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Upload\Data\UploadToken.cs">
+      <Link>Upload\Data\UploadToken.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Upload\Extensions\ExtensionProviders.cs">
+      <Link>Upload\Extensions\ExtensionProviders.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Upload\Extensions\IUploadExtension.cs">
+      <Link>Upload\Extensions\IUploadExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Upload\Extensions\UploadExtension.cs">
+      <Link>Upload\Extensions\UploadExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\AData.cs">
       <Link>Data\AData.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\GeoLocator\LocationInfo.cs">
-      <Link>Data\GeoLocator\LocationInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\IModuleResult.cs">
-      <Link>Data\IModuleResult.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\IServiceResult.cs">
-      <Link>Data\IServiceResult.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\File.cs">
-      <Link>Data\MCM\File.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Folder.cs">
-      <Link>Data\MCM\Folder.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\FolderType.cs">
-      <Link>Data\MCM\FolderType.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\FormatType.cs">
-      <Link>Data\MCM\FormatType.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Language.cs">
-      <Link>Data\MCM\Language.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Metadata.cs">
-      <Link>Data\MCM\Metadata.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\MetadataSchema.cs">
-      <Link>Data\MCM\MetadataSchema.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\Object.cs">
-      <Link>Data\MCM\Object.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\ObjectRelation.cs">
-      <Link>Data\MCM\ObjectRelation.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\ObjectRelationType.cs">
-      <Link>Data\MCM\ObjectRelationType.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\MCM\ObjectType.cs">
-      <Link>Data\MCM\ObjectType.cs</Link>
-    </Compile>
     <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\NoData.cs">
       <Link>Data\NoData.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\Group.cs">
-      <Link>Data\Portal\Group.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\SecureCookie.cs">
-      <Link>Data\Portal\SecureCookie.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\Session.cs">
-      <Link>Data\Portal\Session.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\Subscription.cs">
-      <Link>Data\Portal\Subscription.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\User.cs">
-      <Link>Data\Portal\User.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\Portal\UserSetting.cs">
-      <Link>Data\Portal\UserSetting.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client (.NET)\Data\ScalarResult.cs">
       <Link>Data\ScalarResult.cs</Link>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\Octopus\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Object = CHAOS.Portal.Client.Data.MCM.Object;
+using Object = CHAOS.Portal.Client.MCM.Data.Object;
 
 namespace CHAOS.Portal.Client.Standard.Managers.Data
 {

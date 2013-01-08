@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using CHAOS.Events;
+using CHAOS.Portal.Client.Data;
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.MCM.Extensions;
 using CHAOS.Portal.Client.Managers.Data;
 using CHAOS.Portal.Client.Standard.Managers.Data;
 using CHAOS.Tasks;
 using CHAOS.Utilities;
-using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
 using CHAOS.Portal.Client.Managers;
-using Object = CHAOS.Portal.Client.Data.MCM.Object;
+using Object = CHAOS.Portal.Client.MCM.Data.Object;
 using CHAOS.Extensions;
 using System.Linq;
 
@@ -53,7 +54,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				_objects[guid.Value] = @object;
 			}
 
-			_client.Object.Create(guid, objectTypeID, folderID).WithCallback(CreateCompleted, new CallbackToken<Object>(@object, callback));
+			_client.Object().Create(guid, objectTypeID, folderID).WithCallback(CreateCompleted, new CallbackToken<Object>(@object, callback));
 
 			return @object;
 		}
@@ -69,18 +70,18 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_objects[guid.Value] = @object;
 
 			AddClientSideOnlyObject(@object);
-			RunActionOnObject(@object, c => _client.Object.Create(guid, objectTypeID, folderID).WithCallback(CreateCompleted, new CallbackToken<Object>(@object, c)));
+			RunActionOnObject(@object, c => _client.Object().Create(guid, objectTypeID, folderID).WithCallback(CreateCompleted, new CallbackToken<Object>(@object, c)));
 
 			return @object;
 		}
 
-		private void CreateCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
+		private void CreateCompleted(ServiceResponse<Object> response, object token)
 		{
 			var callbackToken = (CallbackToken<Object>)token;
 
-			if(error == null && result.MCM.Data.Count == 1)
+			if(response.Error == null && response.Result.Results.Count == 1)
 			{
-				UpdateObject(callbackToken.Token, result.MCM.Data[0]);
+				UpdateObject(callbackToken.Token, response.Result.Results[0]);
 
 				if (!_objects.ContainsKey(callbackToken.Token.GUID))
 					_objects[callbackToken.Token.GUID] = callbackToken.Token;
@@ -122,9 +123,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				RemoveClientOnlyObject(_objects[objectGUID], true);
 			else
 			{
-				_client.Object.Delete(objectGUID).WithCallback((result, error, o) =>
+				_client.Object().Delete(objectGUID).WithCallback((response, o) =>
 				{
-					if (error == null)
+					if (response.Error == null)
 					{
 						_objects.Remove(objectGUID);
 						RemoveRelations(objectGUID);
@@ -208,7 +209,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var @object = IsClientSideOnlyObject(object1GUID) ? _objects[object1GUID] : IsClientSideOnlyObject(object2GUID) ? _objects[object2GUID] : null;
 
-			Action<Action<bool>> action = a => _client.ObjectRelation.Create(object1GUID, object2GUID, relationTypeID, sequence).Callback = (result, error, token) => a(error == null && result.MCM.Data.Count == 1);
+			Action<Action<bool>> action = a => _client.ObjectRelation().Create(object1GUID, object2GUID, relationTypeID, sequence).Callback = (response, token) => a(response.Error == null && response.Result.Results.Count == 1);
 
 			if (@object == null)
 				action(callback);
@@ -263,7 +264,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 					data.AddCallback(callback);
 
 				if (call)
-					_client.Object.Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).WithCallback(GetObjectByGUIDCompleted, data);
+					_client.Object().Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).WithCallback(GetObjectByGUIDCompleted, data);
 			}
 			else if(callback != null)
 				callback(result, null);
@@ -281,21 +282,19 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 		}
 
-		private void GetObjectByGUIDCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
+		private void GetObjectByGUIDCompleted(ServiceResponse<Object> response, object token)
 		{
 			var data = (ObjectGetByGUIDData)token;
 
-			if (error != null)
-				data.Call(null, error);
-			else if(result.MCM.Error != null)
-				data.Call(null, result.MCM.Error);
-			else if(result.MCM.Data.Count != 1)
-				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", result.MCM.Data.Count)));
+			if (response.Error != null)
+				data.Call(null, response.Error);
+			else if (response.Result.Results.Count != 1)
+				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", response.Result.Results.Count)));
 			else
 			{
-				var @object = _objects[result.MCM.Data[0].GUID];
+				var @object = _objects[response.Result.Results[0].GUID];
 
-				UpdateObject(@object, result.MCM.Data[0]);
+				UpdateObject(@object, response.Result.Results[0]);
 
 				data.Call(@object, null);
 			}
@@ -363,13 +362,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void MoveLinkToFolder(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool> callback = null)
 		{
-			_client.Link.Update(objectGUID, fromFolderID, toFolderID).Callback = (result, error, t) =>
+			_client.Link().Update(objectGUID, fromFolderID, toFolderID).Callback = (response, t) =>
 			{
 				if (callback != null)
-					callback(error == null);
+					callback(response.Error == null);
 			};
 		}
-
 		
 		public void CreateLinkInFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token)
 		{
@@ -388,10 +386,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void CreateLinkInFolder(Guid objectGUID, uint folderID, Action<bool> callback)
 		{
-			_client.Link.Create(objectGUID, folderID).Callback = (result, error, t) =>
+			_client.Link().Create(objectGUID, folderID).Callback = (r, t) =>
 			{
 				if (callback != null)
-					callback(error == null);
+					callback(r.Error == null);
 			};
 		}
 
@@ -408,10 +406,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void DeleteLinkFromFolder(Guid objectGUID, uint folderID, Action<bool> callback)
 		{
-			_client.Link.Delete(objectGUID, folderID).Callback = (result, error, t) =>
+			_client.Link().Delete(objectGUID, folderID).Callback = (r, t) =>
 			{
 				if (callback != null)
-					callback(error == null);
+					callback(r.Error == null);
 			};
 		}
 
@@ -466,7 +464,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			return new ManagerResult<Object>(pageSize, (i, r) =>
 			{
-				var state = _client.Object.Get(query, sort, (int)i, (int)pageSize, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints);
+				var state = _client.Object().Get(query, sort, (int)i, (int)pageSize, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints);
 				state.Token = (Action<IList<Object>, uint>)((os, c) =>
 				{
 					r.TotalCount = c;
@@ -477,20 +475,15 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			});
 		}
 
-		private void GetObjectCompleted(IServiceResult_MCM<Object> result, Exception error, object token)
+		private void GetObjectCompleted(ServiceResponse<Object> response, object token)
 		{
-			if (error != null)
+			if (response.Error != null)
 			{
-				FailedToGetObjects(this, new DataEventArgs<Exception>(error));
-				return;
-			}
-			if (result.MCM.Error != null)
-			{
-				FailedToGetObjects(this, new DataEventArgs<Exception>(result.MCM.Error));
+				FailedToGetObjects(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
-			((Action<IList<Object>, uint>)token)(UpdateObjects(result.MCM.Data), result.MCM.TotalCount);
+			((Action<IList<Object>, uint>)token)(UpdateObjects(response.Result.Results), response.Result.TotalCount);
 		}
 
 		#endregion
@@ -570,7 +563,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			AddMetadataToObject(@object, metadata);
 
-			RunActionOnObject(@object, a => _client.Metadata.Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, oldRevision, metadata.MetadataXML).Callback = (result, error, token) => a.DoIfIsNotNull(c => c(error == null)), callback);
+			RunActionOnObject(@object, a => _client.Metadata().Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, oldRevision, metadata.MetadataXML).Callback = (response, token) => a.DoIfIsNotNull(c => c(response.Error == null)), callback);
 		}
 
 		private void AddMetadataToObject(Object @object, Metadata metadata)

@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using CHAOS.Events;
-using CHAOS.Utilities;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.MCM.Extensions;
+using CHAOS.Utilities;
 using CHAOS.Portal.Client.Managers;
 using System.Linq;
 using CHAOS.Extensions;
@@ -39,7 +40,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var childFolders = _foldersByParent[parentFolderID];
 
-			var state = _client.Folder.Get(null, null, parentFolderID);
+			var state = _client.Folder().Get(null, null, parentFolderID);
 			state.Token = parentFolderID;
 			state.Callback = GetChildFoldersCompleted;
 			state.FeedbackOnDispatcher = true;
@@ -47,11 +48,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			return childFolders;
 		}
 
-		private void GetChildFoldersCompleted(IServiceResult_MCM<Folder> result, Exception error, object token)
+		private void GetChildFoldersCompleted(ServiceResponse<Folder> response, object token)
 		{
 			var parentID = (uint?) token;
 
-			if(error != null)
+			if(response.Error != null)
 			{
 				FailedToGetFolders(this, new DataEventArgs<uint?>(parentID));
 				return;
@@ -59,7 +60,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var collection = _foldersByParent[parentID];
 
-			foreach (var newFolder in result.MCM.Data)
+			foreach (var newFolder in response.Result.Results)
 			{
 				var existingFolder = collection.FirstOrDefault(f => f.ID == newFolder.ID);
 				
@@ -72,14 +73,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateFolder(Folder oldFolder, Folder newFolder)
 		{
-			//oldFolder.GUID				= newFolder.GUID;
 			oldFolder.ParentID				= newFolder.ParentID;
 			oldFolder.FolderTypeID			= newFolder.FolderTypeID;
-			//oldFolder.SubscriptionGUID	= newFolder.SubscriptionGUID;
+			oldFolder.SubscriptionGUID		= newFolder.SubscriptionGUID;
 			oldFolder.Name					= newFolder.Name;
 			oldFolder.NumberOfSubFolders	= newFolder.NumberOfSubFolders;
 			oldFolder.NumberOfObjects		= newFolder.NumberOfObjects;
-			//oldFolder.DateCreated			= newFolder.DateCreated;
+			oldFolder.DateCreated			= newFolder.DateCreated;
 		}
 	}
 }

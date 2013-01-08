@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Xml.Linq;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
-using CHAOS.Portal.Client.Data.Portal;
+using CHAOS.Portal.Client.Extensions;
+using CHAOS.Portal.Client.MCM.Data;
 using CHAOS.Portal.Client.Managers;
 using CHAOS.Extensions;
 using System.Linq;
@@ -31,32 +31,27 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(_currentUser == null)
 				_currentUser = new User();
 
-			var state = _client.User.Get();
+			var state = _client.User().Get();
 			state.Callback += GetCurrentUserCompleted;
 			state.FeedbackOnDispatcher = true;
 
 			return _currentUser;
 		}
 
-		private void GetCurrentUserCompleted(IServiceResult_Portal<User> result, Exception error, object token)
+		private void GetCurrentUserCompleted(ServiceResponse<User> response, object token)
 		{
-			if(error != null)
+			if (response.Error != null)
 			{
-				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(error));
+				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
-			if(result.Portal.Error != null)
-			{
-				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(result.Portal.Error));
-				return;
-			}
-			if(result.Portal.Data.Count == 0)
+			if(response.Result.Results.Count == 0)
 			{
 				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(new Exception("No user returned")));
 				return;
 			}
 
-			UpdateUser(_currentUser, result.Portal.Data[0]);
+			UpdateUser(_currentUser, response.Result.Results[0]);
 		}
 
 		private static void UpdateUser(User oldUser, User newUser)

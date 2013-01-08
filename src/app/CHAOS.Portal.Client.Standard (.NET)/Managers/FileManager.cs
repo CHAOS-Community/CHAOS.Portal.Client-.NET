@@ -1,4 +1,4 @@
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
 using CHAOS.Portal.Client.Managers;
 using System.Linq;
 

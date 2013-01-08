@@ -2,7 +2,8 @@ using System;
 using System.Collections.ObjectModel;
 using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
-using CHAOS.Portal.Client.Data.MCM;
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.MCM.Extensions;
 using CHAOS.Portal.Client.Managers;
 
 namespace CHAOS.Portal.Client.Standard.Managers
@@ -36,20 +37,20 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void GetSchemas()
 		{
-			_client.MetadataSchema.Get(null).Callback = ClientMetadataSchemaGetcompleted;
+			_client.MetadataSchema().Get().Callback = ClientMetadataSchemaGetcompleted;
 		}
 
-		private void ClientMetadataSchemaGetcompleted(IServiceResult_MCM<MetadataSchema> result, Exception error, object token)
+		private void ClientMetadataSchemaGetcompleted(ServiceResponse<MetadataSchema> response, object token)
 		{
-			if(error != null)
+			if(response.Error != null)
 			{
-				ServiceFailed(this, new DataEventArgs<Exception>(error));
+				ServiceFailed(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
 
 			UpdatePublicProperty(() =>
 				                     {
-										 foreach (var schema in result.MCM.Data)
+										 foreach (var schema in response.Result.Results)
 											 _metadataSchemas.Add(schema);
 
 										 Loaded(this, EventArgs.Empty);

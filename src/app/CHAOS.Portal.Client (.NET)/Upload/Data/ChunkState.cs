@@ -1,4 +1,4 @@
-﻿namespace CHAOS.Portal.Client.MCM.Data
+namespace CHAOS.Portal.Client.Upload.Data
 {
 	public class ChunkState
 	{
