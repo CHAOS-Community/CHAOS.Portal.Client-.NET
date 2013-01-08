@@ -57,7 +57,18 @@
   <ItemGroup>
     <Compile Include="APortalClientUnitTest.cs" />
     <Compile Include="Extensions\EmailPasswordExtensionTest.cs" />
+    <Compile Include="Extensions\FolderExtensionTest.cs" />
+    <Compile Include="Extensions\FolderTypeExtensionTest.cs" />
+    <Compile Include="Extensions\FormatTypeExtensionTest.cs" />
+    <Compile Include="Extensions\GroupExtensionTest.cs" />
+    <Compile Include="Extensions\IndexExtensionTest.cs" />
+    <Compile Include="Extensions\LanguageExtensionTest.cs" />
+    <Compile Include="Extensions\MetadataSchemaExtensionTest.cs" />
+    <Compile Include="Extensions\ObjectExtensionTest.cs" />
+    <Compile Include="Extensions\ObjectRelationTypeExtensionTest.cs" />
+    <Compile Include="Extensions\ObjectTypeExtensionTest.cs" />
     <Compile Include="Extensions\SessionExtensionTest.cs" />
+    <Compile Include="Extensions\UserExtensionTest.cs" />
     <Compile Include="PortalClientTest.cs" />
     <Compile Include="PortalClientTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,6 +77,10 @@
     <ProjectReference Include="..\..\app\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
       <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>
       <Name>CHAOS.Portal.Client %28.NET%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Module %28.NET%29\CHAOS.Portal.Client.Module %28.NET%29.csproj">
+      <Project>{10F9252A-B320-4990-BD4B-EB708673D352}</Project>
+      <Name>CHAOS.Portal.Client.Module %28.NET%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Standard %28.NET%29\CHAOS.Portal.Client.Standard %28.NET%29.csproj">
       <Project>{6c959a48-da6e-4c73-8b3a-50d611413398}</Project>

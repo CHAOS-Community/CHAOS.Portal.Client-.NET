@@ -6,6 +6,7 @@ using NUnit.Framework;
 #endif
 
 using System.Linq;
+using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +23,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetFolderTypes()
 		{
 			TestData(
-				CallPortal(c => c.FolderType.Get()),
+				CallPortal(c => c.FolderType().Get()),
 				d =>
 				{
-					Assert.AreNotEqual(d.MCM.Data.Count, 0, "No FolderTypes returned");
-					Assert.IsTrue(d.MCM.Data.All(t => t.Name != null), "Name not set on FolderType");
+					Assert.AreNotEqual(d.Count, 0, "No FolderTypes returned");
+					Assert.IsTrue(d.All(t => t.Name != null), "Name not set on FolderType");
 				});
 
 			EndTest();

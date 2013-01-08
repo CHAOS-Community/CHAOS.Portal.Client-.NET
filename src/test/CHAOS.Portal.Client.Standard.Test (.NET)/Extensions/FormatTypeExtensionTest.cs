@@ -6,6 +6,7 @@ using NUnit.Framework;
 #endif
 
 using System.Linq;
+using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +23,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetFormatTypes()
 		{
 			TestData(
-				CallPortal(c => c.FormatType.Get()),
+				CallPortal(c => c.FormatType().Get()),
 				d =>
 				{
-					Assert.AreNotEqual(d.MCM.Data.Count, 0, "No FormatTypes returned");
-					Assert.IsTrue(d.MCM.Data.All(t => t.Name != null), "Name not set on FormatType");
+					Assert.AreNotEqual(d.Count, 0, "No FormatTypes returned");
+					Assert.IsTrue(d.All(t => t.Name != null), "Name not set on FormatType");
 				});
 
 			EndTest();

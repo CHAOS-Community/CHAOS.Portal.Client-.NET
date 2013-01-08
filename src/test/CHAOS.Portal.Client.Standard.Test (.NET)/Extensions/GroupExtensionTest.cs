@@ -7,6 +7,7 @@ using NUnit.Framework;
 
 using System;
 using System.Linq;
+using CHAOS.Portal.Client.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -23,11 +24,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetGroups()
 		{
 			TestData(
-				CallPortal(c => c.Group.Get()),
+				CallPortal(c => c.Group().Get()),
 					d =>
 					{
-						Assert.AreNotEqual(d.Portal.Data.Count, 0, "No Groups returned");
-						Assert.IsTrue(d.Portal.Data.All(g => g.Name != null && g.GUID != new Guid()), "Name or GUID not set on Group");
+						Assert.AreNotEqual(d.Count, 0, "No Groups returned");
+						Assert.IsTrue(d.All(g => g.Name != null && g.GUID != new Guid()), "Name or GUID not set on Group");
 					});
 
 			EndTest();

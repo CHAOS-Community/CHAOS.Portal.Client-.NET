@@ -6,6 +6,7 @@ using NUnit.Framework;
 #endif
 
 using System.Linq;
+using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +23,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetObjectTypes()
 		{
 			TestData(
-				CallPortal(c => c.ObjectType.Get()),
+				CallPortal(c => c.ObjectType().Get()),
 					d =>
 					{
-						Assert.AreNotEqual(d.MCM.Data.Count, 0, "No ObjectTypes returned");
-						Assert.IsTrue(d.MCM.Data.All(o => o.Name != null), "Name not set on ObjectType");
+						Assert.AreNotEqual(d.Count, 0, "No ObjectTypes returned");
+						Assert.IsTrue(d.All(o => o.Name != null), "Name not set on ObjectType");
 					});
 
 			EndTest();

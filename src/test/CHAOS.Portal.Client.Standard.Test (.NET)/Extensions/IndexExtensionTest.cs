@@ -5,7 +5,7 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
-using System;
+using CHAOS.Portal.Client.Indexing.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +22,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldDoFacetSearch()
 		{
 			TestData(
-				CallPortal(c => c.Index.Search(null, "field:ObjectTypeID", null, 0, 1)),
+				CallPortal(c => c.Index().Search(null, "field:ObjectTypeID", null, 0, 1)),
 					d =>
 					{
-						Assert.AreNotEqual(d.Index.Data.Count, 0, "No facets returned");
-						Assert.IsNotNull(d.Index.Data[0], "No facets returned");
+						Assert.AreNotEqual(d.Count, 0, "No facets returned");
+						Assert.IsNotNull(d[0], "No facets returned");
 					});
 
 			EndTest();

@@ -6,6 +6,7 @@ using NUnit.Framework;
 #endif
 
 using System;
+using CHAOS.Portal.Client.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +23,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetCurrentUser()
 		{
 			TestData(
-				CallPortal(c => c.User.Get()),
+				CallPortal(c => c.User().Get()),
 					d =>
 					{
-						Assert.AreNotEqual(0, d.Portal.Data.Count, "No user returned");
-						Assert.AreNotEqual(new Guid(), d.Portal.Data[0].GUID, "User Guid not set");
+						Assert.AreNotEqual(0, d.Count, "No user returned");
+						Assert.AreNotEqual(new Guid(), d[0].GUID, "User Guid not set");
 					});
 
 			EndTest();

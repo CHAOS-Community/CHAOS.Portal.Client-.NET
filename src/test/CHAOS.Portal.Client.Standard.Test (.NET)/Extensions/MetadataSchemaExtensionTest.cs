@@ -6,6 +6,7 @@ using NUnit.Framework;
 #endif
 
 using System.Linq;
+using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +23,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetMetadataSchemas()
 		{
 			TestData(
-				CallPortal(c => c.MetadataSchema.Get()),
+				CallPortal(c => c.MetadataSchema().Get()),
 					d =>
 					{
-						Assert.AreNotEqual(d.MCM.Data.Count, 0, "No MetadataSchemas returned");
-						Assert.IsTrue(d.MCM.Data.All(s => s.Name != null && s.SchemaXML != null), "Name or SchemaXML not set on MetadataSchema");
+						Assert.AreNotEqual(d.Count, 0, "No MetadataSchemas returned");
+						Assert.IsTrue(d.All(s => s.Name != null && s.SchemaXML != null), "Name or SchemaXML not set on MetadataSchema");
 					});
 
 			EndTest();

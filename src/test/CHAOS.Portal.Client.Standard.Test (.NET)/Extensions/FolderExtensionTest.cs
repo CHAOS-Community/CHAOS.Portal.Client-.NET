@@ -2,9 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
-using CHAOS.Portal.Client.MCM.Data;
 using NUnit.Framework;
 #endif
+
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -25,20 +27,20 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 			Folder folder = null;
 
 			TestData(
-				CallPortal(c => c.Folder.Get()),
+				CallPortal(c => c.Folder().Get()),
 					d =>
 					{
-						Assert.AreNotEqual(0, d.MCM.Data.Count, "No folders to test");
-						folder = d.MCM.Data[0];
+						Assert.AreNotEqual(0, d.Count, "No folders to test");
+						folder = d[0];
 					});
 
 			TestData(
-				CallPortal(c => c.Folder.GetPermission(folder.ID)),
+				CallPortal(c => c.Folder().GetPermission(folder.ID)),
 					d =>
 					{
-						Assert.AreNotEqual(0, d.MCM.Data.Count, "No permissions recieved");
-						Assert.IsNotNull(d.MCM.Data[0].UserPermissions);
-						Assert.IsNotNull(d.MCM.Data[0].GroupPermissions);
+						Assert.AreNotEqual(0, d.Count, "No permissions recieved");
+						Assert.IsNotNull(d[0].UserPermissions);
+						Assert.IsNotNull(d[0].GroupPermissions);
 					});
 
 			EndTest();

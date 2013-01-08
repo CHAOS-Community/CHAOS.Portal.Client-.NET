@@ -9,15 +9,15 @@ namespace CHAOS.Portal.Client.Standard.Test
 {
 	public static class PortalClientTestHelper
 	{
-		public static string ServicePath = "";
-		public static string LoginEmail = "";
-		public static string LoginPassword = "";
+		public static string ServicePath = "http://api.test.chaos-systems.com";
+		public static string LoginEmail = "jacob@geckon.com";
+		public static string LoginPassword = "1234";
 		public static bool UseLatest = true;
 		public const uint CALL_TIMEOUT = 5000;
 
 		public static IPortalClient GetClient()
 		{	
-			/*var kernel = new StandardKernel();
+			var kernel = new StandardKernel();
 
 			kernel.Bind<IStringSerializer>().To<StringSerializer>().InSingletonScope();
 			kernel.Bind<IXMLSerializer>().To<XMLSerializer>().InSingletonScope();
@@ -25,9 +25,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 			kernel.Load(new Module.Module());
 
-			var client = kernel.Get<IPortalClient>();*/
-
-			var client = new PortalClient();
+			var client = kernel.Get<IPortalClient>();
 
 			if (UseLatest)
 				((PortalClient) client).UseLatest = true;

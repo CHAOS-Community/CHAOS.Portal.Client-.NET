@@ -6,6 +6,7 @@ using NUnit.Framework;
 #endif
 
 using System.Linq;
+using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
 {
@@ -22,11 +23,11 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetLanguages()
 		{
 			TestData(
-				CallPortal(c => c.Language.Get()),
+				CallPortal(c => c.Language().Get()),
 					d =>
 					{
-						Assert.AreNotEqual(d.MCM.Data.Count, 0, "No Languages returned");
-						Assert.IsTrue(d.MCM.Data.All(g => g.Name != null && g.LanguageCode != null), "Name or LanguageCode not set on Language");
+						Assert.AreNotEqual(d.Count, 0, "No Languages returned");
+						Assert.IsTrue(d.All(g => g.Name != null && g.LanguageCode != null), "Name or LanguageCode not set on Language");
 					});
 
 			EndTest();

@@ -36,8 +36,8 @@ namespace CHAOS.Portal.Client.Standard.Test
 			 IServiceCallState<T> state = null;
 
 			 EnqueueCallback(() => state = caller());
-			 EnqueueConditional(() => state.Result != null);
-			 EnqueueCallback(() => data = state.ThrowFirstError().Result);
+			 EnqueueConditional(() => state.Response != null);
+			 EnqueueCallback(() => data = state.ThrowError().Response.Result.Results);
 #else
 			 data = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowError().Response.Result.Results;
 #endif
