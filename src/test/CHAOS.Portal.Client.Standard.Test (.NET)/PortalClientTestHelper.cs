@@ -9,9 +9,9 @@ namespace CHAOS.Portal.Client.Standard.Test
 {
 	public static class PortalClientTestHelper
 	{
-		public static string ServicePath = "http://api.test.chaos-systems.com";
-		public static string LoginEmail = "jacob@geckon.com";
-		public static string LoginPassword = "1234";
+		public static string ServicePath = "";
+		public static string LoginEmail = "";
+		public static string LoginPassword = "";
 		public static bool UseLatest = true;
 		public const uint CALL_TIMEOUT = 5000;
 
