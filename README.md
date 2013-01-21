@@ -22,7 +22,7 @@ If you encounter any problems using this project, please report them using the "
 [Official CHAOS Community website](http://www.chaos-community.org/)  
 [This project on GitHub](https://github.com/CHAOS-Community/CHAOS.Portal.Client-.NET)  
 [Portal project on GitHub](https://github.com/CHAOS-Community/Portal)  
-[JavaScript client on GitHub](https://github.com/CHAOS-Community/CHAOS.Portal.Client-JavaScript)  
+[TypeScript (JavaScript) client on GitHub](https://github.com/CHAOS-Community/CHAOS.Portal.Client-TypeScript)  
 [PHP client on GitHub](https://github.com/CHAOS-Community/CHAOS.Portal.Client-PHP)
 
 ##License  
