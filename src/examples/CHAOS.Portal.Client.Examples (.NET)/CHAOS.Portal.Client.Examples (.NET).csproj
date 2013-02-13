@@ -56,11 +56,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\app\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client %28.NET%29\CHAOS.Portal.Client %28.NET%29.csproj">
       <Project>{a1cc7eb5-49e3-4f21-bf5d-90caaa881bd3}</Project>
       <Name>CHAOS.Portal.Client %28.NET%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\app\CHAOS.Portal.Client.Standard %28.NET%29\CHAOS.Portal.Client.Standard %28.NET%29.csproj">
+    <ProjectReference Include="..\..\app\CHAOS.Portal.Client.Standard %28.NET%29\CHAOS.Portal.Client.Standard %28.NET%29.csproj">
       <Project>{6c959a48-da6e-4c73-8b3a-50d611413398}</Project>
       <Name>CHAOS.Portal.Client.Standard %28.NET%29</Name>
     </ProjectReference>

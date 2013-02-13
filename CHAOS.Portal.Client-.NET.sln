@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Test.We
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples (.NET)", "examples (.NET)", "{87088BDD-838F-4434-B9A1-4D0695A9ABEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Examples (.NET)", "CHAOS.Portal.Client.Examples (.NET)\CHAOS.Portal.Client.Examples (.NET).csproj", "{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Examples (.NET)", "src\examples\CHAOS.Portal.Client.Examples (.NET)\CHAOS.Portal.Client.Examples (.NET).csproj", "{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
