@@ -1,6 +1,5 @@
 #CHAOS.Portal.Client (.NET)
-This is a .NET and Silverlight Portal API Client. It enables easy communication with a CHAOS Portal API (protocol version 4).  
-**It is under active development (being updated from protocol version 3).**
+This is a .NET and Silverlight Portal API Client. It enables easy communication with a CHAOS Portal API (protocol version 6).  
 
 ##Requirements
 .NET 4.0 / Silverlight 5  
