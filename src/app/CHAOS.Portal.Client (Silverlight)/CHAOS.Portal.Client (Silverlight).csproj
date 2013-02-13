@@ -141,6 +141,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IUserSettingsExtension.cs">
       <Link>Extensions\IUserSettingsExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IViewExtension.cs">
+      <Link>Extensions\IViewExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\SecureCookieExtension.cs">
       <Link>Extensions\SecureCookieExtension.cs</Link>
     </Compile>
@@ -155,6 +158,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\UserSettingsExtension.cs">
       <Link>Extensions\UserSettingsExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ViewExtension.cs">
+      <Link>Extensions\ViewExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Indexing\Data\Facet.cs">
       <Link>Indexing\Data\Facet.cs</Link>

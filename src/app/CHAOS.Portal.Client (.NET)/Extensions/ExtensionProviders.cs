@@ -41,5 +41,10 @@
 		{
 			return ExtensionProviderService.GetExtension<UserSettingsExtension>(portalClient);
 		}
+
+		public static IViewExtension View(this IPortalClient portalClient)
+		{
+			return ExtensionProviderService.GetExtension<ViewExtension>(portalClient);
+		}
 	}
 }

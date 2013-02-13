@@ -53,6 +53,8 @@
     <Compile Include="Extensions\EmailPasswordExtension.cs" />
     <Compile Include="Extensions\GroupExtension.cs" />
     <Compile Include="Extensions\IClientGUIDDependentExtension.cs" />
+    <Compile Include="Extensions\IViewExtension.cs" />
+    <Compile Include="Extensions\ViewExtension.cs" />
     <Compile Include="Indexing\Extensions\ExtensionProviders.cs" />
     <Compile Include="MCM\Data\Format.cs" />
     <Compile Include="MCM\Extensions\ExtensionProviders.cs" />
