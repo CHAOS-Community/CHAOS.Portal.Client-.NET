@@ -12,8 +12,8 @@ The source code is located in the *src/app* folder.
 ##Examples
 The examples are located in the *src/examples* folder.
 
-##Unit Tests
-The examples are located in the *src/test* folder.
+##Tests
+The tests are located in the *src/test* folder.
 
 ##Reporting problems
 If you encounter any problems using this project, please report them using the "Issues" section of the projects Github page.
