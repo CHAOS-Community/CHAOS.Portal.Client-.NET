@@ -209,7 +209,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var @object = IsClientSideOnlyObject(object1GUID) ? _objects[object1GUID] : IsClientSideOnlyObject(object2GUID) ? _objects[object2GUID] : null;
 
-			Action<Action<bool>> action = a => _client.ObjectRelation().Create(object1GUID, object2GUID, relationTypeID, sequence).Callback = (response, token) => a(response.Error == null && response.Result.Results.Count == 1);
+			Action<Action<bool>> action = a => _client.ObjectRelation().Create(object1GUID, object2GUID, relationTypeID, null, null, null, null, sequence).Callback = (response, token) => a(response.Error == null && response.Result.Results.Count == 1);
 
 			if (@object == null)
 				action(callback);
