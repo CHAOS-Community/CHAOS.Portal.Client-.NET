@@ -56,11 +56,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateUser(User oldUser, User newUser)
 		{
-			oldUser.SessionID = newUser.SessionID;
 			oldUser.GUID = newUser.GUID;
-			oldUser.Firstname = newUser.Firstname;
-			oldUser.Middlename = newUser.Middlename;
-			oldUser.Lastname = newUser.Lastname;
 			oldUser.Email = newUser.Email;
 			oldUser.SystemPermission = newUser.SystemPermission;
 		}

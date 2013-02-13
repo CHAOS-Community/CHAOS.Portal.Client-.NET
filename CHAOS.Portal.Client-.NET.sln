@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Test (S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Test.Web (Silverlight)", "src\test\CHAOS.Portal.Client.Test.Web (Silverlight)\CHAOS.Portal.Client.Test.Web (Silverlight).csproj", "{A297D0C9-A286-4DE9-95E0-36F595EE524B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples (.NET)", "examples (.NET)", "{87088BDD-838F-4434-B9A1-4D0695A9ABEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client.Examples (.NET)", "CHAOS.Portal.Client.Examples (.NET)\CHAOS.Portal.Client.Examples (.NET).csproj", "{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,10 @@ Global
 		{A297D0C9-A286-4DE9-95E0-36F595EE524B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A297D0C9-A286-4DE9-95E0-36F595EE524B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A297D0C9-A286-4DE9-95E0-36F595EE524B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,5 +89,6 @@ Global
 		{C7FCA4E7-6452-4408-AF2A-62473D66F985} = {AC11ACF9-D74A-4817-9AA2-219DD380A33B}
 		{1D46E6DF-FD18-476F-80D0-D38D9FB0AD6A} = {AC11ACF9-D74A-4817-9AA2-219DD380A33B}
 		{A297D0C9-A286-4DE9-95E0-36F595EE524B} = {AC11ACF9-D74A-4817-9AA2-219DD380A33B}
+		{66BC2B2F-4429-4F78-B88C-6AF18EACCD5B} = {87088BDD-838F-4434-B9A1-4D0695A9ABEC}
 	EndGlobalSection
 EndGlobal
