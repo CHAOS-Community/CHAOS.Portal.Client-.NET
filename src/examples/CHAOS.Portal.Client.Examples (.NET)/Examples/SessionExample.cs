@@ -13,7 +13,7 @@ namespace CHAOS.Portal.Client.Examples.Examples
 
 			if (response.Error == null)
 			{
-				Console.WriteLine("Created session with GUID: {0}", response.Result.Results[0].GUID);
+				Console.WriteLine("Created session with GUID: {0}", response.Result.Results[0].Guid);
 			}
 			else
 			{

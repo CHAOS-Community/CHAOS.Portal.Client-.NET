@@ -8,3 +8,7 @@ Thumbs.db
 *.user
 *.suo
 *.xap
+*.ncrunchsolution
+
+*.ncrunchproject
+_NCrunch

@@ -30,7 +30,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No session data returned");
-						Assert.AreNotEqual(new Guid(), d[0].GUID);
+						Assert.AreNotEqual(new Guid(), d[0].Guid);
 					});
 
 			EndTest();

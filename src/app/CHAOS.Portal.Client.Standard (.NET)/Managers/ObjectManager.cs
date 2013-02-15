@@ -495,10 +495,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			schema.ValidateIsNotNull("schema");
 			language.ValidateIsNotNull("language");
 
-			if(@object.Metadatas != null && @object.Metadatas.Any(m => m.MetadataSchemaGUID == schema.GUID && m.LanguageCode == language.LanguageCode))
+			if(@object.Metadatas != null && @object.Metadatas.Any(m => m.MetadataSchemaGUID == schema.Guid && m.LanguageCode == language.LanguageCode))
 				throw new Exception(string.Format("Object already have metadata with {0} language", language.LanguageCode));
 
-			return AddLanguage(@object, schema.GUID, language.LanguageCode);
+			return AddLanguage(@object, schema.Guid, language.LanguageCode);
 		}
 
 		public Metadata AddLanguage(Object @object, Guid schemaGUID, string languageCode)
@@ -508,7 +508,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				MetadataSchemaGUID = schemaGUID,
 				LanguageCode = languageCode,
 				DateCreated = DateTime.UtcNow,
-				EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGUID)
+				EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGuid)
 			};
 
 			AddMetadataToObject(@object, metadata);
@@ -559,7 +559,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			metadata.RevisionID = metadata.RevisionID == null ? 1 : metadata.RevisionID++;
 
 			metadata.DateCreated = DateTime.UtcNow;
-			metadata.EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGUID);
+			metadata.EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGuid);
 
 			AddMetadataToObject(@object, metadata);
 
