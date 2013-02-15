@@ -7,22 +7,17 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public class ObjectTypeExtension : AExtension, IObjectTypeExtension
 	{
-		public IServiceCallState<ObjectType> Get(int? id, string name)
+		public IServiceCallState<ObjectType> Get()
 		{
-			return CallService<ObjectType>(HTTPMethod.GET, id, name);
+			return CallService<ObjectType>(HTTPMethod.GET);
 		}
 
-		public IServiceCallState<ObjectType> Create(string name)
+		public IServiceCallState<ObjectType> Set(string name)
 		{
 			return CallService<ObjectType>(HTTPMethod.POST, name);
 		}
 
-		public IServiceCallState<ScalarResult> Update(int id, string name)
-		{
-			return CallService<ScalarResult>(HTTPMethod.POST, id, name);
-		}
-
-		public IServiceCallState<ScalarResult> Delete(int id)
+		public IServiceCallState<ScalarResult> Delete(uint id)
 		{
 			return CallService<ScalarResult>(HTTPMethod.GET, id);
 		}
