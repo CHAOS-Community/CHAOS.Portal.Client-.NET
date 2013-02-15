@@ -495,7 +495,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			schema.ValidateIsNotNull("schema");
 			language.ValidateIsNotNull("language");
 
-			if(@object.Metadatas != null && @object.Metadatas.Any(m => m.MetadataSchemaGUID == schema.Guid && m.LanguageCode == language.LanguageCode))
+			if(@object.Metadatas != null && @object.Metadatas.Any(m => m.MetadataSchemaGuid == schema.Guid && m.LanguageCode == language.LanguageCode))
 				throw new Exception(string.Format("Object already have metadata with {0} language", language.LanguageCode));
 
 			return AddLanguage(@object, schema.Guid, language.LanguageCode);
@@ -505,10 +505,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			var metadata = new Metadata
 			{
-				MetadataSchemaGUID = schemaGUID,
+				MetadataSchemaGuid = schemaGUID,
 				LanguageCode = languageCode,
 				DateCreated = DateTime.UtcNow,
-				EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGuid)
+				EditingUserGuid = _client.CurrentSession.DoIfIsNotNull(s => s.UserGuid)
 			};
 
 			AddMetadataToObject(@object, metadata);
@@ -534,7 +534,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if (@object == null)
 				throw new Exception("Could not find object matching metadata");
 
-			metadata.MetadataXML = newData;
+			metadata.MetadataXml = newData;
 
 			SaveMetadata(@object, metadata, callback);
 		}
@@ -559,11 +559,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			metadata.RevisionID = metadata.RevisionID == null ? 1 : metadata.RevisionID++;
 
 			metadata.DateCreated = DateTime.UtcNow;
-			metadata.EditingUserGUID = _client.CurrentSession.DoIfIsNotNull(s => s.UserGuid);
+			metadata.EditingUserGuid = _client.CurrentSession.DoIfIsNotNull(s => s.UserGuid);
 
 			AddMetadataToObject(@object, metadata);
 
-			RunActionOnObject(@object, a => _client.Metadata().Set(@object.GUID, metadata.MetadataSchemaGUID, metadata.LanguageCode, oldRevision, metadata.MetadataXML).Callback = (response, token) => a.DoIfIsNotNull(c => c(response.Error == null)), callback);
+			RunActionOnObject(@object, a => _client.Metadata().Set(@object.GUID, metadata.MetadataSchemaGuid, metadata.LanguageCode, oldRevision, metadata.MetadataXml).Callback = (response, token) => a.DoIfIsNotNull(c => c(response.Error == null)), callback);
 		}
 
 		private void AddMetadataToObject(Object @object, Metadata metadata)
@@ -701,7 +701,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (oldObject.Metadatas == null)
 					oldObject.Metadatas = newObject.Metadatas;
 				else
-					UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaGUID == m2.MetadataSchemaGUID && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
+					UpdateCollection(oldObject.Metadatas, newObject.Metadatas, (m1, m2) => m1.MetadataSchemaGuid == m2.MetadataSchemaGuid && m1.LanguageCode == m2.LanguageCode, UpdateMetadata);
 			}
 
 			if (newObject.Files != null)
@@ -751,8 +751,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		private static void UpdateMetadata(Metadata oldMetadata, Metadata newMetadata)
 		{
 			oldMetadata.DateCreated = newMetadata.DateCreated;
-			oldMetadata.MetadataXML = newMetadata.MetadataXML;
-			oldMetadata.EditingUserGUID = newMetadata.EditingUserGUID;
+			oldMetadata.MetadataXml = newMetadata.MetadataXml;
+			oldMetadata.EditingUserGuid = newMetadata.EditingUserGuid;
 			oldMetadata.RevisionID = newMetadata.RevisionID;
 		}
 

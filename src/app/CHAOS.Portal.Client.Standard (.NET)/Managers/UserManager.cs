@@ -76,10 +76,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public void GetUserProfile(Guid userGUID, Guid schemaGUID, Action<XElement> callback)
 		{
 			var userObject = _objectManager.GetObjectByGUID(userGUID, false, true);
-			var metadata = userObject.Metadatas.DoIfIsNotNull(ms => ms.FirstOrDefault(m => m.MetadataSchemaGUID == schemaGUID));
+			var metadata = userObject.Metadatas.DoIfIsNotNull(ms => ms.FirstOrDefault(m => m.MetadataSchemaGuid == schemaGUID));
 
 			if (metadata != null)
-				callback(metadata.MetadataXML);
+				callback(metadata.MetadataXml);
 			else
 			{
 				NotifyCollectionChangedEventHandler metadatasChangedAction = null;
@@ -88,11 +88,11 @@ namespace CHAOS.Portal.Client.Standard.Managers
 						                         if (args.Action != NotifyCollectionChangedAction.Add) return;
 
 						                         args.NewItems.Cast<Metadata>()
-						                             .FirstOrDefault(m => m.MetadataSchemaGUID == schemaGUID)
+						                             .FirstOrDefault(m => m.MetadataSchemaGuid == schemaGUID)
 						                             .DoIfIsNotNull(m =>
 							                                            {
 																			userObject.Metadatas.CollectionChanged -= metadatasChangedAction;
-								                                            callback(m.MetadataXML);
+								                                            callback(m.MetadataXml);
 							                                            });
 					                         };
 
@@ -105,10 +105,10 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 							                      userObject.PropertyChanged -= objectChangedAction;
 
-							                      var profileMetadata = userObject.Metadatas.FirstOrDefault(m => m.MetadataSchemaGUID == schemaGUID);
+							                      var profileMetadata = userObject.Metadatas.FirstOrDefault(m => m.MetadataSchemaGuid == schemaGUID);
 
 												  if (profileMetadata != null)
-													  callback(profileMetadata.MetadataXML);
+													  callback(profileMetadata.MetadataXml);
 												  else
 													userObject.Metadatas.CollectionChanged += metadatasChangedAction;
 						                      };

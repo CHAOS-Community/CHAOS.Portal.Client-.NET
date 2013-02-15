@@ -17,13 +17,13 @@ namespace CHAOS.Portal.Client.MCM.Data
 			}
 		}
 
-		private Guid _metadataSchemaGUID;
-		public Guid MetadataSchemaGUID
+		private Guid _metadataSchemaGuid;
+		public Guid MetadataSchemaGuid
 		{
-			get { return _metadataSchemaGUID; }
+			get { return _metadataSchemaGuid; }
 			set
 			{
-				_metadataSchemaGUID = value;
+				_metadataSchemaGuid = value;
 				RaisePropertyChanged("MetadataSchemaGUID");
 			}
 		}
@@ -39,24 +39,24 @@ namespace CHAOS.Portal.Client.MCM.Data
 			}
 		}
 
-		private Guid _editingUserGUID;
-		public Guid EditingUserGUID
+		private Guid _editingUserGuid;
+		public Guid EditingUserGuid
 		{
-			get { return _editingUserGUID; }
+			get { return _editingUserGuid; }
 			set
 			{
-				_editingUserGUID = value;
+				_editingUserGuid = value;
 				RaisePropertyChanged("EditingUserGUID");
 			}
 		}
 
-		private XElement _metadataXML;
-		public XElement MetadataXML
+		private XElement _metadataXml;
+		public XElement MetadataXml
 		{
-			get { return _metadataXML; }
+			get { return _metadataXml; }
 			set
 			{
-				_metadataXML = value;
+				_metadataXml = value;
 				RaisePropertyChanged("MetadataXml");
 			}
 		}
