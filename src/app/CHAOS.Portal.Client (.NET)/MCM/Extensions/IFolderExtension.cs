@@ -9,7 +9,7 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 	{
 		IServiceCallState<Folder> Get(uint? id = null, uint? folderTypeID = null, uint? parentID = null);
 		IServiceCallState<Folder> Create(string subscriptionGUID, string title, uint? parentID, int folderTypeID);
-		IServiceCallState<ScalarResult> Update(uint id, string newTitle, int? newParentID, int? newFolderTypeID);
+		IServiceCallState<ScalarResult> Update(uint id, string newTitle, uint? newParentID, uint? newFolderTypeID);
 		IServiceCallState<ScalarResult> Delete(uint id);
 		IServiceCallState<Permissions<FolderPermissions>> GetPermission(uint folderID);
 		IServiceCallState<ScalarResult> SetPermission(Guid? userGUID, Guid? groupGUID, uint folderID, FolderPermissions permission);
