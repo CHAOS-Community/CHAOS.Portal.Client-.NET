@@ -6,6 +6,6 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
     public interface IFileExtension
     {
-        IServiceCallState<File> Create(Guid objectGUID, uint? parentFileID, uint formatID, uint destinationID, string filename, string originalFilename, string folderPath);
+        IServiceCallState<File> Create(Guid objectGuid, uint? parentFileID, uint formatID, uint destinationID, string filename, string originalFilename, string folderPath);
     }
 }

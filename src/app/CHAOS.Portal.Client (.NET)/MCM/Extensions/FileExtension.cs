@@ -7,9 +7,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
     public class FileExtension : AExtension, IFileExtension
     {
-        public IServiceCallState<File> Create(Guid objectGUID, uint? parentFileID, uint formatID, uint destinationID, string filename, string originalFilename, string folderPath)
+        public IServiceCallState<File> Create(Guid objectGuid, uint? parentFileID, uint formatID, uint destinationID, string filename, string originalFilename, string folderPath)
         {
-            return CallService<File>(HTTPMethod.GET, objectGUID, parentFileID, formatID, destinationID, filename, originalFilename, folderPath);
+            return CallService<File>(HTTPMethod.GET, objectGuid, parentFileID, formatID, destinationID, filename, originalFilename, folderPath);
         }
     }
 }
