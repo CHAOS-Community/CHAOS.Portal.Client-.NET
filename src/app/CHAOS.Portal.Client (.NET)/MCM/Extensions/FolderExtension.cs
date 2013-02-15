@@ -18,7 +18,7 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 			return CallService<Folder>(HTTPMethod.GET, subscriptionGUID, title, parentID, folderTypeID);
 		}
 
-		public IServiceCallState<ScalarResult> Update(uint id, string newTitle, int? newParentID, int? newFolderTypeID)
+		public IServiceCallState<ScalarResult> Update(uint id, string newTitle, uint? newParentID, uint? newFolderTypeID)
 		{
 			return CallService<ScalarResult>(HTTPMethod.GET, id, newTitle, newParentID, newFolderTypeID);
 		}
