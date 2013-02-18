@@ -154,7 +154,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			
 			foreach (var relation in @object.ObjectRelations)
 			{
-				var relatedObjectGUID = relation.Object1GUID == @object.GUID ? relation.Object2GUID : relation.Object1GUID;
+				var relatedObjectGUID = relation.Object1Guid == @object.GUID ? relation.Object2Guid : relation.Object1Guid;
 				
 				if (!_objects.ContainsKey(relatedObjectGUID)) continue;
 				
@@ -175,7 +175,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			if (@object.ObjectRelations == null) return;
 
-			foreach (var relation in @object.ObjectRelations.Where(r => r.Object1GUID == relatedObjectGUID || r.Object2GUID == relatedObjectGUID).ToList())
+			foreach (var relation in @object.ObjectRelations.Where(r => r.Object1Guid == relatedObjectGUID || r.Object2Guid == relatedObjectGUID).ToList())
 				@object.ObjectRelations.Remove(relation);
 		}
 
@@ -717,7 +717,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (oldObject.ObjectRelations == null)
 					oldObject.ObjectRelations = newObject.ObjectRelations;
 				else
-					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1GUID == r2.Object1GUID && r1.Object2GUID == r2.Object2GUID && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation, oR => IsClientSideOnlyObject(oR.Object1GUID) || IsClientSideOnlyObject(oR.Object2GUID));
+					UpdateCollection(oldObject.ObjectRelations, newObject.ObjectRelations, (r1, r2) => r1.Object1Guid == r2.Object1Guid && r1.Object2Guid == r2.Object2Guid && r1.ObjectRelationTypeID == r2.ObjectRelationTypeID, UpdateObjectRelation, oR => IsClientSideOnlyObject(oR.Object1Guid) || IsClientSideOnlyObject(oR.Object2Guid));
 			}
 		}
 
