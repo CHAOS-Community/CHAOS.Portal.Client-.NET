@@ -182,22 +182,22 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		#endregion
 		#region ObjectRelation
 
-		public void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token)
+		public void SetRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token)
 		{
-			CreateRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+			SetRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
 		}
 
-		public void CreateRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null)
+		public void SetRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null)
 		{
-			CreateRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback);
+			SetRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback);
 		}
 
-		public void CreateRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token)
+		public void SetRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token)
 		{
-			CreateRelation(object1GUID, object2GUID, relationTypeID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+			SetRelation(object1GUID, object2GUID, relationTypeID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
 		}
 
-		public void CreateRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null)
+		public void SetRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null)
 		{
 			var relation = new ObjectRelation(object1GUID, object2GUID, relationTypeID, sequence);
 
@@ -209,7 +209,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var @object = IsClientSideOnlyObject(object1GUID) ? _objects[object1GUID] : IsClientSideOnlyObject(object2GUID) ? _objects[object2GUID] : null;
 
-			Action<Action<bool>> action = a => _client.ObjectRelation().Create(object1GUID, object2GUID, relationTypeID, null, null, null, null, sequence).Callback = (response, token) => a(response.Error == null && response.Result.Results.Count == 1);
+			Action<Action<bool>> action = a => _client.ObjectRelation().Set(object1GUID, object2GUID, relationTypeID, null, null, null, null, sequence).Callback = (response, token) => a(response.Error == null && response.Result.Results.Count == 1);
 
 			if (@object == null)
 				action(callback);

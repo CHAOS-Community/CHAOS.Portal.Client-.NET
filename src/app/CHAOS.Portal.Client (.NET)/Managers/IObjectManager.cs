@@ -22,10 +22,10 @@ namespace CHAOS.Portal.Client.Managers
 		void Delete(Guid objectGUID, Action<bool> callback = null);
 		void Delete<T>(Guid objectGUID, Action<bool, T> callback, T token);
 
-		void CreateRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null);
-		void CreateRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token);
-		void CreateRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null);
-		void CreateRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token);
+		void SetRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null);
+		void SetRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token);
+		void SetRelation(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool> callback = null);
+		void SetRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token);
 
 		Object GetObjectByGUID(Guid guid, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false, Action<Object, Exception> callback = null);
 		Object GetObjectByFileID(int fileID, bool includeFiles = false, bool includeMetadata = false, bool includeObjectRelations = false, bool includeAccessPoints = false);
