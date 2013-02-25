@@ -69,6 +69,7 @@
     <Compile Include="Extensions\ObjectTypeExtensionTest.cs" />
     <Compile Include="Extensions\SessionExtensionTest.cs" />
     <Compile Include="Extensions\UserExtensionTest.cs" />
+    <Compile Include="Extensions\ViewExtensionTest.cs" />
     <Compile Include="PortalClientTest.cs" />
     <Compile Include="PortalClientTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

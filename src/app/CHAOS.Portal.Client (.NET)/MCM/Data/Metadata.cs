@@ -24,7 +24,7 @@ namespace CHAOS.Portal.Client.MCM.Data
 			set
 			{
 				_metadataSchemaGuid = value;
-				RaisePropertyChanged("MetadataSchemaGUID");
+				RaisePropertyChanged("MetadataSchemaGuid");
 			}
 		}
 			
@@ -46,7 +46,7 @@ namespace CHAOS.Portal.Client.MCM.Data
 			set
 			{
 				_editingUserGuid = value;
-				RaisePropertyChanged("EditingUserGUID");
+				RaisePropertyChanged("EditingUserGuid");
 			}
 		}
 

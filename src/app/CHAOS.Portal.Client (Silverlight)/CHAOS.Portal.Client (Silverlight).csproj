@@ -90,6 +90,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\UserSetting.cs">
       <Link>Data\UserSetting.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ViewInfo.cs">
+      <Link>Data\ViewInfo.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\AExtension.cs">
       <Link>Extensions\AExtension.cs</Link>
     </Compile>
