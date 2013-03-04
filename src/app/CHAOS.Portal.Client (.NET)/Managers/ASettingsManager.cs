@@ -103,7 +103,7 @@ namespace CHAOS.Portal.Client.Managers
 
 		protected void SettingsRecievedFromService(IList<TSettings> settings)
 		{
-			if (settings.Count == 0)
+			if (settings == null || settings.Count == 0)
 			{
 				_serviceHadSettings = false;
 				NoSettingsExist();

@@ -288,8 +288,8 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			if (response.Error != null)
 				data.Call(null, response.Error);
-			else if (response.Result.Results.Count != 1)
-				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", response.Result.Results.Count)));
+			else if (response.Result.Count != 1)
+				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", response.Result.Count)));
 			else
 			{
 				var @object = _objects[response.Result.Results[0].GUID];
