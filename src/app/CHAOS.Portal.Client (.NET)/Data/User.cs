@@ -5,13 +5,13 @@ namespace CHAOS.Portal.Client.Data
 	public class User : AData
 	{
 		private Guid? _guid;
-		public Guid? GUID
+		public Guid? Guid
 		{
 			get { return _guid; }
 			set
 			{
 				_guid = value;
-				RaisePropertyChanged("GUID");
+				RaisePropertyChanged("Guid");
 			}
 		}
 

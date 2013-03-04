@@ -28,7 +28,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 				d =>
 					{
 						Assert.AreNotEqual(0, d.Count, "No user returned");
-						Assert.AreNotEqual(new Guid(), d[0].GUID, "Returned Users GUID not set");
+						Assert.AreNotEqual(new Guid(), d[0].Guid, "Returned Users GUID not set");
 					});
 			
 			EndTest();

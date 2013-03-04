@@ -56,7 +56,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private static void UpdateUser(User oldUser, User newUser)
 		{
-			oldUser.GUID = newUser.GUID;
+			oldUser.Guid = newUser.Guid;
 			oldUser.Email = newUser.Email;
 			oldUser.SystemPermission = newUser.SystemPermission;
 		}
@@ -65,7 +65,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void GetUserProfile(User user, MetadataSchema schema, Action<XElement> callback)
 		{
-			GetUserProfile(user.ValidateIsNotNull("user").GUID.Value, schema.ValidateIsNotNull("schema").Guid, callback);
+			GetUserProfile(user.ValidateIsNotNull("user").Guid.Value, schema.ValidateIsNotNull("schema").Guid, callback);
 		}
 
 		public void GetUserProfile<T>(User user, MetadataSchema schema, Action<XElement, T> callback, T token)
