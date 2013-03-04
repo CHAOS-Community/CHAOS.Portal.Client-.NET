@@ -12,9 +12,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 			return CallService<ObjectType>(HTTPMethod.GET);
 		}
 
-		public IServiceCallState<ObjectType> Set(string name)
+		public IServiceCallState<ObjectType> Set(string name, uint? id)
 		{
-			return CallService<ObjectType>(HTTPMethod.POST, name);
+			return CallService<ObjectType>(HTTPMethod.POST, name, id);
 		}
 
 		public IServiceCallState<ScalarResult> Delete(uint id)
