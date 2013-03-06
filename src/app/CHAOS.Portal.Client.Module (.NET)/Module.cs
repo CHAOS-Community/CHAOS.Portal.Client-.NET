@@ -16,6 +16,7 @@ namespace CHAOS.Portal.Client.Module
 			
 			Bind<IFolderManager>().To<FolderManager>().InSingletonScope();
 			Bind<IObjectManager>().To<ObjectManager>().InSingletonScope();
+			Bind<IViewManager>().To<ViewManager>().InSingletonScope();
 			Bind<IMetadataSchemaManager>().To<MetadataSchemaManager>().InSingletonScope();
 			Bind<IMCMTypesManager>().To<MCMTypesManager>().InSingletonScope();
 			Bind<ILanguageManager>().To<LanguageManager>().InSingletonScope();

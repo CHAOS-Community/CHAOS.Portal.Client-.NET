@@ -79,6 +79,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\CallbackToken.cs">
       <Link>Managers\CallbackToken.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\Data\ManagerResult.cs">
+      <Link>Managers\Data\ManagerResult.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\Data\ObjectGetByGUIDData.cs">
       <Link>Managers\Data\ObjectGetByGUIDData.cs</Link>
     </Compile>
@@ -87,6 +90,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\FileUploadManager.cs">
       <Link>Managers\FileUploadManager.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\ViewManager.cs">
+      <Link>Managers\ViewManager.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\ServiceCall\ServiceCallFactory.cs">
       <Link>ServiceCall\ServiceCallFactory.cs</Link>
@@ -99,9 +105,6 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Managers\LanguageManager.cs">
       <Link>Managers\LanguageManager.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Managers\ManagerResult.cs">
-      <Link>Managers\ManagerResult.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard (.NET)\Managers\MCMTypesManager.cs">
       <Link>Managers\MCMTypesManager.cs</Link>

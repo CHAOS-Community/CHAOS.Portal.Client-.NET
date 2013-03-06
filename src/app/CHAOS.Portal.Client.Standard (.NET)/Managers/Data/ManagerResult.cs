@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using CHAOS.Portal.Client.Managers;
 using CHAOS.Portal.Client.Managers.Data;
 
-namespace CHAOS.Portal.Client.Standard.Managers
+namespace CHAOS.Portal.Client.Standard.Managers.Data
 {
 	public class ManagerResult<T> : ObservableCollection<T>, IManagerResult<T>
 	{

@@ -5,7 +5,7 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class ViewExtension : AExtension, IViewExtension
 	{
-		public IServiceCallState<T> Get<T>(string view, string query, string facet, string sort, int pageIndex, int pageSize) where T : class
+		public IServiceCallState<T> Get<T>(string view, string query, string facet, string sort, uint pageIndex, uint pageSize) where T : class
 		{
 			return CallService<T>(HTTPMethod.GET, view, query, facet, sort, pageIndex, pageSize);
 		}

@@ -222,6 +222,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IUserManager.cs">
       <Link>Managers\IUserManager.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IViewManager.cs">
+      <Link>Managers\IViewManager.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\TransactionState.cs">
       <Link>Managers\TransactionState.cs</Link>
     </Compile>

@@ -64,6 +64,7 @@
     <Compile Include="Managers\CallbackToken.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Managers\Data\ManagerResult.cs" />
     <Compile Include="Managers\Data\ObjectGetByGUIDData.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -83,9 +84,6 @@
     <Compile Include="Managers\LanguageManager.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Managers\ManagerResult.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Managers\MCMTypesManager.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -98,6 +96,7 @@
     <Compile Include="Managers\UserManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Managers\ViewManager.cs" />
     <Compile Include="PortalClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceCall\IServiceCall.cs" />
