@@ -17,7 +17,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public IManagerResult<T> Get<T>(string view, string query, string facet, string sort, uint pageSize) where T : class
 		{
 			var result = new ManagerResult<T>(pageSize,
-				(index, managerResult) => _client.View().Get<T>(view, query, facet, sort, index, pageSize).WithCallback((response, token) =>
+				(index, managerResult) => _client.View().Get<T>(view, query, facet, sort, index, pageSize).InvokeFeedbackOnDispatcher().WithCallback((response, token) =>
 				{
 					if(response.Error != null)
 						return;
