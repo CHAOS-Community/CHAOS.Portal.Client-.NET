@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.Extensions;
 using CHAOS.Portal.Client.ServiceCall;
@@ -8,9 +9,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public class ObjectExtension : AExtension, IObjectExtension
 	{
-		public IServiceCallState<Object> Get(string query, string sort, int pageIndex, int pageSize, bool includeMetadata, bool includeFiles, bool includeObjectRelations, bool includeAccessPoints, Guid? accessPointGUID)
+		public IServiceCallState<Object> Get(IEnumerable<Guid> objectGuids, bool includeAccessPoints, bool includeMetadata, bool includeFiles, bool includeObjectRelations, bool includeFolders)
 		{
-			return CallService<Object>(HTTPMethod.GET, query, sort, pageIndex, pageSize, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints, accessPointGUID);
+			return CallService<Object>(HTTPMethod.GET, objectGuids, includeAccessPoints, includeMetadata, includeFiles, includeObjectRelations, includeFolders);
 		}
 
 		public IServiceCallState<Object> Create(Guid? guid, uint objectTypeID, uint folderID)

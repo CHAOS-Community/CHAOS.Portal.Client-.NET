@@ -12,7 +12,7 @@ namespace CHAOS.Portal.Client.Standard.Test
 		public static string ServicePath = "";
 		public static string LoginEmail = "";
 		public static string LoginPassword = "";
-		public static bool UseLatest = true;
+		public static bool UseLatest = false;
 		public const uint CALL_TIMEOUT = 5000;
 
 		public static IPortalClient GetClient()

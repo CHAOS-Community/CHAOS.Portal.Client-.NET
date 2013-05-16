@@ -5,6 +5,7 @@ using Microsoft.Silverlight.Testing;
 using NUnit.Framework;
 #endif
 
+using System;
 using CHAOS.Portal.Client.MCM.Extensions;
 
 namespace CHAOS.Portal.Client.Standard.Test.Extensions
@@ -22,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetObjects()
 		{
 			TestData(
-				CallPortal(c => c.Object().Get("", null, 0, 1, true, true, true, true)),
+				CallPortal(c => c.Object().Get(new [] {Guid.NewGuid(), Guid.NewGuid()})),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No objects returned");

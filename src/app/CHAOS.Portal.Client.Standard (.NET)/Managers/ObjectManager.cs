@@ -6,7 +6,6 @@ using CHAOS.Events;
 using CHAOS.Portal.Client.Data;
 using CHAOS.Portal.Client.MCM.Data;
 using CHAOS.Portal.Client.MCM.Extensions;
-using CHAOS.Portal.Client.Managers.Data;
 using CHAOS.Portal.Client.Standard.Managers.Data;
 using CHAOS.Tasks;
 using CHAOS.Utilities;
@@ -264,7 +263,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 					data.AddCallback(callback);
 
 				if (call)
-					_client.Object().Get(string.Format("GUID:{0}", guid), null, 0, 1, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints).WithCallback(GetObjectByGUIDCompleted, data);
+					_client.Object().Get(new[] {guid}, includeAccessPoints, includeMetadata, includeFiles, includeObjectRelations).WithCallback(GetObjectByGUIDCompleted, data);
 			}
 			else if(callback != null)
 				callback(result, null);
@@ -319,27 +318,6 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				throw new Exception("Object not found");
 
 			return @object;
-		}
-
-		#endregion
-		#region By Search
-
-		public IManagerResult<Object> GetObjectBySearch(string query, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
-		{
-			return GetResult(query, sort, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
-		}
-
-		#endregion
-		#region By Folder
-
-		public IManagerResult<Object> GetObjectsByFolder(Folder folder, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
-		{
-			return GetObjectsByFolder(folder.ValidateIsNotNull("folder").ID, sort, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
-		}
-
-		public IManagerResult<Object> GetObjectsByFolder(uint folderID, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
-		{
-			return GetResult(string.Format("FolderID:{0}", folderID), sort, pageSize, includeFiles, includeMetadata, includeObjectRelations, includeAccessPoints);
 		}
 
 		#endregion
@@ -455,35 +433,6 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		public void DeleteLinksFromFolder<T>(IEnumerable<Guid> objectGUIDs, uint folderID, Action<bool, T> callback, T token)
 		{
 			DeleteLinksFromFolder(objectGUIDs, folderID, r => callback(r, token));
-		}
-
-		#endregion
-		#region GetResult
-
-		private IManagerResult<Object> GetResult(string query, string sort, uint pageSize, bool includeFiles, bool includeMetadata, bool includeObjectRelations, bool includeAccessPoints)
-		{
-			return new ManagerResult<Object>(pageSize, (i, r) =>
-			{
-				var state = _client.Object().Get(query, sort, (int)i, (int)pageSize, includeMetadata, includeFiles, includeObjectRelations, includeAccessPoints);
-				state.Token = (Action<IList<Object>, uint>)((os, c) =>
-				{
-					r.TotalCount = c;
-					r.AddResult(i, os);
-				});
-				state.Callback = GetObjectCompleted;
-				state.FeedbackOnDispatcher = true;
-			});
-		}
-
-		private void GetObjectCompleted(ServiceResponse<Object> response, object token)
-		{
-			if (response.Error != null)
-			{
-				FailedToGetObjects(this, new DataEventArgs<Exception>(response.Error));
-				return;
-			}
-
-			((Action<IList<Object>, uint>)token)(UpdateObjects(response.Result.Results), response.Result.TotalCount);
 		}
 
 		#endregion
