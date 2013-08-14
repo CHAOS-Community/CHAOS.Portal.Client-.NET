@@ -48,6 +48,9 @@ namespace CHAOS.Portal.Client.Standard.Managers.Data
 
 		public void AddResult(uint pageIndex, IList<T> result)
 		{
+			if (result == null)
+				return;
+
 			lock (_syncObject)
 			{
 				var startIndex = Math.Min(pageIndex * _PageSize, Count);
