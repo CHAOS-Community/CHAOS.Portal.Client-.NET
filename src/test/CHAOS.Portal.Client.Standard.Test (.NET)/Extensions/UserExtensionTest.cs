@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetCurrentUser()
 		{
 			TestData(
-				CallPortal(c => c.User().Get()),
+				CallPortalWithPagedResult(c => c.User().Get()),
 					d =>
 					{
 						Assert.AreNotEqual(0, d.Count, "No user returned");

@@ -48,7 +48,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			return childFolders;
 		}
 
-		private void GetChildFoldersCompleted(ServiceResponse<Folder> response, object token)
+		private void GetChildFoldersCompleted(ServiceResponse<PagedResult<Folder>> response, object token)
 		{
 			var parentID = (uint?) token;
 

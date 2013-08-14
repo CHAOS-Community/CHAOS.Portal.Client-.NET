@@ -6,24 +6,24 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class SubscriptionExtension : AExtension, ISubscriptionExtension
 	{
-		public IServiceCallState<Subscription> Get(Guid guid)
+		public IServiceCallState<PagedResult<Subscription>> Get(Guid guid)
 		{
-			return CallService<Subscription>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<Subscription>>(HTTPMethod.GET, guid);
 		}
 
-		public IServiceCallState<Subscription> Create(string name)
+		public IServiceCallState<PagedResult<Subscription>> Create(string name)
 		{
-			return CallService<Subscription>(HTTPMethod.POST, name);
+			return CallService<PagedResult<Subscription>>(HTTPMethod.POST, name);
 		}
 
-		public IServiceCallState<ScalarResult> Update(Guid guid, string newName)
+		public IServiceCallState<PagedResult<ScalarResult>> Update(Guid guid, string newName)
 		{
-			return CallService<ScalarResult>(HTTPMethod.POST, newName);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.POST, newName);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(Guid guid)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(Guid guid)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, guid);
 		}
 	}
 }

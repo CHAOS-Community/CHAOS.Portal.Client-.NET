@@ -38,7 +38,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			return _currentUser;
 		}
 
-		private void GetCurrentUserCompleted(ServiceResponse<User> response, object token)
+		private void GetCurrentUserCompleted(ServiceResponse<PagedResult<User>> response, object token)
 		{
 			if (response.Error != null)
 			{

@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetObjectRelationTypes()
 		{
 			TestData(
-				CallPortal(c => c.ObjectRelationType().Get()),
+				CallPortalWithPagedResult(c => c.ObjectRelationType().Get()),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No ObjectRelationTypes returned");

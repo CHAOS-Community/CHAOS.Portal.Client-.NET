@@ -1,4 +1,5 @@
-﻿using CHAOS.Portal.Client.Standard.ServiceCall;
+﻿using CHAOS.Portal.Client.Data;
+using CHAOS.Portal.Client.Standard.ServiceCall;
 using CHAOS.Utilities;
 using Ninject;
 
@@ -13,7 +14,7 @@ namespace CHAOS.Portal.Client.Module
 			_kernel = ArgumentUtilities.ValidateIsNotNull("kernel", kernel);
 		}
 
-		public IServiceCall<T> GetServiceCall<T>() where T : class
+		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceResult
 		{
 			return _kernel.Get<IServiceCall<T>>();
 		}

@@ -1,4 +1,5 @@
-﻿#if SILVERLIGHT
+﻿using CHAOS.Portal.Client.Data;
+#if SILVERLIGHT
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Silverlight.Testing;
 #else
@@ -22,27 +23,41 @@ namespace CHAOS.Portal.Client.Standard.Test
 	{
 		private static IPortalClient _reusableClient;
 
-		protected Func<IList<T>> CallPortal<T>(Func<IPortalClient, IServiceCallState<T>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class
+		protected Func<IList<T>> CallPortalWithPagedResult<T>(Func<IPortalClient, IServiceCallState<PagedResult<T>>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class 
+		{
+			var client = GetClient(createSession, login, reuseClient);
+
+			return CallPortalWithPagedResult(() => caller(client));
+		}
+
+		protected Func<IList<T>> CallPortalWithPagedResult<T>(Func<IServiceCallState<PagedResult<T>>> caller) where T : class
+		{
+			var data = CallPortal(caller);
+
+			return () => data().Results;
+		 }
+
+		protected Func<T> CallPortal<T>(Func<IPortalClient, IServiceCallState<T>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class, IServiceResult
 		{
 			var client = GetClient(createSession, login, reuseClient);
 
 			return CallPortal(() => caller(client));
 		}
 
-		protected Func<IList<T>> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class
+		protected Func<T> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class, IServiceResult
 		{
-			IList<T> data = null;
+			T result = null;
 #if SILVERLIGHT
-			 IServiceCallState<T> state = null;
+			IServiceCallState<T> state = null;
 
-			 EnqueueCallback(() => state = caller());
-			 EnqueueConditional(() => state.Response != null);
-			 EnqueueCallback(() => data = state.ThrowError().Response.Result.Results);
+			EnqueueCallback(() => state = caller());
+			EnqueueConditional(() => state.Response != null);
+			EnqueueCallback(() => result = state.ThrowError().Response.Result);
 #else
-			 data = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowError().Response.Result.Results;
+			result = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowError().Response.Result;
 #endif
-			 return () => data;
-		 }
+			return () => result;
+		}
 
 		protected void Test(Action test)
 		{
@@ -80,10 +95,10 @@ namespace CHAOS.Portal.Client.Standard.Test
 				_reusableClient = client;
 
 			if (createSession)
-				CallPortal(() => client.Session().Create());
+				CallPortalWithPagedResult(() => client.Session().Create());
 
 			if (createSession && login)
-				CallPortal(() => client.EmailPassword().Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword));
+				CallPortalWithPagedResult(() => client.EmailPassword().Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword));
 
 			return client;
 		}

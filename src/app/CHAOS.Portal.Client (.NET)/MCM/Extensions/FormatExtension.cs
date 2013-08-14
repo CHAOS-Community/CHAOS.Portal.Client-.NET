@@ -8,14 +8,14 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public class FormatExtension : AExtension, IFormatExtension
 	{
-		public IServiceCallState<Format> Get(uint? id, string name)
+		public IServiceCallState<PagedResult<Format>> Get(uint? id, string name)
 		{
-			return CallService<Format>(HTTPMethod.GET, id, name);
+			return CallService<PagedResult<Format>>(HTTPMethod.GET, id, name);
 		}
 
-		public IServiceCallState<ScalarResult> Create(uint formatCategoryID, string name, XDocument formatXML, string mimeType, string extension)
+		public IServiceCallState<PagedResult<ScalarResult>> Create(uint formatCategoryID, string name, XDocument formatXML, string mimeType, string extension)
 		{
-			return CallService<ScalarResult>(HTTPMethod.POST, formatCategoryID, name, formatXML, mimeType, extension);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.POST, formatCategoryID, name, formatXML, mimeType, extension);
 		}
 	}
 }

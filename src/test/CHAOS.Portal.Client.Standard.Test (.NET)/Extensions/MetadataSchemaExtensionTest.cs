@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetMetadataSchemas()
 		{
 			TestData(
-				CallPortal(c => c.MetadataSchema().Get()),
+				CallPortalWithPagedResult(c => c.MetadataSchema().Get()),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No MetadataSchemas returned");

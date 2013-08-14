@@ -22,7 +22,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldDoFacetSearch()
 		{
 			TestData(
-				CallPortal(c => c.Index().Search(null, "field:ObjectTypeID", null, 0, 1)),
+				CallPortalWithPagedResult(c => c.Index().Search(null, "field:ObjectTypeID", null, 0, 1)),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No facets returned");

@@ -7,24 +7,24 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class SecureCookieExtension : AExtension, ISecureCookieExtension
 	{
-		public IServiceCallState<SecureCookie> Get()
+		public IServiceCallState<PagedResult<SecureCookie>> Get()
 		{
-			return CallService<SecureCookie>(HTTPMethod.GET);
+			return CallService<PagedResult<SecureCookie>>(HTTPMethod.GET);
 		}
 
-		public IServiceCallState<SecureCookie> Create()
+		public IServiceCallState<PagedResult<SecureCookie>> Create()
 		{
-			return CallService<SecureCookie>(HTTPMethod.GET);
+			return CallService<PagedResult<SecureCookie>>(HTTPMethod.GET);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(IList<Guid> guids)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(IList<Guid> guids)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, guids);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, guids);
 		}
 
-		public IServiceCallState<SecureCookie> Login(Guid guid, Guid securityGUID)
+		public IServiceCallState<PagedResult<SecureCookie>> Login(Guid guid, Guid securityGUID)
 		{
-			return CallService<SecureCookie>(HTTPMethod.GET, guid, securityGUID);
+			return CallService<PagedResult<SecureCookie>>(HTTPMethod.GET, guid, securityGUID);
 		}
 	}
 }

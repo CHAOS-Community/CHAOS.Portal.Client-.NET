@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ServiceCallState<T> : IServiceCallState<T> where T : class
+	public class ServiceCallState<T> : IServiceCallState<T> where T : class, IServiceResult
 	{
 		public event EventHandler<DataChangedEventArgs<double>> UploadProgressChanged = delegate { };
 		public event EventHandler<DataChangedEventArgs<double>> DownloadProgressChanged = delegate { };
@@ -62,7 +62,7 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 
 		public bool FeedbackOnDispatcher { get; set; }
 
-		#if !SILVERLIGHT
+#if !SILVERLIGHT
 		public IServiceCallState<T> Synchronous(uint timeout)
 		{
 			var endTime = DateTime.Now.AddMilliseconds(timeout);

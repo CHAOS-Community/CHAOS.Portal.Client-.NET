@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetFormatTypes()
 		{
 			TestData(
-				CallPortal(c => c.FormatType().Get()),
+				CallPortalWithPagedResult(c => c.FormatType().Get()),
 				d =>
 				{
 					Assert.AreNotEqual(d.Count, 0, "No FormatTypes returned");

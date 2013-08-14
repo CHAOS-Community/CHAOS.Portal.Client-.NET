@@ -40,7 +40,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client.MetadataSchema().Get().Callback = ClientMetadataSchemaGetcompleted;
 		}
 
-		private void ClientMetadataSchemaGetcompleted(ServiceResponse<MetadataSchema> response, object token)
+		private void ClientMetadataSchemaGetcompleted(ServiceResponse<PagedResult<MetadataSchema>> response, object token)
 		{
 			if(response.Error != null)
 			{

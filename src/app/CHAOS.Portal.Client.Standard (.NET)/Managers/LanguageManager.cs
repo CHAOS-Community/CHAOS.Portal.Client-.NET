@@ -40,7 +40,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client.Language().Get().Callback = ClientLanguageGetCompleted;
 		}
 
-		private void ClientLanguageGetCompleted(ServiceResponse<Language> response, object token)
+		private void ClientLanguageGetCompleted(ServiceResponse<PagedResult<Language>> response, object token)
 		{
 			if(response.Error != null)
 			{

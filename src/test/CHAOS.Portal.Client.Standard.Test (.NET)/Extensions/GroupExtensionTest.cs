@@ -24,7 +24,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetGroups()
 		{
 			TestData(
-				CallPortal(c => c.Group().Get()),
+				CallPortalWithPagedResult(c => c.Group().Get()),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No Groups returned");

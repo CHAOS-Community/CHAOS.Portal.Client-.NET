@@ -6,9 +6,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface ILanguageExtension
 	{
-		IServiceCallState<Language> Get(string name = null, string languageCode = null);
-		IServiceCallState<Language> Create(string name, string languageCode);
-		IServiceCallState<ScalarResult> Update(string languageCode, string newName);
-		IServiceCallState<ScalarResult> Delete(string languageCode);
+		IServiceCallState<PagedResult<Language>> Get(string name = null, string languageCode = null);
+		IServiceCallState<PagedResult<Language>> Create(string name, string languageCode);
+		IServiceCallState<PagedResult<ScalarResult>> Update(string languageCode, string newName);
+		IServiceCallState<PagedResult<ScalarResult>> Delete(string languageCode);
 	}
 }

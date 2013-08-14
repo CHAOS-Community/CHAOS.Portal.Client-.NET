@@ -7,14 +7,14 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class ClientSettingsExtension : AExtension, IClientSettingsExtension
 	{
-		public IServiceCallState<ClientSettings> Get(Guid guid)
+		public IServiceCallState<PagedResult<ClientSettings>> Get(Guid guid)
 		{
-			return CallService<ClientSettings>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<ClientSettings>>(HTTPMethod.GET, guid);
 		}
 
-		public IServiceCallState<ScalarResult> Set(Guid guid, string name, XElement settings)
+		public IServiceCallState<PagedResult<ScalarResult>> Set(Guid guid, string name, XElement settings)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, guid, name, settings);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, guid, name, settings);
 		}
 	}
 }

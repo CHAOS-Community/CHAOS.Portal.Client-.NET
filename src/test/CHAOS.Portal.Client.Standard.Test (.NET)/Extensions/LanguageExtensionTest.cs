@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetLanguages()
 		{
 			TestData(
-				CallPortal(c => c.Language().Get()),
+				CallPortalWithPagedResult(c => c.Language().Get()),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No Languages returned");

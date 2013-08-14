@@ -25,7 +25,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetSearchView()
 		{
 			TestData(
-				CallPortal(c => c.View().Get<SearchView>("Search", null, null, null, 0, 3), true, false),
+				CallPortalWithPagedResult(c => c.View().Get<SearchView>("Search", null, null, null, 0, 3), true, false),
 					d =>
 					{
 						Assert.AreNotEqual(0, d.Count, "No views returned");

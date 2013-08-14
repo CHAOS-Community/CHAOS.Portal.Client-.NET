@@ -6,24 +6,24 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class GroupExtension : AExtension, IGroupExtension
 	{
-		public IServiceCallState<Group> Get(Guid? guid)
+		public IServiceCallState<PagedResult<Group>> Get(Guid? guid)
 		{
-			return CallService<Group>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<Group>>(HTTPMethod.GET, guid);
 		}
 
-		public IServiceCallState<Group> Create(string name, int systemPermission)
+		public IServiceCallState<PagedResult<Group>> Create(string name, int systemPermission)
 		{
-			return CallService<Group>(HTTPMethod.POST, name, systemPermission);
+			return CallService<PagedResult<Group>>(HTTPMethod.POST, name, systemPermission);
 		}
 
-		public IServiceCallState<ScalarResult> Update(Guid guid, string newName, int newSystemPermission)
+		public IServiceCallState<PagedResult<ScalarResult>> Update(Guid guid, string newName, int newSystemPermission)
 		{
-			return CallService<ScalarResult>(HTTPMethod.POST, guid, newName, newSystemPermission);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.POST, guid, newName, newSystemPermission);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(Guid guid)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(Guid guid)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, guid);
 		}
 	}
 }

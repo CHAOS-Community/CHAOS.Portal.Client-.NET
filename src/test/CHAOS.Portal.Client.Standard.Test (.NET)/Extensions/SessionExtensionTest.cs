@@ -26,7 +26,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldCreateSession()
 		{
 			TestData(
-				CallPortal(c => c.Session().Create(), false, false, false),
+				CallPortalWithPagedResult(c => c.Session().Create(), false, false, false),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No session data returned");

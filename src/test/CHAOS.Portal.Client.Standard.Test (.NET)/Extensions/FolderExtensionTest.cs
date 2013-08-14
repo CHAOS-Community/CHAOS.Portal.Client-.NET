@@ -27,7 +27,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 			Folder folder = null;
 
 			TestData(
-				CallPortal(c => c.Folder().Get()),
+				CallPortalWithPagedResult(c => c.Folder().Get()),
 					d =>
 					{
 						Assert.AreNotEqual(0, d.Count, "No folders to test");
@@ -35,7 +35,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 					});
 
 			TestData(
-				CallPortal(c => c.Folder().GetPermission(folder.ID)),
+				CallPortalWithPagedResult(c => c.Folder().GetPermission(folder.ID)),
 					d =>
 					{
 						Assert.AreNotEqual(0, d.Count, "No permissions recieved");

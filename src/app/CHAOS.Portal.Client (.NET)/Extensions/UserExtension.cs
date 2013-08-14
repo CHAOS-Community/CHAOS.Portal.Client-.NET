@@ -6,24 +6,24 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class UserExtension : AExtension, IUserExtension
 	{
-		public IServiceCallState<User> Get()
+		public IServiceCallState<PagedResult<User>> Get()
 		{
-			return CallService<User>(HTTPMethod.GET);
+			return CallService<PagedResult<User>>(HTTPMethod.GET);
 		}
 
-		public IServiceCallState<User> Create(string firstName, string middleName, string lastName, string email)
+		public IServiceCallState<PagedResult<User>> Create(string firstName, string middleName, string lastName, string email)
 		{
-			return CallService<User>(HTTPMethod.POST, firstName, middleName, lastName, email);
+			return CallService<PagedResult<User>>(HTTPMethod.POST, firstName, middleName, lastName, email);
 		}
 
-		public IServiceCallState<ScalarResult> Update(string newFirstName, string newMiddleName, string newLastName, string newEmail)
+		public IServiceCallState<PagedResult<ScalarResult>> Update(string newFirstName, string newMiddleName, string newLastName, string newEmail)
 		{
-			return CallService<ScalarResult>(HTTPMethod.POST, newFirstName, newMiddleName, newLastName, newEmail);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.POST, newFirstName, newMiddleName, newLastName, newEmail);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(Guid guid)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(Guid guid)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, guid);
 		}
 	}
 }

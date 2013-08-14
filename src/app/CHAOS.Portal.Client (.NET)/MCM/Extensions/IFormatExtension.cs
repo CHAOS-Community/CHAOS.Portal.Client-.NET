@@ -7,7 +7,7 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IFormatExtension
 	{
-		IServiceCallState<Format> Get(uint? id, string name);
-		IServiceCallState<ScalarResult> Create(uint formatCategoryID, string name, XDocument formatXML, string mimeType, string extension);
+		IServiceCallState<PagedResult<Format>> Get(uint? id, string name);
+		IServiceCallState<PagedResult<ScalarResult>> Create(uint formatCategoryID, string name, XDocument formatXML, string mimeType, string extension);
 	}
 }

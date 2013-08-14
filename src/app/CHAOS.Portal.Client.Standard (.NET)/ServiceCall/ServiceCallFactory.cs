@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CHAOS.Portal.Client.Data;
 using CHAOS.Serialization.Standard.String;
 using CHAOS.Serialization.Standard.XML;
 using CHAOS.Serialization.String;
@@ -19,7 +20,7 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			_xmlSerializer.Map(typeof(IList<>), typeof(List<>));
 		}
 
-		public IServiceCall<T> GetServiceCall<T>() where T : class
+		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceResult
 		{
 			return new ServiceCall<T>(new ServiceCallState<T>(), new ResultParser<T>(_xmlSerializer), new SmartHTTPRequest(_stringSerializer));
 		}

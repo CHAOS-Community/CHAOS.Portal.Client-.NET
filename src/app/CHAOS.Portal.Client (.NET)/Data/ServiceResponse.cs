@@ -2,7 +2,7 @@
 
 namespace CHAOS.Portal.Client.Data
 {
-	public class ServiceResponse<T> where T : IServiceResult
+	public class ServiceResponse<T> where T : class, IServiceResult
 	{
 		public ServiceHeader Header { get; set; }
 		public T Result { get; set; }

@@ -92,7 +92,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client.Upload().Initiate(ObjectGUID, FormatTypeID, (ulong)_fileData.Length, true).Callback = InitiateCompleted;
 		}
 
-		private void InitiateCompleted(ServiceResponse<UploadToken> response, object token)
+		private void InitiateCompleted(ServiceResponse<PagedResult<UploadToken>> response, object token)
 		{
 			if (response.Error != null || response.Result.Results.Count == 0)
 			{
@@ -119,7 +119,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				+= (sender, args) => Progress = (ChunkIndex - 1 + Math.Min(0.99, args.NewValue)) / _uploadToken.NoOfChunks; //Math.Min() is used to prevent progress from reaching completed
 		}
 
-		private void TransferCompleted(ServiceResponse<ScalarResult> response, object token)
+		private void TransferCompleted(ServiceResponse<PagedResult<ScalarResult>> response, object token)
 		{
 			if (response.Error != null || response.Result.Results[0].Value != 1)
 			{

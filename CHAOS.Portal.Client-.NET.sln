@@ -5,7 +5,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app (.NET)", "app (.NET)", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app (Silverlight)", "app (Silverlight)", "{D38C8901-72EC-4751-AFA1-A9A54F0FFE6A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test (.NET)", "test (.NET)", "{AC11ACF9-D74A-4817-9AA2-219DD380A33B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{AC11ACF9-D74A-4817-9AA2-219DD380A33B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CHAOS.Portal.Client (.NET)", "src\app\CHAOS.Portal.Client (.NET)\CHAOS.Portal.Client (.NET).csproj", "{A1CC7EB5-49E3-4F21-BF5D-90CAAA881BD3}"
 EndProject

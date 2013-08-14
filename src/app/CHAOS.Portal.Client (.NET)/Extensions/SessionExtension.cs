@@ -9,57 +9,57 @@ namespace CHAOS.Portal.Client.Extensions
 	{
 		public event EventHandler<DataEventArgs<Session>> SessionChanged = delegate { };
 
-		public IServiceCallState<Session> Create()
+		public IServiceCallState<PagedResult<Session>> Create()
 		{
-			var state = CallServiceWithoutSession<Session>(HTTPMethod.GET);
+			var state = CallServiceWithoutSession <PagedResult<Session>>(HTTPMethod.GET);
 
 			state.OperationCompleted += CreateCompleted;
 
 			return state;
 		}
 
-		public IServiceCallState<Session> Get()
+		public IServiceCallState<PagedResult<Session>> Get()
 		{
-			return CallService<Session>(HTTPMethod.GET);
+			return CallService<PagedResult<Session>>(HTTPMethod.GET);
 		}
 
-		public IServiceCallState<Session> Update()
+		public IServiceCallState<PagedResult<Session>> Update()
 		{
-			var state = CallService<Session>(HTTPMethod.POST);
+			var state = CallService<PagedResult<Session>>(HTTPMethod.POST);
 
 			state.OperationCompleted += UpdateCompleted;
 
 			return state;
 		}
 
-		public IServiceCallState<ScalarResult> Delete()
+		public IServiceCallState<PagedResult<ScalarResult>> Delete()
 		{
-			var state = CallService<ScalarResult>(HTTPMethod.GET);
+			var state = CallService<PagedResult<ScalarResult>>(HTTPMethod.GET);
 
 			state.OperationCompleted += DeleteCompleted;
 
 			return state;
 		}
 
-		private void CreateCompleted(object sender, DataEventArgs<ServiceResponse<Session>> e)
+		private void CreateCompleted(object sender, DataEventArgs<ServiceResponse<PagedResult<Session>>> e)
 		{
-			((IServiceCallState<Session>)sender).OperationCompleted -= CreateCompleted;
+			((IServiceCallState<PagedResult<Session>>)sender).OperationCompleted -= CreateCompleted;
 
 			if (e.Data.Error == null && e.Data.Result.Count == 1) //TODO: Handle if there is less or more than one Session returned.
 				SessionChanged(this, new DataEventArgs<Session>(e.Data.Result.Results[0]));
 		}
 
-		private void UpdateCompleted(object sender, DataEventArgs<ServiceResponse<Session>> e)
+		private void UpdateCompleted(object sender, DataEventArgs<ServiceResponse<PagedResult<Session>>> e)
 		{
-			((IServiceCallState<Session>)sender).OperationCompleted -= UpdateCompleted;
+			((IServiceCallState<PagedResult<Session>>)sender).OperationCompleted -= UpdateCompleted;
 
 			if (e.Data.Error == null && e.Data.Result.Count == 1) //TODO: Handle if there is less or more than one Session returned.
 				SessionChanged(this, new DataEventArgs<Session>(e.Data.Result.Results[0]));
 		}
 
-		private void DeleteCompleted(object sender, DataEventArgs<ServiceResponse<ScalarResult>> e)
+		private void DeleteCompleted(object sender, DataEventArgs<ServiceResponse<PagedResult<ScalarResult>>> e)
 		{
-			((IServiceCallState<ScalarResult>)sender).OperationCompleted -= DeleteCompleted;
+			((IServiceCallState<PagedResult<ScalarResult>>)sender).OperationCompleted -= DeleteCompleted;
 
 			if (e.Data.Error == null && e.Data.Result.Count == 1 && e.Data.Result.Results[0].Value == 1) //TODO: Check and handle other values.
 				SessionChanged(this, new DataEventArgs<Session>(null));

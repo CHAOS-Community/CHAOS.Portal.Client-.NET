@@ -8,34 +8,34 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public class FolderExtension : AExtension, IFolderExtension
 	{
-		public IServiceCallState<Folder> Get(uint? id, uint? folderTypeID, uint? parentID)
+		public IServiceCallState<PagedResult<Folder>> Get(uint? id, uint? folderTypeID, uint? parentID)
 		{
-			return CallService<Folder>(HTTPMethod.GET, id, folderTypeID, parentID);
+			return CallService<PagedResult<Folder>>(HTTPMethod.GET, id, folderTypeID, parentID);
 		}
 
-		public IServiceCallState<Folder> Create(string subscriptionGUID, string title, uint? parentID, int folderTypeID)
+		public IServiceCallState<PagedResult<Folder>> Create(string subscriptionGUID, string title, uint? parentID, int folderTypeID)
 		{
-			return CallService<Folder>(HTTPMethod.GET, subscriptionGUID, title, parentID, folderTypeID);
+			return CallService<PagedResult<Folder>>(HTTPMethod.GET, subscriptionGUID, title, parentID, folderTypeID);
 		}
 
-		public IServiceCallState<ScalarResult> Update(uint id, string newTitle, uint? newParentID, uint? newFolderTypeID)
+		public IServiceCallState<PagedResult<ScalarResult>> Update(uint id, string newTitle, uint? newParentID, uint? newFolderTypeID)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, id, newTitle, newParentID, newFolderTypeID);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, id, newTitle, newParentID, newFolderTypeID);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(uint id)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(uint id)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, id);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, id);
 		}
 
-		public IServiceCallState<Permissions<FolderPermissions>> GetPermission(uint folderID)
+		public IServiceCallState<PagedResult<Permissions<FolderPermissions>>> GetPermission(uint folderID)
 		{
-			return CallService<Permissions<FolderPermissions>>(HTTPMethod.GET, folderID);
+			return CallService<PagedResult<Permissions<FolderPermissions>>>(HTTPMethod.GET, folderID);
 		}
 
-		public IServiceCallState<ScalarResult> SetPermission(Guid? userGUID, Guid? groupGUID, uint folderID, FolderPermissions permission)
+		public IServiceCallState<PagedResult<ScalarResult>> SetPermission(Guid? userGUID, Guid? groupGUID, uint folderID, FolderPermissions permission)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, userGUID, groupGUID, folderID, (uint)permission);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, userGUID, groupGUID, folderID, (uint)permission);
 		}
 	}
 }

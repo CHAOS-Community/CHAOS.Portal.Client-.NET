@@ -9,24 +9,24 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public class MetadataSchemaExtension : AExtension, IMetadataSchemaExtension
 	{
-		public IServiceCallState<MetadataSchema> Get(Guid? guid)
+		public IServiceCallState<PagedResult<MetadataSchema>> Get(Guid? guid)
 		{
-			return CallService<MetadataSchema>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<MetadataSchema>>(HTTPMethod.GET, guid);
 		}
 
-		public IServiceCallState<MetadataSchema> Create(string name, XElement schemaXml, Guid? guid = null)
+		public IServiceCallState<PagedResult<MetadataSchema>> Create(string name, XElement schemaXml, Guid? guid = null)
 		{
-			return CallService<MetadataSchema>(HTTPMethod.POST, name, schemaXml, guid);
+			return CallService<PagedResult<MetadataSchema>>(HTTPMethod.POST, name, schemaXml, guid);
 		}
 
-		public IServiceCallState<MetadataSchema> Update(string name, XElement schemaXml, Guid guid)
+		public IServiceCallState<PagedResult<MetadataSchema>> Update(string name, XElement schemaXml, Guid guid)
 		{
-			return CallService<MetadataSchema>(HTTPMethod.POST, name, schemaXml, guid);
+			return CallService<PagedResult<MetadataSchema>>(HTTPMethod.POST, name, schemaXml, guid);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(Guid guid)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(Guid guid)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, guid);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, guid);
 		}
 	}
 }

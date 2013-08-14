@@ -5,9 +5,9 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface ISessionExtension
 	{
-		IServiceCallState<Session> Create();
-		IServiceCallState<Session> Get();
-		IServiceCallState<Session> Update();
-		IServiceCallState<ScalarResult> Delete();
+		IServiceCallState<PagedResult<Session>> Create();
+		IServiceCallState<PagedResult<Session>> Get();
+		IServiceCallState<PagedResult<Session>> Update();
+		IServiceCallState<PagedResult<ScalarResult>> Delete();
 	}
 }

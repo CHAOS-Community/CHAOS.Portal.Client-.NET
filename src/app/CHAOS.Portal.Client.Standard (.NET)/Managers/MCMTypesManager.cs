@@ -51,7 +51,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			_client.ObjectType().Get().Callback = ClientObjectTypeGet;
 		}
 
-		private void ClientFolderTypeGet(ServiceResponse<FolderType> response, object token)
+		private void ClientFolderTypeGet(ServiceResponse<PagedResult<FolderType>> response, object token)
 		{
 			if (response.Error != null)
 			{
@@ -63,7 +63,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				_folderTypes.Add(folderType);
 		}
 
-		private void ClientFormatTypeGet(ServiceResponse<FormatType> response, object token)
+		private void ClientFormatTypeGet(ServiceResponse<PagedResult<FormatType>> response, object token)
 		{
 			if (response.Error != null)
 			{
@@ -75,7 +75,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				_formatTypes.Add(formatType);
 		}
 
-		private void ClientObjectRelationTypeGet(ServiceResponse<ObjectRelationType> response, object token)
+		private void ClientObjectRelationTypeGet(ServiceResponse<PagedResult<ObjectRelationType>> response, object token)
 		{
 			if (response.Error != null)
 			{
@@ -87,7 +87,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				_objectRelationTypes.Add(objectRelationType);
 		}
 
-		private void ClientObjectTypeGet(ServiceResponse<ObjectType> response, object token)
+		private void ClientObjectTypeGet(ServiceResponse<PagedResult<ObjectType>> response, object token)
 		{
 			if (response.Error != null)
 			{

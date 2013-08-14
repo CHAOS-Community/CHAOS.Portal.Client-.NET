@@ -7,7 +7,7 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IObjectRelationExtension
 	{
-		IServiceCallState<ScalarResult> Set(Guid object1Guid, Guid object2Guid, uint objectRelationTypeID, Guid? metadataSchemaGuid = null, string languageCode = null, XElement metadataXml = null, uint? revisionID = null, int? sequence = null);
-		IServiceCallState<ScalarResult> Delete(Guid object1Guid, Guid object2Guid, uint objectRelationTypeID);
+		IServiceCallState<PagedResult<ScalarResult>> Set(Guid object1Guid, Guid object2Guid, uint objectRelationTypeID, Guid? metadataSchemaGuid = null, string languageCode = null, XElement metadataXml = null, uint? revisionID = null, int? sequence = null);
+		IServiceCallState<PagedResult<ScalarResult>> Delete(Guid object1Guid, Guid object2Guid, uint objectRelationTypeID);
 	}
 }

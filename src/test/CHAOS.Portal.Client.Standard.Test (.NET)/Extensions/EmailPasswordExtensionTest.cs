@@ -24,7 +24,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldLogin()
 		{
 			TestData(
-				CallPortal(c => c.EmailPassword().Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword), true, false),
+				CallPortalWithPagedResult(c => c.EmailPassword().Login(PortalClientTestHelper.LoginEmail, PortalClientTestHelper.LoginPassword), true, false),
 				d =>
 					{
 						Assert.AreNotEqual(0, d.Count, "No user returned");

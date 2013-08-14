@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetFolderTypes()
 		{
 			TestData(
-				CallPortal(c => c.FolderType().Get()),
+				CallPortalWithPagedResult(c => c.FolderType().Get()),
 				d =>
 				{
 					Assert.AreNotEqual(d.Count, 0, "No FolderTypes returned");

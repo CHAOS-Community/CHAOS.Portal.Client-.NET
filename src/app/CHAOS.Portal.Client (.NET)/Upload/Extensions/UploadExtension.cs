@@ -9,14 +9,14 @@ namespace CHAOS.Portal.Client.Upload.Extensions
 {
 	public class UploadExtension : AExtension, IUploadExtension
 	{
-		public IServiceCallState<UploadToken> Initiate(Guid objectGUID, uint formatTypeID, ulong fileSize, bool supportMultipleChunks)
+		public IServiceCallState<PagedResult<UploadToken>> Initiate(Guid objectGUID, uint formatTypeID, ulong fileSize, bool supportMultipleChunks)
 		{
-			return CallService<UploadToken>(HTTPMethod.GET, objectGUID, formatTypeID, fileSize, supportMultipleChunks);
+			return CallService<PagedResult<UploadToken>>(HTTPMethod.GET, objectGUID, formatTypeID, fileSize, supportMultipleChunks);
 		}
 
-		public IServiceCallState<ScalarResult> Transfer(string uploadID, uint chunkIndex, FileData fileData)
+		public IServiceCallState<PagedResult<ScalarResult>> Transfer(string uploadID, uint chunkIndex, FileData fileData)
 		{
-			return CallService<ScalarResult>(HTTPMethod.POST, uploadID, chunkIndex, new FileMultipartElement(fileData.Name, fileData.Data, (int) fileData.Length));
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.POST, uploadID, chunkIndex, new FileMultipartElement(fileData.Name, fileData.Data, (int) fileData.Length));
 		}
 	}
 }

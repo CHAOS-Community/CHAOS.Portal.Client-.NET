@@ -6,14 +6,14 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public class EmailPasswordExtension : AExtension, IEmailPasswordExtension
 	{
-		public IServiceCallState<User> CreatePassword(Guid userGUID, string password)
+		public IServiceCallState<PagedResult<User>> CreatePassword(Guid userGUID, string password)
 		{
-			return CallService<User>(HTTPMethod.GET, userGUID, password);
+			return CallService<PagedResult<User>>(HTTPMethod.GET, userGUID, password);
 		}
 
-		public IServiceCallState<User> Login(string email, string password)
+		public IServiceCallState<PagedResult<User>> Login(string email, string password)
 		{
-			return CallService<User>(HTTPMethod.GET, email, password);
+			return CallService<PagedResult<User>>(HTTPMethod.GET, email, password);
 		}
 	}
 }

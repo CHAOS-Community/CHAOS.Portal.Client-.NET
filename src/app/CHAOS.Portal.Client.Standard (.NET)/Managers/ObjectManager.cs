@@ -74,7 +74,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			return @object;
 		}
 
-		private void CreateCompleted(ServiceResponse<Object> response, object token)
+		private void CreateCompleted(ServiceResponse<PagedResult<Object>> response, object token)
 		{
 			var callbackToken = (CallbackToken<Object>)token;
 
@@ -281,7 +281,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			}
 		}
 
-		private void GetObjectByGUIDCompleted(ServiceResponse<Object> response, object token)
+		private void GetObjectByGUIDCompleted(ServiceResponse<PagedResult<Object>> response, object token)
 		{
 			var data = (ObjectGetByGUIDData)token;
 

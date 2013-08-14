@@ -6,8 +6,8 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface ILinkExtension
 	{
-		IServiceCallState<ScalarResult> Create(Guid objectGUID, uint folderID);
-		IServiceCallState<ScalarResult> Update(Guid objectGUID, uint folderID, uint newFolderID);
-		IServiceCallState<ScalarResult> Delete(Guid objectGUID, uint folderID);
+		IServiceCallState<PagedResult<ScalarResult>> Create(Guid objectGUID, uint folderID);
+		IServiceCallState<PagedResult<ScalarResult>> Update(Guid objectGUID, uint folderID, uint newFolderID);
+		IServiceCallState<PagedResult<ScalarResult>> Delete(Guid objectGUID, uint folderID);
 	}
 }

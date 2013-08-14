@@ -7,8 +7,8 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IUserSettingsExtension
 	{
-		IServiceCallState<UserSetting> Get(Guid? clientGUID = null);
-		IServiceCallState<UserSetting> Set(XElement settings, Guid? clientGUID = null);
-		IServiceCallState<UserSetting> Delete(Guid? clientGUID = null);
+		IServiceCallState<PagedResult<UserSetting>> Get(Guid? clientGUID = null);
+		IServiceCallState<PagedResult<UserSetting>> Set(XElement settings, Guid? clientGUID = null);
+		IServiceCallState<PagedResult<UserSetting>> Delete(Guid? clientGUID = null);
 	}
 }

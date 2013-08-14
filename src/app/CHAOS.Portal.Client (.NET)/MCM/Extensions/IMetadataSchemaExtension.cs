@@ -8,9 +8,9 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public interface IMetadataSchemaExtension
 	{
-		IServiceCallState<MetadataSchema> Get(Guid? guid = null);
-		IServiceCallState<MetadataSchema> Create(string name, XElement schemaXml, Guid? guid = null);
-		IServiceCallState<MetadataSchema> Update(string name, XElement schemaXml, Guid guid);
-		IServiceCallState<ScalarResult> Delete(Guid guid);
+		IServiceCallState<PagedResult<MetadataSchema>> Get(Guid? guid = null);
+		IServiceCallState<PagedResult<MetadataSchema>> Create(string name, XElement schemaXml, Guid? guid = null);
+		IServiceCallState<PagedResult<MetadataSchema>> Update(string name, XElement schemaXml, Guid guid);
+		IServiceCallState<PagedResult<ScalarResult>> Delete(Guid guid);
 	}
 }

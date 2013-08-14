@@ -23,7 +23,7 @@ namespace CHAOS.Portal.Client.Standard.Test.Extensions
 		public void ShouldGetObjects()
 		{
 			TestData(
-				CallPortal(c => c.Object().Get(new [] {Guid.NewGuid(), Guid.NewGuid()})),
+				CallPortalWithPagedResult(c => c.Object().Get(new [] {Guid.NewGuid(), Guid.NewGuid()})),
 					d =>
 					{
 						Assert.AreNotEqual(d.Count, 0, "No objects returned");

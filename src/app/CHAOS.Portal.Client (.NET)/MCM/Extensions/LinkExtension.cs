@@ -7,19 +7,19 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 {
 	public class LinkExtension : AExtension, ILinkExtension
 	{
-		public IServiceCallState<ScalarResult> Create(Guid objectGUID, uint folderID)
+		public IServiceCallState<PagedResult<ScalarResult>> Create(Guid objectGUID, uint folderID)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, objectGUID, folderID);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, objectGUID, folderID);
 		}
 
-		public IServiceCallState<ScalarResult> Update(Guid objectGUID, uint folderID, uint newFolderID)
+		public IServiceCallState<PagedResult<ScalarResult>> Update(Guid objectGUID, uint folderID, uint newFolderID)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, objectGUID, folderID, newFolderID);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, objectGUID, folderID, newFolderID);
 		}
 
-		public IServiceCallState<ScalarResult> Delete(Guid objectGUID, uint folderID)
+		public IServiceCallState<PagedResult<ScalarResult>> Delete(Guid objectGUID, uint folderID)
 		{
-			return CallService<ScalarResult>(HTTPMethod.GET, objectGUID, folderID);
+			return CallService<PagedResult<ScalarResult>>(HTTPMethod.GET, objectGUID, folderID);
 		}
 	}
 }

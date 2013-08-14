@@ -66,6 +66,18 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Group.cs">
       <Link>Data\Group.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\GroupedResult.cs">
+      <Link>Data\GroupedResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\IServiceResult.cs">
+      <Link>Data\IServiceResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\PagedResult.cs">
+      <Link>Data\PagedResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ResultGroup.cs">
+      <Link>Data\ResultGroup.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\SecureCookie.cs">
       <Link>Data\SecureCookie.cs</Link>
     </Compile>
@@ -74,9 +86,6 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ServiceResponse.cs">
       <Link>Data\ServiceResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ServiceResult.cs">
-      <Link>Data\ServiceResult.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Session.cs">
       <Link>Data\Session.cs</Link>

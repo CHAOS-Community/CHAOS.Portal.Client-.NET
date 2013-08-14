@@ -7,7 +7,7 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public interface IClientSettingsExtension
 	{
-		IServiceCallState<ClientSettings> Get(Guid guid);
-		IServiceCallState<ScalarResult> Set(Guid guid, string name, XElement settings);
+		IServiceCallState<PagedResult<ClientSettings>> Get(Guid guid);
+		IServiceCallState<PagedResult<ScalarResult>> Set(Guid guid, string name, XElement settings);
 	}
 }
