@@ -2,7 +2,7 @@
 
 namespace CHAOS.Portal.Client.Data
 {
-	public class ServiceResult<T>
+	public class PagedResult<T> : IServiceResult
 	{
 		public uint Count { get; set; }
 		public uint TotalCount { get; set; }

@@ -46,9 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AData.cs" />
+    <Compile Include="Data\IServiceResult.cs" />
+    <Compile Include="Data\ResultGroup.cs" />
     <Compile Include="Data\ServiceHeader.cs" />
     <Compile Include="Data\ServiceResponse.cs" />
-    <Compile Include="Data\ServiceResult.cs" />
+    <Compile Include="Data\PagedResult.cs" />
+    <Compile Include="Data\GroupedResult.cs" />
     <Compile Include="Data\ViewInfo.cs" />
     <Compile Include="Extensions\ClientSettingsExtension.cs" />
     <Compile Include="Extensions\EmailPasswordExtension.cs" />
