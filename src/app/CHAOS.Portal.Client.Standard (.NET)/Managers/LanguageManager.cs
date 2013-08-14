@@ -48,7 +48,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			foreach (var language in response.Result.Results)
+			foreach (var language in response.Body.Results)
 				_languages.Add(language);
 
 			Loaded(this, EventArgs.Empty);

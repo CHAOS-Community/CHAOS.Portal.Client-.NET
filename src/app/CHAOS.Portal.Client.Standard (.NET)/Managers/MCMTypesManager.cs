@@ -59,7 +59,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			foreach (var folderType in response.Result.Results)
+			foreach (var folderType in response.Body.Results)
 				_folderTypes.Add(folderType);
 		}
 
@@ -71,7 +71,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			foreach (var formatType in response.Result.Results)
+			foreach (var formatType in response.Body.Results)
 				_formatTypes.Add(formatType);
 		}
 
@@ -83,7 +83,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			foreach (var objectRelationType in response.Result.Results)
+			foreach (var objectRelationType in response.Body.Results)
 				_objectRelationTypes.Add(objectRelationType);
 		}
 
@@ -95,7 +95,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				return;
 			}
 
-			foreach (var objectType in response.Result.Results)
+			foreach (var objectType in response.Body.Results)
 				_objectTypes.Add(objectType);
 		}
 	}

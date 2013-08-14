@@ -50,7 +50,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			UpdatePublicProperty(() =>
 				                     {
-										 foreach (var schema in response.Result.Results)
+										 foreach (var schema in response.Body.Results)
 											 _metadataSchemas.Add(schema);
 
 										 Loaded(this, EventArgs.Empty);

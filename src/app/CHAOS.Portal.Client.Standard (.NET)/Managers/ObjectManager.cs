@@ -78,9 +78,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 		{
 			var callbackToken = (CallbackToken<Object>)token;
 
-			if(response.Error == null && response.Result.Results.Count == 1)
+			if(response.Error == null && response.Body.Results.Count == 1)
 			{
-				UpdateObject(callbackToken.Token, response.Result.Results[0]);
+				UpdateObject(callbackToken.Token, response.Body.Results[0]);
 
 				if (!_objects.ContainsKey(callbackToken.Token.GUID))
 					_objects[callbackToken.Token.GUID] = callbackToken.Token;
@@ -208,7 +208,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var @object = IsClientSideOnlyObject(object1GUID) ? _objects[object1GUID] : IsClientSideOnlyObject(object2GUID) ? _objects[object2GUID] : null;
 
-			Action<Action<bool>> action = a => _client.ObjectRelation().Set(object1GUID, object2GUID, relationTypeID, null, null, null, null, sequence).Callback = (response, token) => a(response.Error == null && response.Result.Results.Count == 1);
+			Action<Action<bool>> action = a => _client.ObjectRelation().Set(object1GUID, object2GUID, relationTypeID, null, null, null, null, sequence).Callback = (response, token) => a(response.Error == null && response.Body.Results.Count == 1);
 
 			if (@object == null)
 				action(callback);
@@ -287,13 +287,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			if (response.Error != null)
 				data.Call(null, response.Error);
-			else if (response.Result.Count != 1)
-				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", response.Result.Count)));
+			else if (response.Body.Count != 1)
+				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", response.Body.Count)));
 			else
 			{
-				var @object = _objects[response.Result.Results[0].GUID];
+				var @object = _objects[response.Body.Results[0].GUID];
 
-				UpdateObject(@object, response.Result.Results[0]);
+				UpdateObject(@object, response.Body.Results[0]);
 
 				data.Call(@object, null);
 			}

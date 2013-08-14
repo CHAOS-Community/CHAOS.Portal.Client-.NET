@@ -19,7 +19,7 @@ namespace CHAOS.Portal.Client.Examples.Examples
 
 			if (response.Error == null)
 			{
-				Console.WriteLine("Logged in. User GUID: {0}", response.Result.Results[0].Guid);
+				Console.WriteLine("Logged in. User GUID: {0}", response.Body.Results[0].Guid);
 			}
 			else
 			{

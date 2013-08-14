@@ -45,13 +45,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(response.Error));
 				return;
 			}
-			if(response.Result.Results.Count == 0)
+			if(response.Body.Results.Count == 0)
 			{
 				FailedToGetCurrentUser(this, new DataEventArgs<Exception>(new Exception("No user returned")));
 				return;
 			}
 
-			UpdateUser(_currentUser, response.Result.Results[0]);
+			UpdateUser(_currentUser, response.Body.Results[0]);
 		}
 
 		private static void UpdateUser(User oldUser, User newUser)

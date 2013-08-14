@@ -60,7 +60,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			var collection = _foldersByParent[parentID];
 
-			foreach (var newFolder in response.Result.Results)
+			foreach (var newFolder in response.Body.Results)
 			{
 				var existingFolder = collection.FirstOrDefault(f => f.ID == newFolder.ID);
 				

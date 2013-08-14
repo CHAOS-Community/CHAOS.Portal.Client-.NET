@@ -21,9 +21,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				{
 					if(response.Error != null)
 						return;
-					managerResult.TotalCount = response.Result.TotalCount;
-					if(response.Result.Count != 0)
-						managerResult.AddResult(index, response.Result.Results);
+					managerResult.TotalCount = response.Body.TotalCount;
+					if(response.Body.Count != 0)
+						managerResult.AddResult(index, response.Body.Results);
 				}));
 
 			return result;

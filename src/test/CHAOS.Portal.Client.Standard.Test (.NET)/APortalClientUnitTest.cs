@@ -52,9 +52,9 @@ namespace CHAOS.Portal.Client.Standard.Test
 
 			EnqueueCallback(() => state = caller());
 			EnqueueConditional(() => state.Response != null);
-			EnqueueCallback(() => result = state.ThrowError().Response.Result);
+			EnqueueCallback(() => result = state.ThrowError().Response.Body);
 #else
-			result = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowError().Response.Result;
+			result = caller().Synchronous(PortalClientTestHelper.CALL_TIMEOUT).ThrowError().Response.Body;
 #endif
 			return () => result;
 		}

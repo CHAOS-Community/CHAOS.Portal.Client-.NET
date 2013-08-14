@@ -94,13 +94,13 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void InitiateCompleted(ServiceResponse<PagedResult<UploadToken>> response, object token)
 		{
-			if (response.Error != null || response.Result.Results.Count == 0)
+			if (response.Error != null || response.Body.Results.Count == 0)
 			{
 				State = TransactionState.Failed;
 				return;
 			}
 
-			_uploadToken = response.Result.Results[0];
+			_uploadToken = response.Body.Results[0];
 
 			UploadNextChunk();
 		}
@@ -121,7 +121,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void TransferCompleted(ServiceResponse<PagedResult<ScalarResult>> response, object token)
 		{
-			if (response.Error != null || response.Result.Results[0].Value != 1)
+			if (response.Error != null || response.Body.Results[0].Value != 1)
 			{
 				State = TransactionState.Failed;
 				return;
