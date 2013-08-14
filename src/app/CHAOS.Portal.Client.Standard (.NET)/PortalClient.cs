@@ -16,7 +16,7 @@ namespace CHAOS.Portal.Client.Standard
 		private const string PARAMETER_NAME_FORMAT = "format";
 		private const string PARAMETER_NAME_USE_HTTP_CODES = "useHTTPCodes";
 
-		private const string PARAMETER_VALUE_FORMAT = "XML";
+		private const string PARAMETER_VALUE_FORMAT = "XML2";
 		private const bool PARAMETER_VALUE_USE_HTTP_CODES = false;
 
 		private const uint PROTOCOL_VERSION = 6;
