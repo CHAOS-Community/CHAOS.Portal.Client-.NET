@@ -20,7 +20,7 @@ namespace CHAOS.Portal.Client.Standard.ServiceCall
 			_xmlSerializer.Map(typeof(IList<>), typeof(List<>));
 		}
 
-		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceResult
+		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceBody
 		{
 			return new ServiceCall<T>(new ServiceCallState<T>(), new ResultParser<T>(_xmlSerializer), new SmartHTTPRequest(_stringSerializer));
 		}

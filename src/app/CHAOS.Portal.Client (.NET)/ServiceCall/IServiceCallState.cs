@@ -8,7 +8,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 	/// Represents the state of a service call.
 	/// </summary>
 	/// <typeparam name="T">The type of the result from the service.</typeparam>
-	public interface IServiceCallState<T> where T : class, IServiceResult
+	public interface IServiceCallState<T> where T : class, IServiceBody
 	{
 		/// <summary>
 		/// Is raised every time the upload progress change.
@@ -90,5 +90,5 @@ namespace CHAOS.Portal.Client.ServiceCall
 	/// <typeparam name="TResult">The type of result from the service call.</typeparam>
 	/// <param name="response">The response from the service.</param>
 	/// <param name="token">An object if set on <code>IServiceCallState&gr;T&lt;.Object</code></param>
-	public delegate void ServiceCallback<TResult>(ServiceResponse<TResult> response, object token) where TResult : class, IServiceResult;
+	public delegate void ServiceCallback<TResult>(ServiceResponse<TResult> response, object token) where TResult : class, IServiceBody;
 }

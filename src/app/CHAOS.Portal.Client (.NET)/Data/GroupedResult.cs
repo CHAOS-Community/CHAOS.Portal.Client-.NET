@@ -2,7 +2,7 @@
 
 namespace CHAOS.Portal.Client.Data
 {
-	public class GroupedResult<T> : IServiceResult
+	public class GroupedResult<T> : IServiceBody
 	{
 		 public IList<ResultGroup<T>> Groups { get; set; }
 	}

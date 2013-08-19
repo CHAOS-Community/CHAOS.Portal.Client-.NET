@@ -126,7 +126,7 @@ namespace CHAOS.Portal.Client.Standard
 		#endregion
 		#region Call
 
-		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceResult
+		public IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceBody
 		{
 			if (string.IsNullOrEmpty(ServicePath))
 				throw new Exception("ServicePath must be set");

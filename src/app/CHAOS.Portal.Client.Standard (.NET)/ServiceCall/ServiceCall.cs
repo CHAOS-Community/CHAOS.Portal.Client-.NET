@@ -9,7 +9,7 @@ using HTTPMethod = CHAOS.Web.HTTPMethod;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ServiceCall<T> : IServiceCall<T> where T : class, IServiceResult
+	public class ServiceCall<T> : IServiceCall<T> where T : class, IServiceBody
 	{
 		private readonly ServiceCallState<T> _state;
 		private readonly ResultParser<T> _resultParser;

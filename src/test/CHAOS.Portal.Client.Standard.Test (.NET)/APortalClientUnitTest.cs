@@ -37,14 +37,14 @@ namespace CHAOS.Portal.Client.Standard.Test
 			return () => data().Results;
 		 }
 
-		protected Func<T> CallPortal<T>(Func<IPortalClient, IServiceCallState<T>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class, IServiceResult
+		protected Func<T> CallPortal<T>(Func<IPortalClient, IServiceCallState<T>> caller, bool createSession = true, bool login = true, bool reuseClient = true) where T : class, IServiceBody
 		{
 			var client = GetClient(createSession, login, reuseClient);
 
 			return CallPortal(() => caller(client));
 		}
 
-		protected Func<T> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class, IServiceResult
+		protected Func<T> CallPortal<T>(Func<IServiceCallState<T>> caller) where T : class, IServiceBody
 		{
 			T result = null;
 #if SILVERLIGHT

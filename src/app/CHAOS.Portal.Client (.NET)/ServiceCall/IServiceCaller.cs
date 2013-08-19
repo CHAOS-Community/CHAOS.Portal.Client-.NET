@@ -6,7 +6,7 @@ namespace CHAOS.Portal.Client.ServiceCall
 {
 	public interface IServiceCaller
 	{
-		IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceResult;
+		IServiceCallState<T> CallService<T>(string extensionName, string commandName, IDictionary<string, object> parameters, HTTPMethod method, bool requiresSession) where T : class, IServiceBody;
 		void RegisterExtension(IExtension extension);
 	}
 }

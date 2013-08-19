@@ -46,7 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AData.cs" />
-    <Compile Include="Data\IServiceResult.cs" />
+    <Compile Include="Data\Facet.cs" />
+    <Compile Include="Data\FieldFacet.cs" />
+    <Compile Include="Data\IServiceBody.cs" />
+    <Compile Include="Data\QueryResult.cs" />
     <Compile Include="Data\ResultGroup.cs" />
     <Compile Include="Data\ServiceHeader.cs" />
     <Compile Include="Data\ServiceResponse.cs" />

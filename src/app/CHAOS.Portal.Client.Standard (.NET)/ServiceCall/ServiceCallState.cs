@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ServiceCallState<T> : IServiceCallState<T> where T : class, IServiceResult
+	public class ServiceCallState<T> : IServiceCallState<T> where T : class, IServiceBody
 	{
 		public event EventHandler<DataChangedEventArgs<double>> UploadProgressChanged = delegate { };
 		public event EventHandler<DataChangedEventArgs<double>> DownloadProgressChanged = delegate { };

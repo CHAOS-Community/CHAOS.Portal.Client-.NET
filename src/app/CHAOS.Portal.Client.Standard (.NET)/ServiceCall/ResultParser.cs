@@ -6,7 +6,7 @@ using CHAOS.Serialization.XML;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public class ResultParser<T> where T : class, IServiceResult
+	public class ResultParser<T> where T : class, IServiceBody
 	{
 		private readonly IXMLSerializer _serializer;
 

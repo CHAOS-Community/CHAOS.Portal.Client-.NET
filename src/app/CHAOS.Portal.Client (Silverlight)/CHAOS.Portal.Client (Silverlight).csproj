@@ -63,17 +63,26 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ClientSettings.cs">
       <Link>Data\ClientSettings.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Facet.cs">
+      <Link>Data\Facet.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\FieldFacet.cs">
+      <Link>Data\FieldFacet.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\Group.cs">
       <Link>Data\Group.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\GroupedResult.cs">
       <Link>Data\GroupedResult.cs</Link>
     </Compile>
-    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\IServiceResult.cs">
-      <Link>Data\IServiceResult.cs</Link>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\IServiceBody.cs">
+      <Link>Data\IServiceBody.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\PagedResult.cs">
       <Link>Data\PagedResult.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\QueryResult.cs">
+      <Link>Data\QueryResult.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ResultGroup.cs">
       <Link>Data\ResultGroup.cs</Link>

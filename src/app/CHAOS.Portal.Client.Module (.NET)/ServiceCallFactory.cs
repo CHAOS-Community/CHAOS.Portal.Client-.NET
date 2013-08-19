@@ -14,7 +14,7 @@ namespace CHAOS.Portal.Client.Module
 			_kernel = ArgumentUtilities.ValidateIsNotNull("kernel", kernel);
 		}
 
-		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceResult
+		public IServiceCall<T> GetServiceCall<T>() where T : class, IServiceBody
 		{
 			return _kernel.Get<IServiceCall<T>>();
 		}

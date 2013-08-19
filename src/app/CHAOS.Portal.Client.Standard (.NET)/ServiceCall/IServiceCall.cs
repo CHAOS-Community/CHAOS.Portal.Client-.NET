@@ -5,7 +5,7 @@ using HTTPMethod = CHAOS.Web.HTTPMethod;
 
 namespace CHAOS.Portal.Client.Standard.ServiceCall
 {
-	public interface IServiceCall<T> where T : class, IServiceResult
+	public interface IServiceCall<T> where T : class, IServiceBody
 	{
 		IServiceCallState<T> State { get; }
 
