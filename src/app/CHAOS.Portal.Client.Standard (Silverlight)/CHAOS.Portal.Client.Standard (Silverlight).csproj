@@ -91,6 +91,9 @@
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\FileUploadManager.cs">
       <Link>Managers\FileUploadManager.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\UserProfileManager.cs">
+      <Link>Managers\UserProfileManager.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client.Standard %28.NET%29\Managers\ViewManager.cs">
       <Link>Managers\ViewManager.cs</Link>
     </Compile>

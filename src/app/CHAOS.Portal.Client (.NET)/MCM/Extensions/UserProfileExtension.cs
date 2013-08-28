@@ -1,0 +1,22 @@
+﻿using System;
+using System.Xml.Linq;
+using CHAOS.Portal.Client.Data;
+using CHAOS.Portal.Client.Extensions;
+using CHAOS.Portal.Client.MCM.Data;
+using CHAOS.Portal.Client.ServiceCall;
+
+namespace CHAOS.Portal.Client.MCM.Extensions
+{
+	public class UserProfileExtension : AExtension, IUserProfileExtension
+	{
+		public IServiceCallState<PagedResult<UserProfile>> Get(Guid metadataSchemaGuid, Guid? userGuid = null)
+		{
+			return CallService<PagedResult<UserProfile>>(HTTPMethod.GET, metadataSchemaGuid, userGuid);
+		}
+
+		public IServiceCallState<PagedResult<UserProfile>> Set(Guid metadataSchemaGuid, XDocument metadata, Guid? userGuid = null)
+		{
+			return CallService<PagedResult<UserProfile>>(HTTPMethod.POST, metadataSchemaGuid, metadata, userGuid);
+		}
+	}
+}

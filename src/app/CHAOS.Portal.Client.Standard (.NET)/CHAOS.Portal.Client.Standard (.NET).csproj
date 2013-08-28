@@ -96,6 +96,7 @@
     <Compile Include="Managers\UserManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Managers\UserProfileManager.cs" />
     <Compile Include="Managers\ViewManager.cs" />
     <Compile Include="PortalClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

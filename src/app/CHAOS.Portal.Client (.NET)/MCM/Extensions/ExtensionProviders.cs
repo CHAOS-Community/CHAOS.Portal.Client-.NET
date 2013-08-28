@@ -68,5 +68,10 @@ namespace CHAOS.Portal.Client.MCM.Extensions
 		{
 			return ExtensionProviderService.GetExtension<ObjectTypeExtension>(portalClient);
 		}
+
+		public static IUserProfileExtension UserProfile(this IPortalClient portalClient)
+		{
+			return ExtensionProviderService.GetExtension<UserProfileExtension>(portalClient);
+		}
 	}
 }

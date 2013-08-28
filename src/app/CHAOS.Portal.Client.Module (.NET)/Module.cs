@@ -23,6 +23,7 @@ namespace CHAOS.Portal.Client.Module
 			Bind<IUserManager>().To<UserManager>().InSingletonScope();
 			Bind<IFileUploader>().To<FileUploader>();
 			Bind<IFileUploadManager>().To<FileUploadManager>().InSingletonScope();
+			Bind<IUserProfileManager>().To<UserProfileManager>().InSingletonScope();
 		}
 	}
 }

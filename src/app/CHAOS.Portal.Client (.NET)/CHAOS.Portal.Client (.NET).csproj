@@ -63,11 +63,15 @@
     <Compile Include="Extensions\IViewExtension.cs" />
     <Compile Include="Extensions\ViewExtension.cs" />
     <Compile Include="Indexing\Extensions\ExtensionProviders.cs" />
+    <Compile Include="Managers\IUserProfileManager.cs" />
     <Compile Include="Managers\IViewManager.cs" />
     <Compile Include="MCM\Data\Format.cs" />
+    <Compile Include="MCM\Data\UserProfile.cs" />
     <Compile Include="MCM\Extensions\ExtensionProviders.cs" />
     <Compile Include="MCM\Extensions\FormatExtension.cs" />
     <Compile Include="MCM\Extensions\IFormatExtension.cs" />
+    <Compile Include="MCM\Extensions\IUserProfileExtension.cs" />
+    <Compile Include="MCM\Extensions\UserProfileExtension.cs" />
     <Compile Include="MCM\Extensions\LanguageExtension.cs" />
     <Compile Include="Extensions\SecureCookieExtension.cs" />
     <Compile Include="Extensions\SubscriptionExtension.cs" />

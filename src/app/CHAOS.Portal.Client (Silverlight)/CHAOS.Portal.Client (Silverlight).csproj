@@ -240,6 +240,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IUserManager.cs">
       <Link>Managers\IUserManager.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IUserProfileManager.cs">
+      <Link>Managers\IUserProfileManager.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Managers\IViewManager.cs">
       <Link>Managers\IViewManager.cs</Link>
     </Compile>
@@ -296,6 +299,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Permissions.cs">
       <Link>MCM\Data\Permissions.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\UserProfile.cs">
+      <Link>MCM\Data\UserProfile.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ExtensionProviders.cs">
       <Link>MCM\Extensions\ExtensionProviders.cs</Link>
@@ -354,6 +360,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IObjectTypeExtension.cs">
       <Link>MCM\Extensions\IObjectTypeExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\IUserProfileExtension.cs">
+      <Link>MCM\Extensions\IUserProfileExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\LanguageExtension.cs">
       <Link>MCM\Extensions\LanguageExtension.cs</Link>
     </Compile>
@@ -377,6 +386,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\ObjectTypeExtension.cs">
       <Link>MCM\Extensions\ObjectTypeExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Extensions\UserProfileExtension.cs">
+      <Link>MCM\Extensions\UserProfileExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
