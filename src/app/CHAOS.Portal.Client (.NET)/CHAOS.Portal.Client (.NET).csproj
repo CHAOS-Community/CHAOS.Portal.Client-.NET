@@ -60,7 +60,9 @@
     <Compile Include="Extensions\EmailPasswordExtension.cs" />
     <Compile Include="Extensions\GroupExtension.cs" />
     <Compile Include="Extensions\IClientGUIDDependentExtension.cs" />
+    <Compile Include="Extensions\IOAuthExtension.cs" />
     <Compile Include="Extensions\IViewExtension.cs" />
+    <Compile Include="Extensions\OAuthExtension.cs" />
     <Compile Include="Extensions\ViewExtension.cs" />
     <Compile Include="Indexing\Extensions\ExtensionProviders.cs" />
     <Compile Include="Managers\IUserProfileManager.cs" />

@@ -12,6 +12,11 @@
 			return ExtensionProviderService.GetExtension<EmailPasswordExtension>(portalClient);
 		}
 
+		public static IOAuthExtension OAuth(this IPortalClient portalClient)
+		{
+			return ExtensionProviderService.GetExtension<OAuthExtension>(portalClient);
+		}
+
 		public static IGroupExtension Group(this IPortalClient portalClient)
 		{
 			return ExtensionProviderService.GetExtension<GroupExtension>(portalClient);

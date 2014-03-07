@@ -144,6 +144,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IGroupExtension.cs">
       <Link>Extensions\IGroupExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IOAuthExtension.cs">
+      <Link>Extensions\IOAuthExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ISecureCookieExtension.cs">
       <Link>Extensions\ISecureCookieExtension.cs</Link>
     </Compile>
@@ -164,6 +167,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IViewExtension.cs">
       <Link>Extensions\IViewExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\OAuthExtension.cs">
+      <Link>Extensions\OAuthExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\SecureCookieExtension.cs">
       <Link>Extensions\SecureCookieExtension.cs</Link>
