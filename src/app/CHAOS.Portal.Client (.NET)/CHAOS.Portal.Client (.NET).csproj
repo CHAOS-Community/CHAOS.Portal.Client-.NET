@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\AData.cs" />
+    <Compile Include="Data\AuthKey.cs" />
     <Compile Include="Data\Facet.cs" />
     <Compile Include="Data\FieldFacet.cs" />
     <Compile Include="Data\IServiceBody.cs" />
@@ -56,6 +57,8 @@
     <Compile Include="Data\PagedResult.cs" />
     <Compile Include="Data\GroupedResult.cs" />
     <Compile Include="Data\ViewInfo.cs" />
+    <Compile Include="Extensions\AuthKeyExtension.cs" />
+    <Compile Include="Extensions\IAuthKeyExtension.cs" />
     <Compile Include="Extensions\ClientSettingsExtension.cs" />
     <Compile Include="Extensions\EmailPasswordExtension.cs" />
     <Compile Include="Extensions\GroupExtension.cs" />

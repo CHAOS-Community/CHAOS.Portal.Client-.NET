@@ -60,6 +60,9 @@
     <Reference Include="System.Xml.Linq, Version=5.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\AuthKey.cs">
+      <Link>Data\AuthKey.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Data\ClientSettings.cs">
       <Link>Data\ClientSettings.cs</Link>
     </Compile>
@@ -114,6 +117,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\AExtension.cs">
       <Link>Extensions\AExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\AuthKeyExtension.cs">
+      <Link>Extensions\AuthKeyExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ClientSettingsExtension.cs">
       <Link>Extensions\ClientSettingsExtension.cs</Link>
     </Compile>
@@ -128,6 +134,9 @@
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\GroupExtension.cs">
       <Link>Extensions\GroupExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IAuthKeyExtension.cs">
+      <Link>Extensions\IAuthKeyExtension.cs</Link>
     </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\IClientGUIDDependentExtension.cs">
       <Link>Extensions\IClientGUIDDependentExtension.cs</Link>
