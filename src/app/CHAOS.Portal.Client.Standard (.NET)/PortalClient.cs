@@ -132,21 +132,29 @@ namespace CHAOS.Portal.Client.Standard
 				throw new Exception("ServicePath must be set");
 
 			if (requiresSession)
-			{
-				if (!HasSession)
-					throw new Exception(string.Format("Session required before calling {0}/{1}", extensionName, commandName));
-
-				parameters[PARAMETER_NAME_SESSION_ID] = CurrentSession.Guid;
-			}
+				parameters.Add(GetSessionParameter(string.Format("Session required before calling {0}/{1}", extensionName, commandName)));
 
 			parameters[PARAMETER_NAME_FORMAT] = PARAMETER_VALUE_FORMAT;
 			parameters[PARAMETER_NAME_USE_HTTP_CODES] = PARAMETER_VALUE_USE_HTTP_CODES;
 
 			var call = _serviceCallFactory.GetServiceCall<T>();
 
-			call.Call(string.Format(UseLatest ? "{0}/latest/{2}/{3}" : "{0}/v{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName), parameters, method == HTTPMethod.GET ? Web.HTTPMethod.GET : Web.HTTPMethod.POST); //Note: In theory call could complete before state is returned, consider refactoring.
+			call.Call(GetExtensionCommandPath(extensionName, commandName), parameters, method == HTTPMethod.GET ? Web.HTTPMethod.GET : Web.HTTPMethod.POST); //Note: In theory call could complete before state is returned, consider refactoring.
 
 			return call.State;
+		}
+
+		public string GetExtensionCommandPath(string extensionName, string commandName)
+		{
+			return string.Format(UseLatest ? "{0}/latest/{2}/{3}" : "{0}/v{1}/{2}/{3}", ServicePath, ProtocolVersion, extensionName, commandName);
+		}
+
+		public KeyValuePair<string, object> GetSessionParameter(string errorMessage)
+		{
+			if (!HasSession)
+				throw new Exception(errorMessage ?? "Session not acquired");
+
+			return new KeyValuePair<string, object>(PARAMETER_NAME_SESSION_ID, CurrentSession.Guid);
 		}
 
 		#endregion

@@ -11,7 +11,7 @@ namespace CHAOS.Portal.Client.Extensions
 {
 	public abstract class AExtension : IExtension
 	{
-		private IServiceCaller _serviceCaller;
+		protected IServiceCaller _serviceCaller;
 
 		private readonly string _extensionName;
 
