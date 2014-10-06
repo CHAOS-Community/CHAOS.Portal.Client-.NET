@@ -54,7 +54,7 @@ namespace CHAOS.Portal.Client.Extensions
 			var methodParameters = method.GetParameters();
 
 			if(methodParameters.Count() != parameters.Count)
-				throw new Exception(string.Format("Number of values ({0}) and number of method parameters ({1}) does no match", methodParameters.Count(), parameters.Count));
+				throw new Exception(string.Format("Number of values ({0}) and number of method parameters ({1}) does not match", parameters.Count, methodParameters.Count()));
 
 			var serviceParameters = new Dictionary<string, object>();
 

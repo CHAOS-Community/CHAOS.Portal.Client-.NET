@@ -263,7 +263,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 					data.AddCallback(callback);
 
 				if (call)
-					_client.Object().Get(new[] {guid}, includeAccessPoints, includeMetadata, includeFiles, includeObjectRelations).WithCallback(GetObjectByGUIDCompleted, data);
+					_client.Object().Get(new[] {guid}, null, null, includeAccessPoints, includeMetadata, includeFiles, includeObjectRelations).WithCallback(GetObjectByGUIDCompleted, data);
 			}
 			else if(callback != null)
 				callback(result, null);
