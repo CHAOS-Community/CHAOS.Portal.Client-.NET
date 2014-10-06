@@ -32,14 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CHAOS">
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.dll</HintPath>
+    </Reference>
     <Reference Include="CHAOS.Serialization">
-      <HintPath>..\lib\AnyCPU\CHAOS.Serialization.dll</HintPath>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="CHAOS.Serialization.Standard">
-      <HintPath>..\lib\AnyCPU\CHAOS.Serialization.Standard.dll</HintPath>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Serialization.Standard.dll</HintPath>
     </Reference>
     <Reference Include="CHAOS.Web">
-      <HintPath>..\lib\AnyCPU\CHAOS.Web.dll</HintPath>
+      <HintPath>..\..\..\lib\AnyCPU\CHAOS.Web.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Examples\AExample.cs" />
+    <Compile Include="Examples\AuthKeyExample.cs" />
     <Compile Include="Examples\EmailPasswordExample.cs" />
     <Compile Include="Examples\SessionExample.cs" />
     <Compile Include="Program.cs" />

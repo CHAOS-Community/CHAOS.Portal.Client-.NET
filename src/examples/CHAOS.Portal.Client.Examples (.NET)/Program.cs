@@ -11,7 +11,7 @@ namespace CHAOS.Portal.Client.Examples
 
 		private void InitializeClient()
 		{
-			_client = new PortalClient { UseLatest = true }; //UseLatest to hit developer version
+			_client = new PortalClient {};
 		}
 
 		private void GetServicePath()
