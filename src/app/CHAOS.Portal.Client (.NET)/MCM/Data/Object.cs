@@ -6,14 +6,14 @@ namespace CHAOS.Portal.Client.MCM.Data
 {
 	public class Object : AData
 	{
-		private Guid _guid;
-		public Guid GUID
+		private Guid _id;
+		public Guid Id
 		{
-			get { return _guid; }
+			get { return _id; }
 			set
 			{
-				_guid = value;
-				RaisePropertyChanged("GUID");
+				_id = value;
+				RaisePropertyChanged("Id");
 			}
 		}
 
@@ -47,6 +47,17 @@ namespace CHAOS.Portal.Client.MCM.Data
 			{
 				_metadatas = value;
 				RaisePropertyChanged("Metadatas");
+			}
+		}
+
+		private ObservableCollection<ObjectFolder> _objectFolders;
+		public ObservableCollection<ObjectFolder> ObjectFolders
+		{
+			get { return _objectFolders; }
+			set
+			{
+				_objectFolders = value;
+				RaisePropertyChanged("ObjectFolders");
 			}
 		}
 

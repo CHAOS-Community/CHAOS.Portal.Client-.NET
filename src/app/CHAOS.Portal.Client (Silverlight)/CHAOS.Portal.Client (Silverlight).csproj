@@ -306,6 +306,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\Object.cs">
       <Link>MCM\Data\Object.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\ObjectFolder.cs">
+      <Link>MCM\Data\ObjectFolder.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\MCM\Data\ObjectRelation.cs">
       <Link>MCM\Data\ObjectRelation.cs</Link>
     </Compile>

@@ -7,7 +7,7 @@ namespace CHAOS.Portal.Client.Extensions
 	{
 		public IServiceCallState<PagedResult<Session>> Login(string token)
 		{
-			return SetSessionUpdatingState(CallService<PagedResult<Session>>(HTTPMethod.POST, token));
+			return SetSessionUpdatingState(CallServiceWithoutSession<PagedResult<Session>>(HTTPMethod.POST, token));
 		}
 
 		public IServiceCallState<PagedResult<AuthKey>> Create(string name)

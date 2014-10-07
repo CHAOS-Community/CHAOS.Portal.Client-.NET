@@ -49,7 +49,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			if (guid.HasValue)
 			{
-				@object.GUID = guid.Value;
+				@object.Id = guid.Value;
 				_objects[guid.Value] = @object;
 			}
 
@@ -65,7 +65,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if(!guid.HasValue)
 				guid = Guid.NewGuid();
 
-			@object.GUID = guid.Value;
+			@object.Id = guid.Value;
 			_objects[guid.Value] = @object;
 
 			AddClientSideOnlyObject(@object);
@@ -82,15 +82,15 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			{
 				UpdateObject(callbackToken.Token, response.Body.Results[0]);
 
-				if (!_objects.ContainsKey(callbackToken.Token.GUID))
-					_objects[callbackToken.Token.GUID] = callbackToken.Token;
+				if (!_objects.ContainsKey(callbackToken.Token.Id))
+					_objects[callbackToken.Token.Id] = callbackToken.Token;
 
 				callbackToken.CallCallback(true);
 			}
 			else
 			{
-				if (!_objects.ContainsKey(callbackToken.Token.GUID))
-					_objects.Remove(callbackToken.Token.GUID);
+				if (!_objects.ContainsKey(callbackToken.Token.Id))
+					_objects.Remove(callbackToken.Token.Id);
 
 				callbackToken.CallCallback(false);
 			}	
@@ -101,7 +101,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void Delete<T>(Object @object, Action<bool, T> callback, T token)
 		{
-			Delete(@object.ValidateIsNotNull("@object").GUID, callback == null ? null : (Action<bool>) (s => callback(s, token)));
+			Delete(@object.ValidateIsNotNull("@object").Id, callback == null ? null : (Action<bool>) (s => callback(s, token)));
 		}
 
 		public void Delete<T>(Guid objectGUID, Action<bool, T> callback, T token)
@@ -111,7 +111,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void Delete(Object @object, Action<bool> callback = null)
 		{
-			Delete(@object.ValidateIsNotNull("@object").GUID, callback);
+			Delete(@object.ValidateIsNotNull("@object").Id, callback);
 		}
 
 		public void Delete(Guid objectGUID, Action<bool> callback = null)
@@ -143,7 +143,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			if (_objects.ContainsKey(objectGUID))
 				RemoveRelations(_objects[objectGUID]);
 			else
-				foreach (var @object in _objects.Values.Where(@object => @object.GUID != objectGUID))
+				foreach (var @object in _objects.Values.Where(@object => @object.Id != objectGUID))
 					RemoveRelations(@object, objectGUID);
 		}
 
@@ -153,7 +153,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			
 			foreach (var relation in @object.ObjectRelations)
 			{
-				var relatedObjectGUID = relation.Object1Guid == @object.GUID ? relation.Object2Guid : relation.Object1Guid;
+				var relatedObjectGUID = relation.Object1Guid == @object.Id ? relation.Object2Guid : relation.Object1Guid;
 				
 				if (!_objects.ContainsKey(relatedObjectGUID)) continue;
 				
@@ -164,7 +164,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				if (relatedObject.ObjectRelations.Contains(relation))
 					relatedObject.ObjectRelations.Remove(relation);
 				else
-					RemoveRelations(relatedObject, @object.GUID);
+					RemoveRelations(relatedObject, @object.Id);
 			}
 
 			@object.ObjectRelations.Clear();
@@ -183,12 +183,12 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void SetRelation<T>(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool, T> callback, T token)
 		{
-			SetRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
+			SetRelation(object1.ValidateIsNotNull("object1").Id, object2.ValidateIsNotNull("object2").Id, relationType.ValidateIsNotNull("relationType").ID, sequence, callback == null ? null : (Action<bool>)(s => callback(s, token)));
 		}
 
 		public void SetRelation(Object object1, Object object2, ObjectRelationType relationType, int? sequence, Action<bool> callback = null)
 		{
-			SetRelation(object1.ValidateIsNotNull("object1").GUID, object2.ValidateIsNotNull("object2").GUID, relationType.ValidateIsNotNull("relationType").ID, sequence, callback);
+			SetRelation(object1.ValidateIsNotNull("object1").Id, object2.ValidateIsNotNull("object2").Id, relationType.ValidateIsNotNull("relationType").ID, sequence, callback);
 		}
 
 		public void SetRelation<T>(Guid object1GUID, Guid object2GUID, uint relationTypeID, int? sequence, Action<bool, T> callback, T token)
@@ -236,7 +236,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			lock (_objects)
 			{
 				if (!_objects.ContainsKey(guid))
-					_objects[guid] = new Object { GUID = guid };
+					_objects[guid] = new Object { Id = guid };
 			}
 				
 			var result = _objects[guid];
@@ -291,7 +291,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				data.Call(null, new Exception(string.Format("Call to get single object by guid returned {0} objects", response.Body.Count)));
 			else
 			{
-				var @object = _objects[response.Body.Results[0].GUID];
+				var @object = _objects[response.Body.Results[0].Id];
 
 				UpdateObject(@object, response.Body.Results[0]);
 
@@ -330,7 +330,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void MoveLinkToFolder(Object @object, Folder fromFolder, Folder toFolder, Action<bool> callback = null)
 		{
-			MoveLinkToFolder(@object.GUID, fromFolder.ID, toFolder.ID, callback);
+			MoveLinkToFolder(@object.Id, fromFolder.ID, toFolder.ID, callback);
 		}
 
 		public void MoveLinkToFolder<T>(Guid objectGUID, uint fromFolderID, uint toFolderID, Action<bool, T> callback, T token)
@@ -354,7 +354,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void CreateLinkInFolder(Object @object, Folder folder, Action<bool> callback)
 		{
-			CreateLinkInFolder(@object.GUID, folder.ID, callback);
+			CreateLinkInFolder(@object.Id, folder.ID, callback);
 		}
 
 		public void CreateLinkInFolder<T>(Guid objectGUID, uint folderID, Action<bool, T> callback, T token)
@@ -374,7 +374,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void DeleteLinkFromFolder(Object @object, Folder folder, Action<bool> callback)
 		{
-			DeleteLinkFromFolder(@object.GUID, folder.ID, callback);
+			DeleteLinkFromFolder(@object.Id, folder.ID, callback);
 		}
 
 		public void DeleteLinkFromFolder<T>(Object @object, Folder folder, Action<bool, T> callback, T token)
@@ -398,7 +398,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public void DeleteLinksFromFolder(IEnumerable<Object> objects, Folder folder, Action<bool> callback)
 		{
-			DeleteLinksFromFolder(objects.Select(o => o.GUID), folder.ID, callback);
+			DeleteLinksFromFolder(objects.Select(o => o.Id), folder.ID, callback);
 		}
 
 		public void DeleteLinksFromFolder<T>(IEnumerable<Object> objects, Folder folder, Action<bool, T> callback, T token)
@@ -512,7 +512,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			AddMetadataToObject(@object, metadata);
 
-			RunActionOnObject(@object, a => _client.Metadata().Set(@object.GUID, metadata.MetadataSchemaGuid, metadata.LanguageCode, oldRevision, metadata.MetadataXml).Callback = (response, token) => a.DoIfIsNotNull(c => c(response.Error == null)), callback);
+			RunActionOnObject(@object, a => _client.Metadata().Set(@object.Id, metadata.MetadataSchemaGuid, metadata.LanguageCode, oldRevision, metadata.MetadataXml).Callback = (response, token) => a.DoIfIsNotNull(c => c(response.Error == null)), callback);
 		}
 
 		private void AddMetadataToObject(Object @object, Metadata metadata)
@@ -549,7 +549,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		public bool IsClientSideOnlyObject(Guid guid)
 		{
-			return _clientSideOnlyObjects.Keys.Any(o => o.GUID == guid);
+			return _clientSideOnlyObjects.Keys.Any(o => o.Id == guid);
 		}
 
 		private void AddClientSideOnlyObject(Object @object)
@@ -563,7 +563,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			if(deleteObject)
 			{
-				_objects.Remove(@object.GUID);
+				_objects.Remove(@object.Id);
 				RemoveRelations(@object);
 			}
 		}
@@ -595,7 +595,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 			{
 				if (!IsClientSideOnlyObject(@object))
 				{
-					if (_objects.ContainsKey(@object.GUID))
+					if (_objects.ContainsKey(@object.Id))
 					{
 						callback(true);
 						return; //Assume object has been send to server
@@ -620,9 +620,9 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 			foreach (var newObject in objects)
 			{
-				if (_objects.ContainsKey(newObject.GUID))
+				if (_objects.ContainsKey(newObject.Id))
 				{
-					var existingObject = _objects[newObject.GUID];
+					var existingObject = _objects[newObject.Id];
 
 					UpdateObject(existingObject, newObject);
 
@@ -630,7 +630,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 				}
 				else
 				{
-					_objects.Add(newObject.GUID, newObject);
+					_objects.Add(newObject.Id, newObject);
 
 					result.Add(newObject);
 				}
@@ -641,7 +641,7 @@ namespace CHAOS.Portal.Client.Standard.Managers
 
 		private void UpdateObject(Object oldObject, Object newObject)
 		{
-			oldObject.GUID = newObject.GUID;
+			oldObject.Id = newObject.Id;
 			oldObject.ObjectTypeID = newObject.ObjectTypeID;
 			oldObject.DateCreated = newObject.DateCreated;
 
