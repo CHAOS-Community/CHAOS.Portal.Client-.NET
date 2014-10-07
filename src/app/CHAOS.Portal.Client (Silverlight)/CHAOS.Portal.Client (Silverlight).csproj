@@ -117,6 +117,9 @@
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\AExtension.cs">
       <Link>Extensions\AExtension.cs</Link>
     </Compile>
+    <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\ASessionExtension.cs">
+      <Link>Extensions\ASessionExtension.cs</Link>
+    </Compile>
     <Compile Include="..\CHAOS.Portal.Client %28.NET%29\Extensions\AuthKeyExtension.cs">
       <Link>Extensions\AuthKeyExtension.cs</Link>
     </Compile>

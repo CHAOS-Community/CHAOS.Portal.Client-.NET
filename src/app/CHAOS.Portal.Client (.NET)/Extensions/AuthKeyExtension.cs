@@ -3,11 +3,11 @@ using CHAOS.Portal.Client.ServiceCall;
 
 namespace CHAOS.Portal.Client.Extensions
 {
-	class AuthKeyExtension : AExtension, IAuthKeyExtension
+	class AuthKeyExtension : ASessionExtension, IAuthKeyExtension
 	{
 		public IServiceCallState<PagedResult<Session>> Login(string token)
 		{
-			return CallService<PagedResult<Session>>(HTTPMethod.POST, token);
+			return SetSessionUpdatingState(CallService<PagedResult<Session>>(HTTPMethod.POST, token));
 		}
 
 		public IServiceCallState<PagedResult<AuthKey>> Create(string name)
